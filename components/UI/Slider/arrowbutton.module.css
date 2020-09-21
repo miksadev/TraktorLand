@@ -1,0 +1,9 @@
+.button{
+    border: 0;
+    background: transparent;
+    outline: none;
+    cursor: pointer;
+}
+.tip{
+    transform: matrix(-1, 0, 0, 1, 0, 0);
+}
