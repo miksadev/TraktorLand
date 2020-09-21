@@ -11,7 +11,6 @@ export default function Traktori() {
             <div className={styles.line}></div>
 
             <Products/>
-            <Products/>
         </div>
        
 

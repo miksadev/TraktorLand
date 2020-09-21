@@ -1,0 +1,45 @@
+.product{
+    width: 303px;
+    height: 256.93px;
+    background: #FEFEFE;
+    border-radius: 15px;
+    position: relative;
+    vertical-align: middle;
+    margin: 20px;
+}
+.name{
+    font-family: "Open Sans";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 17px;
+    line-height: 18px;
+    color: #2B2B2B;
+    padding: 12px;
+    margin-bottom: 0px;
+    margin-top: 0px;
+}
+.img{
+    position: absolute;
+    top: 41px;
+    left: 0;
+    max-width: 303px;
+    height: auto;
+
+}
+
+.cena{
+    position: absolute;
+    bottom:-6px;
+    left: 12px;
+    font-family: "Open Sans";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    color: #2B2B2B;
+}
+.cena span{
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    color: #F54343;
+}

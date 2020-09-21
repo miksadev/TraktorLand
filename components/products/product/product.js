@@ -7,9 +7,9 @@ const product = (props) => {
         <>
             <div className={styles.product}>
                 <p className={styles.name}>{props.name}</p>
-                <img src={props.src} alt=""/>
-                <p className={styles.cena}>{props.price}</p>
-                {/* <ATCButton></ATCButton> */}
+                <img classname={styles.img} src={props.src} alt=""/>
+                <p className={styles.cena}>{props.price}<span> RSD</span></p>
+                <ATCButton></ATCButton>
             </div>
         </>
     );
