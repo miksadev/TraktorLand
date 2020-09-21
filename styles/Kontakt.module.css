@@ -1,0 +1,75 @@
+.body{
+    width: 100%;
+    height: auto;
+    padding-top: 108px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #F7F7F7;
+    z-index: 2;
+    margin-bottom: 319px;
+  }
+
+  .naslov{
+    font-family: Bebas Neue;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 48px;
+    line-height: 58px;  
+    color: #2B2B2B;
+    margin-left: 47px;
+  }
+
+  .opis{
+    margin-left: 47px;
+    max-width: 553px;
+    margin-top: 0px;
+    font-family: "Open Sans";
+    font-style: normal;
+    font-weight: 300;
+    font-size: 24px;
+    line-height: 28px;
+    
+    color: #212121;
+  }
+
+  .ConInfo{
+      position: absolute;
+      right: 60px;
+      top: 120px;
+  }
+
+  .maps{
+      position: absolute;
+      text-align: right;
+      top: 370px;
+      right: 52px;
+  }
+
+
+  .onama{
+      background-image: url(../public/linke.png);
+      width: 100%;
+      background-size: cover;
+      padding: 35px 55px;
+  }
+  .onama h3{
+    font-family: "Open Sans";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 28px;
+    
+    color: #F54343;
+  }
+  .onama p{
+    font-family: "Open Sans";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 162.8%;
+    
+    
+    color: #2B2B2B;
+    
+  }
