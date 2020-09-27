@@ -1,6 +1,6 @@
 import React from 'React';
 import styles from './arrowbutton.module.css';
-import Carousel, { consts } from "react-elastic-carousel";
+import { consts } from "react-elastic-carousel";
 
 const arrowbutton = (props) => {
     return(
