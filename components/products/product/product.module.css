@@ -25,11 +25,11 @@
 }
 .img{
     position: absolute;
-    top: 59px;
+    top: 58px;
     left: 0;
     max-width: 303px;
     height: auto;
-
+    border-bottom: 1px solid#F54343;
 }
 
 .cena{
