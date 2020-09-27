@@ -26,7 +26,7 @@ export default function Home() {
 
         <div className={styles.carousell}>
           <h3>PROIZVODJACI</h3>
-          {/* <Slider/> */}
+          <Slider/>
         </div>
        
       </div>
