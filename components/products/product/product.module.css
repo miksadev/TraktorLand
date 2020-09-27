@@ -1,11 +1,16 @@
 .product{
     width: 303px;
-    height: 256.93px;
+    height: 276.93px;
     background: #FEFEFE;
     border-radius: 15px;
     position: relative;
     vertical-align: middle;
     margin: 20px;
+    transition: 0.5s;
+    cursor: pointer;
+}
+.product:hover{
+    transform: scale(1.05);
 }
 .name{
     font-family: "Open Sans";
@@ -20,7 +25,7 @@
 }
 .img{
     position: absolute;
-    top: 41px;
+    top: 59px;
     left: 0;
     max-width: 303px;
     height: auto;
@@ -42,4 +47,23 @@
     font-weight: 400;
     font-size: 18px;
     color: #F54343;
+}
+
+.input{
+    position: absolute;
+    bottom: 0;
+    outline :none;
+    border: 1px solid#F54343;
+    border-left: 0;
+    width: 48.24px;
+    height: 48.24px;
+    /* z-index: 10000000000000; */
+    font-size: 18px;
+    font-weight: 600;
+    font-family: "Open Sans";
+    color: black;
+    text-align: center;
+    right: 148.28px;
+    background: #FEFEFE;
+    padding-left: 10px;
 }

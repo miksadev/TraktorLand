@@ -1,0 +1,92 @@
+.total{
+    width: 410px;
+    height: 311px;
+    background: #FEFEFE;
+    box-shadow: 10px 10px 25px rgba(0, 0, 0, 0.05);
+    border-radius: 12px;
+    position: relative;
+    padding: 25px;
+}
+.line
+{
+    border: 0.5px solid #BCBCBC;
+    width: 90%;
+    margin-left: 5%;
+}
+.heading{
+    margin-top: 0;
+    font-family: "Open Sans";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 23px;
+    margin-bottom: 30px;
+    color: #2B2B2B;
+}
+.proizvodii{
+    font-family: "Open Sans";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 20px;
+    color: #2B2B2B;
+    display: inline-block;
+    margin-top: 0;
+}
+.rabatt{
+    font-family: "Open Sans";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 20px;
+    color: #2B2B2B;
+    display: inline-block;
+    margin-top: 0;
+}
+.price{
+    display: inline-block;
+    position: absolute;
+    right: 25px;
+    font-family: "Open Sans";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 20px;
+    color: #2B2B2B;
+    margin-top: 0;
+}
+.rabat{
+    font-family: "Open Sans";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 20px;
+    color: #2B2B2B;
+    display: inline-block;
+    position: absolute;
+    margin-top: 0;
+    right: 25px;
+}
+.ukupno{
+    font-family: "Open Sans";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 23px;
+    color: #2B2B2B;
+    display: inline-block;
+}
+.ukupnocena{
+    font-family: "Open Sans";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 23px;
+    color: #2B2B2B;
+    display: inline-block;
+    position: absolute;
+    right: 25px;
+}
+.button{
+    width: 100%;
+}

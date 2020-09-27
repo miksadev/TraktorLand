@@ -25,18 +25,65 @@ const reducer = (state = initialState, { type, payload }) => {
         isCartOpened: !state.isCartOpened,
       };
     case "ADD":
+
+      let plusitem = state.items.filter((item) => item.id == payload.id);
+      let newItems = [...state.items];
+      if(plusitem.length > 0){
+          newItems.forEach(item => {
+           if(item.id == payload.id){
+             item.qty += payload.qty;
+           }
+         });
+         console.log(payload);
+         return {
+          ...state,
+          price: state.price + (payload.price * payload.qty),
+          isCartOpened: true,
+          items: newItems,
+        };
+      }
+      else{
+        return {
+          ...state,
+          price: state.price + payload.price * payload.qty,
+          isCartOpened: true,
+          items: [...state.items, payload],
+        };
+      }
+    case "ADD_ONE":
+      newItems = [...state.items];
+      newItems.forEach(item => {
+        if(item.id == payload.id){
+          item.qty++;
+        }
+      });
       return {
         ...state,
         price: state.price + payload.price,
-        isCartOpened: true,
-        items: [...state.items, payload],
+        items: newItems,
       };
+    case "REMOVE_ONE":
+    newItems = [...state.items];
+    let newPrice = state.price;
+    newItems.forEach(item => {
+      if(item.id == payload.id){
+        if(item.qty > 1){
+          item.qty--;
+          newPrice-=payload.price;
+        }
+      }
+    });
+    return {
+      ...state,
+      price: newPrice,
+      items: newItems,
+    };
     case "REMOVE":
       return {
         ...state,
-        price: state.price - payload.price,
+        price: state.price - payload.price*payload.qty,
         items: state.items.filter(
-          (item) => item.name !== payload.name || item.size !== payload.size
+          (item) => item.id !== payload.id
         ),
       };
     case "SET_SHIPPING":

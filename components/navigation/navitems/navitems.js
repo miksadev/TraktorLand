@@ -8,8 +8,8 @@ const navitems = () => {
         <Aux>
             <div className={styles.Navitems}>
                 <Navitem link="/">Pocetna</Navitem>
-                <Navitem link="kontakt">Kontakt</Navitem>
-                <Navitem link="webshop">Web Shop</Navitem>
+                <Navitem link="/kontakt">Kontakt</Navitem>
+                <Navitem link="/webshop">Web Shop</Navitem>
             </div>
             
         </Aux>

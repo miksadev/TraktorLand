@@ -24,7 +24,16 @@ const useCart = () => {
       type: "REMOVE",
       payload: item,
     });
-
+  const addOne = (item) =>
+  dispatch({
+    type: "ADD_ONE",
+    payload: item,
+  });
+  const removeOne = (item) =>
+  dispatch({
+    type: "REMOVE_ONE",
+    payload: item,
+  });
   const setShipping = (shipping) => {
     dispatch({
       type: "SET_SHIPPING",
@@ -44,6 +53,8 @@ const useCart = () => {
     setShipping,
     toggleCart,
     addToCart,
+    addOne,
+    removeOne,
     emptyCart,
     removeFromCart,
   };

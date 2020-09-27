@@ -54,10 +54,10 @@ const footer = () => {
                 <Col className={styles.fcol}>
                     <h3>Kontakt</h3>
                     <ul>
-                        <li className={styles.kontaktli}><img src="footer/phone.png" alt=""/>
+                        <li className={styles.kontaktli}><img src="/footer/phone.png" alt=""/>
                             381/ 61 214 21 13</li>
-                        <li className={styles.kontaktli}><img src="footer/mail.png" alt=""/>info@traktorland.rs</li>
-                        <li className={styles.kontaktli}><img src="footer/location.png" alt=""/>Marsala tita 133,<br></br>11272 Beograd - Dobanovci</li>
+                        <li className={styles.kontaktli}><img src="/footer/mail.png" alt=""/>info@traktorland.rs</li>
+                        <li className={styles.kontaktli}><img src="/footer/location.png" alt=""/>Marsala tita 133,<br></br>11272 Beograd - Dobanovci</li>
                     </ul>
                 </Col>
             </Row>

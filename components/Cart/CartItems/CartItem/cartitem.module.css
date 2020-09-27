@@ -1,0 +1,78 @@
+.cartitem{
+    width: calc(100% - 30px);
+    margin: 15px 15px 0px 15px;
+    height: 100px;
+    position: relative;
+    border-bottom: 1px solid #BCBCBC;
+}
+.checkoutitem{
+    width: 650px;
+    background: #FEFEFE;
+    box-shadow: 10px 10px 25px rgba(0, 0, 0, 0.05);
+    border-radius: 12px;
+    margin-left: 100px;
+    position: relative;
+    height: 110px;
+}
+.img{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 115px;
+    height: auto;
+}
+.cimg{
+    position: absolute;
+    top: 22.5px;
+    left: 13px;
+    width: 115px;
+    height: auto;
+}
+.name{
+    margin-left: 140px;
+    font-family: "Open Sans";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 17px;
+    line-height: 20px;
+    color: #2B2B2B;
+    max-width: 280px;
+    overflow: hidden;
+    max-height: 40px;
+}
+.cname{
+    font-family: "Open Sans";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 22px;
+    line-height: 20px;
+    color: #2B2B2B;
+    margin-left: 140px;
+    padding-top: 20px;
+    max-width: 370px;
+    height: 45px;
+    overflow: hidden;
+    margin-bottom: 0;
+    height: 65px;
+}
+.price{
+    margin-left: 140px;
+    font-family: "Open Sans";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 23px;
+    color: #2B2B2B;
+    margin-top: 0;
+    display: inline-block;
+}
+.cprice{
+    font-family: "Open Sans";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 25px;
+    line-height: 20px;
+    color: #2B2B2B;
+    margin-left: 140px;
+    margin-top: 5px;
+}
