@@ -9,7 +9,7 @@ const cart = () => {
     const prazno = 
     <>
         <p className={styles.praznakorpa}>Vasa korpa je prazna</p>
-        <LinkButton click={toggleCart} styles={styles.LinkButton} link="/webshop" >KUPI!</LinkButton>
+        <LinkButton click={toggleCart} styles={styles.LinkButton} link="/webshop" >Nazad na kupovinu</LinkButton>
     </>;
     return(
         <div className={isCartOpened ?  styles.CartOpen : styles.CartClosed}>

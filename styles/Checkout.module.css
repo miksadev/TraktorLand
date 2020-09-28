@@ -35,3 +35,12 @@
 .cartitems{
     display: inline-block;
 }
+.praznaKorpa{
+  margin-left: 50px;
+}
+.praznaKorpa h3{
+  font-size: 35px;
+  font-family: "Bebas Neue";
+  margin-bottom: 0;
+  font-weight: 500;
+}

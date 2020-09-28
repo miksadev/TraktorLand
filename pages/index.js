@@ -10,7 +10,7 @@ export default function Home() {
   const DynamicComponentWithNoSSR = dynamic(
     () => import('../components/Slider/slider'),
     { ssr: false }
-  )
+  );
 
   return (
     <div className={styles.container}>

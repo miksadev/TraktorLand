@@ -1,0 +1,27 @@
+.proizvodi{
+    background: #F0F0F0;
+    width: calc(100% - 300px);
+    height: 100%;
+    min-height: 1024px;
+    position: absolute;
+    top: 0;
+    left: 300px;
+}
+
+.heading{
+    height: 90px;
+    background: #FFFFFF;
+    width: 100%;
+    position: absolute;
+    top :0;
+}
+.heading h3{
+    font-family: "Bebas Neue";
+    font-style: normal;
+    font-weight: normal;
+    font-size: 33px;
+    line-height: 86%;
+    color: #000000;
+    margin-left: 20px;
+    display: inline-block;
+}

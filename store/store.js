@@ -8,7 +8,7 @@ const initialState = {
   isCartOpened: false,
   items: [],
   price: 0,
-  shipping: {},
+  shipping: {}
 };
 
 const reducer = (state = initialState, { type, payload }) => {
