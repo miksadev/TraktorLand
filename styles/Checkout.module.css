@@ -1,5 +1,6 @@
 .body{
   width: 100%;
+  min-height: 700px;
   height: auto;
   padding-top: 108px;
   position: absolute;
