@@ -1,0 +1,22 @@
+.form{
+    margin-left: calc(50% - 257.5px);
+    width: 500px;
+    text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 30px;
+    position: relative;
+}
+
+.form h2{
+    font-family: "Bebas Neue";
+    font-style: normal;
+    font-weight: normal;
+    font-size: 48px;
+    line-height: 58px;
+    color: #212121;
+    margin-bottom: 20px;
+    display: block;
+    width:100%;
+}

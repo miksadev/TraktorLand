@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './cartitems.module.css';
 import CartItem from './CartItem/cartitem';
 import useCart from '../../../util/useCart';
-import LinkButton from '../../UI/Button/linkButton';
+import LinkButton from '../../UI/Button/LinkButton/linkButton';
 
 const cartitems = (props) => {
 

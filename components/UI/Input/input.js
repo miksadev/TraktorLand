@@ -15,7 +15,7 @@ const input = (props) => {
     }
     return(
         <div className={styles.inputdiv}>
-            <label className={styles.label}>{props.label}</label>
+            <label className={styles.label}>{props.img ? <img className={styles.labelimg} src={props.img} alt=""/> : null}{props.label}</label>
             {inputElement}
         </div>
 

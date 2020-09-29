@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import styles from './product.module.css';
-import ATCButton from '../../UI/Cart/Button/atcbutton.js';
+import ATCButton from '../../UI/Button/AddToCart/atcbutton.js';
 
 const product = (props) => {
     const [quantity, setQty] = useState(1);
