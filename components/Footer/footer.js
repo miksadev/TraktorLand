@@ -1,8 +1,8 @@
 import React from 'react';
 import styles from './footer.module.css';
-import {Half, Row, Col } from '../../UI/Grid';
+import {Half, Row, Col } from '../UI/Grid';
 import Link from 'next/link';
-import Logowide from '../../UI/logowide';
+import Logowide from '../UI/Logo/logowide';
 
 
 const footer = () => {

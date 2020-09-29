@@ -1,10 +1,11 @@
 import React from 'react';
-import Logo from '../UI/logo';
+import Logo from '../UI/Logo/logo';
 import styles from '../../styles/Header.module.css';
-import Search from '../navigation/navitems/search/search';
-import Navitems from '../navigation/navitems/navitems';
-import Dropdown from './navitems/dropdown/dropdown';
-import CartIcon from '../UI/Cart/CartIcon/carticon';
+import Search from '../UI/Search/search';
+import Navitems from './navitems/navitems';
+import Dropdown from '../UI/DropDown/dropdown';
+import CartIcon from '../UI/CartIcon/carticon';
+import UserIcon from '../UI/UserIcon/usericon';
 
 const header = () => {
 
@@ -15,6 +16,7 @@ const header = () => {
             <Navitems/>
             {/* <Dropdown/> */}
             <CartIcon/>
+            <UserIcon/>
         </header>
     );
 }

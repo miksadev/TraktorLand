@@ -1,6 +1,6 @@
 import React from 'react';
-import styles from '../../../../styles/Search.module.css';
-import Aux from '../../../../hoc/Auxiliary/Auxiliary';
+import styles from './Search.module.css';
+import Aux from '../../../hoc/Auxiliary/Auxiliary';
 
 const search = () => {
     return (

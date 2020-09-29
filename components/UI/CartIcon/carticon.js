@@ -1,5 +1,5 @@
 import React from 'react';
-import useCart from '../../../../util/useCart';
+import useCart from '../../../util/useCart';
 import styles from './carticon.module.css';
 
 const carticon = () => {

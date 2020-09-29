@@ -6,6 +6,7 @@
     font-style: normal;
     font-weight: normal;
     line-height: 86%;
+    cursor: pointer;
     display: inline-block;
 }
 .span{

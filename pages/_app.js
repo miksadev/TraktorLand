@@ -1,5 +1,4 @@
-import '../styles/globals.css'
-
+import '../styles/globals.css';
 import { Provider } from "react-redux";
 import { useStore } from "../store/store";
 import LayoutMain from './layouts/generallayout';
@@ -11,8 +10,8 @@ function MyApp({ Component, pageProps }) {
 
   return (
     <Provider store={store}>
-        {"admin" == "admina" ? <LayoutMain><Component {...pageProps} /></LayoutMain> : <LayoutAdmin><Component {...pageProps} /></LayoutAdmin>}
-      </Provider>
+        {"a" == "a" ? <LayoutMain><Component className="global" {...pageProps} /></LayoutMain> : <LayoutAdmin><Component {...pageProps} /></LayoutAdmin>}
+    </Provider>
   );
 }
 

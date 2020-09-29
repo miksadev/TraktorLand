@@ -1,4 +1,4 @@
-import styles from "./webshop.module.css";
+import styles from "../../styles/webshop.module.css";
 import Products from '../../components/products/products';
 import Link from 'next/link';
 

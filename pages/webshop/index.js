@@ -1,5 +1,5 @@
-import styles from "./webshop.module.css";
-import Kategorije from '../../components/categories/kategorije';
+import styles from "../../styles/webshop.module.css";
+import Kategorije from '../../components/Kategorije/kategorije';
 
 export default function Webshop() {
   return (

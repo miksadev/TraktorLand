@@ -1,8 +1,8 @@
-import styles from "../styles/Checkout.module.css";
+import styles from "../styles/checkout.module.css";
 import CartItems from '../components/Cart/CartItems/cartitems'; 
 import Total from '../components/UI/Checkout/total';
 import useCart from '../util/useCart';
-import LinkButton from '../components/UI/Cart/Button/linkButton';
+import LinkButton from '../components/UI/Button/linkButton';
 
 export default function Checkout() {
 

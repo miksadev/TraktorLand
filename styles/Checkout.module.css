@@ -1,17 +1,15 @@
 .body{
-    width: 100%;
-    height: auto;
-    padding-top: 108px;
-    position: absolute;
-    top: 0;
-    left: 0;
-    background-color: #F7F7F7;
-    z-index: 2;
-    margin-bottom: 319px;
-    padding-bottom: 50px;
-    min-height: calc(100% - 280px);
-  }
-
+  width: 100%;
+  height: auto;
+  padding-top: 108px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #F7F7F7;
+  z-index: 2;
+  margin-bottom: 319px;
+  padding-bottom: 50px;
+}
   .naslov{
     font-family: Bebas Neue;
     font-style: normal;

@@ -1,7 +1,7 @@
-import styles from '../styles/Home.module.css';
-import Coninfo from '../components/UI/contactinfo/contactinfo';
-import Logowide from '../components/UI/logowide';
-import Kategorije from '../components/categories/kategorije';
+import styles from '../styles/home.module.css';
+import Coninfo from '../components/UI/ContactInfo/contactinfo';
+import Logowide from '../components/UI/Logo/logowide';
+import Kategorije from '../components/Kategorije/kategorije';
 import Slider from '../components/Slider/slider';
 import dynamic from 'next/dynamic';
 
