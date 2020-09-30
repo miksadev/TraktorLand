@@ -11,7 +11,11 @@ export default function Checkout() {
     <h3>Vasa korpa je prazna</h3>
     <LinkButton link="/webshop">Nazad na kupovinu</LinkButton>
   </div>;
-  const punakorpa = (<><CartItems namena="checkout"/><div className={styles.total}><Total price={price} rabat="10"/></div></>);
+  const punakorpa = (
+  <>
+    <CartItems namena="checkout"/><div className={styles.total}>
+    <Total price={price} rabat="10"/></div>
+  </>);
   return (
     <div className={styles.container}>
 

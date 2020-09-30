@@ -4,8 +4,12 @@ import useCart from '../../../../util/useCart';
 
 const atcbutton = (props) => {
     const { addToCart } = useCart();
+    let classes = [styles.Button]
+    if(props.styles){
+        classes.push(props.styles);
+    }
     return (
-        <button onClick={() => addToCart({...props.item})} className={styles.Button}>+ Dodaj u Korpu</button>
+        <button onClick={() => addToCart({...props.item})} className={classes.join(' ')}>+ Dodaj u Korpu</button>
     );
 }
 export default atcbutton;
