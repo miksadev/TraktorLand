@@ -2,7 +2,7 @@ import React from 'react';
 import Header from '../../components/Header/header';
 import Footer from '../../components/Footer/footer';
 import Head from 'next/head';
-import Wrapper from '../../components/UI/Cart/Wrapper/wrapper';
+import Wrapper from '../../components/UI/Wrapper/wrapper';
 import Cart from '../../components/Cart/cart';
 
 const generalLayout = (props) => {

@@ -64,3 +64,19 @@
     margin:15px;
     cursor: pointer;
 }
+.desno{
+    position: absolute;
+    right: 0;
+}
+.levo{
+    position: absolute;
+    left: 0;
+    font-family: "Open Sans";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 17px;
+    line-height: 20px;
+    color: #F54343;
+    margin-top: 45px;
+    cursor: pointer;
+}
