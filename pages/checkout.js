@@ -1,8 +1,8 @@
-import styles from "../styles/Checkout.module.css";
+import styles from "../styles/checkout.module.css";
 import CartItems from '../components/Cart/CartItems/cartitems'; 
 import Total from '../components/UI/Checkout/total';
 import useCart from '../util/useCart';
-import LinkButton from '../components/UI/Cart/Button/linkButton';
+import LinkButton from '../components/UI/Button/LinkButton/linkButton';
 
 export default function Checkout() {
 
@@ -11,7 +11,11 @@ export default function Checkout() {
     <h3>Vasa korpa je prazna</h3>
     <LinkButton link="/webshop">Nazad na kupovinu</LinkButton>
   </div>;
-  const punakorpa = (<><CartItems namena="checkout"/><div className={styles.total}><Total price={price} rabat="10"/></div></>);
+  const punakorpa = (
+  <>
+    <CartItems namena="checkout"/><div className={styles.total}>
+    <Total price={price} rabat="10"/></div>
+  </>);
   return (
     <div className={styles.container}>
 

@@ -10,12 +10,15 @@ const input = (props) => {
         case('textarea'):
             inputElement= <textarea className={styles.textarea}{...props}/>;
             break;
+        case('select'):
+            inputElement= <select className={styles.input}{...props}>{props.children}</select>;
+            break;
         default: 
             inputElement= <input className={styles.Input} {...props}/>;
     }
     return(
         <div className={styles.inputdiv}>
-            <label className={styles.label}>{props.label}</label>
+            <label className={styles.label}>{props.img ? <img className={styles.labelimg} src={props.img} alt=""/> : null}{props.label}</label>
             {inputElement}
         </div>
 

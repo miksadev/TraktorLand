@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './layout.module.css';
-import Logo from '../logo';
+import Logo from '../Logo/logo';
 import Link from 'next/link';
 const layout = () => {
     return (

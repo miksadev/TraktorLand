@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './cartitem.module.css';
-import CartItemInfo from '../../../UI/Cart/CartItemInfo/cartItemInfo';
+import CartItemInfo from '../../../UI/CartItemInfo/cartItemInfo';
 
 const cartitem = (props) => {
     return(

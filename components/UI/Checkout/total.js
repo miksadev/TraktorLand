@@ -1,7 +1,6 @@
 import React from 'react';
 import styles from './total.module.css';
-import LinkButton from '../Cart/Button/linkButton';
-import { propTypes } from 'react-bootstrap/esm/Image';
+import LinkButton from '../Button/LinkButton/linkButton';
 
 const total = (props) => {
     return (

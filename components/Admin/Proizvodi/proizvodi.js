@@ -2,28 +2,35 @@ import React from 'react';
 import styles from './proizvodi.module.css';
 import Proizvod from './Proizvod/proizvod';
 
-const proizvodi = () => {
-    return (
+class proizvodi extends React.Component{
+    constructor(props){
+        super(props)
+        this.state = {
+            loading:true,
+            allPro:[]
+        }
+    }
+    componentDidMount(){
+        fetch('/api/get').then(res => res.json()).then(data => {
+            this.setState({allPro:data})
+            this.setState({loading:false})
+            
+        })
+    }
+    render(){
+        var content;
+        if(this.state.loading){
+            content =<h3 style={{textAlign:"center"}}>LOADING</h3>
+        }else{
+            content = this.state.allPro.map((key,num) => <Proizvod key={key['id']} sifra={key["sifra"]} src={key["thumb"]} name={key["ime"]} price={key["mp_cena"]} kolicina={key['kolicina']}></Proizvod>)
+        }
+        return (
         <div className={styles.proizvodi}>
-            <Proizvod sifra="#845689"src="/product.png" name="Sunce rotirajuci sakupljac" price="9256"></Proizvod>
-            <Proizvod sifra="#845689"src="/product.png" name="Sunce rotirajuci sakupljac" price="9256"></Proizvod>
-            <Proizvod sifra="#845689"src="/product.png" name="Sunce rotirajuci sakupljac" price="9256"></Proizvod>
-            <Proizvod sifra="#845689"src="/product.png" name="Sunce rotirajuci sakupljac" price="9256"></Proizvod>
-            <Proizvod sifra="#845689"src="/product.png" name="Sunce rotirajuci sakupljac" price="9256"></Proizvod>
-            <Proizvod sifra="#845689"src="/product.png" name="Sunce rotirajuci sakupljac" price="9256"></Proizvod>
-            <Proizvod sifra="#845689"src="/product.png" name="Sunce rotirajuci sakupljac" price="9256"></Proizvod>
-            <Proizvod sifra="#845689"src="/product.png" name="Sunce rotirajuci sakupljac" price="9256"></Proizvod>
-            <Proizvod sifra="#845689"src="/product.png" name="Sunce rotirajuci sakupljac" price="9256"></Proizvod>
-            <Proizvod sifra="#845689"src="/product.png" name="Sunce rotirajuci sakupljac" price="9256"></Proizvod>
-            <Proizvod sifra="#845689"src="/product.png" name="Sunce rotirajuci sakupljac" price="9256"></Proizvod>
-            <Proizvod sifra="#845689"src="/product.png" name="Sunce rotirajuci sakupljac" price="9256"></Proizvod>
-            <Proizvod sifra="#845689"src="/product.png" name="Sunce rotirajuci sakupljac" price="9256"></Proizvod>
-            <Proizvod sifra="#845689"src="/product.png" name="Sunce rotirajuci sakupljac" price="9256"></Proizvod>
-            <Proizvod sifra="#845689"src="/product.png" name="Sunce rotirajuci sakupljac" price="9256"></Proizvod>
-            <Proizvod sifra="#845689"src="/product.png" name="Sunce rotirajuci sakupljac" price="9256"></Proizvod>
-            <Proizvod sifra="#845689"src="/product.png" name="Sunce rotirajuci sakupljac" price="9256"></Proizvod>
+                {content}
         </div>
-    );
+        );
+    }
 }
+
 
 export default proizvodi;
