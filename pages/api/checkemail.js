@@ -1,0 +1,33 @@
+import con from '../../store/db.js'
+import formidable from 'formidable-serverless';
+
+export const config = {
+  api: {
+    bodyParser: false
+  }
+};
+export default (req,res) => {
+if(req.method == "POST"){
+		
+  		const form = new formidable.IncomingForm()
+  		
+  		form.parse(req,(err,fields,files) => {
+  				
+  		con.query("SELECT * FROM users WHERE email = ?", [fields["email"]],(err,result) => {
+  			if(err) throw err;
+  			
+  			if(result.length > 0){
+  				res.end(JSON.stringify({ result: 'Success' }))
+  			}else{
+  				res.end(JSON.stringify({ result: 'Failed' }))
+  			}
+  		})
+  	
+  })
+ 
+  
+	}else{
+    res.redirect('/')
+    res.end();
+  }
+}
