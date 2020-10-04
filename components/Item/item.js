@@ -13,7 +13,8 @@ const item = (props) => {
     var back = router.query.tip[0];
 
     useEffect(() => {
-        toggleItem();
+        {isItemOpened ? null : toggleItem()}
+        
     }, []);
 
 
