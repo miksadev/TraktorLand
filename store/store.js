@@ -24,6 +24,11 @@ const reducer = (state = initialState, { type, payload }) => {
         ...state,
         isCartOpened: !state.isCartOpened,
       };
+    case "TOGGLE_ITEM":
+      return {
+        ...state,
+        isItemOpened: !state.isItemOpened,
+      };
     case "ADD":
 
       let plusitem = state.items.filter((item) => item.id == payload.id);
