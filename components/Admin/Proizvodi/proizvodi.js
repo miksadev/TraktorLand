@@ -22,7 +22,7 @@ class proizvodi extends React.Component{
         if(this.state.loading){
             content =<h3 style={{textAlign:"center"}}>LOADING</h3>
         }else{
-            content = this.state.allPro.map((key,num) => <Proizvod key={key['id']} sifra={key["sifra"]} src={key["thumb"]} name={key["ime"]} price={key["mp_cena"]} kolicina={key['kolicina']}></Proizvod>)
+            content = this.state.allPro.map((key,num) => <Proizvod key={key['id']} sifra={key["sifra"]} src={key["thumb"]} name={key["ime"]} price={key["mp_cena"]} kolicina={key['kolicina']} url={'/admin/proizvodi/edit?id='+key['id']}></Proizvod>)
         }
         return (
         <div className={styles.proizvodi}>

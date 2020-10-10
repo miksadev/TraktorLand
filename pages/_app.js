@@ -7,7 +7,9 @@ import {useRouter} from 'next/router';
 
 function MyApp({ Component, pageProps }) {
 
+
   const store = useStore(pageProps.initialReduxState);
+
   const router = useRouter();
   const currentUrl = router.asPath;
   

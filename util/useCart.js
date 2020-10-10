@@ -1,6 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
 
 const useCart = () => {
+  const isItemOpened = useSelector((state) => state.isItemOpened);
   const isCartOpened = useSelector((state) => state.isCartOpened);
   const items = useSelector((state) => state.items);
   const price = useSelector((state) => state.price);
@@ -10,6 +11,11 @@ const useCart = () => {
   const toggleCart = () => {
     dispatch({
       type: "TOGGLE_CART",
+    });
+  };
+  const toggleItem = () => {
+    dispatch({
+      type: "TOGGLE_ITEM",
     });
   };
 
@@ -50,8 +56,10 @@ const useCart = () => {
     price,
     shipping,
     isCartOpened,
+    isItemOpened,
     setShipping,
     toggleCart,
+    toggleItem,
     addToCart,
     addOne,
     removeOne,
