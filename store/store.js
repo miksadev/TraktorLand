@@ -39,7 +39,7 @@ const reducer = (state = initialState, { type, payload }) => {
              item.qty += payload.qty;
            }
          });
-         console.log(payload);
+         
          return {
           ...state,
           price: state.price + (payload.price * payload.qty),
@@ -110,8 +110,16 @@ function initStore(preloadedState = initialState) {
 }
 
 export const initializeStore = (preloadedState) => {
+  if(typeof window == "undefined"){
+    console.log("SERVER")
+    console.log(store)
+  }else{
+    console.log("CLIENT")
+    console.log(store)
+  }
   let _store = store ?? initStore(preloadedState);
-
+  
+  
   // After navigating to a page with an initial Redux state, merge that state
   // with the current state in the store, and create a new store
   if (preloadedState && store) {

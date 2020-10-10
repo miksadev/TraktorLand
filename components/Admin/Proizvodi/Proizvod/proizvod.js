@@ -10,7 +10,7 @@ const proizvod = (props) => {
             <p className={styles.name}>{props.name}</p>
             <p className={styles.price}>{props.price} RSD</p>   
             <p className={styles.kolicina}>{props.kolicina}</p>
-            <Link href="/admin/proizvodi/add"><img className={styles.edit} src="/admin/edit.png" alt=""/></Link>
+            <Link href={props.url}><img className={styles.edit} src="/admin/edit.png" alt=""/></Link>
             
               
         </div>

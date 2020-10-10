@@ -6,6 +6,7 @@ import CartItems from './CartItems/cartitems';
 
 const cart = () => {
     const {isCartOpened, items, toggleCart} = useCart();
+    
     const prazno = 
     <>
         <p className={styles.praznakorpa}>Vasa korpa je prazna</p>
