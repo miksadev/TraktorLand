@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './total.module.css';
-import LinkButton from '../Button/LinkButton/linkButton';
+import Submit from '../Button/Submit/submit';
 
 const total = (props) => {
     return (
@@ -20,7 +20,7 @@ const total = (props) => {
             <div className={styles.line}></div>
             <h3 className={styles.ukupno}>UKUPNO</h3>
             <h3 className={styles.ukupnocena}>{props.price * (1 - props.rabat/100)} RSD</h3>
-            <LinkButton styles={styles.button} link="/checkout/order" >Zavrsi porudzbinu</LinkButton>
+            <Submit submit={props.klik} styles={styles.button} >Zavrsi porudzbinu</Submit>
         </div>
     );
 }

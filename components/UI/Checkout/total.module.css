@@ -88,5 +88,8 @@
     right: 25px;
 }
 .button{
-    width: 100%;
+    width: 80% !important;
+    position: absolute;
+    left: 10%;
+    bottom: 25px;
 }
