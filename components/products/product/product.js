@@ -5,7 +5,7 @@ import Link from 'next/link';
 import useCart from '../../../util/useCart';
 const product = (props) => {
     const [quantity, setQty] = useState(1);
-    const [initialItem ,setInitialItem] = useState({id:props.id, ime: props.name,slika: props.src, price: Number(props.price), qty: 1});
+    const [initialItem ,setInitialItem] = useState({id:props.id, ime: props.name,slika: props.src, price: Number(props.price), qty: 1, sifra: props.sifra});
     const {isItemOpened, toggleItem} = useCart();
 
     const onChangeHandler = (e) => {

@@ -123,7 +123,7 @@ class add extends React.Component{
                 <Input onFocus={(e) => this.onFocus(e)} style={this.state.vp_cenaEmpty ? {borderBottom:'1px solid red'} : {}} onChange={(e) => this.onChange(e)} inputtype="input" value={this.state.data.vp_cena} name="vp_cena"  label="VP cena"  type="text"/>
                 <Input onFocus={(e) => this.onFocus(e)} style={this.state.kolicinaEmpty ? {borderBottom:'1px solid red'} : {}} onChange={(e) => this.onChange(e)} inputtype="input" value={this.state.data.kolicina} name="kolicina"  label="Kolicina"  type="text"/>
 
-                <button type="submit" style={{border:"1px solid gray",background:"white",color:"black",fontSize:"40px",cursor:"pointer"}}>ADD</button>
+                <button type="submit" className={styles.submit}>ADD</button>
             </form>
             <Link href="/admin/proizvodi"><h2 className={styles.nazad}>{"< Nazad"}</h2></Link>
             

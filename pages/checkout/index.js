@@ -21,7 +21,7 @@ export default function Checkout() {
   const punakorpa = (
   <>
     <CartItems namena="checkout"/><div className={styles.total}>
-    <Total klik={() => popUpHandler()} price={price} rabat="10"/></div>
+    <Total edit={true} klik={() => popUpHandler()} price={price} rabat="10"/></div>
     <FinishOrder show={showPopUp} off={() => popUpHandler()}/>
     
   </>);
