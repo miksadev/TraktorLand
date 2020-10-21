@@ -29,7 +29,7 @@ export default function Home() {
         <Kategorije/>
 
         <div className={styles.carousell}>
-          <h3>PROIZVODJACI</h3>
+          <h3>PROIZVODI NA AKCIJI</h3>
           <DynamicComponentWithNoSSR/>
         </div>
        

@@ -45,7 +45,8 @@ export async function getServerSideProps({req,res}){
             res.writeHead(307,{Location:'/'})
              res.end();
         }
-        await fetch('http://localhost:3000/api/checkauth',{headers:{'auth-token':authToken}}).then(res => res.json())
+        await fetch('http://localhost:3000/api/checkauth',
+            {headers:{'auth-token':authToken}}).then(res => res.json())
         .then(data => {
            email = data.email
         })

@@ -6,6 +6,7 @@ import Submit from '../../components/UI/Button/Submit/submit';
 import Link from 'next/link';
 import Cookies from 'cookies'
 import {useRouter} from 'next/router';
+
 const WithRouterLogin = (props)=>{
     const router = useRouter();
     return <Login {...props} router={router} />
@@ -13,7 +14,10 @@ const WithRouterLogin = (props)=>{
 class Login extends React.Component {
     constructor(props){
         super(props)
+
+        
         this.state = {
+
             data:{
                 email:'',
                 password:''
@@ -59,7 +63,12 @@ class Login extends React.Component {
                 alert("Pokusajte ponovo!")
             }else{
                 alert("Uspesno ste prijavljeni")
-                window.location.reload();
+                if(this.props.router.query.back != undefined){
+                    this.props.router.push("/checkout/orderdetails")
+                }else{
+                    window.location.reload();  
+                }
+                
             }
         })
     }

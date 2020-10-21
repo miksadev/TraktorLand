@@ -8,7 +8,7 @@ const cartitem = (props) => {
             <img className={props.namena == "korpa" ? styles.img : styles.cimg} src={props.src} alt=""/>
             <p className={props.namena == "korpa" ? styles.name : styles.cname}>{props.name}</p>
             <p className={props.namena == "korpa" ? styles.price: styles.cprice}>{props.price} RSD</p>
-            <CartItemInfo brisi={props.brisi} qty={props.qty} up={props.up} down={props.down}/>
+            <CartItemInfo namena={props.namena} edit={props.edit} sifra={props.sifra} brisi={props.brisi} qty={props.qty} up={props.up} down={props.down}/>
         </div>
     );
 }

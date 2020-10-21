@@ -4,8 +4,13 @@ import styles from '../../styles/login.module.css';
 import Form from '../../components/Form/form';
 import Submit from '../../components/UI/Button/Submit/submit';
 import Link from 'next/link';
+import {useRouter} from 'next/router';
 
-class register extends React.Component {
+const WithRouterRegister = (props)=>{
+    const router = useRouter();
+    return <Register {...props} router={router} />
+}
+class Register extends React.Component {
     
    constructor(props){
     super(props)
@@ -180,8 +185,13 @@ class register extends React.Component {
             potvrditelozinku:''
             }
             this.setState(data)
-       console.log(this.state)
+       
             alert("Uspesno ste se registrovali")
+            if(this.props.router.query.back != undefined){
+                    this.props.router.push("/login?back="+this.props.router.query.back)
+                }else{
+                    window.location.href="/login";  
+            }
            }
        })
 
@@ -224,4 +234,4 @@ class register extends React.Component {
     }
 }
 
-export default register;
+export default WithRouterRegister;

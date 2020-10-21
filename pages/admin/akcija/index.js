@@ -1,13 +1,13 @@
 import React from 'react';
-import styles from './proizvodi.module.css';
-import Korisnici from '../../../components/Admin/Korisnici/index';
+import styles from '../proizvodi/proizvodi.module.css';
+import Akcija from '../../../components/Admin/Akcije/akcije';
 const proizvodi = () => {
     return (
         <div className={styles.proizvodi}>
             <div className={styles.heading}>
-                <h3>Korisnici</h3>
+                <h3>Proizvodi na akciji</h3>
             </div>
-            <Korisnici/>
+            <Akcija/>
         </div>
     );
 }
