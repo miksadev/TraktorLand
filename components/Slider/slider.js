@@ -4,6 +4,7 @@ import Item from "../UI/Slider/item";
 import StyledImg from "../UI/Slider/styledimg";
 import StyledP from "../UI/Slider/styledp";
 import ArrowButton from '../UI/Slider/arrowbutton.js';
+import Link from 'next/link';
 
 const slider = () => {
     const breakPoints = [
@@ -41,27 +42,36 @@ const slider = () => {
           )
         }}
         >
-
-          <Item>
-            <StyledImg src="slajder/sliderimg.png"/>
-            <StyledP>Proizvodjac 1</StyledP>
-          </Item>
-          <Item>
-            <StyledImg src="slajder/sliderimg.png"/>
-            <StyledP>Proizvodjac 2</StyledP>
-          </Item>
-          <Item>
-            <StyledImg src="slajder/sliderimg.png"/>
-            <StyledP>Proizvodjac 3</StyledP>
-          </Item>
-          <Item>
-            <StyledImg src="slajder/sliderimg.png"/>
-            <StyledP>Proizvodjac 4</StyledP>
-          </Item>
-          <Item>
-            <StyledImg src="slajder/sliderimg.png"/>
-            <StyledP>Proizvodjac 5</StyledP>
-          </Item>
+          <Link href="/admin/proizvodi">
+            <Item>
+              <StyledImg src="slajder/sliderimg.png"/>
+              <StyledP>Proizvodjac 1</StyledP>
+            </Item>
+          </Link>
+          <Link href="/admin/proizvodi">
+            <Item>
+              <StyledImg src="slajder/sliderimg.png"/>
+              <StyledP>Proizvodjac 2</StyledP>
+            </Item>
+          </Link>
+          <Link href="/admin/proizvodi">
+            <Item>
+              <StyledImg src="slajder/sliderimg.png"/>
+              <StyledP>Proizvodjac 3</StyledP>
+            </Item>
+          </Link>
+          <Link href="/admin/proizvodi">
+            <Item>
+              <StyledImg src="slajder/sliderimg.png"/>
+              <StyledP>Proizvodjac 4</StyledP>
+            </Item>
+          </Link>
+          <Link href="/admin/proizvodi">
+            <Item>
+              <StyledImg src="slajder/sliderimg.png"/>
+              <StyledP>Proizvodjac 5</StyledP>
+            </Item>
+          </Link>
       </Carousel>
     );
 }

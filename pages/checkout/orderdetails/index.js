@@ -45,7 +45,7 @@ export default function Kontakt({user}) {
     },[items])
      function onChange(e){
         var newUser = {...user_}
-        newUser.[e.target.name] = e.target.value
+        newUser[e.target.name] = e.target.value
         setUser(newUser)
         var newOrderdata = {...orderdata}
         newOrderdata.user = newUser
