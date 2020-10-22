@@ -27,6 +27,8 @@ export default async (req, res) => {
         var postanskibroj = fields["postanskibroj"]
         var lozinka = fields["lozinka"]
         var pravno_lice = 0;
+        var d = new Date();
+        var created = d.getDate()+"/"+(d.getMonth()+1)+"/"+d.getFullYear()
         if(naziv_firme != undefined){
           pravno_lice = 1
         }
@@ -42,8 +44,11 @@ export default async (req, res) => {
         grad:grad,
         postanski_broj:postanskibroj,
         lozinka:lozinka,
-        pravno_lice:pravno_lice
+        pravno_lice:pravno_lice,
+        created:created,
+        rabat:0
         }
+        
       
       con.query('SELECT * FROM users WHERE email = ?',[email],(err,result) => {
         if(err) throw err;

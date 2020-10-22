@@ -25,6 +25,8 @@ export default async (req, res) => {
           price = price + cena
 
         })
+        var d = new Date()
+        var created = d.getDate()+"/"+(d.getMonth()+1)+"/"+d.getFullYear()
         var order4db = {
           ime_prezime: order['ime']+" "+order['prezime'],
           adresa:order['adresa'],
@@ -32,7 +34,8 @@ export default async (req, res) => {
           email:order['email'],
           grad:order['grad'],
           postanski_broj:order['postanski_broj'],
-          telefon:order['telefon']
+          telefon:order['telefon'],
+          created:created
         }
         res.end(JSON.stringify({ result: 'Success' }))
         resolve();

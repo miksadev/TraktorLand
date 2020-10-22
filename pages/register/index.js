@@ -162,7 +162,7 @@ class Register extends React.Component {
        formData.append("pib",this.state.data.pib);
        
        }
-
+       
        fetch('api/register',{
         method:'POST',
         body:formData
