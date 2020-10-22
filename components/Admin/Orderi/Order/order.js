@@ -4,20 +4,20 @@ import Link from 'next/link';
 const order = (props) => {
     return(
         <div className={styles.order}>
-            <div className={styles.id}>ORDER ID: {props.orderid}</div>
+            <div className={styles.id}>ORDER ID: {props.orderid} </div>
             <div className={styles.ime}>
                 <h2>{props.ime + " " + props.prezime}</h2>
                 <h3>{props.adresa}</h3>
             </div>
             <div className={styles.kolicina}>
-                <h2>Kolicina: </h2>
-                <h3> {props.kolicina}</h3>
+                <h2>Datum: </h2>
+                <h3>{props.created}</h3>
             </div>
             <div className={styles.cena}>
                 <h2>Cena: </h2>
                 <h3> {props.cena}</h3>
             </div>
-            <Link href="/admin/orderi/{id}">
+            <Link href={`/admin/orderi/`+props.id}>
                 <div className={styles.dugme}>
                     <button>{">"}</button>
                 </div>

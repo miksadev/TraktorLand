@@ -18,7 +18,15 @@ export default async (req,res) => {
   					resolve();
   				}
   			})
-	}else{
+	}else if(req.method == "GET"){
+    con.query("SELECT * FROM users ",(err,results) => {
+          
+            res.send(JSON.stringify({result:"Success",users:results}))
+            res.end()
+            resolve();
+          
+        })
+  }else{
 		 res.redirect('/')
     	 res.end();
     	 resolve()

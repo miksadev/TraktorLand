@@ -2,13 +2,13 @@ import React from 'react';
 import styles from './korisnici.module.css';
 import Korisnik from './Korisnik/index';
 
-const korisnici = (props) => {
+const korisnici = ({users,deletefunc}) => {
     return(
         <div className={styles.korisnici}>
-            <Korisnik ime="Mihajlo Stankovic" adresa="Nikole Pasica 16"datum="19/09/2000" rabat="15"/>
-            <Korisnik ime="Mihajlo Stankovic" adresa="Nikole Pasica 16"datum="19/09/2000" rabat="15"/>
-            <Korisnik ime="Mihajlo Stankovic" adresa="Nikole Pasica 16"datum="19/09/2000" rabat="15"/>
-            <Korisnik ime="Mihajlo Stankovic" adresa="Nikole Pasica 16" datum="19/09/2000" rabat="15"/>
+        
+            {users.map(user =>
+             <Korisnik deletefunc={deletefunc} id={user.id} ime={user.ime+` `+user.prezime} adresa={user.adresa} datum={user.created} rabat={user.rabat}/>)}
+            
         </div>
         
     );

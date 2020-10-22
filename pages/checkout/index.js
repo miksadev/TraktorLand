@@ -8,20 +8,38 @@ import FinishOrder from '../../components/UI/FinishOrder/PopUp/popUp';
 import {useRouter} from 'next/router';
 import Cookies from 'cookies'
 export async function getServerSideProps({req,res}){
-  var login = false;
-  var cookies = new Cookies(req,res)
-  var authToken = cookies.get("auth-token")
-  if(authToken != undefined){
-    login = true;
-  }
-  return{
-    props:{
-      login:login
-    }
-  }
-}
-export default function Checkout({login}) {
 
+        var login = false;
+        var user = ""
+        var email = ""
+        var cookies = new Cookies(req,res)
+        var authToken = cookies.get('auth-token')
+        if(authToken != undefined){
+             login = true;
+             await fetch('http://localhost:3000/api/checkauth',
+            {headers:{'auth-token':authToken}}).then(res => res.json())
+        .then(data => {
+           email = data.email
+        })
+
+        await fetch('http://localhost:3000/api/getuser',{
+                method:'POST',
+                body:JSON.stringify({email:email})
+            }).then(res => res.json()).then(data => {
+                user = data.user
+            })
+        }
+        
+        
+        return{
+           props:{
+            user:user,
+            login:login
+           }
+        }
+}
+export default function Checkout({login,user}) {
+  
   const { price, items } = useCart();
   const [showPopUp, setShowPopUp] = useState(false);
   const router = useRouter();
@@ -40,7 +58,7 @@ export default function Checkout({login}) {
   const punakorpa = (
   <>
     <CartItems namena="checkout"/><div className={styles.total}>
-    <Total edit={true} klik={() => popUpHandler()} price={price} rabat="10"/></div>
+    <Total edit={true} klik={() => popUpHandler()} price={price} rabat={user.rabat == undefined ?'0':user.rabat}/></div>
     <FinishOrder show={showPopUp} off={() => popUpHandler()}/>
     
   </>);

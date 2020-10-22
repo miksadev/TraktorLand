@@ -7,19 +7,57 @@ import Submit from '../UI/Button/Submit/submit';
 import {useRouter} from 'next/router';
 import {useState,useEffect} from 'react';
 const order = (props) => {
-    const [order,setOrder] = useState(JSON.parse(props.data.orderdata).items)
+    if(props.data.orderdata != undefined){
+    var [order,setOrder] = useState(JSON.parse(props.data.orderdata).items)
+
+    }else{
+    var [order,setOrder] = useState(props.orders)
+    }
+    const [url,setUrl] = useState("")
     const [price,setPrice] = useState(0)
     const [userinfo,setUserinfo] = useState(props.data);
+    const [zavrsen,setZavrsen] = useState("Zavrsi")
     const router = useRouter();
     useEffect(()=>{
-        
-        
+        setUrl(router.asPath)
+        if(userinfo.zavrsen == 1){
+            setZavrsen("Zavrsen")
+        }
+        var cena = 0;
         order.map(item => {
             var newPrice = Number(item.price) * Number(item.qty)
-            var oldPrice = price
-            setPrice(newPrice+oldPrice)
+           cena = cena+newPrice
+           
         })
+         setPrice(cena)
+         console.log(userinfo)
     },[])
+    function zavrsiOrder(){
+        if(zavrsen == "Zavrsi"){
+           
+            var formData = new FormData()
+            formData.append("value",1);
+            formData.append("id",userinfo.id)
+            fetch('http://localhost:3000/api/finishorder',{
+                method:'POST',
+                body:formData
+            }).then(res => res.json()).then(data => {
+                if(data.result == "Success")
+                setZavrsen("Zavrsen")
+            })
+        }else{
+            var formData = new FormData()
+            formData.append("value",0);
+            formData.append("id",userinfo.id)
+            fetch('http://localhost:3000/api/finishorder',{
+                method:'POST',
+                body:formData
+            }).then(res => res.json()).then(data => {
+                if(data.result == "Success")
+                setZavrsen("Zavrsi")
+            })
+        }
+    }
     function onSubmit(){
         var formData_ = new FormData();
         formData_.append("postData",JSON.stringify(props.data));
@@ -45,20 +83,22 @@ const order = (props) => {
                    
                 </div>
                 <div className={styles.total}>
-                    <Total edit={props.edit} price={price} rabat="10"/>
+                    <Total edit={props.edit} price={price} rabat={userinfo.rabat == undefined || userinfo.rabat == "" ? '0' : userinfo.rabat}/>
                     <div className={styles.orderinfo}>
                     {/* <Input inputtype="input" label="Napomena"/> */}
                     <div className={styles.infoblock}>
                         <h3>Detalji narucioca</h3>
                         <ul>
-                            <li>{userinfo.ime} {userinfo.prezime}</li>
+                            {userinfo.ime_prezime == undefined ? <li>{userinfo.ime} {userinfo.prezime}</li>:
+                        <li>{userinfo.ime_prezime}</li>}
                             <li>{userinfo.adresa}</li>
                             <li>{userinfo.postanski_broj} {userinfo.grad}</li>
                             <li>Serbia</li>
                             <li>{userinfo.email}</li>
                             <li>{userinfo.telefon}</li>
                         </ul>
-                        <span onClick={onSubmit}><Submit styles={styles.dugme} >Zavrsi</Submit></span>
+                        {url.includes("admin") ? <span onClick={zavrsiOrder} ><Submit styles={styles.dugme} >{zavrsen}</Submit></span> : 
+                    <span onClick={onSubmit}><Submit styles={styles.dugme} >Zavrsi</Submit></span>}
                     </div>
                 </div>
                 </div>

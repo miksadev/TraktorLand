@@ -10,6 +10,12 @@ class proizvodi extends React.Component{
             allPro:[]
         }
     }
+    refreshData(){
+         fetch('/api/get').then(res => res.json()).then(data => {
+            this.setState({allPro:data})
+
+        })
+    }
     componentDidMount(){
         fetch('/api/get').then(res => res.json()).then(data => {
             this.setState({allPro:data})
@@ -22,7 +28,7 @@ class proizvodi extends React.Component{
         if(this.state.loading){
             content =<h3 style={{textAlign:"center"}}>LOADING</h3>
         }else{
-            content = this.state.allPro.map((key,num) => <Proizvod key={key['id']} sifra={key["sifra"]} src={key["thumb"]} name={key["ime"]} price={key["mp_cena"]} kolicina={key['kolicina']} url={'/admin/proizvodi/edit?id='+key['id']}></Proizvod>)
+            content = this.state.allPro.map((key,num) => <Proizvod refresh={e => this.refreshData(e)} key={key['id']} id={key['id']} sifra={key["sifra"]} src={key["thumb"]} name={key["ime"]} price={key["mp_cena"]} kolicina={key['kolicina']} url={'/admin/proizvodi/edit?id='+key['id']}></Proizvod>)
         }
         return (
         <div className={styles.proizvodi}>
