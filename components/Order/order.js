@@ -30,6 +30,7 @@ const order = (props) => {
            
         })
          setPrice(cena)
+         console.log(userinfo)
     },[])
     function zavrsiOrder(){
         if(zavrsen == "Zavrsi"){
@@ -82,7 +83,7 @@ const order = (props) => {
                    
                 </div>
                 <div className={styles.total}>
-                    <Total edit={props.edit} price={price} rabat="10"/>
+                    <Total edit={props.edit} price={price} rabat={userinfo.rabat == undefined || userinfo.rabat == "" ? '0' : userinfo.rabat}/>
                     <div className={styles.orderinfo}>
                     {/* <Input inputtype="input" label="Napomena"/> */}
                     <div className={styles.infoblock}>
