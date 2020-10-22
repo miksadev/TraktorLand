@@ -23,7 +23,15 @@ export async function getServerSideProps({req,res}){
             user = data.user
         })
     }else{
-        user = {}
+        user = {
+        ime:"",
+        prezime:"",
+        telefon:"",
+        email:"",
+        adresa:"",
+        grad:"",
+        postanski_broj:""
+    }
     }
     
     return{
@@ -34,7 +42,6 @@ export async function getServerSideProps({req,res}){
 }
 export default function Kontakt({user}) {
     const [user_,setUser] = useState(user);
-
     const [orderdata,setOrderdata] = useState({})
     const [inputEmpty,setInputEmpty] = useState({
         ime:false,
@@ -60,7 +67,6 @@ export default function Kontakt({user}) {
         var newOrderdata = {...orderdata}
         newOrderdata.user = newUser
         setOrderdata(newOrderdata)
-
     }
     function submitMask(e){
         var newInput = {...inputEmpty}
@@ -99,7 +105,6 @@ export default function Kontakt({user}) {
                 <Input onFocus={e => onFocus(e)} style={inputEmpty.adresa ? {borderBottom:'1px solid red'} : {}} onChange={e => onChange(e)}   inputtype="input"  label="Adresa" placeholder="npr. Cara Dusana 26" value={user_.adresa} name="adresa" type="text"></Input>
                 <Input onFocus={e => onFocus(e)} style={inputEmpty.grad ? {borderBottom:'1px solid red'} : {}} onChange={e => onChange(e)}  inputtype="input"  label="Grad" placeholder="npr. Beograd" name="grad" value={user_.grad} type="text"></Input>
                 <Input onFocus={e => onFocus(e)} style={inputEmpty.postanski_broj ? {borderBottom:'1px solid red'} : {}} onChange={e => onChange(e)}  inputtype="input"  label="Postanski br." placeholder="npr. 11000" name="postanski_broj" value={user_.postanski_broj} type="text"></Input>
-                <input type="hidden" name="rabat" value={user_.rabat} />
                <input type="hidden" value={JSON.stringify(orderdata)} name="orderdata" />
                 {/* <div className={styles.line}></div> */}
                 <div className={styles.block}  onClick={e => submitMask(e)}><Submit styles={styles.loginbutton} >Zavrsi narudzbinu</Submit></div>
