@@ -4,8 +4,9 @@ import Item from "../UI/Slider/item";
 import StyledImg from "../UI/Slider/styledimg";
 import StyledP from "../UI/Slider/styledp";
 import ArrowButton from '../UI/Slider/arrowbutton.js';
-
-const slider = () => {
+import Link from 'next/link'
+const slider = ({akcije}) => {
+   
     const breakPoints = [
         { width: 1, itemsToShow: 1 },
         { width: 550, itemsToShow: 2 },
@@ -41,27 +42,12 @@ const slider = () => {
           )
         }}
         >
-
-          <Item>
-            <StyledImg src="slajder/sliderimg.png"/>
-            <StyledP>Proizvodjac 1</StyledP>
-          </Item>
-          <Item>
-            <StyledImg src="slajder/sliderimg.png"/>
-            <StyledP>Proizvodjac 2</StyledP>
-          </Item>
-          <Item>
-            <StyledImg src="slajder/sliderimg.png"/>
-            <StyledP>Proizvodjac 3</StyledP>
-          </Item>
-          <Item>
-            <StyledImg src="slajder/sliderimg.png"/>
-            <StyledP>Proizvodjac 4</StyledP>
-          </Item>
-          <Item>
-            <StyledImg src="slajder/sliderimg.png"/>
-            <StyledP>Proizvodjac 5</StyledP>
-          </Item>
+      {/* <Link href={item.link_proizvoda}></Link> */}
+        {akcije.map(item =>  <Item>
+            <StyledImg src={item.thumb}/>
+            <StyledP>{item.ime}</StyledP>
+          </Item> )}
+          
       </Carousel>
     );
 }
