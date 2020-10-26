@@ -2,5 +2,17 @@
     display: inline-block;
     position: absolute;
     top: 44px;
-    margin-left: 50px;
+    margin-left: 600px;
+}
+
+@media screen and (max-width: 1250px) {
+    .Navitems {
+        margin-left: 500px;
+    }
+  }
+
+@media screen and (max-width: 1107px) {
+    .Navitems {
+        margin-left: 400px;
+    }
 }

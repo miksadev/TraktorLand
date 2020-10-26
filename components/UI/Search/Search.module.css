@@ -1,8 +1,10 @@
+
 .Search{
-    position: relative;
+    position: absolute;
     display: inline-block;
-    overflow: auto;
+    /* overflow: auto; */
     margin-left: 60px;
+    margin-top: 32px;
 }
 
 .input{
@@ -52,6 +54,13 @@
 }
 
 @media screen and (max-width: 1250px) {
+    .input {
+      width: 400px;
+    }
+  }
+
+  
+@media screen and (max-width: 1107px) {
     .input {
       width: 300px;
     }
