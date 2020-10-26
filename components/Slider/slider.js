@@ -43,10 +43,10 @@ const slider = ({akcije}) => {
         }}
         >
       {/* <Link href={item.link_proizvoda}></Link> */}
-        {akcije.map(item =>  <Item>
+        {akcije.map(item => <Link href={item.link_proizvoda}><Item>
             <StyledImg src={item.thumb}/>
             <StyledP>{item.ime}</StyledP>
-          </Item> )}
+          </Item></Link> )}
           
       </Carousel>
     );

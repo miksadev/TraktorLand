@@ -19,3 +19,34 @@
 .logos{
     margin-left: calc(50% - 48.57px) !important;
 }
+.searchicon{
+    position: absolute;
+    right: 90px;
+    top: 42px;
+    transform: scale(1.15);
+}
+.responsivesearch{
+    left: 40px;
+    width: calc(100% - 150px);
+}
+.responsiveinput{
+    width: calc(100% - 100px);
+}
+
+
+
+
+
+
+@media screen and (max-width: 1000px) {
+    .responsive{
+        display: block;
+    }
+    .headerbig{
+        display: none;
+    }
+
+
+
+
+}

@@ -16,7 +16,7 @@ const product = (props) => {
         <>
             <div className={styles.product}>
                 <div onClick={toggleItem} >
-                    <Link href={props.backroute+'/'+props.id}><a><p className={styles.name}>{props.name}</p>
+                    <Link href={'http://localhost:3000/webshop/'+props.tip+'/'+props.id}><a><p className={styles.name}>{props.name}</p>
                     <img className={styles.img} src={props.src} alt=""/></a></Link>
                 </div>
                 

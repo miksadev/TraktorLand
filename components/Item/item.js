@@ -50,6 +50,10 @@ const item = (props) => {
                         <p className={styles.levo}>Proizvodjac</p>
                         <h3 className={styles.desno}>{props.proizvod[0].ime}</h3>
                     </div>
+                    {props.proizvod[0].zemlja_porekla == null  || props.proizvod[0].zemlja_porekla ==  "" ? "" : <div className={styles.block}>
+                        <p className={styles.levo}>Zemlja porekla</p>
+                        <h3 className={styles.desno}>{props.proizvod[0].zemlja_porekla}</h3>
+                    </div>}
                     <div className={styles.block}>
                         <p className={styles.levo}>Kataloski broj</p>
                         <h3 className={styles.desno}>{props.proizvod[0].kataloski_broj}</h3>

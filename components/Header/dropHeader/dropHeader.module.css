@@ -1,0 +1,24 @@
+.dropHeader{
+    width: 90%;
+    margin-left: 5%;
+    background-color: white;
+    height: 50px;
+    /* margin-top: 150px; */
+    border-radius: 10px;
+}
+.drop{
+    position: absolute;
+    top: 100px;
+    left: 0;
+    width: 100%;
+}
+.wrapper{
+    width: 100%;
+    height: 100vh;
+    
+    
+
+    backdrop-filter: blur(10px);
+    background: rgba(47,46,65,.1);
+    z-index: 20;
+}
