@@ -32,6 +32,7 @@ export default async (req, res) => {
         var tip = fields["tip"];
         var sifra = fields["sifra"];
         var kolicina = fields["kolicina"]
+        var zemlja_porekla = fields["zemlja_porekla"]
         var thumb = image4db;
       
         var proizvod = {
@@ -43,7 +44,8 @@ export default async (req, res) => {
         tip:tip,
         sifra:sifra,
         kolicina:kolicina,
-        thumb:thumb
+        thumb:thumb,
+        zemlja_porekla:zemlja_porekla
       } 
       con.query("INSERT INTO proizvodi SET ?", proizvod,(err,result) => {
         if(err) throw err;

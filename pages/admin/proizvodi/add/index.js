@@ -15,7 +15,7 @@ class add extends React.Component{
                         mp_cena:'',
                         vp_cena:'',
                         tip:'Traktori',
-                        
+                        zemlja_porekla:'',
                         kolicina:''
                     },
                 imeEmpty:false,
@@ -46,11 +46,13 @@ class add extends React.Component{
         var err = 0;
         for(const [key,value] of Object.entries(this.state.data)){
             if(value == ""){
-                var obj = {};
+                if(key != "zemlja_porekla"){
+                    var obj = {};
                 obj[key+"Empty"] = true
                 this.setState(obj)
-                 console.log(key)
+                 
                 err++;
+                }
             }
         }
         
@@ -61,7 +63,6 @@ class add extends React.Component{
             return;
         }
         
-        
 
         var formData = new FormData();
         formData.append("ime",this.state.data.ime);
@@ -71,6 +72,7 @@ class add extends React.Component{
         formData.append("vp_cena",this.state.data.vp_cena);
         formData.append("tip",this.state.data.tip);
         formData.append("sifra",this.state.data.sifra);
+        formData.append("zemlja_porekla",this.state.data.zemlja_porekla);
         formData.append("kolicina",this.state.data.kolicina);
         formData.append("thumb",e.target["thumb"].files[0]);
         fetch("/api/add",{
@@ -86,7 +88,7 @@ class add extends React.Component{
                         sifra:'',
                         mp_cena:'',
                         vp_cena:'',
-                        tip:'Traktori',
+                        tip:'traktori',
                         
                         kolicina:''
                     }})
@@ -117,7 +119,8 @@ class add extends React.Component{
                 </Input>
                 <Input onFocus={(e) => this.onFocus(e)} style={this.state.imeEmpty ? {borderBottom:'1px solid red'} : {}} onChange={(e) => this.onChange(e)} inputtype="input" value={this.state.data.ime}  name="ime"  label="Ime"  type="text"/>
                 <Input onFocus={(e) => this.onFocus(e)} style={this.state.proizvodjacEmpty ? {borderBottom:'1px solid red'} : {}} onChange={(e) => this.onChange(e)} inputtype="input" value={this.state.data.proizvodjac} name="proizvodjac"  label="Proizvodjac"  type="text"/>
-                <Input onFocus={(e) => this.onFocus(e)} style={this.state.kataloski_broj ? {borderBottom:'1px solid red'} : {}} onChange={(e) => this.onChange(e)} inputtype="input" value={this.state.data.kataloski_broj} name="kataloski_broj"  label="Kataloski broj"  type="text"/>
+                <Input onFocus={(e) => this.onFocus(e)} style={{}} onChange={(e) => this.onChange(e)} inputtype="input" value={this.state.data.zemlja_porekla} name="zemlja_porekla"  label="Zemlja porekla"  type="text"/>
+                <Input onFocus={(e) => this.onFocus(e)} style={this.state.kataloski_brojEmpty ? {borderBottom:'1px solid red'} : {}} onChange={(e) => this.onChange(e)} inputtype="input" value={this.state.data.kataloski_broj} name="kataloski_broj"  label="Kataloski broj"  type="text"/>
                 <Input onFocus={(e) => this.onFocus(e)} style={this.state.sifraEmpty ? {borderBottom:'1px solid red'} : {}} onChange={(e) => this.onChange(e)} inputtype="input" value={this.state.data.sifra} name="sifra"  label="Sifra"  type="text"/>
                 <Input onFocus={(e) => this.onFocus(e)} style={this.state.mp_cenaEmpty ? {borderBottom:'1px solid red'} : {}} onChange={(e) => this.onChange(e)} inputtype="input" value={this.state.data.mp_cena} name="mp_cena"  label="MP cena"  type="text"/>
                 <Input onFocus={(e) => this.onFocus(e)} style={this.state.vp_cenaEmpty ? {borderBottom:'1px solid red'} : {}} onChange={(e) => this.onChange(e)} inputtype="input" value={this.state.data.vp_cena} name="vp_cena"  label="VP cena"  type="text"/>

@@ -1,18 +1,15 @@
 import React from 'react';
 import styles from './searchitems.module.css';
 import SearchItem from './SearchItem/searchItem';
+import Link from 'next/link';
+const searchItems = ({data}) => {
 
-const searchItems = (props) => {
     return(
         <div className={styles.search}>
-            <SearchItem img="/product.png" ime="Sunce rotirajuci sakupljac" cena="3000"/>
-            <SearchItem img="/product.png" ime="Sunce rotirajuci sakupljac" cena="3000"/>
-            <SearchItem img="/product.png" ime="Sunce rotirajuci sakupljac" cena="3000"/>
-            <SearchItem img="/product.png" ime="Sunce rotirajuci sakupljac" cena="3000"/>
-            <SearchItem img="/product.png" ime="Sunce rotirajuci sakupljac" cena="3000"/>
-            <SearchItem img="/product.png" ime="Sunce rotirajuci sakupljac" cena="3000"/>
-            <SearchItem img="/product.png" ime="Sunce rotirajuci sakupljac" cena="3000"/>
-            <SearchItem img="/product.png" ime="Sunce rotirajuci sakupljac" cena="3000"/>
+            {data.map(item => 
+               <Link href={`/webshop/${item.tip}/${item.id}`}><a> <SearchItem img={item.thumb} ime={item.ime} cena={item.mp_cena}/> </a></Link>
+                )}
+         
         </div>
     );
 }
