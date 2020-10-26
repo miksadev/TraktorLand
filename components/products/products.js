@@ -7,7 +7,7 @@ const products = ({data,mdata,backroute}) => {
     return(
         <div className={styles.products}>
         	{mdata.length == 0 || mdata == "empty" ? "" : <Item proizvod={mdata}/>}
-            {data.map((prod) => <Product backroute={backroute} key={prod["id"]} id={prod["id"]} name={prod["ime"]} price={prod["mp_cena"]} src={prod["thumb"]} sifra={prod["sifra"]} />)}
+            {data.map((prod) => <Product tip={prod["tip"]} backroute={backroute} key={prod["id"]} id={prod["id"]} name={prod["ime"]} price={prod["mp_cena"]} src={prod["thumb"]} sifra={prod["sifra"]} />)}
             
         </div>
     );

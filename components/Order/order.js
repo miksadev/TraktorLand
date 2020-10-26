@@ -7,6 +7,7 @@ import Submit from '../UI/Button/Submit/submit';
 import {useRouter} from 'next/router';
 import {useState,useEffect} from 'react';
 const order = (props) => {
+
     if(props.data.orderdata != undefined){
     var [order,setOrder] = useState(JSON.parse(props.data.orderdata).items)
 
@@ -30,7 +31,7 @@ const order = (props) => {
            
         })
          setPrice(cena)
-         console.log(userinfo)
+         
     },[])
     function zavrsiOrder(){
         if(zavrsen == "Zavrsi"){
@@ -71,16 +72,19 @@ const order = (props) => {
             }
          })
     }
+
     return(
         <>
+
             <div className={styles.row}>
+                <h3 style={{marginLeft:"100px"}}>{props.data.created+`  `+props.data.time}</h3>
                 <div className={styles.CartItems}>
+
                     {order.map(item => <CartItem edit={props.edit} sifra={item.sifra}
                      namena={props.namena} src={item.slika}
                       name={item.ime}
                        price={item.price} qty={item.qty} up={() => addOne(item)}
                         down={() => removeOne(item)} brisi={() => removeFromCart(item)}></CartItem>)}
-                   
                 </div>
                 <div className={styles.total}>
                     <Total edit={props.edit} price={price} rabat={userinfo.rabat == undefined || userinfo.rabat == "" ? '0' : userinfo.rabat}/>
