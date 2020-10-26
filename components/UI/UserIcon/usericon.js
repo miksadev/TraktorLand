@@ -9,6 +9,7 @@ class usericon extends React.Component {
 			url:''
 		}
 	}
+	
 	componentDidMount(){
 		fetch('/api/proxy/checkauth').then(res => res.json()).then(data => {
 			
@@ -19,9 +20,13 @@ class usericon extends React.Component {
 			}
 		})
 	}
+
+	
     render(){
+		let style = [styles.usericon];
+	{this.props.styles ? style.push(this.props.styles) : null}
     	return(
-        <Link href={this.state.url}><img className={styles.usericon} src="/header/user.png" alt=""/></Link>
+        <Link href={this.state.url}><img onClick={this.props.click} className={style.join(' ')} src="/header/user.png" alt=""/></Link>
     );
     }
 }
