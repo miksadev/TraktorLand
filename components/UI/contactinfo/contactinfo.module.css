@@ -7,6 +7,7 @@
     position: relative;
     margin-top: 26px;
     margin-left: 26px;
+    z-index: 10;
 }
 
 .phone{
@@ -53,4 +54,11 @@ background: #D2D2D2;
     left: 16.3px;
     top: 53.46px;
     
+}
+
+
+@media screen and (max-width: 630px) {
+    .coninfo{
+        margin-left: 5px;
+    }
 }

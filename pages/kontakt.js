@@ -17,7 +17,7 @@ export default function Kontakt() {
           </div>
           <div className={styles.maps}>
             {/* <GoogleMaps/> */}
-            <img src="maps.png" alt=""/>
+            <img className={styles.mapaimg} src="maps.png" alt=""/>
           </div>
           <ConBlockInfo/>
 

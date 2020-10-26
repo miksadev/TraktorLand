@@ -5,7 +5,8 @@
     justify-content: center;
     align-content: space-between;
     margin-left: 47px;
-
+    z-index: 10;
+    position: relative;
 }
 .block{
     display: inline-block;

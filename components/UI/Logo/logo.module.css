@@ -24,4 +24,22 @@
     font-size: 72px;
     line-height: 86px;
     color: #212121;
+    position: relative;
+    z-index: 3;
+    background-color:#f7f7f7c9;
+    border-radius: 10px;
 }
+
+@media screen and (max-width: 500px) {
+    .logowide{
+      font-size: 60px;
+      width: calc(100%);
+      height: auto;
+    }
+  }
+
+  @media screen and (max-width: 400px) {
+    .logowide{
+      font-size: 50px;
+    }
+  }

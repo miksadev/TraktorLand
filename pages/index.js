@@ -28,14 +28,15 @@ export default function Home({akcije}) {
      
       {/* <Header/> */}
       <div className={styles.body}>
+      <img className={styles.traktor} src="traktor.png" alt=""/>
         <Coninfo/>
         
         <div className={styles.logowide}>
-        <Logowide />
+          <Logowide />
         </div>
 
         <p className={styles.slogan}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni assumenda minima vero quaerat corporis unde obcaecati dolorum labore.</p>
-        <img className={styles.traktor} src="traktor.png" alt=""/>
+        
 
         <Kategorije/>
 
