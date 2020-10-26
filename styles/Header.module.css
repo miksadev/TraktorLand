@@ -8,3 +8,14 @@
     display: inline-block;
     z-index: 100;
 }
+
+
+.headerbig{
+    
+}
+.responsive{
+    display: none;
+}
+.logos{
+    margin-left: calc(50% - 48.57px) !important;
+}

@@ -42,7 +42,7 @@ const slider = () => {
           )
         }}
         >
-          <Link href="/admin/proizvodi">
+          <Link href="/webshop/traktori/10">
             <Item>
               <StyledImg src="slajder/sliderimg.png"/>
               <StyledP>Proizvodjac 1</StyledP>
