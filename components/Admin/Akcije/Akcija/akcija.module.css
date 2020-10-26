@@ -2,11 +2,13 @@
     position: absolute;
     top: 0;
     right: 0;
+    cursor: pointer;
 }
 .delete{
     position: absolute;
     bottom: 0;
     right: 0;
+    cursor: pointer;
 }
 .akcija{
     width: calc(50% - 20px);

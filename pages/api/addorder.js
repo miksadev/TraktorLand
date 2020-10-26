@@ -17,8 +17,10 @@ export default async (req, res) => {
       
       form.parse(req,(err,fields,files) => {
         var ime = fields["ime"];
+        console.log(fields)
         var price = 0;
         var order = JSON.parse(fields['postData']);
+        var rabat = order["rabat"]
         var allorders = JSON.parse(order['orderdata']).items
         allorders.map((item) => {
           var cena = Number(item.qty) * Number(item.price)
@@ -35,7 +37,8 @@ export default async (req, res) => {
           grad:order['grad'],
           postanski_broj:order['postanski_broj'],
           telefon:order['telefon'],
-          created:created
+          created:created,
+          rabat:rabat
         }
         res.end(JSON.stringify({ result: 'Success' }))
         resolve();

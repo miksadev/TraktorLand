@@ -1,17 +1,12 @@
 import React from 'react';
 import styles from './akcije.module.css';
 import Akcija from './Akcija/akcija';
-
-const akcije = () => {
+import Link from 'next/link';
+const akcije = ({akcije,refreshfunc}) => {
     return(
         <div className={styles.akcije}>
-            <Akcija img="/product.png" ime="Sunce rotirajuci sakupljac" sifra="123456"/>
-            <Akcija img="/product.png" ime="Sunce rotirajuci sakupljac" sifra="123456"/>
-            <Akcija img="/product.png" ime="Sunce rotirajuci sakupljac" sifra="123456"/>
-            <Akcija img="/product.png" ime="Sunce rotirajuci sakupljac" sifra="123456"/>
-            <Akcija img="/product.png" ime="Sunce rotirajuci sakupljac" sifra="123456"/>
-            <Akcija img="/product.png" ime="Sunce rotirajuci sakupljac" sifra="123456"/>
-            <Akcija img="/product.png" ime="Sunce rotirajuci sakupljac" sifra="123456"/>
+            {akcije.map(akcija => <Link href={akcija.link_proizvoda}><Akcija refreshfunc={refreshfunc} id={akcija.id} img={akcija.thumb} ime={akcija.ime} sifra={akcija.sifra} /></Link>)}
+           
         </div>
     )
 }
