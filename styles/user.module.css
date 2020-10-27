@@ -60,3 +60,10 @@
     justify-content: center;
     width: 100%;
 }
+
+@media screen and (max-width: 950px) {
+    .body{
+        position: relative;
+        margin-bottom: 0;
+    }
+  }

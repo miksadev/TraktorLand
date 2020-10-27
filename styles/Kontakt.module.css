@@ -102,6 +102,13 @@
       margin-top: 50px;
     }
   }
+
+  @media screen and (max-width: 950px) {
+    .body{
+        position: relative;
+        margin-bottom: 0;
+    }
+  }
   @media screen and (max-width: 650px) {
     .opis{
       margin-right: 50px;

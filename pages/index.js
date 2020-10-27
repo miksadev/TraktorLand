@@ -24,9 +24,9 @@ export default function Home({akcije}) {
   );
 
   return (
-    <div className={styles.container}>
-     
+    <>
       {/* <Header/> */}
+      
       <div className={styles.body}>
       <img className={styles.traktor} src="traktor.png" alt=""/>
         <Coninfo/>
@@ -48,8 +48,6 @@ export default function Home({akcije}) {
       </div>
 
       {/* <Footer/> */}
-      
-
-    </div>
+      </>
   )
 }

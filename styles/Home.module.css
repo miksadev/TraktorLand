@@ -76,7 +76,12 @@
   color: #212121;
 }
 
-
+@media screen and (max-width: 950px) {
+  .body{
+      position: relative;
+      margin-bottom: 0;
+  }
+}
 @media screen and (max-width: 800px) {
   .traktor{
     width: 100%;

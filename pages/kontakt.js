@@ -5,7 +5,7 @@ import ConBlockInfo from '../components/UI/contactinfo/ConBlockInfo';
 
 export default function Kontakt() {
   return (
-    <div className={styles.container}>
+    <>
 
         <div className={styles.body}>
           <h1 className={styles.naslov}>KONTAKT</h1>
@@ -44,6 +44,6 @@ export default function Kontakt() {
         </div>
        
 
-    </div>
+    </>
   )
 }

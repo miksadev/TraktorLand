@@ -79,7 +79,12 @@
     margin-top: 45px;
     cursor: pointer;
 }
-
+@media screen and (max-width: 950px) {
+    .body{
+        position: relative;
+        margin-bottom: 0;
+    }
+  }
 @media screen and (max-width: 450px) {
     .forgotpw{
         position: relative;
