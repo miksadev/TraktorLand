@@ -1,7 +1,7 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import con from '../../store/db.js'
 import formidable from 'formidable-serverless';
-
+import crypto from 'crypto';
 export const config = {
   api: {
     bodyParser: false
@@ -15,7 +15,7 @@ export default async (req, res) => {
 
       const form = new formidable.IncomingForm()
       form.parse(req,(err,fields,files) => {
-        
+        var secret = "traktorlandsecret";
         var ime = fields["ime"];
         var prezime = fields["prezime"];
         var telefon = fields["telefon"];
@@ -26,6 +26,9 @@ export default async (req, res) => {
         var grad = fields["grad"]
         var postanskibroj = fields["postanskibroj"]
         var lozinka = fields["lozinka"]
+        var cipher = crypto.createCipher('aes192',secret)
+        var encrypted = cipher.update(lozinka,'utf8','hex')
+        encrypted+=cipher.final('hex')
         var pravno_lice = 0;
         var d = new Date();
         var created = d.getDate()+"/"+(d.getMonth()+1)+"/"+d.getFullYear()
@@ -43,7 +46,7 @@ export default async (req, res) => {
         adresa:adresa,
         grad:grad,
         postanski_broj:postanskibroj,
-        lozinka:lozinka,
+        lozinka:encrypted,
         pravno_lice:pravno_lice,
         created:created,
         rabat:0

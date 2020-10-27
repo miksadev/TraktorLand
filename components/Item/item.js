@@ -12,11 +12,18 @@ const item = (props) => {
     const {isItemOpened, toggleItem} = useCart();
     var back = router.query.tip[0];
 
+    
+    useEffect(() => {
+        if(isItemOpened != null){
+            if(!isItemOpened){
+               router.push(props.backroute)
+        }
+        }
+    },[isItemOpened])
     useEffect(() => {
         {isItemOpened ? null : toggleItem()}
         
     }, []);
-
 
     return(
     <>

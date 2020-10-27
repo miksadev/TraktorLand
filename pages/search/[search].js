@@ -4,17 +4,9 @@ import styles from "../../styles/webshop.module.css";
 import Products from '../../components/products/products';
 
 
-function Webshop(props){
-	
+function Search(props){
 	const router = useRouter()
-  	
-    
-	var par = props.param
-	
-
 	var naslov = ""
-	
-	
 	return (
 			<div className={styles.container}>
       
@@ -25,22 +17,24 @@ function Webshop(props){
 
 		            </h3>
 		            <div className={styles.line}></div>
-		            <Products backroute={props.param} data={props.data} mdata={props.mData}/>
+		            <Products search={props.search} backroute={props.param} data={props.data} mdata={props.mData}/>
 		        </div>
-		       
-
+		      
 		    </div>
 		)
 }
 export async function getServerSideProps(context){
+
 	var data = await fetch("http://localhost:3000/api/search?search="+context.query.search)
 	.then(res => res.json()).then(data => data.results)
 	return{
 		props:{
 			data:data,
-			mData:"empty"
+			mData:"empty",
+			param:context.query.search,
+			search:"true"
 		}
 	}
 	
 }
-export default Webshop
+export default Search

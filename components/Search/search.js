@@ -6,8 +6,8 @@ const search = ({data,search}) => {
     return(
     	<>
         {data.length != 0  ? <div className={styles.search}>
-            {data.length > 1 ? <div className={styles.more}>
-                <Link href={`/search/${search}`}><a>Klikni da pogledas jos {data.length} proizvoda!</a></Link>
+            {data.length > 10 ? <div className={styles.more}>
+                <Link href={`/search/${search}`}><a>Klikni da pogledas jos {data.length-10} proizvoda!</a></Link>
             </div> : null}
             <SearchItems data={data}/>
         </div> : null}
