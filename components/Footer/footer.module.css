@@ -59,7 +59,8 @@
     }
     .lwide{
         width: 100%;
-        padding-left: calc(50% - 206.5px);
+        /* padding-left: calc(50% - 206.5px); */
+        margin-left: 0;
     }
     .footer{
         height: 800px;

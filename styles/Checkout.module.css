@@ -44,9 +44,29 @@
   font-weight: 500;
 }
 
+
+@media only screen and (max-width: 1300px) {
+
+
+  .total{
+      display: block;
+      position: relative;
+      left: 0;
+      margin-left: calc(50% - 205px);
+  }
+
+
+}
+
 @media screen and (max-width: 950px) {
   .body{
       position: relative;
       margin-bottom: 0;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .total{
+      margin-left: 0;
   }
 }

@@ -54,7 +54,8 @@
     height: 45px;
     overflow: hidden;
     margin-bottom: 0;
-    height: 65px;
+    height: 63px;
+    margin-right: 135px;
 }
 .price{
     margin-left: 130px;
@@ -77,16 +78,56 @@
     margin-left: 140px;
     margin-top: 5px;
 }
+@media screen and (max-width: 1300px) {
 
+    .checkoutitem{
+        margin-left: 0;
+    }
+}
+@media screen and (max-width: 720px) {
+
+    .checkoutitem{
+        width: 100%;
+    }
+}
 @media screen and (max-width: 620px) {
     .cartitem{
-        height: 185px;
+        height: 120px;
     }
     .cartitem .name{
-        max-height: 60px;
+        max-height: 80px;
         margin-bottom: 5px;
     }
     .cartitem .price{
         max-height: 60px;
+        bottom: 0;
+        position: absolute;
+        left: -120px;
     }
+    .cname{
+        font-size: 18px;
+    }
+    .cprice{
+        font-size:20px ;
+    }
+  }
+
+  @media screen and (max-width: 550px) {
+    .cartitem{
+        height: 140px;
+    }
+    .checkoutitem{
+        height: 160px;
+    }
+    .cname{
+        margin-right: 5px;
+        height: 80px;
+    }
+    .cprice{
+        bottom: 0;
+        position: absolute;
+        left: -120px;
+    }
+
+
   }
