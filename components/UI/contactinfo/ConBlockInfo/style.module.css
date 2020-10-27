@@ -5,7 +5,8 @@
     justify-content: center;
     align-content: space-between;
     margin-left: 47px;
-
+    z-index: 10;
+    position: relative;
 }
 .block{
     display: inline-block;
@@ -28,4 +29,10 @@
     line-height: 28px;
     color: #000000;
     margin-top: 8px;
+}
+
+@media screen and (max-width: 600px) {
+    .div{
+        justify-content: left;
+    }
 }

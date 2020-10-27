@@ -46,3 +46,11 @@
     top: -10px;
     left: 14px;
 }
+
+@media screen and (max-width: 620px) {
+    .cartItemInfo{
+        position: absolute;
+        bottom: 0;
+        left: calc(50% + 70px);
+    }
+  }

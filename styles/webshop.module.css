@@ -50,3 +50,10 @@
     margin-left: 47px;
     color: #2B2B2B;
 }
+
+@media screen and (max-width: 950px) {
+  .body{
+      position: relative;
+      margin-bottom: 0;
+  }
+}

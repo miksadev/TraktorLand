@@ -43,3 +43,10 @@
   margin-bottom: 0;
   font-weight: 500;
 }
+
+@media screen and (max-width: 950px) {
+  .body{
+      position: relative;
+      margin-bottom: 0;
+  }
+}

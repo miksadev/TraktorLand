@@ -5,19 +5,20 @@ import ConBlockInfo from '../components/UI/contactinfo/ConBlockInfo';
 
 export default function Kontakt() {
   return (
-    <div className={styles.container}>
+    <>
 
         <div className={styles.body}>
           <h1 className={styles.naslov}>KONTAKT</h1>
-          <p className={styles.opis}>
-          Dobrodosli na nasu kontakt stranicu. Mozete nas kontaktirati na navedin telefon ili mail, a mozete nas pronaci i na adresi Knez Mihajlova, br.56 u Beogradu
-          </p>
           <div className={styles.ConInfo}>
             <ConInfo/>
           </div>
+          <p className={styles.opis}>
+          Dobrodosli na nasu kontakt stranicu. Mozete nas kontaktirati na navedin telefon ili mail, a mozete nas pronaci i na adresi Knez Mihajlova, br.56 u Beogradu
+          </p>
+          
           <div className={styles.maps}>
             {/* <GoogleMaps/> */}
-            <img src="maps.png" alt=""/>
+            <img className={styles.mapaimg} src="maps.png" alt=""/>
           </div>
           <ConBlockInfo/>
 
@@ -43,6 +44,6 @@ export default function Kontakt() {
         </div>
        
 
-    </div>
+    </>
   )
 }

@@ -40,6 +40,13 @@ function Webshop(props){
 		)
 }
 export async function getServerSideProps(context){
+	console.log(context)
+	var backroute = "";
+	if(context.query.s != undefined){
+		backroute = "/search/"+context.query.s
+	}else{
+		backroute = context.query.tip[0]
+	}
 	var param = context.query.tip[0]
 	var mData = "empty"
 	if(context.query.tip[1] != undefined){
@@ -53,7 +60,7 @@ export async function getServerSideProps(context){
 		props:{
 			data,
 			mData,
-			param:param
+			param:backroute
 		}
 	}
 	

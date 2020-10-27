@@ -12,17 +12,25 @@ const item = (props) => {
     const {isItemOpened, toggleItem} = useCart();
     var back = router.query.tip[0];
 
+    
+    useEffect(() => {
+        if(isItemOpened != null){
+            if(!isItemOpened){
+               router.push(props.backroute)
+        }
+        }
+    },[isItemOpened])
     useEffect(() => {
         {isItemOpened ? null : toggleItem()}
         
     }, []);
-
 
     return(
     <>
         <Wrapper/>
         { isItemOpened ?
             <div className={styles.item}>
+                <img onClick={toggleItem} className={styles.x} src="/header/x.png" alt=""/>
             {/* <Link href={'/webshop/'+back} style={{float:"right"}}><a>close</a></Link> */}
                 <h3 className={styles.name}>{props.proizvod[0].ime}</h3>
                 <div>

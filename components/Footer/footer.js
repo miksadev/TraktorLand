@@ -47,7 +47,7 @@ const footer = () => {
                 </Col>
                 <Col className={styles.fcol}>
                     <div className={styles.lwide}>
-                    <Logowide color="white" font="50px" martop="120px" marleft="calc(50% - 206.5px)"/>
+                    <Logowide back="transparent"color="white" font="50px" martop="120px" marleft="calc(50% - 206.5px)"/>
                     </div>
                     
                 </Col>

@@ -11,6 +11,7 @@ class add extends React.Component{
                 data:{
                         ime:this.props.proizvod.ime,
                         proizvodjac:this.props.proizvod.proizvodjac,
+                        zemlja_porekla :this.props.proizvod.zemlja_porekla,
                         kataloski_broj:this.props.proizvod.kataloski_broj,
                         sifra:this.props.proizvod.sifra,
                         mp_cena:this.props.proizvod.mp_cena,
@@ -20,6 +21,7 @@ class add extends React.Component{
                     },
                 imeEmpty:false,
                 proizvodjacEmpty:false,
+                zemlja_poreklaEmpty:false,
                 kataloski_brojEmpty:false,
                 sifraEmpty:false,
                 mp_cenaEmpty:false,
@@ -61,6 +63,7 @@ class add extends React.Component{
         var formData = new FormData();
         formData.append("ime",this.state.data.ime);
         formData.append("proizvodjac",this.state.data.proizvodjac);
+        formData.append("zemlja_porekla",this.state.data.zemlja_porekla);
         formData.append("kataloski_broj",this.state.data.kataloski_broj);
         formData.append("mp_cena",this.state.data.mp_cena);
         formData.append("vp_cena",this.state.data.vp_cena);
@@ -110,6 +113,7 @@ class add extends React.Component{
                 </Input>
                 <Input onFocus={(e) => this.onFocus(e)} style={this.state.imeEmpty ? {borderBottom:'1px solid red'} : {}} onChange={(e) => this.onChange(e)} inputtype="input" value={this.state.data.ime}  name="ime"  label="Ime"  type="text"/>
                 <Input onFocus={(e) => this.onFocus(e)} style={this.state.proizvodjacEmpty ? {borderBottom:'1px solid red'} : {}} onChange={(e) => this.onChange(e)} inputtype="input" value={this.state.data.proizvodjac} name="proizvodjac"  label="Proizvodjac"  type="text"/>
+                <Input onFocus={(e) => this.onFocus(e)} style={this.state.zemlja_poreklaEmpty ? {borderBottom:'1px solid red'} : {}} onChange={(e) => this.onChange(e)} inputtype="input" value={this.state.data.zemlja_porekla} name="zemlja_porekla"  label="Zemlja porekla"  type="text"/>
                 <Input onFocus={(e) => this.onFocus(e)} style={this.state.kataloski_broj ? {borderBottom:'1px solid red'} : {}} onChange={(e) => this.onChange(e)} inputtype="input" value={this.state.data.kataloski_broj} name="kataloski_broj"  label="Kataloski broj"  type="text"/>
                 <Input onFocus={(e) => this.onFocus(e)} style={this.state.sifraEmpty ? {borderBottom:'1px solid red'} : {}} onChange={(e) => this.onChange(e)} inputtype="input" value={this.state.data.sifra} name="sifra"  label="Sifra"  type="text"/>
                 <Input onFocus={(e) => this.onFocus(e)} style={this.state.mp_cenaEmpty ? {borderBottom:'1px solid red'} : {}} onChange={(e) => this.onChange(e)} inputtype="input" value={this.state.data.mp_cena} name="mp_cena"  label="MP cena"  type="text"/>

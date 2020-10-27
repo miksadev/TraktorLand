@@ -9,11 +9,15 @@ import UserIcon from '../UI/UserIcon/usericon';
 import Menu from '../UI/HamburgerMenu/hamburger';
 import Link from 'next/link';
 import DropHeader from './dropHeader/dropHeader';
+import useCart from '../../util/useCart';
+
+
 
 const header = () => {
     const [search , setSearch] = useState(false);
     const [open, setOpen] = useState(false);
 
+    const {isCartOpened} = useCart();
     const onClickHandler = () => {
         setOpen(!open);
     }
@@ -33,11 +37,12 @@ const header = () => {
             </div>
             <div className={styles.responsive}>
                 {search ? null : <Logo styles={styles.logos}/>}
-                <Menu open={open} onclickhandler={onClickHandler}/>
+                {search ? null : <Menu open={open} onclickhandler={isCartOpened ? null : onClickHandler}/> }
                 { search ? <Search styles={styles.responsivesearch} input={styles.responsiveinput}/> : null}
-                <img onClick={searchHeandler} className={styles.searchicon} src={search ? "/header/x.png" : "/header/search.png"} alt=""/>
-                <CartIcon/>
-                { open ? <DropHeader/> : null }
+                {open ? null : <img onClick={open || isCartOpened ? null : searchHeandler} className={search ? styles.searchX : styles.searchicon} src={search ? "/header/x.png" : "/header/search.png"} alt=""/> }
+                {search || open ? null : <CartIcon open={open}/> }
+                { open ? <DropHeader setopen={onClickHandler}/> : null }
+                { open ? <UserIcon click={onClickHandler} styles={styles.usericonn}/> : null}
             </div>
             
         </header>

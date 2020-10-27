@@ -14,7 +14,12 @@
 .CartClosed{
     display: none;
 }
-
+.X{
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    cursor: pointer;
+}
 .praznakorpa{
     font-family: "Open Sans";
     font-style: normal;
@@ -28,5 +33,17 @@
 .LinkButton{
     margin-bottom: 10px;
     margin-left: calc(50% - 105px);
+
+}
+
+@media screen and (max-width: 620px) {
+    .CartOpen{
+        width: calc(100% - 20px);
+        margin-left: 10px;
+        left: 0;
+
+    }
+
+
 
 }

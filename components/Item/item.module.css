@@ -84,3 +84,54 @@
     line-height: 24px;
     color: #8F8F8F;
 }
+.x{
+    position: absolute;
+    right: 20px;
+    top: 20px;
+}
+
+@media screen and (max-width: 710px) {
+    .item{
+        width: calc(100% - 60px);
+        margin-left: 30px;
+        left: 0;
+    }
+
+
+}
+
+@media screen and (max-width: 680px) {
+    .img{
+        margin-left: calc(50% - 204px);
+    }
+    .cena{
+        margin-top: 20px;
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+    .atcbutton{
+        display: block;
+        margin-left: calc(50% - 74.5px);
+        margin-top: 0;
+    }
+    .item{
+        text-align: center;
+    }
+}
+
+
+@media screen and (max-width: 520px) {
+    .img{
+        width: calc(100%);
+        margin-left: 0;
+    }
+
+
+}
+@media screen and (max-width: 440px) {
+    .cena{
+        margin-bottom : 0;
+    }
+
+
+}

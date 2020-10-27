@@ -83,3 +83,27 @@ border-radius: 10px;
     font-family: "Open Sans";
     font-weight: 700;
 }
+.X{
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 550px) {
+    .donjideo{
+        height: 140px;
+    }
+    .donjideo p{
+        text-align: center;
+        margin-left: 0;
+    }
+    .Button{
+        left: calc(50% - 105px);
+    }
+    .gornjideo{
+        padding-bottom: 140px;
+    }
+
+
+}

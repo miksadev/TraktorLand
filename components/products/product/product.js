@@ -12,12 +12,15 @@ const product = (props) => {
         setInitialItem({...initialItem, qty:Number(e.target.value)});
         setQty(e.target.value);
     }
-    return (
+
+       return (
         <>
             <div className={styles.product}>
                 <div onClick={toggleItem} >
-                    <Link href={'http://localhost:3000/webshop/'+props.tip+'/'+props.id}><a><p className={styles.name}>{props.name}</p>
-                    <img className={styles.img} src={props.src} alt=""/></a></Link>
+                {props.search == "true" ? <Link href={'http://localhost:3000/webshop/'+props.tip+'/'+props.id+'?s='+props.backroute}><a><p className={styles.name}>{props.name}</p>
+                    <img className={styles.img} src={props.src} alt=""/></a></Link> : <Link href={'http://localhost:3000/webshop/'+props.tip+'/'+props.id}><a><p className={styles.name}>{props.name}</p>
+                    <img className={styles.img} src={props.src} alt=""/></a></Link>}
+                    
                 </div>
                 
                 <p className={styles.cena}>{props.price}<span> RSD</span></p>

@@ -25,14 +25,22 @@
     top: 42px;
     transform: scale(1.15);
 }
+.searchX{
+    position: absolute;
+    right: 30px;
+    top: 42px;
+    transform: scale(1.15);
+}
 .responsivesearch{
     left: 40px;
     width: calc(100% - 150px);
 }
 .responsiveinput{
-    width: calc(100% - 100px);
+    width: calc(100% - 100px) !important;
 }
-
+.usericonn{
+    right: 20px !important;
+}
 
 
 

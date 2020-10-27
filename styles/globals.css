@@ -14,4 +14,8 @@ a {
 * {
   box-sizing: border-box;
 }
-
+@media screen and (max-width: 950px) {
+  .body{
+      margin-bottom: 800px !important;
+  }
+}
