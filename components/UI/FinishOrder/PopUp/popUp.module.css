@@ -63,3 +63,19 @@
 .prvi{
     margin-left: calc(50% - 105px);
 }
+
+
+@media screen and (max-width: 620px) {
+    .popup{
+        width: calc(100% - 30px);
+        left: 15px;
+    }
+}
+
+@media screen and (max-width: 473px) {
+    .popup{
+        height: 340px;
+    }
+
+
+}

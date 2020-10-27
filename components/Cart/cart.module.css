@@ -14,7 +14,12 @@
 .CartClosed{
     display: none;
 }
-
+.X{
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    cursor: pointer;
+}
 .praznakorpa{
     font-family: "Open Sans";
     font-style: normal;
