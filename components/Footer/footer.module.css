@@ -63,7 +63,7 @@
     }
     .footer{
         height: 800px;
-        z-index: 20;
+        z-index: 1;
         position: relative;
         bottom: 0;
         left: 0;

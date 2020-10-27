@@ -10,7 +10,7 @@ const cartItemInfo = (props) => {
     },[]);
 
     return(
-        <div className={styles.cartItemInfo}>
+        <div className={props.namena == "korpa" ? styles.cartItemInfo : styles.checkoutItemInfo}>
             {
                 edit ? 
                 <>
