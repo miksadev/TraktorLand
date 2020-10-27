@@ -79,3 +79,13 @@
     margin-top: 45px;
     cursor: pointer;
 }
+
+@media screen and (max-width: 450px) {
+    .forgotpw{
+        position: relative;
+    }
+    .registerprvi{
+        position: relative;
+        margin-top: 0;
+    }
+}

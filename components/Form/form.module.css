@@ -1,5 +1,5 @@
 .form{
-    margin-left: calc(50% - 257.5px);
+    margin-left: calc(50% - 250px);
     width: 500px;
     text-align: center;
     display: flex;
@@ -19,4 +19,11 @@
     margin-bottom: 20px;
     display: block;
     width:100%;
+}
+
+@media screen and (max-width: 550px) {
+    .form{
+        width: calc(100% - 30px);
+        margin-left: 15px;
+    }
 }
