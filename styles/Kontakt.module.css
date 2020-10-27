@@ -96,14 +96,26 @@
     }
     .maps img{
       margin-left: 47px;
-      width: calc(80% - 40px);
+      width: calc(100% - 40px);
     }
-
-  }
-  @media screen and (max-width: 1250px) {
     .opis{
       margin-top: 50px;
     }
-
+  }
+  @media screen and (max-width: 650px) {
+    .opis{
+      margin-right: 50px;
+      margin-top: 20px;
+    }
+    .ConInfo{
+      position: relative;
+      top: 0;
+      margin-left: 27px;
+      left: 0;
+      
+    }
+    .naslov{
+      margin-bottom: 0px;
+    }
   }
   
