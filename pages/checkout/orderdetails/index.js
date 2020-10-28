@@ -69,6 +69,7 @@ export default function Kontakt({user}) {
         setOrderdata(newOrderdata)
     }
     function submitMask(e){
+
         var newInput = {...inputEmpty}
         var err = 0;
         delete user_["pravno_lice"]
@@ -77,12 +78,13 @@ export default function Kontakt({user}) {
             if(user_[key] === ""){
                 
                 newInput[key] = true
-                
+             
                 err++
             }
         }
         
         setInputEmpty(newInput)
+
         if(err != 0){
             e.preventDefault()
         }

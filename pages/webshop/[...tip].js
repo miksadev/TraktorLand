@@ -2,10 +2,10 @@ import { useRouter } from 'next/router'
 import Link from 'next/link'
 import styles from "../../styles/webshop.module.css";
 import Products from '../../components/products/products';
-
+import {useState} from 'react';
 
 function Webshop(props){
-	
+	const [prodata,setProdata] = useState(props.data)
 	const router = useRouter()
   	const tip = router.query.tip
 	var upLett = ["traktori","beraci","freze","kombajni"];
@@ -22,17 +22,25 @@ function Webshop(props){
 	}else{
 		naslov = "Poljoprivredna mehanizacija"
 	}
+	function onChange(e){
+		fetch('http://localhost:3000/api/searchtip?search='+e.target.value+"&tip="+par)
+        .then(res => res.json())
+        .then(data => {
+           setProdata(data.results)
+        })
+	}
 	return (
 			<div className={styles.container}>
       
 		        <div className={styles.body}>
 		            <Link href="/webshop"><h1 className={styles.naslov}>{"<- WEBSHOP"}</h1></Link>
+		            <input type="text" onChange={e => onChange(e)} style={{position:"absolute",marginTop:"5px",marginLeft:"160px"}} placeholder="Pretrazite proizvode..." />
 		            <h3 className={styles.naslovmanji}>
 		            	{naslov}
 
 		            </h3>
 		            <div className={styles.line}></div>
-		            <Products backroute={props.param} data={props.data} mdata={props.mData}/>
+		            <Products backroute={props.param} data={prodata} mdata={props.mData}/>
 		        </div>
 		       
 
@@ -40,7 +48,7 @@ function Webshop(props){
 		)
 }
 export async function getServerSideProps(context){
-	console.log(context)
+	
 	var backroute = "";
 	if(context.query.s != undefined){
 		backroute = "/search/"+context.query.s
