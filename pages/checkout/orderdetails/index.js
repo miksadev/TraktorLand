@@ -74,7 +74,7 @@ export default function Kontakt({user}) {
         delete user_["pravno_lice"]
         
         for(var key in user_){
-            if(user_[key] == ""){
+            if(user_[key] === ""){
                 
                 newInput[key] = true
                 

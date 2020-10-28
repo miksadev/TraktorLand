@@ -77,7 +77,8 @@ const order = (props) => {
         <>
 
             <div className={styles.row}>
-                <h3 style={{marginLeft:"100px"}}>{props.data.created+`  `+props.data.time}</h3>
+                {props.data.created && props.data.time ? <h3 style={{marginLeft:"100px"}}>{props.data.created+`  `+props.data.time}</h3> : null}
+                
                 <div className={styles.CartItems}>
 
                     {order.map(item => <CartItem edit={props.edit} sifra={item.sifra}
