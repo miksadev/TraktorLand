@@ -3,6 +3,8 @@ import styles from './proizvodi.module.css';
 import Korisnici from '../../../components/Admin/Korisnici/index';
 import {useState} from 'react'
 import Cookies from 'cookies';
+import Filter from '../../../components/Search/Filter/filter';
+
 export async function getServerSideProps({req,res}){
 		var user = ""
         var email = ""
@@ -64,7 +66,8 @@ const proizvodi = (props) => {
     	
         <div className={styles.proizvodi}>
             <div className={styles.heading}>
-                <h3>Korisnici</h3><input type="text" onChange={e => onChange(e)} style={{position:"absolute",marginTop:"36px",marginLeft:"40px"}} placeholder="Pretrazi korisnike..." />
+                <h3>Korisnici</h3>
+                <Filter change={e => onChange(e)} placeholder="Pretrazi korisnike..."></Filter>
             </div>
             <Korisnici deletefunc={refreshData} users={users}/>
         </div>

@@ -4,6 +4,7 @@ import Proizvodi from '../../../components/Admin/Proizvodi/proizvodi';
 import Link from 'next/link';
 import {useState} from 'react';
 import Cookies from 'cookies';
+import Filter from '../../../components/Search/Filter/filter';
 export async function getServerSideProps({req,res}){
 
 	var user = ""
@@ -56,7 +57,8 @@ const proizvodi = (props) => {
     return (
         <div className={styles.proizvodi}>
             <div className={styles.heading}>
-                <h3>Proizvodi </h3> <input type="text" onChange={e => onChange(e)} style={{position:"absolute",marginTop:"36px",marginLeft:"40px"}} placeholder="Pretrazi proizvode..." />
+                <h3>Proizvodi </h3> 
+                <Filter change={e => onChange(e)} placeholder="Pretrazi proizvode..."></Filter>
 
             </div>
             <Proizvodi data={pro}/>

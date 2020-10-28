@@ -3,6 +3,7 @@ import Link from 'next/link'
 import styles from "../../styles/webshop.module.css";
 import Products from '../../components/products/products';
 import {useState} from 'react';
+import Filter from '../../components/Search/Filter/filter';
 
 function Webshop(props){
 	const [prodata,setProdata] = useState(props.data)
@@ -34,11 +35,11 @@ function Webshop(props){
       
 		        <div className={styles.body}>
 		            <Link href="/webshop"><h1 className={styles.naslov}>{"<- WEBSHOP"}</h1></Link>
-		            <input type="text" onChange={e => onChange(e)} style={{position:"absolute",marginTop:"5px",marginLeft:"160px"}} placeholder="Pretrazite proizvode..." />
+		            
 		            <h3 className={styles.naslovmanji}>
 		            	{naslov}
-
 		            </h3>
+					<Filter styles={styles.filter} change={e => onChange(e)} placeholder="Pretrazi proizvode..."></Filter>
 		            <div className={styles.line}></div>
 		            <Products backroute={props.param} data={prodata} mdata={props.mData}/>
 		        </div>

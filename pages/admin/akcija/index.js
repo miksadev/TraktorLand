@@ -4,6 +4,8 @@ import Akcija from '../../../components/Admin/Akcije/akcije';
 import Link from 'next/link';
 import {useState} from 'react';
 import Cookies from 'cookies';
+import Filter from '../../../components/Search/Filter/filter';
+
 export async function getServerSideProps({req,res}){
 
 		var user = ""
@@ -64,7 +66,8 @@ const proizvodi = ({akcije}) => {
     return (
         <div className={styles.proizvodi}>
             <div className={styles.heading}>
-                <h3>Proizvodi na akciji</h3><input type="text" onChange={e => onChange(e)} style={{position:"absolute",marginTop:"36px",marginLeft:"40px"}} placeholder="Pretrazi akcije..." />
+                <h3>Proizvodi na akciji</h3>
+                <Filter change={e => onChange(e)} placeholder="Pretrazi akcije..."></Filter>
             </div>
             <Akcija akcije={dataAkcije} refreshfunc={refreshData}/>
             <Link href="/admin/akcija/add"><img className={styles.add} src="/admin/add.png" alt=""/></Link>

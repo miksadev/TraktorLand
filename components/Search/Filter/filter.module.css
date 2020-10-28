@@ -1,0 +1,13 @@
+.filtersearch{
+    position: absolute;
+    margin-top:30px;
+    margin-left:40px;
+    border-radius: 10px;
+    width: 250px;
+    height: 35px;
+    outline: none;
+    border: 0.5px solid #2B2B2B;
+    padding-left: 10px;
+    font-family: "Open Sans";
+    font-size: 14px;
+}

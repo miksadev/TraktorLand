@@ -3,6 +3,8 @@ import styles from './proizvodi.module.css';
 import Orderi from '../../../components/Admin/Orderi/orderi';
 import {useState,useEffect} from 'react'
 import Cookies from 'cookies';
+import Filter from '../../../components/Search/Filter/filter';
+
 export async function getServerSideProps({req,res}){
 
     var user = ""
@@ -73,7 +75,7 @@ const proizvodi = ({data}) => {
                 <h3>Orderi</h3>
                 <button onClick={setNovi} className={styles.novi} style={{color:noviColor}}>Novi</button>
                 <button onClick={setZavrseni} className={styles.zavrseni} style={{color:zavrseniColor}}>Zavrseni</button>
-                <input type="text" onChange={e => onChange(e)} style={{position:"absolute",marginTop:"36px",marginLeft:"40px"}} placeholder="Pretrazi ordere..." />
+                <Filter change={e => onChange(e)} placeholder="Pretrazi ordere..."></Filter>
             </div>
             <Orderi orders={orderdata}/>
         </div>
