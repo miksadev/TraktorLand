@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './add.module.css';
 import Input from '../../../../components/UI/Input/input';
 import Link from 'next/link';
-
+import Cookies from 'cookies';
 class add extends React.Component{
     constructor(props){
         super(props)
@@ -136,5 +136,41 @@ class add extends React.Component{
     );
     }
 }
+export async function getServerSideProps({req,res}){
 
+    var user = ""
+        var email = ""
+        var cookies = new Cookies(req,res)
+        var authToken = cookies.get('auth-token')
+        if(authToken == undefined){
+            res.writeHead(307,{Location:'/login'})
+             res.end();
+        }
+        await fetch('http://localhost:3000/api/checkauth',
+            {headers:{'auth-token':authToken}}).then(res => res.json())
+        .then(data => {
+           email = data.email
+        })
+
+        await fetch('http://localhost:3000/api/getuser',{
+                method:'POST',
+                body:JSON.stringify({email:email})
+            }).then(res => res.json()).then(data => {
+                user = data.user
+            })
+            if(user.rank !== "admin"){
+                res.writeHead(307,{Location:'/login'})
+             res.end();
+            }
+
+    //----------------------------------------------------
+
+
+    
+    return {
+        props:{
+            data:[]
+        }
+    }
+}
 export default add;

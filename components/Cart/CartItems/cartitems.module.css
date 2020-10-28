@@ -89,6 +89,19 @@ border-radius: 10px;
     right: 30px;
     cursor: pointer;
 }
+@media screen and (max-width: 1300px) {
+
+    .cartitemscheckout{
+        margin-left: calc(50% - 325px);
+    }
+}
+@media screen and (max-width: 720px) {
+
+    .cartitemscheckout{
+        margin-left: 20px;
+        width: calc(100% - 40px);
+    }
+}
 
 @media screen and (max-width: 550px) {
     .donjideo{

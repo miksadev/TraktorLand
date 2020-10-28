@@ -2,7 +2,9 @@
 
 }
 
+.checkoutItemInfo{
 
+}
 .brisi{
     position: absolute;
     right: 11px;
@@ -47,10 +49,38 @@
     left: 14px;
 }
 
-@media screen and (max-width: 620px) {
-    .cartItemInfo{
+/* @media screen and (max-width: 550px) {
+    /* .cartItemInfo{
         position: absolute;
         bottom: 0;
-        left: calc(50% + 70px);
+        right: 0;
+    } */
+    
+
+
+@media screen and (max-width: 550px) {
+    .checkoutItemInfo .up{
+        bottom: 43px;        
     }
-  }
+    .checkoutItemInfo .down{
+        bottom: 8px;        
+    }
+    .checkoutItemInfo .kolicina{
+        bottom: 0;        
+    }
+    .checkoutItemInfo .brisi{
+        bottom: 25px;        
+    }
+    .cartItemInfo .up{
+        bottom: 43px;        
+    }
+    .cartItemInfo .down{
+        bottom: 8px;        
+    }
+    .cartItemInfo .kolicina{
+        bottom: 0;        
+    }
+    .cartItemInfo .brisi{
+        bottom: 25px;        
+    }
+}

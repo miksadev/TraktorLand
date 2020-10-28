@@ -77,10 +77,11 @@ const order = (props) => {
         <>
 
             <div className={styles.row}>
-                <h3 style={{marginLeft:"100px"}}>{props.data.created+`  `+props.data.time}</h3>
+                {props.data.created != undefined ? <h3 style={{marginLeft:"100px"}}>{props.data.created+`  `+props.data.time}</h3>
+                : null}
                 <div className={styles.CartItems}>
 
-                    {order.map(item => <CartItem edit={props.edit} sifra={item.sifra}
+                    {order.map(item => <CartItem key={item.id} edit={props.edit} sifra={item.sifra}
                      namena={props.namena} src={item.slika}
                       name={item.ime}
                        price={item.price} qty={item.qty} up={() => addOne(item)}

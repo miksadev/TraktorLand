@@ -78,3 +78,14 @@
     margin-top: 3.5px;
     margin-right: 10px;
 }
+
+@media screen and (max-width: 450px) {
+    .label{
+        position: absolute;
+        top: -43px;
+        border-right: 0;
+    }
+    .inputdiv{
+        margin-top: 30px;
+    }
+}

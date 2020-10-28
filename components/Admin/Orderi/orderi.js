@@ -5,7 +5,7 @@ import Order from './Order/order';
 const orderi = ({orders}) => {
     return(
         <div className={styles.orderi}>
-            {orders.map(item => <Order ime={item.ime_prezime}
+            {orders.map(item => <Order key={item.id} ime={item.ime_prezime}
             	prezime="" created={item.created} adresa={item.adresa+` `+item.grad+` `+item.postanski_broj} kolicina="" id={item.id} cena={item.price} orderid={`#`+item.id}/>)}
           
         </div>

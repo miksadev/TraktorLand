@@ -7,7 +7,7 @@ const searchItems = ({data}) => {
     return(
         <div className={styles.search}>
             {data.map(item => 
-               <Link href={`/webshop/${item.tip}/${item.id}`}><a> <SearchItem img={item.thumb} ime={item.ime} cena={item.mp_cena}/> </a></Link>
+               <Link key={item.id} href={`/webshop/${item.tip}/${item.id}`}><a> <SearchItem  img={item.thumb} ime={item.ime} cena={item.mp_cena}/> </a></Link>
                 )}
          
         </div>
