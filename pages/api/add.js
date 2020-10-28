@@ -2,7 +2,7 @@
 import con from '../../store/db.js'
 import formidable from 'formidable-serverless';
 var imageUrl;
-var image4db;
+var image4db = "";
 
 export const config = {
   api: {
@@ -33,8 +33,13 @@ export default async (req, res) => {
         var sifra = fields["sifra"];
         var kolicina = fields["kolicina"]
         var zemlja_porekla = fields["zemlja_porekla"]
-        var thumb = image4db;
-      
+        if(image4db == ""){
+          var thumb = "/upload/default.png";
+        }else{
+          var thumb = image4db;
+        }
+        
+        
         var proizvod = {
         ime:ime,
         proizvodjac:proizvodjac,

@@ -55,11 +55,14 @@ class add extends React.Component{
                 }
             }
         }
-        
+        var imgThumb;
+        if(e.target["thumb"].files.length == 0){
+                imgThumb = "default";
+        }else{
+                imgThumb = e.target["thumb"].files[0];
+        }
         if(err != 0){
-            if(e.target["thumb"].files.length == 0){
-                alert("Upload image");
-            }
+            
             return;
         }
         
@@ -74,7 +77,7 @@ class add extends React.Component{
         formData.append("sifra",this.state.data.sifra);
         formData.append("zemlja_porekla",this.state.data.zemlja_porekla);
         formData.append("kolicina",this.state.data.kolicina);
-        formData.append("thumb",e.target["thumb"].files[0]);
+        formData.append("thumb",imgThumb);
         fetch("/api/add",{
             method:"POST",
             body:formData
