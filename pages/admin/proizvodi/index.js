@@ -55,8 +55,8 @@ const proizvodi = (props) => {
 
 	}
     return (
-        <div className={styles.proizvodi}>
-            <div className={styles.heading}>
+        <div className={styles.proizvodii}>
+            <div className={styles.headingg}>
                 <h3>Proizvodi </h3> 
                 <Filter change={e => onChange(e)} placeholder="Pretrazi proizvode..."></Filter>
 

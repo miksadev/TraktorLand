@@ -3,6 +3,7 @@ import Order from '../../../components/Order/order';
 import styles from '../../../styles/checkout.module.css';
 import qs from 'querystring';
 import Cookies from 'cookies';
+import Footer from '../../../components/Footer/footer';
 export async function getServerSideProps({req,res,query}){
 
 	var user = ""
@@ -54,17 +55,17 @@ const ViewOrder = ({data,orders}) => {
 	return(
 		<div className={styles.container}>
 
-        <div className={styles.body}>
+        <div className={styles.body} style={{paddingTop:"10px"}}>
 
             <h1 className={styles.naslov}>Pregled porudzbine</h1>
-            <span style={{marginLeft:'60px',cursor:'pointer'}} onClick={() => router.back()}>{'<'} ADMIN</span>
+            <h2 className={styles.back} onClick={() => router.back()}>{'<'} ADMIN</h2>
 
             <div className={styles.line}></div>
             <Order namena="checkout" orders={orders} data={data} edit={false}/>
             
             
         </div>
-       
+        <Footer/>
 
     </div>
 	)

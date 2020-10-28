@@ -1,23 +1,21 @@
-.proizvodii{
+.proizvodi{
     background: #F0F0F0;
     width: calc(100% - 300px);
-    height: auto;
+    height: 100%;
     min-height: 1024px;
     position: absolute;
     top: 0;
     left: 300px;
-    padding-bottom: 25px;
 }
 
-.headingg{
+.heading{
     height: 90px;
     background: #FFFFFF;
     width: 100%;
-    position: fixed;
-    z-index: 100;
+    position: absolute;
     top :0;
 }
-.headingg h3{
+.heading h3{
     font-family: "Bebas Neue";
     font-style: normal;
     font-weight: normal;
@@ -27,6 +25,7 @@
     margin-left: 20px;
     display: inline-block;
 }
+
 .add{
     position: fixed;
     bottom: 50px;
@@ -34,33 +33,21 @@
     cursor: pointer;
 }
 
-
-
 @media only screen and (max-width: 1650px) {
-    .proizvodii{
+    .proizvodi{
         left: 200px;
         width: calc(100% - 200px);
     }
 }
 @media only screen and (max-width:880px) {
-    .proizvodii{
+    .proizvodi{
         left: 0;
         top: 260px;
         width: 100%;
     }
-    .headingg{
+    .heading{
         position: relative;
         overflow-x: scroll;
         overflow-y: hidden;
     }
-}
-
-@media only screen and (max-width:880px) {
-    .headingg h3{
-        display: b;
-        /* margin-bottom: 0; */
-    }
-
-
-
 }

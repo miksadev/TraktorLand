@@ -4,6 +4,7 @@ import Orderi from '../../../components/Admin/Orderi/orderi';
 import {useState,useEffect} from 'react'
 import Cookies from 'cookies';
 import Filter from '../../../components/Search/Filter/filter';
+import Menu from '../../../components/UI/HamburgerMenu/hamburger';
 
 export async function getServerSideProps({req,res}){
 
@@ -42,7 +43,7 @@ export async function getServerSideProps({req,res}){
         }
     }
 }
-const proizvodi = ({data}) => {
+const proizvodi = ({data} , props) => {
     const [orderdata,setOrderdata] = useState(data)
     const [noviColor,setNoviColor] = useState("")
     const [zavrseniColor,setZavrseniColor] = useState("")

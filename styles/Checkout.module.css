@@ -1,6 +1,6 @@
 .body{
   width: 100%;
-  min-height: 700px;
+  min-height: calc(100% + 50px);
   height: auto;
   padding-top: 108px;
   position: absolute;
@@ -43,7 +43,14 @@
   margin-bottom: 0;
   font-weight: 500;
 }
-
+.back{
+  cursor: pointer;
+  margin-left: 40px;
+  font-family: "Open Sans";
+  font-weight: 600;
+  margin-bottom: 20px;
+  font-size: 22px;
+}
 
 @media only screen and (max-width: 1300px) {
 

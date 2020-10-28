@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './edit.module.css';
+import styles from '../../../../styles/add.module.css';
 import Input from '../../../../components/UI/Input/input';
 import Link from 'next/link';
 import url from 'url'

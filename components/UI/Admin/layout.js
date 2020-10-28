@@ -3,6 +3,9 @@ import styles from './layout.module.css';
 import Logo from '../Logo/logo';
 import Link from 'next/link';
 const layout = () => {
+
+    
+
     return (
         <div className={styles.adminLayout}>
             <Logo/>

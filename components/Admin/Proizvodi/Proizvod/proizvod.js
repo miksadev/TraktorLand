@@ -23,7 +23,7 @@ const proizvod = (props) => {
             <img className={styles.img} src={props.src} alt=""/>
             <p className={styles.name}>{props.name}</p>
             <p className={styles.price}>{props.price} RSD</p>   
-            <p className={styles.kolicina}>{props.kolicina}</p>
+            {/* <p className={styles.kolicina}>{props.kolicina}</p> */}
             <Link href={props.url}><img className={styles.edit} src="/admin/edit.png" alt=""/></Link>
             <img onClick={e => deleteProizvod(e)} name={props.id} className={styles.delete} src="/admin/delete.png" alt=""/>
               

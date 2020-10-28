@@ -63,8 +63,6 @@ export default function Checkout({login,user}) {
     
   </>);
   return (
-    <div className={styles.container}>
-
         <div className={styles.body}>
             <h1 className={styles.naslov}>Moja Korpa</h1>
             <div className={styles.line}></div>
@@ -73,8 +71,5 @@ export default function Checkout({login,user}) {
             
             
         </div>
-       
-
-    </div>
   )
 }

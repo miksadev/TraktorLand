@@ -77,7 +77,7 @@ const order = (props) => {
         <>
 
             <div className={styles.row}>
-                {props.data.created && props.data.time ? <h3 style={{marginLeft:"100px"}}>{props.data.created+`  `+props.data.time}</h3> : null}
+                {props.data.created && props.data.time ? <h3 className={styles.vreme}>{props.data.created+`  `+props.data.time}</h3> : null}
                 
                 <div className={styles.CartItems}>
 
