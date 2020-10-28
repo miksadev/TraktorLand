@@ -28,7 +28,7 @@ export default async (req, res) => {
         var proizvodjac = fields["proizvodjac"];
         var kataloski_broj = fields["kataloski_broj"];
         var mp_cena = fields["mp_cena"];
-        var vp_cena = fields["vp_cena"];
+        var vp_cena = mp_cena - (mp_cena*20/120);
         var tip = fields["tip"];
         var sifra = fields["sifra"];
         var kolicina = fields["kolicina"]
@@ -40,7 +40,7 @@ export default async (req, res) => {
         proizvodjac:proizvodjac,
         kataloski_broj:kataloski_broj,
         mp_cena:mp_cena,
-        vp_cena:vp_cena,
+        vp_cena:vp_cena.toFixed(2),
         tip:tip,
         sifra:sifra,
         kolicina:kolicina,
