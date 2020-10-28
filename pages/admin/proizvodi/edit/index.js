@@ -15,7 +15,7 @@ class add extends React.Component{
                         kataloski_broj:this.props.proizvod.kataloski_broj,
                         sifra:this.props.proizvod.sifra,
                         mp_cena:this.props.proizvod.mp_cena,
-                        vp_cena:this.props.proizvod.vp_cena,
+                        
                         tip:this.props.proizvod.tip,
                         kolicina:this.props.proizvod.kolicina
                     },
@@ -25,7 +25,7 @@ class add extends React.Component{
                 kataloski_brojEmpty:false,
                 sifraEmpty:false,
                 mp_cenaEmpty:false,
-                vp_cenaEmpty:false,
+               
                 tipEmpty:false,
                 kolicinaEmpty:false
         }
@@ -66,7 +66,7 @@ class add extends React.Component{
         formData.append("zemlja_porekla",this.state.data.zemlja_porekla);
         formData.append("kataloski_broj",this.state.data.kataloski_broj);
         formData.append("mp_cena",this.state.data.mp_cena);
-        formData.append("vp_cena",this.state.data.vp_cena);
+        
         formData.append("tip",this.state.data.tip);
         formData.append("sifra",this.state.data.sifra);
         formData.append("kolicina",this.state.data.kolicina);
@@ -117,7 +117,7 @@ class add extends React.Component{
                 <Input onFocus={(e) => this.onFocus(e)} style={this.state.kataloski_broj ? {borderBottom:'1px solid red'} : {}} onChange={(e) => this.onChange(e)} inputtype="input" value={this.state.data.kataloski_broj} name="kataloski_broj"  label="Kataloski broj"  type="text"/>
                 <Input onFocus={(e) => this.onFocus(e)} style={this.state.sifraEmpty ? {borderBottom:'1px solid red'} : {}} onChange={(e) => this.onChange(e)} inputtype="input" value={this.state.data.sifra} name="sifra"  label="Sifra"  type="text"/>
                 <Input onFocus={(e) => this.onFocus(e)} style={this.state.mp_cenaEmpty ? {borderBottom:'1px solid red'} : {}} onChange={(e) => this.onChange(e)} inputtype="input" value={this.state.data.mp_cena} name="mp_cena"  label="MP cena"  type="text"/>
-                <Input onFocus={(e) => this.onFocus(e)} style={this.state.vp_cenaEmpty ? {borderBottom:'1px solid red'} : {}} onChange={(e) => this.onChange(e)} inputtype="input" value={this.state.data.vp_cena} name="vp_cena"  label="VP cena"  type="text"/>
+                
                 <Input onFocus={(e) => this.onFocus(e)} style={this.state.kolicinaEmpty ? {borderBottom:'1px solid red'} : {}} onChange={(e) => this.onChange(e)} inputtype="input" value={this.state.data.kolicina} name="kolicina"  label="Kolicina"  type="text"/>
 
                 <button type="submit" className={styles.submit}>EDIT</button>

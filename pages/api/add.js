@@ -2,7 +2,7 @@
 import con from '../../store/db.js'
 import formidable from 'formidable-serverless';
 var imageUrl;
-var image4db;
+var image4db = "";
 
 export const config = {
   api: {
@@ -28,19 +28,24 @@ export default async (req, res) => {
         var proizvodjac = fields["proizvodjac"];
         var kataloski_broj = fields["kataloski_broj"];
         var mp_cena = fields["mp_cena"];
-        var vp_cena = fields["vp_cena"];
+        var vp_cena = mp_cena - (mp_cena*20/120);
         var tip = fields["tip"];
         var sifra = fields["sifra"];
         var kolicina = fields["kolicina"]
         var zemlja_porekla = fields["zemlja_porekla"]
-        var thumb = image4db;
-      
+        if(image4db == ""){
+          var thumb = "/upload/default.png";
+        }else{
+          var thumb = image4db;
+        }
+        
+        
         var proizvod = {
         ime:ime,
         proizvodjac:proizvodjac,
         kataloski_broj:kataloski_broj,
         mp_cena:mp_cena,
-        vp_cena:vp_cena,
+        vp_cena:vp_cena.toFixed(2),
         tip:tip,
         sifra:sifra,
         kolicina:kolicina,
