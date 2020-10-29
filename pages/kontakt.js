@@ -1,5 +1,5 @@
 import styles from '../styles/kontakt.module.css'
-import ConInfo from '../components/UI/contactinfo/contactinfo';
+import ConInfo from '../components/UI/ContactInfo/contactinfo';
 import GoogleMaps from '../components/UI/GoogleMap/googleMap';
 import ConBlockInfo from '../components/UI/contactinfo/ConBlockInfo';
 
