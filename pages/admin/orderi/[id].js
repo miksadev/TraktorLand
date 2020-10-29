@@ -4,6 +4,8 @@ import styles from '../../../styles/checkout.module.css';
 import qs from 'querystring';
 import Cookies from 'cookies';
 import Footer from '../../../components/Footer/footer';
+import Print from '../../../components/UI/Print/print';
+
 export async function getServerSideProps({req,res,query}){
 
 	var user = ""
@@ -50,24 +52,31 @@ export async function getServerSideProps({req,res,query}){
 }
 const ViewOrder = ({data,orders}) => {
 	const router = useRouter()
-	const {id} = router.query
+    const {id} = router.query;
+    
 
 	return(
+        <>
 		<div className={styles.container}>
 
-        <div className={styles.body} style={{paddingTop:"10px"}}>
+            <div className={styles.body} style={{paddingTop:"10px"}}>
 
-            <h1 className={styles.naslov}>Pregled porudzbine</h1>
-            <h2 className={styles.back} onClick={() => router.back()}>{'<'} ADMIN</h2>
+                <h1 className={styles.naslov}>Pregled porudzbine</h1>
+                <h2 className={styles.back} onClick={() => router.back()}>{'<'} ADMIN</h2>
+                <button className={styles.printbutton} onClick={() => window.print()}>Print</button>
 
-            <div className={styles.line}></div>
-            <Order namena="checkout" orders={orders} data={data} edit={false}/>
-            
-            
+                <div className={styles.line}></div>
+                <Order namena="checkout" orders={orders} data={data} edit={false}/>
+                
+                
+            </div>
+            <Footer/>
+
         </div>
-        <Footer/>
-
-    </div>
+        <div className={styles.print}>
+            <Print orders={orders} data={data}/>
+        </div>
+        </>
 	)
 }
 
