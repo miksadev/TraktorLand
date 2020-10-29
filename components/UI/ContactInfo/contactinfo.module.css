@@ -1,0 +1,64 @@
+.coninfo{
+    width: 311px;
+    height: 84px;
+    background: linear-gradient(90deg, #F7F7F7 0%, #FFFFFF 26.56%, #FEFEFE 63.02%, #F5F5F5 100%);
+    box-shadow: 0px 8px 28px rgba(0, 0, 0, 0.06);
+    border-radius: 18px;
+    position: relative;
+    margin-top: 26px;
+    margin-left: 26px;
+    z-index: 10;
+}
+
+.phone{
+    color: #F54343;
+    font-family: 'Open Sans', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 29px;
+    position: absolute;
+    top: -18px;
+    left: 75px;
+}
+
+.mail{
+    color: #F54343;
+    font-family: 'Open Sans', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 29px;
+    position: absolute;
+    left: 75px;
+    top: 22px;
+}
+.line{
+    position: absolute;
+    width: 0.5px;
+    height: 84px;
+    left: 53px;
+    top: 0;
+
+background: #D2D2D2;
+}
+.phoneimg{
+    position: absolute;
+    height: 19px;
+    left: 18px;
+    top: 11px;
+
+}
+.mailimg{
+    position: absolute;
+    left: 16.3px;
+    top: 53.46px;
+    
+}
+
+
+@media screen and (max-width: 630px) {
+    .coninfo{
+        margin-left: 5px;
+    }
+}
