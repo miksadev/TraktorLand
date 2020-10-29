@@ -34,14 +34,6 @@
       margin-bottom: 10px;
   }
 
-  .printbutton{
-    width: 150px;
-    height: 80px;
-    background-color: red;
-    color:black;
-    font-family: "Open Sans";
-    font-size: 18px;
-  }
 
   @media print {
       .print{

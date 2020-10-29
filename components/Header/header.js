@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import Logo from '../UI/Logo/logo';
-import styles from '../../styles/Header.module.css';
+import styles from '../../styles/header.module.css';
 import Search from '../UI/Search/search';
 import Navitems from './navitems/navitems';
 import Dropdown from '../UI/DropDown/dropdown';
