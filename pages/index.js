@@ -42,7 +42,7 @@ export default function Home({akcije}) {
 
         <div className={styles.carousell}>
           <h3>PROIZVODI NA AKCIJI</h3>
-          {/* <DynamicComponentWithNoSSR akcije={akcije}/> */}
+          <DynamicComponentWithNoSSR akcije={akcije}/>
         </div>
        
       </div>
