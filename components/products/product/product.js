@@ -12,13 +12,14 @@ const product = (props) => {
         setInitialItem({...initialItem, qty:Number(e.target.value)});
         setQty(e.target.value);
     }
-
+    const HOST = process.env.NEXT_PUBLIC_HOST;
+    const PROTOCOL = process.env.NEXT_PUBLIC_PROTOCOL;
        return (
         <>
             <div className={styles.product}>
                 <div onClick={toggleItem} >
-                {props.search == "true" ? <Link href={'http://localhost:3000/webshop/'+props.tip+'/'+props.id+'?s='+props.backroute}><a><p className={styles.name}>{props.name}</p>
-                    <img className={styles.img} src={props.src} alt=""/></a></Link> : <Link href={'http://localhost:3000/webshop/'+props.tip+'/'+props.id}><a><p className={styles.name}>{props.name}</p>
+                {props.search == "true" ? <Link href={'/webshop/'+props.tip+'/'+props.id+'?s='+props.backroute}><a><p className={styles.name}>{props.name}</p>
+                    <img className={styles.img} src={props.src} alt=""/></a></Link> : <Link href={'/webshop/'+props.tip+'/'+props.id}><a><p className={styles.name}>{props.name}</p>
                     <img className={styles.img} src={props.src} alt=""/></a></Link>}
                     
                 </div>
