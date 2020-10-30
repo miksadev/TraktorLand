@@ -3,7 +3,9 @@ import Cookies from 'cookies'
 import url from 'url'
 
 const proxy = httpProxy.createProxyServer()
-const API_URL = 'http://localhost:3000/api'
+const HOST = process.env.NEXT_PUBLIC_HOST;
+const PROTOCOL = process.env.NEXT_PUBLIC_PROTOCOL;
+const API_URL = PROTOCOL+'://'+HOST+'/api';
 export const config = {
 	api:{
 		bodyParser:false
