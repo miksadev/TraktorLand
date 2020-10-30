@@ -20,3 +20,24 @@
     line-height: 86%;
     color: #000000;
 }
+
+@media only screen and (max-width: 1450px) {
+
+    .adminLayout{
+        width: 200px !important;
+
+    }
+
+}
+@media only screen and (max-width: 880px) {
+
+    .adminLayout{
+       height: 400px;
+       width: 100% !important;
+    }
+    .linkovi{
+        margin-top: 25px;
+        /* display: inline; */
+    }
+
+}

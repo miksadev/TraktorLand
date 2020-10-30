@@ -25,3 +25,29 @@
     margin-left: 20px;
     display: inline-block;
 }
+
+
+@media only screen and (max-width: 1650px) {
+    .proizvodi{
+        left: 200px;
+        width: calc(100% - 200px);
+    }
+}
+@media only screen and (max-width:880px) {
+    .proizvodi{
+        left: 0;
+        top: 260px;
+        width: 100%;
+    }
+}
+@media only screen and (max-width:670px) {
+    .heading{
+        width: 100%;
+        overflow-x: scroll;
+        overflow-y: hidden;
+    }
+    .novi,.zavrseni{
+        display: block;
+        margin-left: 30px;
+    }
+}

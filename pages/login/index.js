@@ -41,6 +41,8 @@ class Login extends React.Component {
     onSubmit(e){
         var err = 0;
         e.preventDefault();
+        var HOST = process.env.NEXT_PUBLIC_HOST;
+        var PROTOCOL = process.env.NEXT_PUBLIC_PROTOCOL
         for(const [key,value] of Object.entries(this.state.data)){
             if(value == ""){
                 var obj = {...this.state}
@@ -55,7 +57,7 @@ class Login extends React.Component {
         if(err != 0){
             return;
         } 
-        fetch('api/proxy/login',{
+        fetch(PROTOCOL+'://'+HOST+'/api/proxy/login',{
             method:"POST",
             body:formData
         }).then(res => res.json()).then(data => {

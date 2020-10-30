@@ -8,9 +8,11 @@ const search = (props) => {
     const [search,setSearch] = useState("")
     
     function onChange(e){
+         var HOST = process.env.NEXT_PUBLIC_HOST;
+        var PROTOCOL = process.env.NEXT_PUBLIC_PROTOCOL
         if(e.target.value != ""){
             setSearch(e.target.value)
-            fetch("http://localhost:3000/api/search?search="+e.target.value).then(res => res.json()).then(data =>{
+            fetch(PROTOCOL+"://"+HOST+"/api/search?search="+e.target.value).then(res => res.json()).then(data =>{
                 var newArray = data.results
                 setData(newArray)
 

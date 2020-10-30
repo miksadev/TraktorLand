@@ -6,12 +6,15 @@ const korisnik = (props) => {
     const [rabat,setRabat] = useState(props.rabat)
 
     function onChange(e){
+
+        var HOST = process.env.NEXT_PUBLIC_HOST;
+        var PROTOCOL = process.env.NEXT_PUBLIC_PROTOCOL
         setRabat(e.target.value)
         
         var formData = new FormData()
         formData.append("id",e.target.name)
         formData.append("rabat",e.target.value)
-        fetch("http://localhost:3000/api/changerabat",{
+        fetch(PROTOCOL+"://"+HOST+"/api/changerabat",{
             method:"POST",
             body:formData
         }).then(res => res.json()).then(data => {
@@ -22,10 +25,12 @@ const korisnik = (props) => {
        
     }
     function deleteUser(e){
+         var HOST = process.env.NEXT_PUBLIC_HOST;
+        var PROTOCOL = process.env.NEXT_PUBLIC_PROTOCOL
         var id = e.target.name
         var formData = new FormData()
         formData.append("id",id)
-        fetch("http://localhost:3000/api/deleteuser",{
+        fetch(PROTOCOL+"://"+HOST+"/api/deleteuser",{
             method:"POST",
             body:formData
         }).then(res => res.json()).then(data => {

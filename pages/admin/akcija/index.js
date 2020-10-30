@@ -1,11 +1,14 @@
 import React from 'react';
-import styles from '../proizvodi/proizvodi.module.css';
+import styles from './proizvodi.module.css';
 import Akcija from '../../../components/Admin/Akcije/akcije';
 import Link from 'next/link';
 import {useState} from 'react';
 import Cookies from 'cookies';
-export async function getServerSideProps({req,res}){
+import Filter from '../../../components/Search/Filter/filter';
 
+export async function getServerSideProps({req,res}){
+        var HOST = process.env.HOST;
+        var PROTOCOL = process.env.PROTOCOL
 		var user = ""
         var email = ""
         var cookies = new Cookies(req,res)
@@ -14,13 +17,13 @@ export async function getServerSideProps({req,res}){
             res.writeHead(307,{Location:'/login'})
              res.end();
         }
-        await fetch('http://localhost:3000/api/checkauth',
+        await fetch(PROTOCOL+'://'+HOST+'/api/checkauth',
             {headers:{'auth-token':authToken}}).then(res => res.json())
         .then(data => {
            email = data.email
         })
 
-        await fetch('http://localhost:3000/api/getuser',{
+        await fetch(PROTOCOL+'://'+HOST+'/api/getuser',{
                 method:'POST',
                 body:JSON.stringify({email:email})
             }).then(res => res.json()).then(data => {
@@ -37,7 +40,7 @@ export async function getServerSideProps({req,res}){
 
 
 
-	const data = await fetch("http://localhost:3000/api/getakcije")
+	const data = await fetch(PROTOCOL+"://"+HOST+"/api/getakcije")
 	.then(res => res.json()).then(data => data)
 	return{
 		props:{
@@ -48,14 +51,16 @@ export async function getServerSideProps({req,res}){
 
 const proizvodi = ({akcije}) => {
 	const [dataAkcije,setDataAkcije] = useState(akcije)
+    var HOST = process.env.NEXT_PUBLIC_HOST;
+    var PROTOCOL = process.env.NEXT_PUBLIC_PROTOCOL
 	function refreshData(){
-		fetch("http://localhost:3000/api/getakcije")
+		fetch(PROTOCOL+"://"+HOST+"/api/getakcije")
 	.then(res => res.json()).then(data => {
 		setDataAkcije(data.data)
 	})
 	}
 	function onChange(e){
-		fetch('http://localhost:3000/api/searchakcije?search='+e.target.value)
+		fetch(PROTOCOL+'://'+HOST+'/api/searchakcije?search='+e.target.value)
 		.then(res => res.json())
 		.then(data => {
 			setDataAkcije(data.results)
@@ -64,7 +69,8 @@ const proizvodi = ({akcije}) => {
     return (
         <div className={styles.proizvodi}>
             <div className={styles.heading}>
-                <h3>Proizvodi na akciji</h3><input type="text" onChange={e => onChange(e)} style={{position:"absolute",marginTop:"36px",marginLeft:"40px"}} placeholder="Pretrazi akcije..." />
+                <h3>Proizvodi na akciji</h3>
+                <Filter change={e => onChange(e)} placeholder="Pretrazi akcije..."></Filter>
             </div>
             <Akcija akcije={dataAkcije} refreshfunc={refreshData}/>
             <Link href="/admin/akcija/add"><img className={styles.add} src="/admin/add.png" alt=""/></Link>

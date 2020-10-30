@@ -24,8 +24,9 @@ function Search(props){
 		)
 }
 export async function getServerSideProps(context){
-
-	var data = await fetch("http://localhost:3000/api/search?search="+context.query.search)
+	var HOST = process.env.HOST;
+     var PROTOCOL = process.env.PROTOCOL
+	var data = await fetch(PROTOCOL+"://"+HOST+"/api/search?search="+context.query.search)
 	.then(res => res.json()).then(data => data.results)
 	return{
 		props:{

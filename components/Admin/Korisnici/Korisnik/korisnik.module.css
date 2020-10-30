@@ -85,3 +85,27 @@
     bottom: 0;
     cursor: pointer;
 }
+
+
+@media only screen and (max-width: 1050px) {
+    .korisnik{
+        display: block;
+        width: calc(100% - 20px);
+    }
+    .ime{
+        position: absolute;
+        top: 0;
+    }
+    .adresa{
+        position: absolute;
+        bottom: 20px;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .korisnik{
+
+        width: 460px;
+    }
+
+}

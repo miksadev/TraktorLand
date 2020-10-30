@@ -10,7 +10,9 @@ const proizvodi = (props) => {
         setAllPro(props.data)
     },[props.data])
     function refreshData(){
-         fetch('/api/get').then(res => res.json()).then(data => {
+        var HOST = process.env.NEXT_PUBLIC_HOST;
+        var PROTOCOL = process.env.NEXT_PUBLIC_PROTOCOL
+         fetch(PROTOCOL+'://'+HOST+'/api/get').then(res => res.json()).then(data => {
             
             setAllPro(data)
         })

@@ -11,7 +11,9 @@ class usericon extends React.Component {
 	}
 	
 	componentDidMount(){
-		fetch('/api/proxy/checkauth').then(res => res.json()).then(data => {
+		var HOST = process.env.NEXT_PUBLIC_HOST;
+        var PROTOCOL = process.env.NEXT_PUBLIC_PROTOCOL
+		fetch(PROTOCOL+'://'+HOST+'/api/proxy/checkauth').then(res => res.json()).then(data => {
 			
 			if(data.result == "Success"){
 				this.setState({url:'/user'})

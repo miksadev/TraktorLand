@@ -36,3 +36,15 @@
 .akcija h2{
     font-weight: 600;
 }
+
+@media only screen and (max-width: 1250px) {
+    .akcija{
+        display: block;
+        width: calc(100% - 20px);
+    }
+}
+@media only screen and (max-width: 550px) {
+    .akcija{
+        width: 510px;
+    }
+}

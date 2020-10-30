@@ -1,9 +1,12 @@
-import styles from './add.module.css';
+import styles from '../../../../styles/add.module.css';
+import React from 'react';
 import Input from '../../../../components/UI/Input/input';
 import Link from 'next/link';
 import {useState} from 'react';
 import Cookies from 'cookies';
 export async function getServerSideProps({req,res,query}){
+	var HOST = process.env.HOST;
+        var PROTOCOL = process.env.PROTOCOL
 	var user = ""
         var email = ""
         var cookies = new Cookies(req,res)
@@ -12,13 +15,13 @@ export async function getServerSideProps({req,res,query}){
             res.writeHead(307,{Location:'/login'})
              res.end();
         }
-        await fetch('http://localhost:3000/api/checkauth',
+        await fetch(PROTOCOL+'://'+HOST+'/api/checkauth',
             {headers:{'auth-token':authToken}}).then(res => res.json())
         .then(data => {
            email = data.email
         })
 
-        await fetch('http://localhost:3000/api/getuser',{
+        await fetch(PROTOCOL+'://'+HOST+'/api/getuser',{
                 method:'POST',
                 body:JSON.stringify({email:email})
             }).then(res => res.json()).then(data => {
@@ -32,7 +35,7 @@ export async function getServerSideProps({req,res,query}){
 	//----------------------------------------------------
 
 	var id = query.id
-	const data = await fetch('http://localhost:3000/api/getakcije?id='+id)
+	const data = await fetch(PROTOCOL+'://'+HOST+'/api/getakcije?id='+id)
 	.then(res => res.json()).then(data => data)
 	return {
 		props:{
@@ -41,7 +44,7 @@ export async function getServerSideProps({req,res,query}){
 		}
 	}
 }
-const AddAkcija = ({akcije,id}) => {
+const addakcija = ({akcije,id}) => {
 	const initialA = {
 		ime:"",
 		sifra:"",
@@ -66,6 +69,8 @@ const AddAkcija = ({akcije,id}) => {
 	}
 	function onSubmit(e){
 		e.preventDefault()
+		var HOST = process.env.NEXT_PUBLIC_HOST;
+    	var PROTOCOL = process.env.NEXT_PUBLIC_PROTOCOL
 		var err = 0
 		var newdataempty = {...dataempty}
 		for(let key in data){
@@ -94,7 +99,7 @@ const AddAkcija = ({akcije,id}) => {
 		formData.append("sifra",data["sifra"]);
 		formData.append("link_proizvoda",data["link_proizvoda"]);
 		formData.append("thumb",thumb);
-		fetch('/api/editakcije',{
+		fetch(PROTOCOL+'://'+HOST+'/api/editakcije',{
 			method:"POST",
 			body:formData
 		}).then(res => res.json())
@@ -131,4 +136,4 @@ const AddAkcija = ({akcije,id}) => {
 
 
 }
-export default AddAkcija;
+export default addakcija;

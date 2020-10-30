@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './edit.module.css';
+import styles from '../../../../styles/add.module.css';
 import Input from '../../../../components/UI/Input/input';
 import Link from 'next/link';
 import url from 'url'
@@ -44,6 +44,8 @@ class add extends React.Component{
         this.setState(obj)
     }
     onSubmit(e){
+        var HOST = process.env.NEXT_PUBLIC_HOST;
+        var PROTOCOL = process.env.NEXT_PUBLIC_PROTOCOL
         e.preventDefault();
         var err = 0;
         for(const [key,value] of Object.entries(this.state.data)){
@@ -78,7 +80,7 @@ class add extends React.Component{
            formData.append("thumb","no");
         }
         
-        fetch("/api/edit",{
+        fetch(PROTOCOL+"://"+HOST+"/api/edit",{
             method:"POST",
             body:formData
         }).then(res => res.json()).then(data =>{
@@ -132,7 +134,8 @@ class add extends React.Component{
 }
 
 export async function getServerSideProps({req,res}){
-
+        var HOST = process.env.HOST;
+        var PROTOCOL = process.env.PROTOCOL
     var user = ""
         var email = ""
         var cookies = new Cookies(req,res)
@@ -141,13 +144,13 @@ export async function getServerSideProps({req,res}){
             res.writeHead(307,{Location:'/login'})
              res.end();
         }
-        await fetch('http://localhost:3000/api/checkauth',
+        await fetch(PROTOCOL+'://'+HOST+'/api/checkauth',
             {headers:{'auth-token':authToken}}).then(res => res.json())
         .then(data => {
            email = data.email
         })
 
-        await fetch('http://localhost:3000/api/getuser',{
+        await fetch(PROTOCOL+'://'+HOST+'/api/getuser',{
                 method:'POST',
                 body:JSON.stringify({email:email})
             }).then(res => res.json()).then(data => {
@@ -163,7 +166,7 @@ export async function getServerSideProps({req,res}){
 
     var id = url.parse(req.url,true).query.id
     
-    var data = await fetch('http://localhost:3000/api/get?id='+id).then(res => res.json())
+    var data = await fetch(PROTOCOL+'://'+HOST+'/api/get?id='+id).then(res => res.json())
     .then(data => data)
     return {
         props:{

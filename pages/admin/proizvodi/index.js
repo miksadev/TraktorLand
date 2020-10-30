@@ -4,8 +4,10 @@ import Proizvodi from '../../../components/Admin/Proizvodi/proizvodi';
 import Link from 'next/link';
 import {useState} from 'react';
 import Cookies from 'cookies';
+import Filter from '../../../components/Search/Filter/filter';
 export async function getServerSideProps({req,res}){
-
+ var HOST = process.env.HOST;
+        var PROTOCOL = process.env.PROTOCOL
 	var user = ""
         var email = ""
         var cookies = new Cookies(req,res)
@@ -14,13 +16,13 @@ export async function getServerSideProps({req,res}){
             res.writeHead(307,{Location:'/login'})
              res.end();
         }
-        await fetch('http://localhost:3000/api/checkauth',
+        await fetch(PROTOCOL+'://'+HOST+'/api/checkauth',
             {headers:{'auth-token':authToken}}).then(res => res.json())
         .then(data => {
            email = data.email
         })
 
-        await fetch('http://localhost:3000/api/getuser',{
+        await fetch(PROTOCOL+'://'+HOST+'/api/getuser',{
                 method:'POST',
                 body:JSON.stringify({email:email})
             }).then(res => res.json()).then(data => {
@@ -34,7 +36,7 @@ export async function getServerSideProps({req,res}){
 	//----------------------------------------------------
 
 
-	const data = await  fetch('http://localhost:3000/api/get').then(res => res.json()).then(data => data)
+	const data = await  fetch(PROTOCOL+'://'+HOST+'/api/get').then(res => res.json()).then(data => data)
 	return{
 		props:{
 			data:data
@@ -44,8 +46,10 @@ export async function getServerSideProps({req,res}){
 
 const proizvodi = (props) => {
 	const [pro,setPro] = useState(props.data)
+    var HOST = process.env.NEXT_PUBLIC_HOST;
+    var PROTOCOL = process.env.NEXT_PUBLIC_PROTOCOL
 	function onChange(e){
-		fetch('http://localhost:3000/api/searchpro?search='+e.target.value).
+		fetch(PROTOCOL+'://'+HOST+'/api/searchpro?search='+e.target.value).
 		then(res => res.json()).then(data => {
 
 			setPro(data.results)
@@ -54,9 +58,10 @@ const proizvodi = (props) => {
 
 	}
     return (
-        <div className={styles.proizvodi}>
-            <div className={styles.heading}>
-                <h3>Proizvodi </h3> <input type="text" onChange={e => onChange(e)} style={{position:"absolute",marginTop:"36px",marginLeft:"40px"}} placeholder="Pretrazi proizvode..." />
+        <div className={styles.proizvodii}>
+            <div className={styles.headingg}>
+                <h3>Proizvodi </h3> 
+                <Filter change={e => onChange(e)} placeholder="Pretrazi proizvode..."></Filter>
 
             </div>
             <Proizvodi data={pro}/>

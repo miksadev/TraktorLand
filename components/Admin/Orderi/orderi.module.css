@@ -2,3 +2,10 @@
     padding: 10px;
     padding-top: 100px;
 }
+
+@media only screen and (max-width:670px) {
+    .orderi{
+        padding-top: 260px;
+        overflow-x: scroll;
+    }
+}
