@@ -13,7 +13,7 @@ export default function Kontakt() {
             <ConInfo/>
           </div>
           <p className={styles.opis}>
-          Dobrodosli na nasu kontakt stranicu. Mozete nas kontaktirati na navedin telefon ili mail, a mozete nas pronaci i na adresi Knez Mihajlova, br.56 u Beogradu
+          Dobrodosli na nasu kontakt stranicu. Mozete nas kontaktirati na navedeni telefon ili mail, a mozete nas pronaci i na adresi Knez Mihajlova 67 u Pukovcu.
           </p>
           
           <div className={styles.maps}>
