@@ -6,7 +6,7 @@ class usericon extends React.Component {
 	constructor(props){
 		super(props)
 		this.state = {
-			url:''
+			url:'/login'
 		}
 	}
 	
