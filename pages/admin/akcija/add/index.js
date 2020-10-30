@@ -4,6 +4,8 @@ import Link from 'next/link';
 import {useState} from 'react';
 import Cookies from 'cookies';
 export async function getServerSideProps({req,res}){
+	var HOST = process.env.HOST;
+        var PROTOCOL = process.env.PROTOCOL
 		var user = ""
         var email = ""
         var cookies = new Cookies(req,res)
@@ -12,13 +14,13 @@ export async function getServerSideProps({req,res}){
             res.writeHead(307,{Location:'/login'})
              res.end();
         }
-        await fetch('http://localhost:3000/api/checkauth',
+        await fetch(PROTOCOL+'://'+HOST+'/api/checkauth',
             {headers:{'auth-token':authToken}}).then(res => res.json())
         .then(data => {
            email = data.email
         })
 
-        await fetch('http://localhost:3000/api/getuser',{
+        await fetch(PROTOCOL+'://'+HOST+'/api/getuser',{
                 method:'POST',
                 body:JSON.stringify({email:email})
             }).then(res => res.json()).then(data => {
@@ -61,6 +63,8 @@ const AddAkcija = () => {
 	}
 	function onSubmit(e){
 		e.preventDefault()
+		var HOST = process.env.NEXT_PUBLIC_HOST;
+    	var PROTOCOL = process.env.NEXT_PUBLIC_PROTOCOL
 		var err = 0
 		var newdataempty = {...dataempty}
 		for(let key in data){
@@ -86,7 +90,7 @@ const AddAkcija = () => {
 		formData.append("sifra",data["sifra"]);
 		formData.append("link_proizvoda",data["link_proizvoda"]);
 		formData.append("thumb",e.target["thumb"].files[0]);
-		fetch('/api/addakcija',{
+		fetch(PROTOCOL+'://'+HOST+'/api/addakcija',{
 			method:"POST",
 			body:formData
 		}).then(res => res.json())

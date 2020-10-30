@@ -54,6 +54,8 @@ class Edit extends React.Component{
     onSubmit(e){
         e.preventDefault();
         var err = 0;
+        var HOST = process.env.NEXT_PUBLIC_HOST;
+        var PROTOCOL = process.env.NEXT_PUBLIC_PROTOCOL
         for(const [key,value] of Object.entries(this.state.data)){
 
             if(value == ""){
@@ -92,7 +94,7 @@ class Edit extends React.Component{
 
             var formData = new FormData()
             formData.append('email',this.state.data.email)
-            fetch('/api/checkemail',{
+            fetch(PROTOCOL+'://'+HOST+'/api/checkemail',{
                 method:'POST',
                 body:formData
             }).then(res => res.json()).then(data => {
@@ -116,7 +118,7 @@ class Edit extends React.Component{
            formData.append("pib",this.state.data.pib);
            }
 
-           fetch('/api/edituser',{
+           fetch(PROTOCOL+'://'+HOST+'/api/edituser',{
         method:'POST',
         body:formData
        }).then(res => res.json()).then(data => {
@@ -143,7 +145,7 @@ class Edit extends React.Component{
        formData.append("pib",this.state.data.pib);
        }
 
-       fetch('/api/edituser',{
+       fetch(PROTOCOL+'://'+HOST+'/api/edituser',{
         method:'POST',
         body:formData
        }).then(res => res.json()).then(data => {
@@ -188,6 +190,8 @@ class Edit extends React.Component{
     }
 }
 export async function getServerSideProps({req,res}){
+        var HOST = process.env.HOST;
+        var PROTOCOL = process.env.PROTOCOL
         var user = ""
         var email = ""
         var cookies = new Cookies(req,res)
@@ -196,12 +200,12 @@ export async function getServerSideProps({req,res}){
             res.writeHead(307,{Location:'/'})
              res.end();
         }
-        await fetch('http://localhost:3000/api/checkauth',{headers:{'auth-token':authToken}}).then(res => res.json())
+        await fetch(PROTOCOL+'://'+HOST+'/api/checkauth',{headers:{'auth-token':authToken}}).then(res => res.json())
         .then(data => {
            email = data.email
         })
 
-        await fetch('http://localhost:3000/api/getuser',{
+        await fetch(PROTOCOL+'://'+HOST+'/api/getuser',{
                 method:'POST',
                 body:JSON.stringify({email:email})
             }).then(res => res.json()).then(data => {

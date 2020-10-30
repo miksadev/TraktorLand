@@ -30,7 +30,7 @@ export default async (req, res) => {
         var proizvodjac = fields["proizvodjac"];
         var kataloski_broj = fields["kataloski_broj"];
         var mp_cena = fields["mp_cena"];
-        var vp_cena = fields["vp_cena"];
+        var vp_cena = mp_cena - (mp_cena*20/120);
         var tip = fields["tip"];
         var sifra = fields["sifra"];
         var kolicina = fields["kolicina"]
@@ -40,7 +40,7 @@ export default async (req, res) => {
           
           con.query(`UPDATE proizvodi SET ime = ?,proizvodjac=?,kataloski_broj=?,
            mp_cena = ?,vp_cena = ?,tip = ?,sifra = ?,kolicina = ? WHERE id = ?`,[ime,proizvodjac,kataloski_broj,
-           mp_cena,vp_cena,tip,sifra,kolicina,id],(err,result) => {
+           mp_cena,vp_cena.toFixed(2),tip,sifra,kolicina,id],(err,result) => {
         if(err) throw err;
         
         res.end(JSON.stringify({ result: 'Success' }))

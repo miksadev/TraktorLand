@@ -7,7 +7,8 @@ import Cookies from 'cookies';
 import Filter from '../../../components/Search/Filter/filter';
 
 export async function getServerSideProps({req,res}){
-
+        var HOST = process.env.HOST;
+        var PROTOCOL = process.env.PROTOCOL
 		var user = ""
         var email = ""
         var cookies = new Cookies(req,res)
@@ -16,13 +17,13 @@ export async function getServerSideProps({req,res}){
             res.writeHead(307,{Location:'/login'})
              res.end();
         }
-        await fetch('http://localhost:3000/api/checkauth',
+        await fetch(PROTOCOL+'://'+HOST+'/api/checkauth',
             {headers:{'auth-token':authToken}}).then(res => res.json())
         .then(data => {
            email = data.email
         })
 
-        await fetch('http://localhost:3000/api/getuser',{
+        await fetch(PROTOCOL+'://'+HOST+'/api/getuser',{
                 method:'POST',
                 body:JSON.stringify({email:email})
             }).then(res => res.json()).then(data => {
@@ -39,7 +40,7 @@ export async function getServerSideProps({req,res}){
 
 
 
-	const data = await fetch("http://localhost:3000/api/getakcije")
+	const data = await fetch(PROTOCOL+"://"+HOST+"/api/getakcije")
 	.then(res => res.json()).then(data => data)
 	return{
 		props:{
@@ -50,14 +51,16 @@ export async function getServerSideProps({req,res}){
 
 const proizvodi = ({akcije}) => {
 	const [dataAkcije,setDataAkcije] = useState(akcije)
+    var HOST = process.env.NEXT_PUBLIC_HOST;
+    var PROTOCOL = process.env.NEXT_PUBLIC_PROTOCOL
 	function refreshData(){
-		fetch("http://localhost:3000/api/getakcije")
+		fetch(PROTOCOL+"://"+HOST+"/api/getakcije")
 	.then(res => res.json()).then(data => {
 		setDataAkcije(data.data)
 	})
 	}
 	function onChange(e){
-		fetch('http://localhost:3000/api/searchakcije?search='+e.target.value)
+		fetch(PROTOCOL+'://'+HOST+'/api/searchakcije?search='+e.target.value)
 		.then(res => res.json())
 		.then(data => {
 			setDataAkcije(data.results)

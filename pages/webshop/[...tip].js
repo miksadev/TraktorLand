@@ -24,7 +24,9 @@ function Webshop(props){
 		naslov = "Poljoprivredna mehanizacija"
 	}
 	function onChange(e){
-		fetch('http://localhost:3000/api/searchtip?search='+e.target.value+"&tip="+par)
+		var HOST = process.env.NEXT_PUBLIC_HOST;
+		var PROTOCOL = process.env.NEXT_PUBLIC_PROTOCOL;
+		fetch(PROTOCOL+'://'+HOST+'/api/searchtip?search='+e.target.value+"&tip="+par)
         .then(res => res.json())
         .then(data => {
            setProdata(data.results)

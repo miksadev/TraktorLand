@@ -34,12 +34,14 @@ const order = (props) => {
          
     },[])
     function zavrsiOrder(){
+         var HOST = process.env.NEXT_PUBLIC_HOST;
+        var PROTOCOL = process.env.NEXT_PUBLIC_PROTOCOL
         if(zavrsen == "Zavrsi"){
            
             var formData = new FormData()
             formData.append("value",1);
             formData.append("id",userinfo.id)
-            fetch('http://localhost:3000/api/finishorder',{
+            fetch(PROTOCOL+'://'+HOST+'/api/finishorder',{
                 method:'POST',
                 body:formData
             }).then(res => res.json()).then(data => {
@@ -50,7 +52,7 @@ const order = (props) => {
             var formData = new FormData()
             formData.append("value",0);
             formData.append("id",userinfo.id)
-            fetch('http://localhost:3000/api/finishorder',{
+            fetch(PROTOCOL+'://'+HOST+'/api/finishorder',{
                 method:'POST',
                 body:formData
             }).then(res => res.json()).then(data => {
@@ -60,9 +62,11 @@ const order = (props) => {
         }
     }
     function onSubmit(){
+         var HOST = process.env.NEXT_PUBLIC_HOST;
+        var PROTOCOL = process.env.NEXT_PUBLIC_PROTOCOL
         var formData_ = new FormData();
         formData_.append("postData",JSON.stringify(props.data));
-         fetch('/api/addorder',{
+         fetch(PROTOCOL+'://'+HOST+'/api/addorder',{
             method:'POST',
             body:formData_
          }).then(res => res.json()).then(data => {

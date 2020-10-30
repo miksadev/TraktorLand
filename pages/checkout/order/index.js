@@ -20,6 +20,7 @@ const order = ({data}) => {
     );
 }
 export async function getServerSideProps({req,res}){
+	
 	var data = {};
 	const streamPromise = new Promise((resolve,reject) => {
 		let postBody = '';

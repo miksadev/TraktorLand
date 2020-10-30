@@ -6,17 +6,19 @@ import Cookies from 'cookies'
 import useCart from '../../../util/useCart';
 import {useState,useEffect,useRef } from 'react'
 export async function getServerSideProps({req,res}){
+    var HOST = process.env.HOST;
+    var PROTOCOL = process.env.PROTOCOL
     var user = ""
     var email = ""
     var cookies = new Cookies(req,res)
     var authToken = cookies.get('auth-token')
     if(authToken != undefined){
-        await fetch('http://localhost:3000/api/checkauth',{headers:{'auth-token':authToken}})
+        await fetch(PROTOCOL+'://'+HOST+'/api/checkauth',{headers:{'auth-token':authToken}})
         .then(res => res.json()).then(data => {
             email = data.email
         })
 
-        await fetch('http://localhost:3000/api/getuser',{
+        await fetch(PROTOCOL+'://'+HOST+'/api/getuser',{
             method:'POST',
             body:JSON.stringify({email:email})
         }).then(res => res.json()).then(data => {

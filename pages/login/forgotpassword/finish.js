@@ -37,6 +37,8 @@ class FinishForgot extends React.Component {
     }
     onSubmit(e){
         e.preventDefault()
+        var HOST = process.env.NEXT_PUBLIC_HOST;
+        var PROTOCOL = process.env.NEXT_PUBLIC_PROTOCOL
         var err = 0;
         for(const [key,value] of Object.entries(this.state.data)){
             if(value == ""){
@@ -66,7 +68,7 @@ class FinishForgot extends React.Component {
         var formData = new FormData()
         formData.append('email',this.props.email)
         formData.append('password',this.state.data.lozinka)
-        fetch('/api/changepassword',{
+        fetch(PROTOCOL+'://'+HOST+'/api/changepassword',{
             method:'POST',
             body:formData
         }).then(res => res.json()).then(data => {

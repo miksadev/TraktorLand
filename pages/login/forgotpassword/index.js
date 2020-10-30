@@ -29,6 +29,8 @@ class ForgotPass extends React.Component{
     }
     onSubmit(e){
         e.preventDefault()
+        var HOST = process.env.NEXT_PUBLIC_HOST;
+        var PROTOCOL = process.env.NEXT_PUBLIC_PROTOCOL
         var err = 0;
         for(const [key,value] of Object.entries(this.state.data)){
             if(value == ""){
@@ -42,7 +44,7 @@ class ForgotPass extends React.Component{
         if(err == 0){
             var formData = new FormData()
             formData.append('email',this.state.data.email)
-            var checkmail =  fetch('/api/checkemail',{
+            var checkmail =  fetch(PROTOCOL+'://'+HOST+'/api/checkemail',{
                 method:'POST',
                 body:formData
             }).then(res => res.json()).then(data => {
@@ -53,13 +55,13 @@ class ForgotPass extends React.Component{
                     var username = this.state.data.email;
                     var token = jwt.sign({username:username},secret)
                     
-                    var url = 'http://localhost:3000/login/forgotpassword/finish?token='+token
+                    var url = PROTOCOL+'://'+HOST+'/login/forgotpassword/finish?token='+token
 
                     var formData = new FormData()
                     formData.append('email',this.state.data.email)
                     formData.append('url',url)
 
-                    fetch('/api/sendmail',{
+                    fetch(PROTOCOL+'://'+HOST+'/api/sendmail',{
                         method:'POST',
                         body:formData
                     }).then(res => res.json()).then(data => {

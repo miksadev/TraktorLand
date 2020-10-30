@@ -43,6 +43,8 @@ class add extends React.Component{
     }
     onSubmit(e){
         e.preventDefault();
+        var HOST = process.env.NEXT_PUBLIC_HOST;
+        var PROTOCOL = process.env.NEXT_PUBLIC_PROTOCOL
         var err = 0;
         for(const [key,value] of Object.entries(this.state.data)){
             if(value == ""){
@@ -78,7 +80,7 @@ class add extends React.Component{
         formData.append("zemlja_porekla",this.state.data.zemlja_porekla);
         formData.append("kolicina",this.state.data.kolicina);
         formData.append("thumb",imgThumb);
-        fetch("/api/add",{
+        fetch(PROTOCOL+"://"+HOST+"/api/add",{
             method:"POST",
             body:formData
         }).then(res => res.json()).then(data =>{
@@ -140,7 +142,8 @@ class add extends React.Component{
     }
 }
 export async function getServerSideProps({req,res}){
-
+        var HOST = process.env.HOST;
+        var PROTOCOL = process.env.PROTOCOL
     var user = ""
         var email = ""
         var cookies = new Cookies(req,res)
@@ -149,13 +152,13 @@ export async function getServerSideProps({req,res}){
             res.writeHead(307,{Location:'/login'})
              res.end();
         }
-        await fetch('http://localhost:3000/api/checkauth',
+        await fetch(PROTOCOL+'://'+HOST+'/api/checkauth',
             {headers:{'auth-token':authToken}}).then(res => res.json())
         .then(data => {
            email = data.email
         })
 
-        await fetch('http://localhost:3000/api/getuser',{
+        await fetch(PROTOCOL+'://'+HOST+'/api/getuser',{
                 method:'POST',
                 body:JSON.stringify({email:email})
             }).then(res => res.json()).then(data => {

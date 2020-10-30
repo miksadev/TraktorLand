@@ -7,7 +7,8 @@ import Filter from '../../../components/Search/Filter/filter';
 import Menu from '../../../components/UI/HamburgerMenu/hamburger';
 
 export async function getServerSideProps({req,res}){
-
+        var HOST = process.env.HOST;
+        var PROTOCOL = process.env.PROTOCOL
     var user = ""
         var email = ""
         var cookies = new Cookies(req,res)
@@ -16,13 +17,13 @@ export async function getServerSideProps({req,res}){
             res.writeHead(307,{Location:'/login'})
              res.end();
         }
-        await fetch('http://localhost:3000/api/checkauth',
+        await fetch(PROTOCOL+'://'+HOST+'/api/checkauth',
             {headers:{'auth-token':authToken}}).then(res => res.json())
         .then(data => {
            email = data.email
         })
 
-        await fetch('http://localhost:3000/api/getuser',{
+        await fetch(PROTOCOL+'://'+HOST+'/api/getuser',{
                 method:'POST',
                 body:JSON.stringify({email:email})
             }).then(res => res.json()).then(data => {
@@ -35,7 +36,7 @@ export async function getServerSideProps({req,res}){
 
     //----------------------------------------------------
 
-    const data = await fetch('http://localhost:3000/api/getorders?zavrseni=0').then(res => res.json())
+    const data = await fetch(PROTOCOL+'://'+HOST+'/api/getorders?zavrseni=0').then(res => res.json())
     .then(data => data)
     return {
         props:{
@@ -48,15 +49,17 @@ const proizvodi = ({data} , props) => {
     const [noviColor,setNoviColor] = useState("")
     const [zavrseniColor,setZavrseniColor] = useState("")
     const [tip,setTip] = useState("novi")
+    var HOST = process.env.NEXT_PUBLIC_HOST;
+    var PROTOCOL = process.env.NEXT_PUBLIC_PROTOCOL
     function setNovi(){
-     fetch('http://localhost:3000/api/getorders?zavrseni=0').then(res => res.json())
+     fetch(PROTOCOL+'://'+HOST+'/api/getorders?zavrseni=0').then(res => res.json())
     .then(data => setOrderdata(data))
     setNoviColor("#F54343")
     setZavrseniColor("#2B2B2B")
     setTip("novi")
     }
     function setZavrseni(){
-     fetch('http://localhost:3000/api/getorders?zavrseni=1').then(res => res.json())
+     fetch(PROTOCOL+'://'+HOST+'/api/getorders?zavrseni=1').then(res => res.json())
     .then(data => setOrderdata(data))
     setZavrseniColor("#F54343")
     setNoviColor("#2B2B2B")
@@ -64,7 +67,7 @@ const proizvodi = ({data} , props) => {
     }
     function onChange(e){
         
-        fetch('http://localhost:3000/api/searchorder?search='+e.target.value+"&tip="+tip)
+        fetch(PROTOCOL+'://'+HOST+'/api/searchorder?search='+e.target.value+"&tip="+tip)
         .then(res => res.json())
         .then(data => {
            setOrderdata(data.results)

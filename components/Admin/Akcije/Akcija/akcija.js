@@ -4,10 +4,12 @@ import Link from 'next/link';
 
 const akcija = (props) => {
 	function deleteAkcija(e){
+		 var HOST = process.env.NEXT_PUBLIC_HOST;
+        var PROTOCOL = process.env.NEXT_PUBLIC_PROTOCOL
 		var id = e.target.getAttribute('data-id')
 		var formData = new FormData()
 		formData.append("id",id)
-		fetch('http://localhost:3000/api/deleteakcija',{
+		fetch(PROTOCOL+'://'+HOST+'/api/deleteakcija',{
 			method:"POST",
 			body:formData
 		}).then(res => res.json()).then(data => {

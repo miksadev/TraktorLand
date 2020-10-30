@@ -6,7 +6,9 @@ import Slider from '../components/Slider/slider';
 import dynamic from 'next/dynamic';
 
 export async function getServerSideProps({req,res}){
-  const data = await fetch("http://localhost:3000/api/getakcije").
+  var HOST = process.env.HOST;
+  var PROTOCOL = process.env.PROTOCOL
+  const data = await fetch(PROTOCOL+"://"+HOST+"/api/getakcije").
   then(res => res.json()).then(data => {
     return data;
   })

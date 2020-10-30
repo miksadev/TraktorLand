@@ -101,6 +101,8 @@ class Register extends React.Component {
     onSubmit(e){
         e.preventDefault();
         var err = 0;
+        var HOST = process.env.NEXT_PUBLIC_HOST;
+        var PROTOCOL = process.env.NEXT_PUBLIC_PROTOCOL
         for(const [key,value] of Object.entries(this.state.data)){
 
             if(value == ""){
@@ -148,6 +150,7 @@ class Register extends React.Component {
         if(err != 0){
             return;
         }
+        
        var formData = new FormData();
        formData.append("ime",this.state.data.ime);
        formData.append("prezime",this.state.data.prezime);
@@ -163,7 +166,7 @@ class Register extends React.Component {
        
        }
        
-       fetch('api/register',{
+       fetch(PROTOCOL+'://'+HOST+'/api/register',{
         method:'POST',
         body:formData
        }).then(res => res.json()).then(data => {

@@ -7,7 +7,8 @@ import Footer from '../../../components/Footer/footer';
 import Print from '../../../components/UI/Print/print';
 
 export async function getServerSideProps({req,res,query}){
-
+        var HOST = process.env.HOST;
+        var PROTOCOL = process.env.PROTOCOL
 	var user = ""
         var email = ""
         var cookies = new Cookies(req,res)
@@ -16,13 +17,13 @@ export async function getServerSideProps({req,res,query}){
             res.writeHead(307,{Location:'/login'})
              res.end();
         }
-        await fetch('http://localhost:3000/api/checkauth',
+        await fetch(PROTOCOL+'://'+HOST+'/api/checkauth',
             {headers:{'auth-token':authToken}}).then(res => res.json())
         .then(data => {
            email = data.email
         })
 
-        await fetch('http://localhost:3000/api/getuser',{
+        await fetch(PROTOCOL+'://'+HOST+'/api/getuser',{
                 method:'POST',
                 body:JSON.stringify({email:email})
             }).then(res => res.json()).then(data => {
@@ -38,9 +39,9 @@ export async function getServerSideProps({req,res,query}){
 
 
 	var id = query.id
-	var data = await fetch('http://localhost:3000/api/getorders?id='+id).then(res => res.json())
+	var data = await fetch(PROTOCOL+'://'+HOST+'/api/getorders?id='+id).then(res => res.json())
 	.then(data => data);
-	var orders = await fetch('http://localhost:3000/api/getorders?order_id='+id).then(res => res.json())
+	var orders = await fetch(PROTOCOL+'://'+HOST+'/api/getorders?order_id='+id).then(res => res.json())
 	.then(data => data)
 	
 	return{
