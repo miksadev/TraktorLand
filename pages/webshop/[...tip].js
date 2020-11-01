@@ -51,7 +51,8 @@ function Webshop(props){
 		)
 }
 export async function getServerSideProps(context){
-	
+	var HOST = process.env.NEXT_PUBLIC_HOST;
+	var PROTOCOL = process.env.NEXT_PUBLIC_PROTOCOL;
 	var backroute = "";
 	if(context.query.s != undefined){
 		backroute = "/search/"+context.query.s
@@ -62,10 +63,10 @@ export async function getServerSideProps(context){
 	var mData = "empty"
 	if(context.query.tip[1] != undefined){
 		var mParam = context.query.tip[1]
-		var mData = await fetch(`http://localhost:3000/api/get?id=`+mParam).
+		var mData = await fetch(PROTOCOL +'://'+HOST+`/api/get?id=`+mParam).
 		then(res => res.json()).then(data =>data)
 	}
-	var data = await fetch(`http://localhost:3000/api/get?tip=`+param).
+	var data = await fetch(PROTOCOL +'://'+HOST+`/api/get?tip=`+param).
 	then(res => res.json()).then(data =>data)
 	return{
 		props:{

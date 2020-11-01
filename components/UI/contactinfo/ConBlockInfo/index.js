@@ -25,7 +25,7 @@ const conBlockInfo = () => {
                     Adresa
                 </div>
                 <div className={styles.text}>
-                Maršala Tita 133,<br></br>11272 Beograd
+                Knez Mihajlova 67,<br></br>18255 Pukovac
                 </div>
             </div>
             <div className={styles.block}>
@@ -33,7 +33,7 @@ const conBlockInfo = () => {
                     Telefon
                 </div>
                 <div className={styles.text}>
-                    +381(011) 435 123
+                    +381(18) 812 100
                 </div>
             </div>
         </div>

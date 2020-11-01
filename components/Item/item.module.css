@@ -1,5 +1,5 @@
 .item{
-    position: fixed;
+    position: absolute;
     width: 678px;
     height: auto;
     left: calc(50% - 339px);

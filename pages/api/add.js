@@ -1,9 +1,14 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import con from '../../store/db.js'
 import formidable from 'formidable-serverless';
+import uploadImage from '../../store/uploadgc';
+import fs from 'fs';
 var imageUrl;
 var image4db = "";
-
+var testimg = "";
+var bufferImg = "";
+var nameImg = "";
+var folder = "upload";
 export const config = {
   api: {
     bodyParser: false
@@ -15,15 +20,55 @@ export default async (req, res) => {
     res.sendStatus = 200
      res.setHeader('Content-Type', 'application/json')
       const form = new formidable.IncomingForm()
-      form.on('fileBegin',(name,file) => {
+    //   form.onPart = (part) => {
+    //      if (part.filename === '' || !part.mime) {
+    // // used internally, please do not override!
+    //       form.handlePart(part);
+    //     }else{
+    //      const originalname = part.filename
+    //     part.on("data",(buffer) => {
+    //      nameImg = originalname
+    //      bufferImg = buffer
+    //     })
+    //     }
+
+    //   }
+      // form.on('fileBegin',(name,file) => {
+      //   var randomNum1 = Math.floor((Math.random() * 10000) + 10);
+      //   var randomNum2 = Math.floor((Math.random() * 10000) + 10);
+      //   var randomNum3 = Math.floor((Math.random() * 10000) + 10);
+      //   imageUrl = "./public/upload/"+randomNum1+"-"+randomNum2+randomNum3+"-"+file.name;
+      //   image4db = "/upload/"+randomNum1+"-"+randomNum2+randomNum3+"-"+file.name;
+      //   // file.path = imageUrl;
+        
+      //   console.log(file)
+      // })
+      form.parse(req,(err,fields,files) => {
+        var thumb;
+        if(files.thumb != undefined){
+          nameImg = files.thumb.name;
+          var thumbfile = files.thumb
+       
+        
+        
         var randomNum1 = Math.floor((Math.random() * 10000) + 10);
         var randomNum2 = Math.floor((Math.random() * 10000) + 10);
         var randomNum3 = Math.floor((Math.random() * 10000) + 10);
-        imageUrl = "./public/upload/"+randomNum1+"-"+randomNum2+randomNum3+"-"+file.name;
-        image4db = "/upload/"+randomNum1+"-"+randomNum2+randomNum3+"-"+file.name;
-        file.path = imageUrl;
-      })
-      form.parse(req,(err,fields,files) => {
+        var replaced = nameImg.replace(/ /g,"_")
+        var finishPath = folder+"/"+randomNum1+randomNum2+randomNum3+replaced
+        fs.readFile(thumbfile.path,function(err,buffer){
+          
+          uploadImage(finishPath,buffer);
+        })
+        
+      }
+        if(nameImg == ""){
+          thumb = "/upload/default.png";
+        }else{
+          
+          thumb = `https://storage.googleapis.com/traktorland/${finishPath}`
+        }
+        
         var ime = fields["ime"];
         var proizvodjac = fields["proizvodjac"];
         var kataloski_broj = fields["kataloski_broj"];
@@ -33,11 +78,6 @@ export default async (req, res) => {
         var sifra = fields["sifra"];
         var kolicina = fields["kolicina"]
         var zemlja_porekla = fields["zemlja_porekla"]
-        if(image4db == ""){
-          var thumb = "/upload/default.png";
-        }else{
-          var thumb = image4db;
-        }
         
         
         var proizvod = {
