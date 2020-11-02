@@ -14,7 +14,7 @@ class add extends React.Component{
                         sifra:'',
                         mp_cena:'',
                         
-                        tip:'Traktori',
+                        tip:'traktori',
                         zemlja_porekla:'',
                         kolicina:''
                     },
