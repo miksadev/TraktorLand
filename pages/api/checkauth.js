@@ -5,8 +5,11 @@ export default async (req,res) => {
 	return new Promise(resolve => {
 		res.sendStatus = 200
 	res.setHeader('Content-Type', 'application/json')
-	const authToken = req.headers['auth-token']
-	
+	var authToken = req.headers['auth-token']
+	if(authToken == undefined){
+		var cookies = new Cookies(req,res)
+        authToken = cookies.get('auth-token')
+	}
 	jwt.verify(authToken,'traktorlandsecret',function(err,decoded){
 		if(err){
 			res.end(JSON.stringify({result:'Failed'}))

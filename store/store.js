@@ -24,6 +24,11 @@ const reducer = (state = initialState, { type, payload }) => {
         ...state,
         isCartOpened: !state.isCartOpened,
       };
+      case "UND_ITEM":
+      return{
+        ...state,
+        isItemOpened:undefined
+      };
     case "TOGGLE_ITEM":
       return {
         ...state,

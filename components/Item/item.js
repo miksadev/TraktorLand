@@ -9,7 +9,7 @@ import useCart from '../../util/useCart';
 
 const item = (props) => {
     const router = useRouter();
-    const {isItemOpened, toggleItem} = useCart();
+    const {isItemOpened, toggleItem, undItem} = useCart();
     var back = router.query.tip[0];
 
     
@@ -17,6 +17,7 @@ const item = (props) => {
         if(isItemOpened != null){
             if(!isItemOpened){
                router.push(props.backroute)
+               undItem();
         }
         }
     },[isItemOpened])
