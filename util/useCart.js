@@ -18,7 +18,11 @@ const useCart = () => {
       type: "TOGGLE_ITEM",
     });
   };
-
+  const undItem = () => {
+    dispatch({
+      type: "UND_ITEM",
+    });
+  }
   const addToCart = (item) =>
     dispatch({
       type: "ADD",
@@ -60,6 +64,7 @@ const useCart = () => {
     setShipping,
     toggleCart,
     toggleItem,
+    undItem,
     addToCart,
     addOne,
     removeOne,
