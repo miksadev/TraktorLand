@@ -9,7 +9,7 @@ function Webshop(props){
 	const [prodata,setProdata] = useState(props.data)
 	const router = useRouter()
   	const tip = router.query.tip
-	var upLett = ["traktori","berači","freze","kombajni"];
+	var upLett = ["traktori","berači","freze","kombajni","ostalo"];
     
 	var par = props.param
 	
