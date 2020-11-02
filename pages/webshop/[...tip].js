@@ -16,7 +16,7 @@ function Webshop(props){
 
 	var naslov = ""
 	
-	if(upLett.includes(par)){
+	if(upLett.includes(par.toLowerCase())){
 		naslov = par.charAt(0).toUpperCase() + par.slice(1)
 	}else if(par == "delovi"){
 		naslov = "Delovi za poljoprivredne mašine"
