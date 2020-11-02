@@ -91,7 +91,7 @@ class FinishForgot extends React.Component {
                 <Form formname="">
                     <Input onFocus={(e) => this.onFocus(e)} onChange={(e) => this.onChange(e)} value={this.state.lozinka} style={this.state.lozinkaEmpty ? {borderBottom:'1px solid red'} : {}} inputtype="input" label="Lozinka" img="/login/password.png" placeholder="Vise od 5 karaktera" name="lozinka" type="password"></Input>
                     <Input onFocus={(e) => this.onFocus(e)} onChange={(e) => this.onChange(e)} value={this.state.potvrditelozinku} style={this.state.potvrditelozinkuEmpty ? {borderBottom:'1px solid red'} : {}} inputtype="input" label="Potvrdite lozinku" img="/login/password.png" placeholder="Vise od 5 karaktera" name="potvrditelozinku" type="password"></Input>
-                    <div className={styles.block}><Submit styles={styles.loginbutton} >Promeni sifru</Submit></div>
+                    <div className={styles.block}><Submit styles={styles.loginbutton} >Promeni šifru</Submit></div>
                     
                 </Form>
             </form>

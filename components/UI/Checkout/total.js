@@ -11,7 +11,7 @@ const total = (props) => {
     
     return (
         <div className={classes.join(' ')} style={!props.edit ? {height: "230px"} : null}>
-            <h2 className={styles.heading}>Totalni obracun</h2>
+            <h2 className={styles.heading}>Totalni obračun</h2>
             <div>
                 <h3 className={styles.proizvodii} >Proizvodi</h3>
                 <h2 className={styles.price}>{props.price} RSD</h2>
@@ -26,7 +26,7 @@ const total = (props) => {
             <div className={styles.line}></div>
             <h3 className={styles.ukupno}>UKUPNO</h3>
             <h3 className={styles.ukupnocena}>{props.price * (1 - props.rabat/100)} RSD</h3>
-            {props.edit ? <Submit submit={props.klik} styles={styles.button} >Zavrsi porudzbinu</Submit> : null}
+            {props.edit ? <Submit submit={props.klik} styles={styles.button} >Završi porudžbinu</Submit> : null}
         </div>
     );
 }

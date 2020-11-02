@@ -20,7 +20,7 @@ const footer = () => {
                         </li>
                         <li>
                             <Link href="/webshop/beraci">
-                                <a>Beraci</a>
+                                <a>Berači</a>
                             </Link>
                         </li>
                         <li>
@@ -35,7 +35,7 @@ const footer = () => {
                         </li>
                         <li>
                             <Link href="/webshop/polj-mas">
-                                <a>Delozi za poljoprivredne masine</a>
+                                <a>Delozi za poljoprivredne mašine</a>
                             </Link>
                         </li>
                         <li>

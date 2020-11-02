@@ -85,7 +85,7 @@ class ForgotPass extends React.Component{
             <form onSubmit={(e) => this.onSubmit(e)}>
                 <Form formname="Zaboravljena lozinka">
                     <Input onFocus={(e) => this.onFocus(e)} style={this.state.emailEmpty ? {borderBottom:'1px solid red'} : {}} onChange={(e) => this.onChange(e)} value={this.state.data.email} inputtype="input" label="E-mail" img="/login/email.png" placeholder="mojaadresa@gmail.com" name="email" type="email"></Input>
-                    <div className={styles.block}><Submit styles={styles.loginbutton} >Posalji</Submit></div>
+                    <div className={styles.block}><Submit styles={styles.loginbutton} >Pošalji</Submit></div>
                     <div className={styles.block}>
                         <Link href="/login/"><p className={styles.forgotpw}>Nazad na prijavu</p></Link>
                     </div>

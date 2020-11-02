@@ -13,7 +13,7 @@ export default function Kontakt() {
             <ConInfo/>
           </div>
           <p className={styles.opis}>
-          Dobrodosli na nasu kontakt stranicu. Mozete nas kontaktirati na navedeni telefon ili mail, a mozete nas pronaci i na adresi Knez Mihajlova 67 u Pukovcu.
+          Dobrodošli na našu kontakt stranicu. Možete nas kontaktirati na navedeni telefon ili mail, a možete nas pronaći i na adresi Knez Mihajlova 67 u Pukovcu.
           </p>
           
           <div className={styles.maps}>
@@ -34,7 +34,7 @@ export default function Kontakt() {
             - stručna pomoć pri kupovini delova i mehanizacije.<br></br>
             -Dostupnost potrebnih delova i dostava istih u najkraćem roku.<br></br>
             <br></br>
-            Zahvaljujuci svemu navedenom, 2012. godine postali smo generalni zastupnici firme "Termometal" iz Ade, sto smo i dan danas, te i ova informacija govori o profesionalnosti i ozbiljnosti nase firme.
+            Zahvaljujući svemu navedenom, 2012. godine postali smo generalni zastupnici firme "Termometal" iz Ade, što smo i dan danas, te i ova informacija govori o profesionalnosti i ozbiljnosti naše firme.
             </p>
           </div>
 
