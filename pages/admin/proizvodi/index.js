@@ -46,10 +46,23 @@ export async function getServerSideProps({req,res}){
 
 const proizvodi = (props) => {
 	const [pro,setPro] = useState(props.data)
+    const [searchKolona,setSearchKolona] = useState("ime")
+    const [searchValue,setSearchValue] = useState("");
     var HOST = process.env.NEXT_PUBLIC_HOST;
     var PROTOCOL = process.env.NEXT_PUBLIC_PROTOCOL
 	function onChange(e){
-		fetch(PROTOCOL+'://'+HOST+'/api/searchpro?search='+e.target.value).
+        var searchR=""
+        var searchK=""
+        if(e.target.name != "selectsearch"){
+            searchR=e.target.value
+            searchK=searchKolona
+            setSearchValue(searchR)
+        }else{
+            searchK=e.target.value
+            searchR=searchValue
+
+        }
+		fetch(PROTOCOL+'://'+HOST+'/api/searchpro?search='+searchR+"&searchkolona="+searchK).
 		then(res => res.json()).then(data => {
 
 			setPro(data.results)
@@ -57,12 +70,20 @@ const proizvodi = (props) => {
 		})
 
 	}
+    function onChangeSearch(e){
+        setSearchKolona(e.target.value)
+        onChange(e)
+    }
     return (
         <div className={styles.proizvodii}>
             <div className={styles.headingg}>
                 <h3>Proizvodi </h3> 
                 <Filter change={e => onChange(e)} placeholder="Pretrazi proizvode..."></Filter>
-
+                <select style={{marginLeft:"300px"}} name="selectsearch" value={searchKolona} onChange={e => onChangeSearch(e)}>
+                        <option value="ime">Ime</option>
+                        <option value="sifra">Sifra</option>
+                        <option value="kataloski_broj">Kataloski broj</option>
+                    </select>
             </div>
             <Proizvodi data={pro}/>
             <Link href="/admin/proizvodi/add"><img className={styles.add} src="/admin/add.png" alt=""/></Link>
