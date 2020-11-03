@@ -16,6 +16,7 @@ const kategorije = () => {
                 <Kategorija top2="22.72" top="25.72" src="kategorije/freze.png" link="/webshop/freze">Freze</Kategorija>
                 <Kategorija top2="8" top="8" sir="300" src="kategorije/poljmasine.png" link="/webshop/delovi">Delovi Za <br></br>Poljoprivredne Mašine</Kategorija>
                 <Kategorija top2="14" top="14" sir="300" src="kategorije/poljmeh.png" link="/webshop/mehanizacija">Poljoprivredna Mehanizacija</Kategorija>
+                <Kategorija top2="32" top="48" src="kategorije/ostalo.png" link="/webshop/ostalo">Ostalo</Kategorija>
             </div>
             
         </Aux>

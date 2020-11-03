@@ -34,13 +34,18 @@ const footer = () => {
                             </Link>
                         </li>
                         <li>
-                            <Link href="/webshop/polj-mas">
+                            <Link href="/webshop/delovi">
                                 <a>Delozi za poljoprivredne mašine</a>
                             </Link>
                         </li>
                         <li>
-                            <Link href="/webshop/polj-meh">
+                            <Link href="/webshop/mehanizacija">
                                 <a>Poljoprivredna mehanizacija</a>
+                            </Link>
+                        </li>
+                        <li>
+                            <Link href="/webshop/ostalo">
+                                <a>Ostalo</a>
                             </Link>
                         </li>
                     </ul>

@@ -3,6 +3,7 @@ import ConInfo from '../components/UI/ContactInfo/contactinfo';
 import GoogleMaps from '../components/UI/GoogleMap/googleMap';
 import ConBlockInfo from '../components/UI/contactinfo/ConBlockInfo';
 
+
 export default function Kontakt() {
   return (
     <>
