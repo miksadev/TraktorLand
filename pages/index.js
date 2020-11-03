@@ -37,7 +37,7 @@ export default function Home({akcije}) {
           <Logowide />
         </div>
 
-        <p className={styles.slogan}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni assumenda minima vero quaerat corporis unde obcaecati dolorum labore.</p>
+        <p className={styles.slogan}>Profesionalni i originalni već 25 godina!</p>
         
 
         <Kategorije/>
