@@ -22,7 +22,7 @@ const cartitems = (props) => {
         </div>
         <div className={styles.donjideo}>
             <p>UKUPNO: <span>{price}</span><span> RSD</span></p>
-            <LinkButton click={toggleCart} link="/checkout" styles={styles.Button}>Zavrsi kupovinu</LinkButton>
+            <LinkButton click={toggleCart} link="/checkout" styles={styles.Button}>Završi kupovinu</LinkButton>
         </div>
     </div>);
     let checkout = <div className={styles.cartitemscheckout}>{cartitems}</div>;

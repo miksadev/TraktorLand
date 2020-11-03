@@ -24,7 +24,7 @@
   z-index: 1;
 }
 .slogan{
-  max-width: 605px;
+  max-width: 360px;
   /* max-width: 100%; */
   margin-right: 50px;
   margin-bottom: 30px;
@@ -35,7 +35,7 @@
   font-weight: 600;
   font-size: 18px;
   line-height: 21px;
-  margin-left: 28px;
+  margin-left: 45px;
   color: #212121;
   z-index: 10;
   position: relative;

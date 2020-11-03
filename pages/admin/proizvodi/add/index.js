@@ -14,7 +14,7 @@ class add extends React.Component{
                         sifra:'',
                         mp_cena:'',
                         
-                        tip:'Traktori',
+                        tip:'traktori',
                         zemlja_porekla:'',
                         kolicina:''
                     },
@@ -121,6 +121,7 @@ class add extends React.Component{
                     <option value="freze">Freze</option>
                     <option value="delovi">Delovi za poljoprivredne masine</option>
                     <option value="mehanizacija">Poljoprivredna mehanizacija</option>
+                    <option value="ostalo">Ostalo</option>
                 </Input>
                 <Input onFocus={(e) => this.onFocus(e)} style={this.state.imeEmpty ? {borderBottom:'1px solid red'} : {}} onChange={(e) => this.onChange(e)} inputtype="input" value={this.state.data.ime}  name="ime"  label="Ime"  type="text"/>
                 <Input onFocus={(e) => this.onFocus(e)} style={this.state.proizvodjacEmpty ? {borderBottom:'1px solid red'} : {}} onChange={(e) => this.onChange(e)} inputtype="input" value={this.state.data.proizvodjac} name="proizvodjac"  label="Proizvodjac"  type="text"/>

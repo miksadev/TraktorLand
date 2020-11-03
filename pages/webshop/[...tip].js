@@ -7,30 +7,48 @@ import Filter from '../../components/Search/Filter/filter';
 
 function Webshop(props){
 	const [prodata,setProdata] = useState(props.data)
+	const [searchKolona,setSearchKolona] = useState("ime")
+	const [searchValue,setSearchValue] = useState("");
 	const router = useRouter()
   	const tip = router.query.tip
-	var upLett = ["traktori","beraci","freze","kombajni"];
+	var upLett = ["traktori","berači","freze","kombajni","ostalo"];
     
 	var par = props.param
 	
 
 	var naslov = ""
 	
-	if(upLett.includes(par)){
+	if(upLett.includes(par.toLowerCase())){
 		naslov = par.charAt(0).toUpperCase() + par.slice(1)
 	}else if(par == "delovi"){
-		naslov = "Delovi za poljoprivredne masine"
+		naslov = "Delovi za poljoprivredne mašine"
 	}else{
 		naslov = "Poljoprivredna mehanizacija"
 	}
 	function onChange(e){
+		var searchR="";
+		var searchK="";
+		if(e.target.name != "selectsearch"){
+			searchR=e.target.value
+			searchK=searchKolona
+			setSearchValue(searchR)
+		}else{
+			searchK=e.target.value
+			searchR=searchValue
+
+		}
+		
 		var HOST = process.env.NEXT_PUBLIC_HOST;
 		var PROTOCOL = process.env.NEXT_PUBLIC_PROTOCOL;
-		fetch(PROTOCOL+'://'+HOST+'/api/searchtip?search='+e.target.value+"&tip="+par)
+		fetch(PROTOCOL+'://'+HOST+'/api/searchtip?search='+searchR+"&tip="+par+"&searchkolona="+searchK)
         .then(res => res.json())
         .then(data => {
            setProdata(data.results)
         })
+	}
+	function onChangeSearch(e){
+		setSearchKolona(e.target.value)
+		onChange(e)
 	}
 	return (
 			<div className={styles.container}>
@@ -42,6 +60,11 @@ function Webshop(props){
 		            	{naslov}
 		            </h3>
 					<Filter styles={styles.filter} change={e => onChange(e)} placeholder="Pretrazi proizvode..."></Filter>
+					<select name="selectsearch" value={searchKolona} onChange={e => onChangeSearch(e)}>
+						<option value="ime">Ime</option>
+						<option value="sifra">Sifra</option>
+						<option value="kataloski_broj">Kataloski broj</option>
+					</select>
 		            <div className={styles.line}></div>
 		            <Products backroute={props.param} data={prodata} mdata={props.mData}/>
 		        </div>

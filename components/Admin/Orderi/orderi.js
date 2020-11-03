@@ -5,7 +5,7 @@ import Order from './Order/order';
 const orderi = ({orders}) => {
     return(
         <div className={styles.orderi}>
-            {orders.map(item => <Order key={item.id} ime={item.ime_prezime}
+            {orders.slice(0).reverse().map(item => <Order key={item.id} ime={item.ime_prezime}
             	prezime="" created={item.created} vreme={item.time} adresa={item.adresa} grad={item.grad}pak={item.postanski_broj} id={item.id} cena={item.price} orderid={`#`+item.id}/>)}
           
         </div>

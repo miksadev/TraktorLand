@@ -48,15 +48,15 @@ const item = (props) => {
                 </div>
                 <div className={styles.line}/>
                     <div className={styles.block}>
-                        <p className={styles.levo}>Kataloski broj</p>
+                        <p className={styles.levo}>Kataloški broj</p>
                         <h3 className={styles.desno}>{props.proizvod[0].kataloski_broj}</h3>
                     </div>
                     <div className={styles.block}>
-                        <p className={styles.levo}>Sifra</p>
+                        <p className={styles.levo}>Šifra</p>
                         <h3 className={styles.desno}>{props.proizvod[0].sifra}</h3>
                     </div>
                     <div className={styles.block}>
-                        <p className={styles.levo}>Proizvodjac</p>
+                        <p className={styles.levo}>Proizvođac</p>
                         <h3 className={styles.desno}>{props.proizvod[0].ime}</h3>
                     </div>
                     {props.proizvod[0].zemlja_porekla == null  || props.proizvod[0].zemlja_porekla ==  "" ? "" : <div className={styles.block}>
@@ -64,7 +64,7 @@ const item = (props) => {
                         <h3 className={styles.desno}>{props.proizvod[0].zemlja_porekla}</h3>
                     </div>}
                     <div className={styles.block}>
-                        <p className={styles.levo}>Kataloski broj</p>
+                        <p className={styles.levo}>Kataloški broj</p>
                         <h3 className={styles.desno}>{props.proizvod[0].kataloski_broj}</h3>
                     </div>
                 </div>
