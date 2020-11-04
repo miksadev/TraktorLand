@@ -10,7 +10,14 @@ const cartitems = (props) => {
     
     let cartitems = items.map(cartitem => {
         const item = {id: cartitem.id, ime: cartitem.name,slika: cartitem.src,price: Number(cartitem.price), qty: cartitem.qty, sifra: cartitem.sifra};
-        return <CartItem edit={true} sifra={cartitem.sifra} namena={props.namena} key={cartitem.id} src={cartitem.slika} name={cartitem.ime} price={cartitem.price} qty={cartitem.qty} up={() => addOne(item)} down={() => removeOne(item)} brisi={() => removeFromCart(item)}></CartItem>
+        return <CartItem edit={true} sifra={cartitem.sifra} namena={props.namena} key={cartitem.id} src={cartitem.slika} name={cartitem.ime} price={cartitem.price} qty={cartitem.qty} up={() => {
+          if(cartitem.qty >= cartitem.kolicina){
+            return;
+          }else{
+            addOne(item);
+          }
+
+        }} down={() => removeOne(item)} brisi={() => removeFromCart(item)}></CartItem>
     });
 
     let korpa = (

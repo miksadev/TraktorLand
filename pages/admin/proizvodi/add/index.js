@@ -13,7 +13,9 @@ class add extends React.Component{
                         kataloski_broj:'',
                         sifra:'',
                         mp_cena:'',
-                        
+                        rabat_1:'',
+                        rabat_2:'',
+                        rabat_3:'',
                         tip:'traktori',
                         zemlja_porekla:'',
                         kolicina:''
@@ -46,9 +48,10 @@ class add extends React.Component{
         var HOST = process.env.NEXT_PUBLIC_HOST;
         var PROTOCOL = process.env.NEXT_PUBLIC_PROTOCOL
         var err = 0;
+        var allow_array=["zemlja_porekla","rabat_1","rabat_2","rabat_3"]
         for(const [key,value] of Object.entries(this.state.data)){
             if(value == ""){
-                if(key != "zemlja_porekla"){
+                if(allow_array.includes(key) == false){
                     var obj = {};
                 obj[key+"Empty"] = true
                 this.setState(obj)
@@ -78,6 +81,9 @@ class add extends React.Component{
         formData.append("tip",this.state.data.tip);
         formData.append("sifra",this.state.data.sifra);
         formData.append("zemlja_porekla",this.state.data.zemlja_porekla);
+        formData.append("rabat_1",this.state.data.rabat_1);
+        formData.append("rabat_2",this.state.data.rabat_2);
+        formData.append("rabat_3",this.state.data.rabat_3);
         formData.append("kolicina",this.state.data.kolicina);
         formData.append("thumb",imgThumb);
         fetch(PROTOCOL+"://"+HOST+"/api/add",{
@@ -92,7 +98,10 @@ class add extends React.Component{
                         kataloski_broj:'',
                         sifra:'',
                         mp_cena:'',
-                        
+                        zemlja_porekla:'',
+                        rabat_1:'',
+                        rabat_3:'',
+                        rabat_2:'',
                         tip:'traktori',
                         
                         kolicina:''
@@ -131,7 +140,9 @@ class add extends React.Component{
                 <Input onFocus={(e) => this.onFocus(e)} style={this.state.mp_cenaEmpty ? {borderBottom:'1px solid red'} : {}} onChange={(e) => this.onChange(e)} inputtype="input" value={this.state.data.mp_cena} name="mp_cena"  label="MP cena"  type="text"/>
                 
                 <Input onFocus={(e) => this.onFocus(e)} style={this.state.kolicinaEmpty ? {borderBottom:'1px solid red'} : {}} onChange={(e) => this.onChange(e)} inputtype="input" value={this.state.data.kolicina} name="kolicina"  label="Kolicina"  type="text"/>
-
+                <Input onFocus={(e) => this.onFocus(e)} style={{}} onChange={(e) => this.onChange(e)} inputtype="input" value={this.state.data.rabat_1}  name="rabat_1"  label="Rabat 1"  type="text"/>
+                <Input onFocus={(e) => this.onFocus(e)} style={{}} onChange={(e) => this.onChange(e)} inputtype="input" value={this.state.data.rabat_2}  name="rabat_2"  label="Rabat 2"  type="text"/>
+                <Input onFocus={(e) => this.onFocus(e)} style={{}} onChange={(e) => this.onChange(e)} inputtype="input" value={this.state.data.rabat_3}  name="rabat_3"  label="Rabat 3"  type="text"/>
                 <button type="submit" className={styles.submit}>ADD</button>
             </form>
             <Link href="/admin/proizvodi"><h2 className={styles.nazad}>{"< Nazad"}</h2></Link>

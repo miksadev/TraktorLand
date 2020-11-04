@@ -2,7 +2,7 @@ import { useRouter } from 'next/router'
 import Link from 'next/link'
 import styles from "../../styles/webshop.module.css";
 import Products from '../../components/products/products';
-import {useState} from 'react';
+import {useState,useEffect} from 'react';
 import Filter from '../../components/Search/Filter/filter';
 
 function Webshop(props){
@@ -11,15 +11,27 @@ function Webshop(props){
 	const [searchValue,setSearchValue] = useState("");
 	const router = useRouter()
   	const tip = router.query.tip
-	var upLett = ["traktori","berači","freze","kombajni","ostalo"];
+	var upLett = ["traktori","beraci","freze","kombajni","ostalo"];
     
 	var par = props.param
 	
 
 	var naslov = ""
 	
+	useEffect(() => {
+		var HOST = process.env.NEXT_PUBLIC_HOST;
+		var PROTOCOL = process.env.NEXT_PUBLIC_PROTOCOL;
+		fetch(PROTOCOL +'://'+HOST+`/api/get?tip=`+par)
+        .then(res => res.json())
+        .then(data => {
+           setProdata(data)
+        })
+	},[router.query.tip])
+	
+	
 	if(upLett.includes(par.toLowerCase())){
 		naslov = par.charAt(0).toUpperCase() + par.slice(1)
+		naslov = naslov.replace("c","č")
 	}else if(par == "delovi"){
 		naslov = "Delovi za poljoprivredne mašine"
 	}else{
