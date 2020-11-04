@@ -72,7 +72,7 @@ function Webshop(props){
 		            	{naslov}
 		            </h3>
 					<Filter styles={styles.filter} change={e => onChange(e)} placeholder="Pretrazi proizvode..."></Filter>
-					<select name="selectsearch" value={searchKolona} onChange={e => onChangeSearch(e)}>
+					<select className={styles.selectt} name="selectsearch" value={searchKolona} onChange={e => onChangeSearch(e)}>
 						<option value="ime">Ime</option>
 						<option value="sifra">Sifra</option>
 						<option value="kataloski_broj">Kataloski broj</option>

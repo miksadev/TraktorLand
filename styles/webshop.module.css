@@ -63,11 +63,22 @@
       margin-bottom: 0;
   }
 }
-
-/* @media screen and (max-width: 450px) {
-  .filter{
-     margin-left: 30px;
-     position: relative;
+.selectt
+{
+    border-radius: 10px;
+    width: 150px;
+    height: 35px;
+    outline: none;
+    border: .5px solid #2b2b2b;
+    padding-left: 10px;
+    font-family: Open Sans;
+    font-size: 14px;
+    margin-left: 10px;
+    padding-right: 10px;
+}
+@media screen and (max-width: 460px) {
+  .selectt{
+     margin-left: 47px;
      margin-bottom: 20px;
   }
-} */
+}
