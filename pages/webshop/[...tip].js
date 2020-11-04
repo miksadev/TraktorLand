@@ -11,7 +11,7 @@ function Webshop(props){
 	const [searchValue,setSearchValue] = useState("");
 	const router = useRouter()
   	const tip = router.query.tip
-	var upLett = ["traktori","berači","freze","kombajni","ostalo"];
+	var upLett = ["traktori","beraci","freze","kombajni","ostalo"];
     
 	var par = props.param
 	
@@ -20,6 +20,7 @@ function Webshop(props){
 	
 	if(upLett.includes(par.toLowerCase())){
 		naslov = par.charAt(0).toUpperCase() + par.slice(1)
+		naslov = naslov.replace("c","č")
 	}else if(par == "delovi"){
 		naslov = "Delovi za poljoprivredne mašine"
 	}else{
