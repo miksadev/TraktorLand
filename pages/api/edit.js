@@ -60,12 +60,16 @@ export default async (req, res) => {
         var tip = fields["tip"];
         var sifra = fields["sifra"];
         var kolicina = fields["kolicina"]
+        var rabat_1 = fields["rabat_1"] == "" ? 0 : fields["rabat_1"]
+        var rabat_2 = fields["rabat_2"] == "" ? 0 : fields["rabat_2"]
+        var rabat_3 = fields["rabat_3"] == "" ? 0 : fields["rabat_3"]
+        var zemlja_porekla = fields["zemlja_porekla"]
         var thumb = thumb;
         var id = fields["id"]
         if(thumb == ""){
           
-          con.query(`UPDATE proizvodi SET ime = ?,proizvodjac=?,kataloski_broj=?,
-           mp_cena = ?,vp_cena = ?,tip = ?,sifra = ?,kolicina = ? WHERE id = ?`,[ime,proizvodjac,kataloski_broj,
+          con.query(`UPDATE proizvodi SET rabat_1=?,rabat_2=?,rabat_3=?,zemlja_porekla=?,ime = ?,proizvodjac=?,kataloski_broj=?,
+           mp_cena = ?,vp_cena = ?,tip = ?,sifra = ?,kolicina = ? WHERE id = ?`,[rabat_1,rabat_2,rabat_3,zemlja_porekla,ime,proizvodjac,kataloski_broj,
            mp_cena,vp_cena.toFixed(2),tip,sifra,kolicina,id],(err,result) => {
         if(err) throw err;
         
@@ -74,8 +78,8 @@ export default async (req, res) => {
       })
         }else{
           
-          con.query(`UPDATE proizvodi SET ime = ?,proizvodjac=?,kataloski_broj=?,
-           mp_cena = ?,vp_cena = ?,tip = ?,sifra = ?,kolicina = ?,thumb=? WHERE id = ?`,[ime,proizvodjac,kataloski_broj,
+          con.query(`UPDATE proizvodi SET rabat_1=?,rabat_2=?,rabat_3=?,zemlja_porekla=?,ime = ?,proizvodjac=?,kataloski_broj=?,
+           mp_cena = ?,vp_cena = ?,tip = ?,sifra = ?,kolicina = ?,thumb=? WHERE id = ?`,[rabat_1,rabat_2,rabat_3,zemlja_porekla,ime,proizvodjac,kataloski_broj,
            mp_cena,vp_cena.toFixed(2),tip,sifra,kolicina,thumb,id],(err,result) => {
         if(err) throw err;
         

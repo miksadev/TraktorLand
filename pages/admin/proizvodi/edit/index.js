@@ -15,13 +15,15 @@ class add extends React.Component{
                         kataloski_broj:this.props.proizvod.kataloski_broj,
                         sifra:this.props.proizvod.sifra,
                         mp_cena:this.props.proizvod.mp_cena,
-                        
+                        rabat_1:this.props.proizvod.rabat_1,
+                        rabat_2:this.props.proizvod.rabat_2,
+                        rabat_3:this.props.proizvod.rabat_3,
                         tip:this.props.proizvod.tip,
                         kolicina:this.props.proizvod.kolicina
                     },
                 imeEmpty:false,
                 proizvodjacEmpty:false,
-                zemlja_poreklaEmpty:false,
+                
                 kataloski_brojEmpty:false,
                 sifraEmpty:false,
                 mp_cenaEmpty:false,
@@ -48,13 +50,17 @@ class add extends React.Component{
         var PROTOCOL = process.env.NEXT_PUBLIC_PROTOCOL
         e.preventDefault();
         var err = 0;
+        var allow_array=["zemlja_porekla","rabat_1","rabat_2","rabat_3"]
         for(const [key,value] of Object.entries(this.state.data)){
             if(value == ""){
-                var obj = {};
-                obj[key+"Empty"] = true
-                this.setState(obj)
-                 console.log(key)
-                err++;
+                if(allow_array.includes(key) == false){
+                    var obj = {};
+                    obj[key+"Empty"] = true
+                    this.setState(obj)
+                     
+                    err++;
+                }
+                
             }
         }
         
@@ -72,6 +78,9 @@ class add extends React.Component{
         formData.append("tip",this.state.data.tip);
         formData.append("sifra",this.state.data.sifra);
         formData.append("kolicina",this.state.data.kolicina);
+        formData.append("rabat_1",this.state.data.rabat_1);
+        formData.append("rabat_2",this.state.data.rabat_2);
+        formData.append("rabat_3",this.state.data.rabat_3);
         formData.append("id",this.props.id)
         console.log(this.props.id)
         if(e.target["thumb"].files.length != 0){
@@ -116,13 +125,15 @@ class add extends React.Component{
                 </Input>
                 <Input onFocus={(e) => this.onFocus(e)} style={this.state.imeEmpty ? {borderBottom:'1px solid red'} : {}} onChange={(e) => this.onChange(e)} inputtype="input" value={this.state.data.ime}  name="ime"  label="Ime"  type="text"/>
                 <Input onFocus={(e) => this.onFocus(e)} style={this.state.proizvodjacEmpty ? {borderBottom:'1px solid red'} : {}} onChange={(e) => this.onChange(e)} inputtype="input" value={this.state.data.proizvodjac} name="proizvodjac"  label="Proizvodjac"  type="text"/>
-                <Input onFocus={(e) => this.onFocus(e)} style={this.state.zemlja_poreklaEmpty ? {borderBottom:'1px solid red'} : {}} onChange={(e) => this.onChange(e)} inputtype="input" value={this.state.data.zemlja_porekla} name="zemlja_porekla"  label="Zemlja porekla"  type="text"/>
+                <Input onFocus={(e) => this.onFocus(e)} style={{}} onChange={(e) => this.onChange(e)} inputtype="input" value={this.state.data.zemlja_porekla} name="zemlja_porekla"  label="Zemlja porekla"  type="text"/>
                 <Input onFocus={(e) => this.onFocus(e)} style={this.state.kataloski_broj ? {borderBottom:'1px solid red'} : {}} onChange={(e) => this.onChange(e)} inputtype="input" value={this.state.data.kataloski_broj} name="kataloski_broj"  label="Kataloski broj"  type="text"/>
                 <Input onFocus={(e) => this.onFocus(e)} style={this.state.sifraEmpty ? {borderBottom:'1px solid red'} : {}} onChange={(e) => this.onChange(e)} inputtype="input" value={this.state.data.sifra} name="sifra"  label="Sifra"  type="text"/>
                 <Input onFocus={(e) => this.onFocus(e)} style={this.state.mp_cenaEmpty ? {borderBottom:'1px solid red'} : {}} onChange={(e) => this.onChange(e)} inputtype="input" value={this.state.data.mp_cena} name="mp_cena"  label="MP cena"  type="text"/>
                 
                 <Input onFocus={(e) => this.onFocus(e)} style={this.state.kolicinaEmpty ? {borderBottom:'1px solid red'} : {}} onChange={(e) => this.onChange(e)} inputtype="input" value={this.state.data.kolicina} name="kolicina"  label="Kolicina"  type="text"/>
-
+                <Input onFocus={(e) => this.onFocus(e)} style={{}} onChange={(e) => this.onChange(e)} inputtype="input" value={this.state.data.rabat_1} name="rabat_1"  label="Rabat 1"  type="text"/>
+                <Input onFocus={(e) => this.onFocus(e)} style={{}} onChange={(e) => this.onChange(e)} inputtype="input" value={this.state.data.rabat_2} name="rabat_2"  label="Rabat 2"  type="text"/>
+                <Input onFocus={(e) => this.onFocus(e)} style={{}} onChange={(e) => this.onChange(e)} inputtype="input" value={this.state.data.rabat_3} name="rabat_3"  label="Rabat 3"  type="text"/>
                 <button type="submit" className={styles.submit}>EDIT</button>
             </form>
             <Link href="/admin/proizvodi"><h2 className={styles.nazad}>{"< Nazad"}</h2></Link>

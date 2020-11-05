@@ -7,6 +7,7 @@ const korisnik = (props) => {
 
     function onChange(e){
 
+        
         var HOST = process.env.NEXT_PUBLIC_HOST;
         var PROTOCOL = process.env.NEXT_PUBLIC_PROTOCOL
         setRabat(e.target.value)
@@ -53,10 +54,16 @@ const korisnik = (props) => {
             </div>
             <div className={styles.rabat}>
                 <div className={styles.box}>
-                    <input onChange={e => onChange(e)} type="text" name={props.id} style={{width:"100%",border:"none",textAlign:"center"}} value={rabat} />
+                  
+                    <select onChange={e => onChange(e)} value={rabat} name={props.id}>
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>
                 </div>
                 <h3 className={styles.proc}>
-                    Rabat (%)
+                    Rabat
                 </h3>
             </div>
             { /* <Link href="/admin/korisnici/edit"><img className={styles.edit} src="/admin/edit.png" alt=""/></Link> */}

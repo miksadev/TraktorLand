@@ -5,7 +5,7 @@ import Link from 'next/link';
 import useCart from '../../../util/useCart';
 const product = (props) => {
     const [quantity, setQty] = useState(1);
-    const [initialItem ,setInitialItem] = useState({id:props.id, ime: props.name,slika: props.src, price: Number(props.price), qty: 1, sifra: props.sifra});
+    const [initialItem ,setInitialItem] = useState({id:props.id, ime: props.name,slika: props.src, price: Number(props.price), qty: 1, sifra: props.sifra,kolicina:props.kolicina});
     const {isItemOpened, toggleItem} = useCart();
 
     const onChangeHandler = (e) => {
@@ -25,7 +25,7 @@ const product = (props) => {
                 </div>
                 
                 <p className={styles.cena}>{props.price}<span> RSD</span></p>
-                <input onChange={(event) => onChangeHandler(event)} className={styles.input} type="number" value={quantity} name="kolicina" placeholder="1" min="1"/>
+                <input onChange={(event) => onChangeHandler(event)} className={styles.input} type="number" value={quantity} name="kolicina" placeholder="1" min="1" max={props.kolicina}/>
                 <ATCButton item={initialItem}></ATCButton>
             </div>
         </>

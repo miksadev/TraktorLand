@@ -78,6 +78,10 @@ export default async (req, res) => {
         var sifra = fields["sifra"];
         var kolicina = fields["kolicina"]
         var zemlja_porekla = fields["zemlja_porekla"]
+        var rabat_1 = fields["rabat_1"] == "" ? 0 : fields["rabat_1"]
+        var rabat_2 = fields["rabat_2"] == "" ? 0 : fields["rabat_2"]
+        var rabat_3 = fields["rabat_3"] == "" ? 0 : fields["rabat_3"]
+        
         
         
         var proizvod = {
@@ -90,7 +94,10 @@ export default async (req, res) => {
         sifra:sifra,
         kolicina:kolicina,
         thumb:thumb,
-        zemlja_porekla:zemlja_porekla
+        zemlja_porekla:zemlja_porekla,
+        rabat_1:rabat_1,
+        rabat_2:rabat_2,
+        rabat_3:rabat_3
       } 
       con.query("INSERT INTO proizvodi SET ?", proizvod,(err,result) => {
         if(err) throw err;
