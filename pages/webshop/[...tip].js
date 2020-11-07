@@ -4,7 +4,7 @@ import styles from "../../styles/webshop.module.css";
 import Products from '../../components/products/products';
 import {useState,useEffect} from 'react';
 import Filter from '../../components/Search/Filter/filter';
-
+import Cookies from 'cookies'
 function Webshop(props){
 	const [prodata,setProdata] = useState(props.data)
 	const [searchKolona,setSearchKolona] = useState("ime")
@@ -78,7 +78,7 @@ function Webshop(props){
 						<option value="kataloski_broj">Kataloski broj</option>
 					</select>
 		            <div className={styles.line}></div>
-		            <Products backroute={props.param} data={prodata} mdata={props.mData}/>
+		            <Products user={props.user} backroute={props.param} data={prodata} mdata={props.mData}/>
 		        </div>
 		       
 
@@ -103,11 +103,43 @@ export async function getServerSideProps(context){
 	}
 	var data = await fetch(PROTOCOL +'://'+HOST+`/api/get?tip=`+param).
 	then(res => res.json()).then(data =>data)
+
+
+
+
+
+	var user = ""
+        var email = ""
+        var cookies = new Cookies(context.req,context.res)
+        var authToken = cookies.get('auth-token')
+        if(authToken != undefined){
+            
+        
+        await fetch(PROTOCOL+'://'+HOST+'/api/checkauth',
+            {headers:{'auth-token':authToken}}).then(res => res.json())
+        .then(data => {
+           email = data.email
+        })
+
+        await fetch(PROTOCOL+'://'+HOST+'/api/getuser',{
+                method:'POST',
+                body:JSON.stringify({email:email})
+            }).then(res => res.json()).then(data => {
+                user = data.user
+            })
+        }
+
+
+
+
+
+
 	return{
 		props:{
 			data,
 			mData,
-			param:backroute
+			param:backroute,
+			user:user
 		}
 	}
 	
