@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState,useEffect} from 'react';
 import styles from "../../styles/checkout.module.css";
 import CartItems from '../../components/Cart/CartItems/cartitems'; 
 import Total from '../../components/UI/Checkout/total';
@@ -42,8 +42,16 @@ export async function getServerSideProps({req,res}){
 export default function Checkout({login,user}) {
   
   const { price, items } = useCart();
+  const [fullPrice,setFullPrice] = useState(0)
   const [showPopUp, setShowPopUp] = useState(false);
   const router = useRouter();
+  useEffect(()=>{
+    var fullprice_ = 0
+    items.map(item => {
+      fullprice_ = fullprice_+(Number(item.price) * Number(item.qty))
+    })
+    setFullPrice(fullprice_)
+  },[])
   const popUpHandler = () => {
     if(login){
       router.push('/checkout/orderdetails')
@@ -59,7 +67,7 @@ export default function Checkout({login,user}) {
   const punakorpa = (
   <>
     <CartItems namena="checkout"/><div className={styles.total}>
-    <Total edit={true} klik={() => popUpHandler()} price={price} rabat={user.rabat == undefined ?'0':user.rabat}/></div>
+    <Total edit={true} klik={() => popUpHandler()} price={fullPrice} price2={price} rabat={user.rabat == undefined ?'0':user.rabat}/></div>
     <FinishOrder show={showPopUp} off={() => popUpHandler()}/>
     
   </>);

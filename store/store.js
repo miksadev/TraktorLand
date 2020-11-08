@@ -38,30 +38,35 @@ const reducer = (state = initialState, { type, payload }) => {
 
       let plusitem = state.items.filter((item) => item.id == payload.id);
       let newItems = [...state.items];
+
       if(plusitem.length > 0){
           newItems.forEach(item => {
            if(item.id == payload.id){
              item.qty += payload.qty;
            }
          });
-         
+         console.log("PAYLOAD1")
+      console.log(payload)
          return {
           ...state,
-          price: state.price + (payload.price * payload.qty),
+          price: state.price + (payload.price2 * payload.qty),
           isCartOpened: true,
           items: newItems,
         };
       }
       else{
+        console.log("PAYLOAD2")
+      console.log(state.price)
         return {
           ...state,
-          price: state.price + payload.price * payload.qty,
+          price: state.price + payload.price2 * payload.qty,
           isCartOpened: true,
           items: [...state.items, payload],
         };
       }
     case "ADD_ONE":
       newItems = [...state.items];
+
       newItems.forEach(item => {
         if(item.id == payload.id){
           item.qty++;
@@ -69,7 +74,7 @@ const reducer = (state = initialState, { type, payload }) => {
       });
       return {
         ...state,
-        price: state.price + payload.price,
+        price: state.price + payload.price2,
         items: newItems,
       };
     case "REMOVE_ONE":
@@ -79,7 +84,7 @@ const reducer = (state = initialState, { type, payload }) => {
       if(item.id == payload.id){
         if(item.qty > 1){
           item.qty--;
-          newPrice-=payload.price;
+          newPrice-=payload.price2;
         }
       }
     });
@@ -91,7 +96,7 @@ const reducer = (state = initialState, { type, payload }) => {
     case "REMOVE":
       return {
         ...state,
-        price: state.price - payload.price*payload.qty,
+        price: state.price - payload.price2*payload.qty,
         items: state.items.filter(
           (item) => item.id !== payload.id
         ),

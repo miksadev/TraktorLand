@@ -14,22 +14,41 @@ const order = (props) => {
     }else{
     var [order,setOrder] = useState(props.orders)
     }
+    const [fullPrice,setFullPrice] = useState(0)
     const [url,setUrl] = useState("")
     const [price,setPrice] = useState(0)
     const [userinfo,setUserinfo] = useState(props.data);
     const [zavrsen,setZavrsen] = useState("Zavrsi")
     const router = useRouter();
     useEffect(()=>{
+        
         setUrl(router.asPath)
         if(userinfo.zavrsen == 1){
             setZavrsen("Zavrsen")
         }
         var cena = 0;
+        var fullcena = 0;
         order.map(item => {
-            var newPrice = Number(item.price) * Number(item.qty)
+            console.log("ITEM")
+            console.log(item)
+            var popust;
+                        var price2;
+                        if(props.data.rabat == 1){
+                            popust = item.rabat_1
+                        }else if(props.data.rabat == 2){
+                            popust = item.rabat_2
+                        }else if(props.data.rabat == 3){
+                            popust = item.rabat_3
+                        }else{
+                            popust = 0
+                        }
+                        price2 = item.price * (1 - popust/100)
+            var newPrice = Number(price2) * Number(item.qty)
            cena = cena+newPrice
+           fullcena = fullcena + (Number(item.price) * Number(item.qty))
            
         })
+        setFullPrice(fullcena)
          setPrice(cena)
          
     },[])
@@ -85,14 +104,28 @@ const order = (props) => {
                 
                 <div className={styles.CartItems}>
 
-                    {order.map(item => <CartItem key={item.id} edit={props.edit} sifra={item.sifra}
+                    {order.map(item => {
+                        var popust;
+                        var price2;
+                        if(props.data.rabat == 1){
+                            popust = item.rabat_1
+                        }else if(props.data.rabat == 2){
+                            popust = item.rabat_2
+                        }else if(props.data.rabat == 3){
+                            popust = item.rabat_3
+                        }else{
+                            popust = 0
+                        }
+                        price2 = item.price * (1 - popust/100)
+                        return <CartItem key={item.id} edit={props.edit} sifra={item.sifra}
                      namena={props.namena} src={item.slika}
-                      name={item.ime}
+                      name={item.ime} price2={price2}
                        price={item.price} qty={item.qty} up={() => addOne(item)}
-                        down={() => removeOne(item)} brisi={() => removeFromCart(item)}></CartItem>)}
+                        down={() => removeOne(item)} brisi={() => removeFromCart(item)}></CartItem>
+                    })}
                 </div>
                 <div className={styles.total}>
-                    <Total edit={props.edit} price={price} rabat={userinfo.rabat == undefined || userinfo.rabat == "" ? '0' : userinfo.rabat}/>
+                    <Total edit={props.edit} price={fullPrice} price2={price} rabat={userinfo.rabat == undefined || userinfo.rabat == "" ? '0' : userinfo.rabat}/>
                     <div className={styles.orderinfo}>
                     {/* <Input inputtype="input" label="Napomena"/> */}
                     <div className={styles.infoblock}>

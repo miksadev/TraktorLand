@@ -18,14 +18,15 @@ const total = (props) => {
             </div>
             
             <div>
-                <h3 className={styles.rabatt}>Rabat</h3>
-                <h2 className={styles.rabat}>{props.rabat}%</h2>
+                <h3 className={styles.rabatt}>Popust</h3>
+                {props.price2 == undefined ? <h2 className={styles.rabat}>0 RSD</h2> : <h2 className={styles.rabat}>{props.price - props.price2} RSD</h2>}
+                
             </div>
             
             
             <div className={styles.line}></div>
             <h3 className={styles.ukupno}>UKUPNO</h3>
-            <h3 className={styles.ukupnocena}>{props.price * (1 - props.rabat/100)} RSD</h3>
+            {props.price2 == undefined ? <h3 className={styles.ukupnocena}>{props.price} RSD</h3> : <h3 className={styles.ukupnocena}>{props.price2} RSD</h3>}
             {props.edit ? <Submit submit={props.klik} styles={styles.button} >Završi porudžbinu</Submit> : null}
         </div>
     );

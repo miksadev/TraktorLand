@@ -1,8 +1,10 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import Order from '../../../components/Order/order';
 import styles from '../../../styles/checkout.module.css';
 import qs from 'querystring';
+
 const order = ({data}) => {
+	
     return (
         <div className={styles.container}>
 

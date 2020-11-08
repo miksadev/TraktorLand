@@ -9,8 +9,9 @@ const cartitems = (props) => {
     const {price, toggleCart, items, removeFromCart, addOne, removeOne} = useCart();
     
     let cartitems = items.map(cartitem => {
-        const item = {id: cartitem.id, ime: cartitem.name,slika: cartitem.src,price: Number(cartitem.price), qty: cartitem.qty, sifra: cartitem.sifra};
-        return <CartItem edit={true} sifra={cartitem.sifra} namena={props.namena} key={cartitem.id} src={cartitem.slika} name={cartitem.ime} price={cartitem.price} qty={cartitem.qty} up={() => {
+
+        const item = {id: cartitem.id, ime: cartitem.name,slika: cartitem.src,price: Number(cartitem.price), qty: cartitem.qty, sifra: cartitem.sifra,price2:Number(cartitem.price2)};
+        return <CartItem edit={true} sifra={cartitem.sifra} namena={props.namena} key={cartitem.id} src={cartitem.slika} name={cartitem.ime} price2={cartitem.price2} price={cartitem.price} qty={cartitem.qty} up={() => {
           if(cartitem.qty >= cartitem.kolicina){
             return;
           }else{
