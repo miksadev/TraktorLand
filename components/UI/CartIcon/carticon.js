@@ -1,13 +1,20 @@
 import React from 'react';
 import useCart from '../../../util/useCart';
 import styles from './carticon.module.css';
+import dynamic from 'next/dynamic';
 
 const carticon = (props) => {
     const {toggleCart,items} = useCart();
 
+    const CountNoSSR = dynamic(
+        () => import('./CartCount/count'),
+        { ssr: false }
+      );
+
     return(
         <div className={styles.carticon}>
-            <p className={items.length != null && items.length > 0 ? styles.prikazi : styles.nema}>{items.length}</p>
+            <CountNoSSR items={items} styles_prikazi={styles.prikazi} styles_nema={styles.nema}></CountNoSSR>
+            {/* <p className={items.length != null && items.length > 0 ? styles.prikazi : styles.nema}>{items.length}</p> */}
             <img onClick={props.open ? null : toggleCart} src="/header/cart.png" alt=""/>
         </div>
         

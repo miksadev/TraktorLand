@@ -4,11 +4,19 @@ import { useStore } from "../store/store";
 import LayoutMain from './layouts/generallayout';
 import LayoutAdmin from './layouts/adminlayout';
 import {useRouter} from 'next/router';
+import { loadState , saveState } from '../store/localStorage';
 
 function MyApp({ Component, pageProps }) {
 
+  const persistedState = loadState();
+  const store = useStore(persistedState);
 
-  const store = useStore(pageProps.initialReduxState);
+  store.subscribe(() => {
+    saveState({
+      items: store.getState().items,
+      price: store.getState().price
+    });
+  })
 
   const router = useRouter();
   const currentUrl = router.asPath;

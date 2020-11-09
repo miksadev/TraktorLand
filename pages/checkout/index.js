@@ -1,12 +1,14 @@
 import React, {useState,useEffect} from 'react';
 import styles from "../../styles/checkout.module.css";
-import CartItems from '../../components/Cart/CartItems/cartitems'; 
-import Total from '../../components/UI/Checkout/total';
+// import CartItems from '../../components/Cart/CartItems/cartitems'; 
+// import Total from '../../components/UI/Checkout/total';
 import useCart from '../../util/useCart';
 import LinkButton from '../../components/UI/Button/LinkButton/linkButton';
 import FinishOrder from '../../components/UI/FinishOrder/PopUp/popUp';
 import {useRouter} from 'next/router';
 import Cookies from 'cookies'
+import dynamic from 'next/dynamic';
+
 export async function getServerSideProps({req,res}){
         var HOST = process.env.HOST;
         var PROTOCOL = process.env.PROTOCOL
@@ -45,6 +47,17 @@ export default function Checkout({login,user}) {
   const [fullPrice,setFullPrice] = useState(0)
   const [showPopUp, setShowPopUp] = useState(false);
   const router = useRouter();
+
+  const CartItemsNoSSR = dynamic(
+    () => import('../../components/Cart/CartItems/cartitems'),
+    { ssr: false }
+  );
+
+  const TotalNoSSR = dynamic(
+    () => import('../../components/Cart/CartItems/cartitems'),
+    { ssr: false }
+  );
+
   useEffect(()=>{
     var fullprice_ = 0
     items.map(item => {
@@ -66,8 +79,8 @@ export default function Checkout({login,user}) {
   </div>;
   const punakorpa = (
   <>
-    <CartItems namena="checkout"/><div className={styles.total}>
-    <Total edit={true} klik={() => popUpHandler()} price={fullPrice} price2={price} rabat={user.rabat == undefined ?'0':user.rabat}/></div>
+    <CartItemsNoSSR namena="checkout"/><div className={styles.total}>
+    <TotalNoSSR edit={true} klik={() => popUpHandler()} price={fullPrice} price2={price} rabat={user.rabat == undefined ?'0':user.rabat}/></div>
     <FinishOrder show={showPopUp} off={() => popUpHandler()}/>
     
   </>);
