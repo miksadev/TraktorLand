@@ -19,4 +19,4 @@ const con = mysql({
 // 	password:'',
 // 	database:'traktorland'
 // });
-// export default con;
+export default con;
