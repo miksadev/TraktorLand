@@ -10,7 +10,6 @@ export default async (req,res) => {
             res.send(JSON.stringify({results}))
             res.end()
             resolve();
-          
         })
   }else if(req.query.search != undefined && req.query.tip != undefined){
     var search = req.query.search

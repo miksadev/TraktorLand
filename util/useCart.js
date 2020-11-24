@@ -4,6 +4,7 @@ const useCart = () => {
   const isItemOpened = useSelector((state) => state.isItemOpened);
   const isCartOpened = useSelector((state) => state.isCartOpened);
   const items = useSelector((state) => state.items);
+  const isLogged = useSelector((state) => state.isLogged);
   const price = useSelector((state) => state.price);
   const shipping = useSelector((state) => state.shipping);
   const dispatch = useDispatch();
@@ -11,6 +12,11 @@ const useCart = () => {
   const toggleCart = () => {
     dispatch({
       type: "TOGGLE_CART",
+    });
+  };
+  const toggleLogged = () => {
+    dispatch({
+      type: "TOGGLE_LOGGED",
     });
   };
   const toggleItem = () => {
@@ -61,6 +67,8 @@ const useCart = () => {
     shipping,
     isCartOpened,
     isItemOpened,
+    isLogged,
+    toggleLogged,
     setShipping,
     toggleCart,
     toggleItem,

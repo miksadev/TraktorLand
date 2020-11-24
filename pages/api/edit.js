@@ -19,33 +19,33 @@ export default async (req, res) => {
      res.setHeader('Content-Type', 'application/json')
 
       const form = new formidable.IncomingForm()
-      // form.on('fileBegin',(name,file) => {
-      //   var randomNum1 = Math.floor((Math.random() * 10000) + 10);
-      //   var randomNum2 = Math.floor((Math.random() * 10000) + 10);
-      //   var randomNum3 = Math.floor((Math.random() * 10000) + 10);
-      //   imageUrl = "./public/upload/"+randomNum1+"-"+randomNum2+randomNum3+"-"+file.name;
-      //   image4db = "/upload/"+randomNum1+"-"+randomNum2+randomNum3+"-"+file.name;
-      //   file.path = imageUrl;
-      // })
-      form.parse(req,(err,fields,files) => {
-        var thumb;
-        if(files.thumb != undefined){
-          nameImg = files.thumb.name;
-          var thumbfile = files.thumb
-       
-        
-        
+      form.on('fileBegin',(name,file) => {
         var randomNum1 = Math.floor((Math.random() * 10000) + 10);
         var randomNum2 = Math.floor((Math.random() * 10000) + 10);
         var randomNum3 = Math.floor((Math.random() * 10000) + 10);
-        var replaced = nameImg.replace(/ /g,"_")
-        var finishPath = folder+"/"+randomNum1+randomNum2+randomNum3+replaced
-        fs.readFile(thumbfile.path,function(err,buffer){
-          
-          uploadImage(finishPath,buffer);
-        })
+        imageUrl = "./public/upload/"+randomNum1+"-"+randomNum2+randomNum3+"-"+file.name;
+        image4db = "/upload/"+randomNum1+"-"+randomNum2+randomNum3+"-"+file.name;
+        file.path = imageUrl;
+      })
+      form.parse(req,(err,fields,files) => {
+        // var thumb;
+        // if(files.thumb != undefined){
+        //   nameImg = files.thumb.name;
+        //   var thumbfile = files.thumb
+       
         
-      }
+        
+        // var randomNum1 = Math.floor((Math.random() * 10000) + 10);
+        // var randomNum2 = Math.floor((Math.random() * 10000) + 10);
+        // var randomNum3 = Math.floor((Math.random() * 10000) + 10);
+        // var replaced = nameImg.replace(/ /g,"_")
+        // var finishPath = folder+"/"+randomNum1+randomNum2+randomNum3+replaced
+        // fs.readFile(thumbfile.path,function(err,buffer){
+          
+        //   uploadImage(finishPath,buffer);
+        // })
+        
+        // }
         if(nameImg == ""){
           thumb = "";
         }else{

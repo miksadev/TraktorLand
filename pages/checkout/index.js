@@ -54,7 +54,7 @@ export default function Checkout({login,user}) {
   );
 
   const TotalNoSSR = dynamic(
-    () => import('../../components/Cart/CartItems/cartitems'),
+    () => import('../../components/UI/Checkout/total'),
     { ssr: false }
   );
 
@@ -64,7 +64,7 @@ export default function Checkout({login,user}) {
       fullprice_ = fullprice_+(Number(item.price) * Number(item.qty))
     })
     setFullPrice(fullprice_)
-  },[])
+  },[fullPrice,items])
   const popUpHandler = () => {
     if(login){
       router.push('/checkout/orderdetails')
@@ -89,7 +89,7 @@ export default function Checkout({login,user}) {
             <h1 className={styles.naslov}>Moja Korpa</h1>
             <div className={styles.line}></div>
             
-            {items.length > 0 ? punakorpa : praznakorpa}
+            {items ? punakorpa : praznakorpa}
             
             
         </div>
