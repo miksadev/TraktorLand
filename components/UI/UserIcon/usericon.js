@@ -1,36 +1,33 @@
-import React from 'react';
+import React,{useState,useEffect} from 'react';
 import styles from './usericon.module.css';
 import Link from 'next/link';
+import useCart from '../../../util/useCart';
 
-class usericon extends React.Component {
-	constructor(props){
-		super(props)
-		this.state = {
-			url:''
-		}
-	}
-	
-	componentDidMount(){
+
+const UserIcon = (props)=>{
+	const [url,setUrl] = useState("")
+	const {isLogged} = useCart()
+	let style = [styles.usericon];
+	useEffect(() => {
+		
+		{props.styles ? style.push(props.styles) : null}
 		var HOST = process.env.NEXT_PUBLIC_HOST;
         var PROTOCOL = process.env.NEXT_PUBLIC_PROTOCOL
 		fetch(PROTOCOL+'://'+HOST+'/api/checkauth').then(res => res.json()).then(data => {
 			
 			if(data.result == "Success"){
-				this.setState({url:'/user'})
+				setUrl("/user")
 			}else{
-				this.setState({url:'/login'})
+				setUrl("/login")
 			}
 		})
-	}
-
-	
-    render(){
-		let style = [styles.usericon];
-	{this.props.styles ? style.push(this.props.styles) : null}
-    	return(
-        <Link href={this.state.url}><img onClick={this.props.click} className={style.join(' ')} src="/header/user.png" alt=""/></Link>
-    );
-    }
+	},[isLogged])
+	return(
+ <Link href={url}><img onClick={props.click} className={style.join(' ')} src="/header/user.png" alt=""/></Link>
+		)
 }
 
-export default usericon;
+
+
+
+export default UserIcon;

@@ -6,10 +6,11 @@ import Submit from '../../components/UI/Button/Submit/submit';
 import Link from 'next/link';
 import Cookies from 'cookies'
 import {useRouter} from 'next/router';
-
+import useCart from '../../util/useCart';
 const WithRouterLogin = (props)=>{
     const router = useRouter();
-    return <Login {...props} router={router} />
+    const {toggleLogged} = useCart()
+    return <Login {...props} toggleLogged={toggleLogged} router={router} />
 }
 class Login extends React.Component {
     constructor(props){
@@ -64,11 +65,13 @@ class Login extends React.Component {
             if(data.result == "Failed"){
                 alert("Pokusajte ponovo!")
             }else{
-                alert("Uspesno ste prijavljeni")
+                
                 if(this.props.router.query.back != undefined){
                     this.props.router.push("/checkout/orderdetails")
                 }else{
-                    window.location.reload();  
+                    this.props.toggleLogged()
+                    this.props.router.push("/")
+                    
                 }
                 
             }

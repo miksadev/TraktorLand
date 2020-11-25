@@ -1,15 +1,33 @@
 import Cookies from 'cookies'
+import {useRouter} from 'next/router';
+import {useEffect} from 'react';
+import useCart from '../util/useCart';
 export async function getServerSideProps({req,res}){
+		var userlogin = false;
 		var cookies = new Cookies(req,res)
+		var authToken = cookies.get('auth-token')
+		if(authToken != undefined){
+			userlogin = true
+		}
 		cookies.set('auth-token')
-		res.writeHead(307,{Location:'/'})
-		res.end();
+		
 		return{
 			props:{
-				data:"fake"
+				log:userlogin
 			}
 		}
 }
-export default function Logout(){
-	return;
+export default function Logout({log}){
+	const router = useRouter();
+	const {isLogged,toggleLogged} = useCart()
+	useEffect(()=>{
+		if(isLogged || log){
+			toggleLogged()
+			router.push("/login")
+		}else{
+			router.push("/")
+		}
+		
+	},[])
+	return (<></>);
 }
