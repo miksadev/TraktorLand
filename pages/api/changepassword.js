@@ -17,7 +17,7 @@ export default async (req, res) => {
       form.parse(req,(err,fields,files) => {
         
       
-      con.query("UPDATE users SET lozinka = ? WHERE email = ?",[fields["password"],fields["email"]],(err,results,fields) => {
+      con.query("UPDATE partner SET password = ? WHERE email = ?",[fields["password"],fields["email"]],(err,results,fields) => {
           if(err){
             res.end(JSON.stringify({ result: 'Failed' }))
             resolve();

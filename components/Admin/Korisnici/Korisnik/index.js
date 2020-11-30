@@ -1,9 +1,18 @@
 import React from 'react';
 import styles from './korisnik.module.css';
 import Link from 'next/link';
-import {useState} from 'react';
+import {useState,useEffect} from 'react';
 const korisnik = (props) => {
     const [rabat,setRabat] = useState(props.rabat)
+    const [date, setDate] = useState()
+    const [time,setTime] = useState()
+    useEffect(() => {
+            var vreme = props.datum
+            var t = vreme.split(/[- T : Z]/);
+            var d = new Date(Date.UTC(t[0], t[1]-1, t[2], t[3], t[4], t[5]));
+            setDate(t[1]+"/"+t[2]+"/"+t[0])
+            setTime(t[3]+":"+t[4])
+    },[])
 
     function onChange(e){
 
@@ -44,7 +53,7 @@ const korisnik = (props) => {
     return (
         <div className={styles.korisnik}>
             <div className={styles.datum}>
-                Datum kreiranja: {props.datum}
+                Datum kreiranja: {date}
             </div>
             <div className={styles.ime}>
                 {props.ime}

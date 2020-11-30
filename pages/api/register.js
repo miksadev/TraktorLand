@@ -37,30 +37,31 @@ export default async (req, res) => {
         }
         
         var user = {
-        ime:ime,
-        prezime:prezime,
-        telefon:telefon,
+        name:ime+" "+prezime,
+        phone:telefon,
         naziv_firme:naziv_firme,
-        pib:pib,
+        code:pib,
         email:email,
-        adresa:adresa,
-        grad:grad,
-        postanski_broj:postanskibroj,
-        lozinka:encrypted,
+        username:email,
+        address:adresa,
+        city:grad,
+        zip:postanskibroj,
+        password:encrypted,
         pravno_lice:pravno_lice,
-        created:created,
-        rabat:0
+        active:"y",
+        rebatepercent:0,
+        partnertype:'member'
         }
         
       
-      con.query('SELECT * FROM users WHERE email = ?',[email],(err,result) => {
+      con.query('SELECT * FROM partner WHERE email = ?',[email],(err,result) => {
         if(err) throw err;
         
         if(result.length != 0){
           res.end(JSON.stringify({result:'Error email'}));
           resolve();
         }else{
-            con.query("INSERT INTO users SET ?", user,(err,result) => {
+            con.query("INSERT INTO partner SET ?", user,(err,result) => {
             if(err) throw err;
             
             res.end(JSON.stringify({ result: 'Success' }))

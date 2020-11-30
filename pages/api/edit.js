@@ -68,23 +68,29 @@ export default async (req, res) => {
         var id = fields["id"]
         if(thumb == ""){
           
-          con.query(`UPDATE proizvodi SET rabat_1=?,rabat_2=?,rabat_3=?,zemlja_porekla=?,ime = ?,proizvodjac=?,kataloski_broj=?,
-           mp_cena = ?,vp_cena = ?,tip = ?,sifra = ?,kolicina = ? WHERE id = ?`,[rabat_1,rabat_2,rabat_3,zemlja_porekla,ime,proizvodjac,kataloski_broj,
-           mp_cena,vp_cena.toFixed(2),tip,sifra,kolicina,id],(err,result) => {
-        if(err) throw err;
+          con.query(`UPDATE product SET rabat_1=?,rabat_2=?,rabat_3=?,zemlja_porekla=?,name = ?,manufname=?,kataloski_broj=?,
+           price = ?,vp_cena = ?,type = ?,code = ? WHERE productid = ?`,[rabat_1,rabat_2,rabat_3,zemlja_porekla,ime,proizvodjac,kataloski_broj,
+           mp_cena,vp_cena.toFixed(2),tip,sifra,id],(err,result) => {
+           if(err) throw err;
+           con.query("UPDATE productamount SET productamountweb = ? WHERE productid = ?",[kolicina,id],(err,result) => {
+            if(err) throw err;
+             res.end(JSON.stringify({ result: 'Success' }))
+             resolve();
+          })
         
-        res.end(JSON.stringify({ result: 'Success' }))
-        resolve();
+       
       })
         }else{
           
-          con.query(`UPDATE proizvodi SET rabat_1=?,rabat_2=?,rabat_3=?,zemlja_porekla=?,ime = ?,proizvodjac=?,kataloski_broj=?,
-           mp_cena = ?,vp_cena = ?,tip = ?,sifra = ?,kolicina = ?,thumb=? WHERE id = ?`,[rabat_1,rabat_2,rabat_3,zemlja_porekla,ime,proizvodjac,kataloski_broj,
-           mp_cena,vp_cena.toFixed(2),tip,sifra,kolicina,thumb,id],(err,result) => {
+          con.query(`UPDATE product SET rabat_1=?,rabat_2=?,rabat_3=?,zemlja_porekla=?,name = ?,manufname=?,kataloski_broj=?,
+           price = ?,vp_cena = ?,type = ?,code = ?,thumb=? WHERE productid = ?`,[rabat_1,rabat_2,rabat_3,zemlja_porekla,ime,proizvodjac,kataloski_broj,
+           mp_cena,vp_cena.toFixed(2),tip,sifra,thumb,id],(err,result) => {
         if(err) throw err;
-        
-        res.end(JSON.stringify({ result: 'Success' }))
-        resolve();
+        con.query("UPDATE productamount SET productamountweb = ? WHERE productid = ?",[kolicina,id],(err,result) => {
+            if(err) throw err;
+             res.end(JSON.stringify({ result: 'Success' }))
+             resolve();
+          })
       })
         }
       

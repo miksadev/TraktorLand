@@ -16,7 +16,7 @@ export default async (req, res) => {
      const form = new formidable.IncomingForm()
      form.parse(req,(err,fields,files) => {
           var ime = fields["ime"];
-        var prezime = fields["prezime"];
+        
         var telefon = fields["telefon"];
         var naziv_firme = fields["naziv_firme"];
         var pib = fields["pib"];
@@ -37,9 +37,9 @@ export default async (req, res) => {
                 })
         }
         
-        con.query(`UPDATE users SET ime = ?,prezime = ?,telefon=?,naziv_firme=?,
-          pib = ?,email = ?,adresa = ?,grad = ?,postanski_broj = ? 
-         WHERE email = ?`,[ime,prezime,telefon,naziv_firme,pib,email,adresa,grad,postanskibroj,oldemail],(err,result) => {
+        con.query(`UPDATE partner SET name = ?,phone=?,naziv_firme=?,
+          code = ?,email = ?,address = ?,city = ?,zip = ? 
+         WHERE email = ?`,[ime,telefon,naziv_firme,pib,email,adresa,grad,postanskibroj,oldemail],(err,result) => {
           if(err) throw err;
 
           res.end(JSON.stringify({ result: 'Success' }))

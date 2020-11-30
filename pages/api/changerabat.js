@@ -18,7 +18,7 @@ export default async (req, res) => {
          var id = fields["id"];
          var rabat = fields["rabat"]
         console.log(fields)
-        con.query(`UPDATE users SET rabat = ? WHERE id = ?`,[rabat,Number(id)],(err,result) => {
+        con.query(`UPDATE partner SET rabat = ? WHERE partnerid = ?`,[rabat,Number(id)],(err,result) => {
           if(err) throw err;
 
           res.end(JSON.stringify({ result: 'Success' }))

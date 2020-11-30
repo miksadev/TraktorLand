@@ -85,25 +85,31 @@ export default async (req, res) => {
         
         
         var proizvod = {
-        ime:ime,
-        proizvodjac:proizvodjac,
+        name:ime,
+        manufname:proizvodjac,
         kataloski_broj:kataloski_broj,
-        mp_cena:mp_cena,
+        price:mp_cena,
         vp_cena:vp_cena.toFixed(2),
-        tip:tip,
-        sifra:sifra,
-        kolicina:kolicina,
+        type:tip,
+        code:sifra,
         thumb:thumb,
         zemlja_porekla:zemlja_porekla,
         rabat_1:rabat_1,
         rabat_2:rabat_2,
-        rabat_3:rabat_3
+        rabat_3:rabat_3,
+        active:'y'
       } 
-      con.query("INSERT INTO proizvodi SET ?", proizvod,(err,result) => {
+      con.query("INSERT INTO product SET ?", proizvod,(err,result) => {
         if(err) throw err;
+        var productam = {
+          productamountweb:kolicina
+        }
+        con.query("INSERT INTO productamount SET ?",productam,(err,result) => {
+          if(err) throw err;
         
-        res.end(JSON.stringify({ result: 'Success' }))
-        resolve();
+          res.end(JSON.stringify({ result: 'Success' }))
+          resolve();
+        })
       })
     
   })

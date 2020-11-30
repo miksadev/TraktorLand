@@ -33,18 +33,18 @@ const item = (props) => {
             <div className={styles.item}>
                 <img onClick={toggleItem} className={styles.x} src="/header/x.png" alt=""/>
             {/* <Link href={'/webshop/'+back} style={{float:"right"}}><a>close</a></Link> */}
-                <h3 className={styles.name}>{props.proizvod[0].ime}</h3>
+                <h3 className={styles.name}>{props.proizvod[0].name}</h3>
                 <div>
                     <img className={styles.img} src={props.proizvod[0].thumb ? props.proizvod[0].thumb : "/product.png"} alt=""/>
                     <div className={styles.cena}>
                         <p>Maloprodajna cena</p>
-                        <h3 className={styles.ukupnocena}>{props.proizvod[0].mp_cena ? props.proizvod[0].mp_cena : 70800} <span>RSD</span></h3>
+                        <h3 className={styles.ukupnocena}>{props.proizvod[0].price ? props.proizvod[0].price : 70800} <span>RSD</span></h3>
                     </div>
                     <div className={styles.cena}>
                         <p>Veleprodajna cena</p>
                         <h3 className={styles.ukupnocena}>{props.proizvod[0].vp_cena ? props.proizvod[0].vp_cena : 59900} <span>RSD</span></h3>
                     </div>
-                     <AddToCart user={props.user} styles={styles.atcbutton} item={{id:props.proizvod[0].id, kolicina: props.proizvod[0].kolicina, rabat_1: props.proizvod[0].rabat_1, rabat_2: props.proizvod[0].rabat_2, rabat_3: props.proizvod[0].rabat_3, ime: props.proizvod[0].proizvodjac,slika: props.proizvod[0].thumb,sifra: props.proizvod[0].sifra, price: Number(props.proizvod[0].mp_cena), qty: 1}}/>
+                     <AddToCart user={props.user} styles={styles.atcbutton} item={{id:props.proizvod[0].productid, kolicina: props.proizvod[0].qty, rabat_1: props.proizvod[0].rabat_1, rabat_2: props.proizvod[0].rabat_2, rabat_3: props.proizvod[0].rabat_3, ime: props.proizvod[0].manufname,slika: props.proizvod[0].thumb,sifra: props.proizvod[0].code, price: Number(props.proizvod[0].price), qty: 1}}/>
                 </div>
                 <div className={styles.line}/>
                     <div className={styles.block}>
@@ -53,11 +53,11 @@ const item = (props) => {
                     </div>
                     <div className={styles.block}>
                         <p className={styles.levo}>Šifra</p>
-                        <h3 className={styles.desno}>{props.proizvod[0].sifra}</h3>
+                        <h3 className={styles.desno}>{props.proizvod[0].code}</h3>
                     </div>
                     <div className={styles.block}>
                         <p className={styles.levo}>Proizvođac</p>
-                        <h3 className={styles.desno}>{props.proizvod[0].ime}</h3>
+                        <h3 className={styles.desno}>{props.proizvod[0].name}</h3>
                     </div>
                     {props.proizvod[0].zemlja_porekla == null  || props.proizvod[0].zemlja_porekla ==  "" ? "" : <div className={styles.block}>
                         <p className={styles.levo}>Zemlja porekla</p>

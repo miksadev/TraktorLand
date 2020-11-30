@@ -15,19 +15,19 @@ class Edit extends React.Component{
         pravnaLica:this.props.user.pravno_lice,
         user:this.props.user,
         data:{
-            ime:this.props.user.ime,
-            prezime:this.props.user.prezime,
+            ime:this.props.user.name,
+            
             naziv_firme:this.props.user.naziv_firme,
             pib:this.props.user.pib,
-            telefon:this.props.user.telefon,
+            telefon:this.props.user.phone,
             email:this.props.user.email,
-            adresa:this.props.user.adresa,
-            grad:this.props.user.grad,
-            postanskibroj:this.props.user.postanski_broj
+            adresa:this.props.user.address,
+            grad:this.props.user.city,
+            postanskibroj:this.props.user.zip
         },
         empty:{
             imeEmpty:false,
-            prezimeEmpty:false,
+            
             naziv_firmeEmpty:false,
             pibEmpty:false,
             telefonEmpty:false,
@@ -167,7 +167,7 @@ class Edit extends React.Component{
                     
                 
                         <Input onFocus={(e)=>this.onFocus(e)} onChange={(e) => this.onChange(e)} value={this.state.data.ime} style={this.state.empty.imeEmpty ? {borderBottom:'1px solid red'} : {}} inputtype="input" requiered label="Ime" placeholder="npr. Petar" name="ime" type="text"></Input>
-                        <Input onFocus={(e)=>this.onFocus(e)} onChange={(e) => this.onChange(e)} value={this.state.data.prezime} style={this.state.empty.prezimeEmpty ? {borderBottom:'1px solid red'} : {}} inputtype="input" requiered label="Prezime" placeholder="npr. Petrovic" name="prezime" type="text"></Input>
+                        
                         {this.state.pravnaLica ? <>
                         <Input onFocus={(e)=>this.onFocus(e)} onChange={(e) => this.onChange(e)} style={this.state.empty.naziv_firmeEmpty ? {borderBottom:'1px solid red'} : {}} value={this.state.data.naziv_firme} inputtype="input" requiered label="Naziv firme" placeholder="npr. Petrovic DOO" name="naziv_firme" type="text"></Input>
                         <Input onFocus={(e)=>this.onFocus(e)} onChange={(e) => this.onChange(e)} value={this.state.data.pib} style={this.state.empty.pibEmpty ? {borderBottom:'1px solid red'} : {}} inputtype="input" requiered label="PIB" placeholder="npr. 123456" name="pib" type="text"></Input></> : null}

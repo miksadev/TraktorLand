@@ -9,17 +9,17 @@ class add extends React.Component{
         super(props)
         this.state = { 
                 data:{
-                        ime:this.props.proizvod.ime,
-                        proizvodjac:this.props.proizvod.proizvodjac,
+                        ime:this.props.proizvod.name,
+                        proizvodjac:this.props.proizvod.manufname,
                         zemlja_porekla :this.props.proizvod.zemlja_porekla,
                         kataloski_broj:this.props.proizvod.kataloski_broj,
-                        sifra:this.props.proizvod.sifra,
-                        mp_cena:this.props.proizvod.mp_cena,
+                        sifra:this.props.proizvod.code,
+                        mp_cena:this.props.proizvod.price,
                         rabat_1:this.props.proizvod.rabat_1,
                         rabat_2:this.props.proizvod.rabat_2,
                         rabat_3:this.props.proizvod.rabat_3,
-                        tip:this.props.proizvod.tip,
-                        kolicina:this.props.proizvod.kolicina
+                        tip:this.props.proizvod.type,
+                        kolicina:this.props.proizvod.qty
                     },
                 imeEmpty:false,
                 proizvodjacEmpty:false,
@@ -168,7 +168,7 @@ export async function getServerSideProps({req,res}){
             }).then(res => res.json()).then(data => {
                 user = data.user
             })
-            if(user.rank !== "admin"){
+            if(user.partnertype !== "admin"){
                 res.writeHead(307,{Location:'/login'})
              res.end();
             }
@@ -180,6 +180,7 @@ export async function getServerSideProps({req,res}){
     
     var data = await fetch(PROTOCOL+'://'+HOST+'/api/get?id='+id).then(res => res.json())
     .then(data => data)
+    
     return {
         props:{
             proizvod:data[0],

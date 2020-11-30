@@ -13,7 +13,7 @@ export default async (req,res) => {
       }else{
         search_start=search+"%"
       }
-    con.query("SELECT * FROM proizvodi WHERE "+kolona+" LIKE ? AND tip = ? ORDER BY ime ASC",[search_start,tip],(err,results) => {
+    con.query("SELECT * FROM product WHERE "+kolona+" LIKE ? AND type = ? ORDER BY name ASC",[search_start,tip],(err,results) => {
           
             res.send(JSON.stringify({results}))
             res.end()

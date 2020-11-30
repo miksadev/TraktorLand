@@ -27,7 +27,7 @@ export async function getServerSideProps({req,res,query}){
             }).then(res => res.json()).then(data => {
                 user = data.user
             })
-        	if(user.rank !== "admin"){
+        	if(user.partnertype !== "admin"){
         		res.writeHead(307,{Location:'/login'})
              res.end();
         	}

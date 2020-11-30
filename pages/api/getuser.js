@@ -7,7 +7,7 @@ export default async (req,res) => {
 		res.sendStatus = 200
 		res.setHeader('Content-Type', 'application/json')
 		var email = JSON.parse(req.body).email
-  			con.query("SELECT * FROM users WHERE email = ?",[email],(err,results) => {
+  			con.query("SELECT * FROM partner WHERE email = ?",[email],(err,results) => {
   				if(results.length > 0){
   					res.send(JSON.stringify({result:"Success",user:results[0]}))
   					res.end()
@@ -19,13 +19,23 @@ export default async (req,res) => {
   				}
   			})
 	}else if(req.method == "GET"){
-    con.query("SELECT * FROM users ",(err,results) => {
+    if(req.query.id != undefined){
+            con.query("SELECT * FROM partner WHERE partnerid = ? ",req.query.id,(err,results) => {
+          
+            res.send(JSON.stringify({user:results}))
+            res.end()
+            resolve();
+          
+        })
+    }else{
+      con.query("SELECT * FROM partner ",(err,results) => {
           
             res.send(JSON.stringify({result:"Success",users:results}))
             res.end()
             resolve();
           
         })
+    }
   }else{
 		 res.redirect('/')
     	 res.end();
