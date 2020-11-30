@@ -17,6 +17,6 @@ const con = mysql.createConnection({
 	host:'localhost',
 	user:'root',
 	password:'',
-	database:'traktorland'
+	database:'traktorland2'
 });
 export default con;

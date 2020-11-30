@@ -7,7 +7,7 @@ const korisnici = ({users,deletefunc}) => {
         <div className={styles.korisnici}>
         
             {users.map(user =>
-             <Korisnik key={user.id} deletefunc={deletefunc} id={user.id} ime={user.ime+` `+user.prezime} adresa={user.adresa} datum={user.created} rabat={user.rabat}/>)}
+             <Korisnik key={user.partnerid} deletefunc={deletefunc} id={user.partnerid} ime={user.name} adresa={user.address} datum={user.partnerts} rabat={user.rabat}/>)}
             
         </div>
         

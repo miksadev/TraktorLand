@@ -14,6 +14,7 @@ const order = (props) => {
     }else{
     var [order,setOrder] = useState(props.orders)
     }
+    const [orderaddress,setOrderaddress] = useState(props.orderaddress)
     const [fullPrice,setFullPrice] = useState(0)
     const [url,setUrl] = useState("")
     const [price,setPrice] = useState(0)
@@ -21,7 +22,8 @@ const order = (props) => {
     const [zavrsen,setZavrsen] = useState("Zavrsi")
     const router = useRouter();
     useEffect(()=>{
-        
+        console.log("PROPS")
+        console.log(props)
         setUrl(router.asPath)
         if(userinfo.zavrsen == 1){
             setZavrsen("Zavrsen")
@@ -29,8 +31,7 @@ const order = (props) => {
         var cena = 0;
         var fullcena = 0;
         order.map(item => {
-            console.log("ITEM")
-            console.log(item)
+            
             var popust;
                         var price2;
                         if(props.data.rabat == 1){
@@ -59,7 +60,7 @@ const order = (props) => {
            
             var formData = new FormData()
             formData.append("value",1);
-            formData.append("id",userinfo.id)
+            formData.append("id",userinfo.documentid)
             fetch(PROTOCOL+'://'+HOST+'/api/finishorder',{
                 method:'POST',
                 body:formData
@@ -70,7 +71,7 @@ const order = (props) => {
         }else{
             var formData = new FormData()
             formData.append("value",0);
-            formData.append("id",userinfo.id)
+            formData.append("id",userinfo.documentid)
             fetch(PROTOCOL+'://'+HOST+'/api/finishorder',{
                 method:'POST',
                 body:formData
@@ -105,6 +106,8 @@ const order = (props) => {
                 <div className={styles.CartItems}>
 
                     {order.map(item => {
+                        console.log("IIII")
+                        console.log(item)
                         var popust;
                         var price2;
                         if(props.data.rabat == 1){
@@ -117,9 +120,9 @@ const order = (props) => {
                             popust = 0
                         }
                         price2 = item.price * (1 - popust/100)
-                        return <CartItem key={item.id} edit={props.edit} sifra={item.sifra}
+                        return <CartItem key={item.id} edit={props.edit} sifra={item.code != undefined ? item.code : item.sifra}
                      namena={props.namena} src={item.slika}
-                      name={item.ime} price2={price2}
+                      name={item.name != undefined ? item.name : item.ime} price2={price2}
                        price={item.price} qty={item.qty} up={() => addOne(item)}
                         down={() => removeOne(item)} brisi={() => removeFromCart(item)}></CartItem>
                     })}
@@ -133,11 +136,11 @@ const order = (props) => {
                         <ul>
                             {userinfo.ime_prezime == undefined ? <li>{userinfo.ime} {userinfo.prezime}</li>:
                         <li>{userinfo.ime_prezime}</li>}
-                            <li>{userinfo.adresa}</li>
-                            <li>{userinfo.postanski_broj} {userinfo.grad}</li>
+                            <li>{orderaddress.address}</li>
+                            <li>{orderaddress.zip} {orderaddress.city}</li>
                             <li>Serbia</li>
-                            <li>{userinfo.email}</li>
-                            <li>{userinfo.telefon}</li>
+                            <li>{orderaddress.email}</li>
+                            <li>{orderaddress.phone}</li>
                         </ul>
                         {url.includes("admin") ? <span onClick={zavrsiOrder} ><Submit styles={styles.dugme} >{zavrsen}</Submit></span> : 
                     <span onClick={onSubmit}><Submit styles={styles.dugme} >Zavrsi</Submit></span>}

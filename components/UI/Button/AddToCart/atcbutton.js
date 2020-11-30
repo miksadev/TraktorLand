@@ -14,7 +14,11 @@ const atcbutton = (props) => {
         	var user = props.user
         	var item = props.item
         	var popust = 0;
-        	if(user.id != undefined){
+            console.log("user")
+            console.log(user)
+            console.log("item")
+            console.log(item)
+        	if(user.partnerid != undefined){
         		if(user.rabat == 1){
         			popust = item.rabat_1
         		}else if(user.rabat == 2){

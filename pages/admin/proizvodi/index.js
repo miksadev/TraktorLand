@@ -28,7 +28,7 @@ export async function getServerSideProps({req,res}){
             }).then(res => res.json()).then(data => {
                 user = data.user
             })
-        	if(user.rank !== "admin"){
+        	if(user.partnertype !== "admin"){
         		res.writeHead(307,{Location:'/login'})
              res.end();
         	}
@@ -46,7 +46,7 @@ export async function getServerSideProps({req,res}){
 
 const proizvodi = (props) => {
 	const [pro,setPro] = useState(props.data)
-    const [searchKolona,setSearchKolona] = useState("ime")
+    const [searchKolona,setSearchKolona] = useState("name")
     const [searchValue,setSearchValue] = useState("");
     var HOST = process.env.NEXT_PUBLIC_HOST;
     var PROTOCOL = process.env.NEXT_PUBLIC_PROTOCOL
@@ -80,8 +80,8 @@ const proizvodi = (props) => {
                 <h3>Proizvodi </h3> 
                 <Filter change={e => onChange(e)} placeholder="Pretrazi proizvode..."></Filter>
                 <select style={{marginLeft:"300px"}} name="selectsearch" value={searchKolona} onChange={e => onChangeSearch(e)}>
-                        <option value="ime">Ime</option>
-                        <option value="sifra">Sifra</option>
+                        <option value="name">Ime</option>
+                        <option value="code">Sifra</option>
                         <option value="kataloski_broj">Kataloski broj</option>
                     </select>
             </div>

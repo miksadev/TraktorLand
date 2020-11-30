@@ -30,43 +30,76 @@ export default async (req, res) => {
         var d = new Date()
         var created = d.getDate()+"/"+(d.getMonth()+1)+"/"+d.getFullYear()
         var time = d.getHours()+":"+d.getMinutes()+":"+d.getSeconds();
-        var order4db = {
-          ime_prezime: order['ime']+" "+order['prezime'],
-          adresa:order['adresa'],
-          price:price,
+
+        console.log("ID")
+        console.log(order)
+        var partneraddress4db = {
+          address:order['adresa'],
+          city:order['grad'],
+          zip:order['postanski_broj'],
+          partnerid:order['partnerid'],
           email:order['email'],
-          grad:order['grad'],
-          postanski_broj:order['postanski_broj'],
-          telefon:order['telefon'],
-          created:created,
-          rabat:rabat,
-          time:time
+          phone:order['telefon']
         }
-        res.end(JSON.stringify({ result: 'Success' }))
-        resolve();
-      
-        
-      con.query("INSERT INTO orders SET ?", order4db,(err,result) => {
+        // res.end(JSON.stringify({ result: 'Success' }))
+        // resolve();
+
+      con.query("INSERT INTO partneraddress SET ?",partneraddress4db,(err,result) => {
         if(err) throw err;
-        var order_id = result.insertId
-        var insertRow = []
-        allorders.map((item) => {
-        var fullorder = []
-        fullorder.push(order_id)
-        fullorder.push(item.id)
-        fullorder.push(item.qty)
-        insertRow.push(fullorder)
-        })
-        
-        
-        con.query("INSERT INTO fullorder (order_id,proizvod_id,qty) VALUES ?",[insertRow],(err,result) => {
+        var document4db = {
+          documentdate:created,
+          partnerid:order['partnerid'],
+          status:'n',
+          foreign_partneraddressid:result.insertId,
+          processtype:'WEB',
+          processed:'n',
+          retrieved:'n',   
+          price:price,
+          ime_prezime:order["ime"]
+          
+        }
+        con.query("INSERT INTO document SET ?",document4db,(err,result) => {
           if(err) throw err;
-          console.log(result)
-           res.end(JSON.stringify({ result: 'Success' }))
-        resolve();
+          var insertRow = []
+          allorders.map((item) => {
+            var fullorder = []
+            fullorder.push(result.insertId)
+            fullorder.push(item.id)
+            fullorder.push(item.qty)
+            fullorder.push(item.price)
+            insertRow.push(fullorder)
+          })
+          
+          con.query("INSERT INTO documentitem (documentid,productid,quantity,price) VALUES ?",[insertRow],(err,result) => {
+            if(err) throw err;
+            res.end(JSON.stringify({ result: 'Success' }))
+            resolve();
+          })
+          
         })
-       
+         
       })
+        
+      // con.query("INSERT INTO orders SET ?", order4db,(err,result) => {
+      //   if(err) throw err;
+      //   var order_id = result.insertId
+      //   var insertRow = []
+      //   allorders.map((item) => {
+      //   var fullorder = []
+      //   fullorder.push(order_id)
+      //   fullorder.push(item.id)
+      //   fullorder.push(item.qty)
+      //   insertRow.push(fullorder)
+      //   })
+        
+        
+      //   con.query("INSERT INTO fullorder (order_id,proizvod_id,qty) VALUES ?",[insertRow],(err,result) => {
+      //     if(err) throw err;
+      //     console.log(result)
+          
+      //   })
+       
+      // })
     
   })
  

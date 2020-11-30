@@ -13,7 +13,7 @@ if(req.method == "POST"){
   		
   		form.parse(req,(err,fields,files) => {
   				
-  		con.query("SELECT * FROM users WHERE email = ?", [fields["email"]],(err,result) => {
+  		con.query("SELECT * FROM partner WHERE email = ?", [fields["email"]],(err,result) => {
   			if(err) throw err;
   			
   			if(result.length > 0){

@@ -19,7 +19,7 @@ export default async (req, res) => {
       form.parse(req,(err,fields,files) => {
         var id = fields["id"]
         var value = fields["value"]
-        con.query("UPDATE orders SET zavrsen = ? WHERE id = ?",[value,id],(err,fields,result) => {
+        con.query("UPDATE document SET zavrsen = ? WHERE documentid = ?",[value,id],(err,fields,result) => {
           res.end(JSON.stringify({ result: 'Success' }))
           resolve();
         })

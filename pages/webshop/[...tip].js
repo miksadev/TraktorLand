@@ -7,7 +7,7 @@ import Filter from '../../components/Search/Filter/filter';
 import Cookies from 'cookies'
 function Webshop(props){
 	const [prodata,setProdata] = useState(props.data)
-	const [searchKolona,setSearchKolona] = useState("ime")
+	const [searchKolona,setSearchKolona] = useState("name")
 	const [searchValue,setSearchValue] = useState("");
 	const router = useRouter()
   	const tip = router.query.tip
@@ -73,8 +73,8 @@ function Webshop(props){
 		            </h3>
 					<Filter styles={styles.filter} change={e => onChange(e)} placeholder="Pretrazi proizvode..."></Filter>
 					<select className={styles.selectt} name="selectsearch" value={searchKolona} onChange={e => onChangeSearch(e)}>
-						<option value="ime">Ime</option>
-						<option value="sifra">Sifra</option>
+						<option value="name">Ime</option>
+						<option value="code">Sifra</option>
 						<option value="kataloski_broj">Kataloski broj</option>
 					</select>
 		            <div className={styles.line}></div>

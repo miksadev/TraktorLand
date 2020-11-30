@@ -7,13 +7,13 @@ const HOST = process.env.NEXT_PUBLIC_HOST;
 const PROTOCOL = process.env.NEXT_PUBLIC_PROTOCOL;
 const API_URL = PROTOCOL+'://'+HOST+'/api';
 export const config = {
-	api:{
-		bodyParser:false
-	}
+    api:{
+        bodyParser:false
+    }
 }
 
 export default async (req,res) => {
-	return new Promise(resolve => {
+    return new Promise(resolve => {
 
     if(req.url == "/api/proxy/checkauth"){
          req.url = req.url.replace(/^\/api\/proxy/, '')

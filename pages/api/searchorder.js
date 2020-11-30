@@ -11,7 +11,7 @@ export default async (req,res) => {
       }else{
       	tip = 1;
       }
-    con.query("SELECT * FROM orders WHERE ime_prezime LIKE ? AND zavrsen = ? ORDER BY ime_prezime ASC",["%"+search+"%",tip],(err,results) => {
+    con.query("SELECT * FROM document WHERE ime_prezime LIKE ? AND zavrsen = ? ORDER BY ime_prezime ASC",["%"+search+"%",tip],(err,results) => {
           
             res.send(JSON.stringify({results}))
             res.end()

@@ -18,12 +18,12 @@ class User extends React.Component{
               
             <div className={styles.form}>
                 <h2 className={styles.naslov}>Moj profil</h2>
-                <p className="podaci">{this.state.user.ime}</p>
-                <p className="podaci">{this.state.user.adresa}</p>
-                <p className="podaci">{this.state.user.postanski_broj} {this.state.user.grad}</p>
+                <p className="podaci">{this.state.user.name}</p>
+                <p className="podaci">{this.state.user.address}</p>
+                <p className="podaci">{this.state.user.zip} {this.state.user.city}</p>
                 <p className="podaci">Serbia</p>
                 <p className="podaci">{this.state.user.email}</p>
-                <p className="podaci">{this.state.user.telefon}</p>
+                <p className="podaci">{this.state.user.phone}</p>
                 <div className={styles.blok}>
                     <LinkButton link="/logout" styles={styles.logout}>Odjavi se</LinkButton>
                     <LinkButton link="/user/edit" styles={styles.edit}>Uredi profil</LinkButton>

@@ -6,7 +6,7 @@ export default async (req,res) => {
     if(req.query.search != undefined){
       var search = req.query.search
       var kolona = req.query.searchkolona
-    con.query("SELECT * FROM proizvodi WHERE "+kolona+" LIKE ? ORDER BY ime ASC",search+"%",(err,results) => {
+    con.query("SELECT * FROM product WHERE "+kolona+" LIKE ? ORDER BY name ASC",search+"%",(err,results) => {
           
             res.send(JSON.stringify({results}))
             res.end()

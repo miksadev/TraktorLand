@@ -23,9 +23,9 @@ const proizvodi = (props) => {
         <div className={styles.proizvodi}>
             {loading ? <h3 style={{textAlign:"center"}}>LOADING</h3> : 
 
-        allPro.map(item => <Proizvod refresh={e => refreshData(e)} key={item['id']} id={item['id']} sifra={item["sifra"]} src={item["thumb"]} name={item["ime"]}
-         price={item["mp_cena"]} kolicina={item['kolicina']} zemlja_porekla={item['zemlja_porekla']} 
-         url={'/admin/proizvodi/edit?id='+item['id']}></Proizvod>)}
+        allPro.map(item => <Proizvod refresh={e => refreshData(e)} key={item['productid']} id={item['productid']} sifra={item["code"]} src={item["thumb"]} name={item["name"]}
+         price={item["price"]} kolicina={item['qty']} zemlja_porekla={item['zemlja_porekla']} 
+         url={'/admin/proizvodi/edit?id='+item['productid']}></Proizvod>)}
        </div>
         )
 }

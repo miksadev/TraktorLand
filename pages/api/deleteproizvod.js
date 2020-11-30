@@ -17,7 +17,7 @@ export default async (req, res) => {
      form.parse(req,(err,fields,files) => {
          var id = fields["id"];
 
-        con.query(`DELETE FROM proizvodi WHERE id = ?`,[Number(id)],(err,result) => {
+        con.query(`DELETE FROM product WHERE productid = ?`,[Number(id)],(err,result) => {
           if(err) throw err;
 
           res.end(JSON.stringify({ result: 'Success' }))

@@ -22,7 +22,7 @@ export default async (req, res) => {
         var password = fields["password"];
 
 
-      con.query('SELECT * FROM users WHERE email = ?',[email],(err,result) => {
+      con.query('SELECT * FROM partner WHERE email = ?',[email],(err,result) => {
         if(err) throw err;
         
         if(result.length == 0){
@@ -31,7 +31,7 @@ export default async (req, res) => {
         }else{
           var secret = "traktorlandsecret";
           var decipher = crypto.createDecipher('aes192',secret)
-          var encrypted = result[0].lozinka
+          var encrypted = result[0].password
           var decrypted = decipher.update(encrypted,'hex','utf8')
           decrypted+=decipher.final('utf8')
           if(password == decrypted){

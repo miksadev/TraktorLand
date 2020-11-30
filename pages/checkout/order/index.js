@@ -1,9 +1,15 @@
-import React,{useEffect} from 'react';
+import React,{useState,useEffect,useLayoutEffect} from 'react';
 import Order from '../../../components/Order/order';
 import styles from '../../../styles/checkout.module.css';
 import qs from 'querystring';
 
 const order = ({data}) => {
+	const [orderaddress,setOrderaddress] = useState({
+		address:data.adresa,
+			city:data.grad,
+			phone:data.telefon,
+			zip:data.postanski_broj,
+			email:data.email})
 	
     return (
         <div className={styles.container}>
@@ -11,7 +17,7 @@ const order = ({data}) => {
         <div className={styles.body}>
             <h1 className={styles.naslov}>Pregled porudzbine</h1>
             <div className={styles.line}></div>
-            <Order namena="checkout" data={data} edit={false}/>
+            <Order namena="checkout" orderaddress={orderaddress} data={data} edit={false}/>
             
             
         </div>

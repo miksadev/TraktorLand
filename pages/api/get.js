@@ -7,7 +7,7 @@ export default async (req,res) => {
 		res.statusCode = 200
 	res.setHeader('Content-Type','application/json')
 	if(req.query.tip != undefined){
-		con.query("SELECT * FROM proizvodi WHERE tip = ?",[req.query.tip],function(err,result,fields){
+		con.query("SELECT * FROM product WHERE type = ?",[req.query.tip],function(err,result,fields){
 			if(err) throw err;
 			res.send(JSON.stringify(result))
 			res.end()
@@ -15,19 +15,55 @@ export default async (req,res) => {
 		})
 	}
 	if(req.query.id != undefined){
-		con.query("SELECT * FROM proizvodi WHERE id = ?",[req.query.id],function(err,result,fields){
+		con.query("SELECT * FROM product WHERE productid = ?",req.query.id, function(err,result,fields){
 			if(err) throw err;
-			res.send(JSON.stringify(result))
-			res.end()
-			resolve()
+				var data = result
+				var count = result.length
+				var result2 = []
+				var num = 1
+				result.map((item) => {
+					con.query("SELECT * FROM productamount WHERE productid = ?",item.productid,(err,result) => {
+						data[num-1]["qty"] = result[0].productamountweb
+						result2.push(data[num-1])
+						
+						if(num == count){
+							
+							res.send(JSON.stringify(result2))
+							res.end()
+							resolve()
+						}
+						num++
+					})
+				})
+			
+			
+			
 		})
 	}
 	if(req.query.id == undefined && req.query.tip == undefined){
-		con.query("SELECT * FROM proizvodi",function(err,result,fields){
+		con.query("SELECT * FROM product", function(err,result,fields){
 			if(err) throw err;
-			res.send(JSON.stringify(result))
-			res.end()
-			resolve()
+				var data = result
+				var count = result.length
+				var result2 = []
+				var num = 1
+				result.map((item) => {
+					con.query("SELECT * FROM productamount WHERE productid = ?",item.productid,(err,result) => {
+						data[num-1]["qty"] = result[0].productamountweb
+						result2.push(data[num-1])
+						
+						if(num == count){
+							
+							res.send(JSON.stringify(result2))
+							res.end()
+							resolve()
+						}
+						num++
+					})
+				})
+			
+			
+			
 		})
 	}
 	})

@@ -29,7 +29,7 @@ export async function getServerSideProps({req,res,query}){
             }).then(res => res.json()).then(data => {
                 user = data.user
             })
-        	if(user.rank !== "admin"){
+        	if(user.partnertype !== "admin"){
         		res.writeHead(307,{Location:'/login'})
              res.end();
         	}
@@ -43,15 +43,29 @@ export async function getServerSideProps({req,res,query}){
 	.then(data => data);
 	var orders = await fetch(PROTOCOL+'://'+HOST+'/api/getorders?order_id='+id).then(res => res.json())
 	.then(data => data)
-	
+    var orderaddress = await fetch(PROTOCOL+'://'+HOST+'/api/getorderaddress?id='+data[0].foreign_partneraddressid).then(res => res.json())
+    .then(data => data)
+    
+	var orderuser = await fetch(PROTOCOL+'://'+HOST+'/api/getuser?id='+orderaddress[0].partnerid).then(res => res.json())
+    .then(data => data)
+    console.log("USERRR")
+    var user = orderuser.user
+    console.log(orderaddress[0].partnerid)
+    if(user.length > 0){
+        data[0]["rabat"] = orderuser.user[0].rabat
+    }else{
+        data[0]["rabat"] = 0
+    }
+    
 	return{
 		props:{
 			data:data[0],
-			orders:orders
+			orders:orders,
+            orderaddress:orderaddress[0]
 		}
 	}
 }
-const ViewOrder = ({data,orders}) => {
+const ViewOrder = ({data,orders,orderaddress}) => {
 	const router = useRouter()
     const {id} = router.query;
     
@@ -67,7 +81,7 @@ const ViewOrder = ({data,orders}) => {
                 <button className={styles.printbutton} onClick={() => window.print()}>Print</button>
 
                 <div className={styles.line}></div>
-                <Order namena="checkout" orders={orders} data={data} edit={false}/>
+                <Order namena="checkout" orderaddress={orderaddress} orders={orders} data={data} edit={false}/>
                 
                 
             </div>
