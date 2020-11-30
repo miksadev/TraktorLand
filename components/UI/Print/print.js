@@ -27,9 +27,9 @@ const print = (props) => {
                     <th>Rabat</th>
                     <th>Stopa PDV</th>
                     <th>Poreska osnovica</th>
-                    
                     <th>Iznos PDV</th>
-                    <th>Cena</th>
+                    <th>Cena po komadu rabat i pdv</th>
+                    <th>Cena bez rabata</th>
                     <th>Cena sa Rabatom</th>
                 </tr>
                 {
@@ -50,6 +50,7 @@ const print = (props) => {
                             <td>20%</td>
                             <td>{Number(order.vp_cena*order.qty).toFixed(2)}</td>
                             <td>{Number(0.2*order.vp_cena*order.qty).toFixed(2)}</td>
+                            <td>{Number(order.mp_cena* (1 - props.data.rabat/100)).toFixed(2)}</td>
                             <td>{Number(order.qty*order.mp_cena).toFixed(2)}</td>
                             <td>{Number(order.mp_cena*order.qty * (1 - props.data.rabat/100)).toFixed(2)}</td>
                         </tr>
@@ -66,6 +67,7 @@ const print = (props) => {
                     <td>Ukupno:</td>
                     <td>{Number(poros).toFixed(2)}</td>
                     <td>{Number(pdv).toFixed(2)}</td>
+                    <td></td>
                     <td>{Number(cena).toFixed(2)}</td>
                     <td>{Number(cenara).toFixed(2)}</td>
                 </tr>
