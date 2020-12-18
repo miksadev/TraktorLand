@@ -38,7 +38,7 @@ const reducer = (state = initialState, { type, payload }) => {
     case "TOGGLE_LOGGED":
       return {
         ...state,
-        isLogged: !state.isLogged,
+        isLogged: payload.value,
       };
     case "ADD":
 

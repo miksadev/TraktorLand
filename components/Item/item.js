@@ -42,7 +42,7 @@ const item = (props) => {
                     </div>
                     <div className={styles.cena}>
                         <p>Veleprodajna cena</p>
-                        <h3 className={styles.ukupnocena}>{props.proizvod[0].vp_cena ? props.proizvod[0].vp_cena : 59900} <span>RSD</span></h3>
+                        <h3 className={styles.ukupnocena}>{props.proizvod[0].vp_cena ? props.proizvod[0].vp_cena : "Nema"} <span>RSD</span></h3>
                     </div>
                      <AddToCart user={props.user} styles={styles.atcbutton} item={{id:props.proizvod[0].productid, kolicina: props.proizvod[0].qty, rabat_1: props.proizvod[0].rabat_1, rabat_2: props.proizvod[0].rabat_2, rabat_3: props.proizvod[0].rabat_3, ime: props.proizvod[0].manufname,slika: props.proizvod[0].thumb,sifra: props.proizvod[0].code, price: Number(props.proizvod[0].price), qty: 1}}/>
                 </div>

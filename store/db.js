@@ -11,12 +11,21 @@
 //     	password: GOOGLE_CLOUD_DB_PASSWORD
 // 	}
 // })
+// import mysql from 'mysql';
+
+// const con = mysql.createConnection({
+// 	host:'localhost',
+// 	user:'root',
+// 	password:'',
+// 	database:'traktorland2'
+// });
+// export default con;
 import mysql from 'mysql';
 
 const con = mysql.createConnection({
-	host:'localhost',
+	host:'127.0.0.1',
 	user:'root',
-	password:'',
-	database:'traktorland2'
+	password:'123456',
+	database:'gazzele_web'
 });
 export default con;

@@ -1,13 +1,16 @@
-import React, {useEffect} from 'react';
+import React, {useState,useEffect} from 'react';
 import styles from './total.module.css';
 import Submit from '../Button/Submit/submit';
 
 const total = (props) => {
 
     const classes = [styles.total];
+
+
     useEffect(() => {
         {props.styles ? classes.push(props.styles) : null}
     },[])
+
     
     return (
         <div className={classes.join(' ')} style={!props.edit ? {height: "230px"} : null}>
@@ -19,7 +22,7 @@ const total = (props) => {
             
             <div>
                 <h3 className={styles.rabatt}>Popust</h3>
-                {props.price2 == undefined ? <h2 className={styles.rabat}>0 RSD</h2> : <h2 className={styles.rabat}>{props.price - props.price2} RSD</h2>}
+                {!props.isLogged ? <h2 className={styles.rabat}>0 RSD</h2> : <h2 className={styles.rabat}>{props.price - props.price2} RSD</h2>}
                 
             </div>
             

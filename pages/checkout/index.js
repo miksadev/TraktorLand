@@ -43,7 +43,11 @@ export async function getServerSideProps({req,res}){
 }
 export default function Checkout({login,user}) {
   
-  const { price, items } = useCart();
+  const { price, items, isLogged } = useCart();
+  // useEffect(()=> {
+  //   console.log(isLogged);  
+  // },[isLogged]);
+  console.log(items);
   const [fullPrice,setFullPrice] = useState(0)
   const [showPopUp, setShowPopUp] = useState(false);
   const router = useRouter();
@@ -64,7 +68,7 @@ export default function Checkout({login,user}) {
       fullprice_ = fullprice_+(Number(item.price) * Number(item.qty))
     })
     setFullPrice(fullprice_)
-  },[fullPrice,items])
+  },[fullPrice,items,login])
   const popUpHandler = () => {
     if(login){
       router.push('/checkout/orderdetails')
@@ -80,7 +84,7 @@ export default function Checkout({login,user}) {
   const punakorpa = (
   <>
     <CartItemsNoSSR namena="checkout"/><div className={styles.total}>
-    <TotalNoSSR edit={true} klik={() => popUpHandler()} price={fullPrice} price2={price} rabat={user.rabat == undefined ?'0':user.rabat}/></div>
+    <TotalNoSSR isLogged={isLogged} edit={true} klik={() => popUpHandler()} price={fullPrice} price2={price} rabat={user.rabat == undefined ?'0':user.rabat}/></div>
     <FinishOrder show={showPopUp} off={() => popUpHandler()}/>
     
   </>);

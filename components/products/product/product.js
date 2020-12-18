@@ -20,7 +20,7 @@ const product = (props) => {
             <div className={styles.product}>
                 <div onClick={toggleItem} >
                 {props.search == "true" ? <Link href={'/webshop/'+props.tip+'/'+props.id+'?s='+props.backroute}><a><p className={styles.name}>{props.name}</p>
-                    <img className={styles.img} src={props.src} alt=""/></a></Link> : <Link href={'/webshop/'+props.tip+'/'+props.id}><a><p className={styles.name}>{props.name}</p>
+                    <img className={styles.img} src={props.src} alt=""/></a></Link> : <Link href={'/webshop/'+"traktori"+'/'+props.id}><a><p className={styles.name}>{props.name}</p>
                     <img className={styles.img} src={props.src} alt=""/></a></Link>}
                     
                 </div>
