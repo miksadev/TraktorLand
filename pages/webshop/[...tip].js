@@ -21,7 +21,7 @@ function Webshop(props){
 	useEffect(() => {
 		var HOST = process.env.NEXT_PUBLIC_HOST;
 		var PROTOCOL = process.env.NEXT_PUBLIC_PROTOCOL;
-		fetch(PROTOCOL +'://'+HOST+`/api/get?tip=`+par)
+		fetch(PROTOCOL +'://'+HOST+`/api/get?tip=`+props.type)
         .then(res => res.json())
         .then(data => {
            setProdata(data)
@@ -78,7 +78,7 @@ function Webshop(props){
 						<option value="kataloski_broj">Kataloski broj</option>
 					</select>
 		            <div className={styles.line}></div>
-		            <Products user={props.user} backroute={props.param} data={prodata} mdata={props.mData}/>
+		            <Products type={props.type} user={props.user} backroute={props.param} data={prodata} mdata={props.mData}/>
 		        </div>
 		       
 
@@ -139,7 +139,8 @@ export async function getServerSideProps(context){
 			data,
 			mData,
 			param:backroute,
-			user:user
+			user:user,
+			type:param
 		}
 	}
 	

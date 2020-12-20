@@ -16,7 +16,7 @@ class add extends React.Component{
                         rabat_1:'',
                         rabat_2:'',
                         rabat_3:'',
-                        tip:'traktori',
+                        tip:this.props.cat[0].categoryprid,
                         zemlja_porekla:'',
                         kolicina:''
                     },
@@ -113,6 +113,7 @@ class add extends React.Component{
         
     }
     render(){
+        var opt = this.props.cat;
         return (
         <div className={styles.proizvodi}>
             <div className={styles.heading}>
@@ -124,13 +125,8 @@ class add extends React.Component{
                 <br />
                 
                 <Input  label="Tip" inputtype="select" name="tip" value={this.state.data.tip} onChange={(e) => this.onChange(e)}>
-                    <option value="traktori" >Traktori</option>
-                    <option value="beraci">Beraci</option>
-                    <option value="kombajni">Kombajni</option>
-                    <option value="freze">Freze</option>
-                    <option value="delovi">Delovi za poljoprivredne masine</option>
-                    <option value="mehanizacija">Poljoprivredna mehanizacija</option>
-                    <option value="ostalo">Ostalo</option>
+                    
+                    {opt.map(item => <option value={item.categoryprid} >{item.name}</option>)}
                 </Input>
                 <Input onFocus={(e) => this.onFocus(e)} style={this.state.imeEmpty ? {borderBottom:'1px solid red'} : {}} onChange={(e) => this.onChange(e)} inputtype="input" value={this.state.data.ime}  name="ime"  label="Ime"  type="text"/>
                 <Input onFocus={(e) => this.onFocus(e)} style={this.state.proizvodjacEmpty ? {borderBottom:'1px solid red'} : {}} onChange={(e) => this.onChange(e)} inputtype="input" value={this.state.data.proizvodjac} name="proizvodjac"  label="Proizvodjac"  type="text"/>
@@ -180,6 +176,8 @@ export async function getServerSideProps({req,res}){
                 res.writeHead(307,{Location:'/login'})
              res.end();
             }
+        var catdata = await fetch(PROTOCOL+"://"+HOST+"/api/getcategory")
+        .then(res => res.json()).then(data => data)
 
     //----------------------------------------------------
 
@@ -187,6 +185,7 @@ export async function getServerSideProps({req,res}){
     
     return {
         props:{
+            cat:catdata.data,
             data:[]
         }
     }

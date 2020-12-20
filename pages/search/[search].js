@@ -49,8 +49,7 @@ export async function getServerSideProps(context){
         }else{
         	var user = {}
         }
-        console.log("USER")
-        console.log(user)
+        
 	return{
 		props:{
 			data:data,

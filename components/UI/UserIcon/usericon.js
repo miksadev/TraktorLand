@@ -7,7 +7,6 @@ import useCart from '../../../util/useCart';
 const UserIcon = (props)=>{
 	const [url,setUrl] = useState("")
 	const {isLogged} = useCart()
-	
 	let style = [styles.usericon];
 	useEffect(() => {
 		

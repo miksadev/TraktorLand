@@ -22,7 +22,7 @@ export default function Logout({log}){
 	const {isLogged,toggleLogged} = useCart()
 	useEffect(()=>{
 		if(isLogged || log){
-			toggleLogged(false)
+			toggleLogged()
 			router.push("/login")
 		}else{
 			router.push("/")

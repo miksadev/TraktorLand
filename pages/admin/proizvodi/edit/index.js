@@ -7,6 +7,7 @@ import Cookies from 'cookies';
 class add extends React.Component{
     constructor(props){
         super(props)
+        
         this.state = { 
                 data:{
                         ime:this.props.proizvod.name,
@@ -18,7 +19,7 @@ class add extends React.Component{
                         rabat_1:this.props.proizvod.rabat_1,
                         rabat_2:this.props.proizvod.rabat_2,
                         rabat_3:this.props.proizvod.rabat_3,
-                        tip:this.props.proizvod.type,
+                        tip:this.props.productcategory.categoryprid,
                         kolicina:this.props.proizvod.qty
                     },
                 imeEmpty:false,
@@ -93,7 +94,7 @@ class add extends React.Component{
             method:"POST",
             body:formData
         }).then(res => res.json()).then(data =>{
-            console.log(data)
+            
             if(data["result"] == "Success"){
                 alert("Sacuvano")
                 
@@ -104,6 +105,7 @@ class add extends React.Component{
         
     }
     render(){
+         var opt = this.props.cat;
         return (
         <div className={styles.proizvodi}>
             <div className={styles.heading}>
@@ -115,13 +117,9 @@ class add extends React.Component{
                 <br />
                 
                 <Input  label="Tip" inputtype="select" name="tip" value={this.state.data.tip} onChange={(e) => this.onChange(e)}>
-                    <option value="traktori" >Traktori</option>
-                    <option value="beraci">Beraci</option>
-                    <option value="kombajni">Kombajni</option>
-                    <option value="freze">Freze</option>
-                    <option value="delovi">Delovi za poljoprivredne masine</option>
-                    <option value="mehanizacija">Poljoprivredna mehanizacija</option>
-                    <option value="ostalo">Ostalo</option>
+                    {opt.map(item =>  <option value={item.categoryprid} >{item.name}</option>)}
+                   
+                    
                 </Input>
                 <Input onFocus={(e) => this.onFocus(e)} style={this.state.imeEmpty ? {borderBottom:'1px solid red'} : {}} onChange={(e) => this.onChange(e)} inputtype="input" value={this.state.data.ime}  name="ime"  label="Ime"  type="text"/>
                 <Input onFocus={(e) => this.onFocus(e)} style={this.state.proizvodjacEmpty ? {borderBottom:'1px solid red'} : {}} onChange={(e) => this.onChange(e)} inputtype="input" value={this.state.data.proizvodjac} name="proizvodjac"  label="Proizvodjac"  type="text"/>
@@ -180,9 +178,14 @@ export async function getServerSideProps({req,res}){
     
     var data = await fetch(PROTOCOL+'://'+HOST+'/api/get?id='+id).then(res => res.json())
     .then(data => data)
-    
+     var catdata = await fetch(PROTOCOL+'://'+HOST+'/api/getcategory').then(res => res.json())
+    .then(data => data)
+    var productcategory = await fetch(PROTOCOL+'://'+HOST+'/api/getcategory?productid='+id).then(res => res.json())
+    .then(data => data)
     return {
         props:{
+            productcategory:productcategory.data[0],
+            cat:catdata.data,
             proizvod:data[0],
             id:id
         }

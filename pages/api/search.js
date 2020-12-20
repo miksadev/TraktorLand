@@ -3,13 +3,29 @@ import formidable from 'formidable-serverless';
 
 export default async (req,res) => {
 	return new Promise(resolve => {
+
     if(req.query.search != undefined && req.query.tip == undefined){
       var search = req.query.search
     con.query("SELECT * FROM product WHERE name LIKE ? ORDER BY name ASC LIMIT 10",search+"%",(err,results) => {
-          
-            res.send(JSON.stringify({results}))
-            res.end()
-            resolve();
+            var data = results
+            var niz = []
+            var res1 = results
+            res1.map((item,index) => {
+               con.query("SELECT * FROM productcategorypr WHERE productid = ?",[item.productid],(err,results) => {
+                con.query("SELECT * FROM categorypr WHERE categoryprid = ?",[results[0].categoryprid],(err,results) => {
+                  res1[index]["tip"] = results[0].name.toLowerCase()
+                  if(index == (res1.length-1)){
+                    var results = res1
+                    res.send(JSON.stringify({results})) 
+                    res.end()
+                    resolve(); 
+                  }
+                })
+               })
+            })
+             
+            
+            
         })
   }else if(req.query.search != undefined && req.query.tip != undefined){
     var search = req.query.search

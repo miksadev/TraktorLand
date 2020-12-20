@@ -12,13 +12,18 @@ export async function getServerSideProps({req,res}){
   then(res => res.json()).then(data => {
     return data;
   })
+  const cat = await fetch(PROTOCOL+"://"+HOST+"/api/getcategory").
+  then(res => res.json()).then(data => {
+    return data;
+  })
   return{
     props:{
-      akcije:data.data
+      akcije:data.data,
+      catdata:cat.data
     }
   }
 }
-export default function Home({akcije}) {
+export default function Home({akcije,catdata}) {
 
   const DynamicComponentWithNoSSR = dynamic(
     () => import('../components/Slider/slider'),
@@ -40,7 +45,7 @@ export default function Home({akcije}) {
         <p className={styles.slogan}>Profesionalni i originalni već 25 godina!</p>
         
 
-        <Kategorije/>
+        <Kategorije cat={catdata}/>
 
         <div className={styles.carousell}>
           <h3>PROIZVODI NA AKCIJI</h3>

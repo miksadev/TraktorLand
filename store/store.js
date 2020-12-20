@@ -8,8 +8,7 @@ const initialState = {
   isCartOpened: false,
   items: [],
   price: 0,
-  shipping: {},
-  isLogged: false
+  shipping: {}
 };
 
 const reducer = (state = initialState, { type, payload }) => {
@@ -34,11 +33,6 @@ const reducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         isItemOpened: !state.isItemOpened,
-      };
-    case "TOGGLE_LOGGED":
-      return {
-        ...state,
-        isLogged: payload.value,
       };
     case "ADD":
 

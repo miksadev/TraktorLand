@@ -7,11 +7,23 @@ export default async (req,res) => {
 		res.statusCode = 200
 	res.setHeader('Content-Type','application/json')
 	if(req.query.tip != undefined){
-		con.query("SELECT * FROM product LIMIT 20",[req.query.tip],function(err,result,fields){
+		function capitalizeFirstLetter(string) {
+		  return string.charAt(0).toUpperCase() + string.slice(1);
+		}
+		var name = req.query.tip;
+		con.query("SELECT * FROM categorypr WHERE name = ?",[capitalizeFirstLetter(name)],function(err,result,fields){
 			if(err) throw err;
-			res.send(JSON.stringify(result))
-			res.end()
-			resolve()
+			var categoryid = result[0].categoryprid;
+			con.query("SELECT * FROM productcategorypr WHERE categoryprid = ?",[categoryid],function(err,result){
+				var productids = []
+				result.map(item => productids.push(item.productid))
+				con.query("SELECT * FROM product WHERE productid IN (?)",[productids],function(err,result){
+					res.send(JSON.stringify(result))
+					res.end()
+					resolve()
+				})
+				
+			})
 		})
 	}
 	if(req.query.id != undefined){
@@ -49,7 +61,7 @@ export default async (req,res) => {
 				var num = 1
 				result.map((item) => {
 					con.query("SELECT * FROM productamount WHERE productid = ?",item.productid,(err,result) => {
-						data[num-1]["qty"] = result[0].productamountb2b
+						data[num-1]["qty"] = result[0].productamountweb
 						result2.push(data[num-1])
 						
 						if(num == count){

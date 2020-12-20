@@ -90,7 +90,6 @@ export default async (req, res) => {
         kataloski_broj:kataloski_broj,
         price:mp_cena,
         vp_cena:vp_cena.toFixed(2),
-        type:tip,
         code:sifra,
         thumb:thumb,
         zemlja_porekla:zemlja_porekla,
@@ -100,15 +99,19 @@ export default async (req, res) => {
         active:'y'
       } 
       con.query("INSERT INTO product SET ?", proizvod,(err,result) => {
+        var productid = result.insertId;
         if(err) throw err;
         var productam = {
           productamountweb:kolicina
         }
         con.query("INSERT INTO productamount SET ?",productam,(err,result) => {
           if(err) throw err;
-        
-          res.end(JSON.stringify({ result: 'Success' }))
-          resolve();
+          con.query("INSERT INTO productcategorypr SET productid = ?,categoryprid = ?",[productid,tip],(err,result) => {
+            if(err) throw err;
+            res.end(JSON.stringify({ result: 'Success' }))
+            resolve();
+          })
+         
         })
       })
     

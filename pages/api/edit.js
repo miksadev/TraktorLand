@@ -69,13 +69,17 @@ export default async (req, res) => {
         if(thumb == ""){
           
           con.query(`UPDATE product SET rabat_1=?,rabat_2=?,rabat_3=?,zemlja_porekla=?,name = ?,manufname=?,kataloski_broj=?,
-           price = ?,vp_cena = ?,type = ?,code = ? WHERE productid = ?`,[rabat_1,rabat_2,rabat_3,zemlja_porekla,ime,proizvodjac,kataloski_broj,
-           mp_cena,vp_cena.toFixed(2),tip,sifra,id],(err,result) => {
+           price = ?,vp_cena = ?,code = ? WHERE productid = ?`,[rabat_1,rabat_2,rabat_3,zemlja_porekla,ime,proizvodjac,kataloski_broj,
+           mp_cena,vp_cena.toFixed(2),sifra,id],(err,result) => {
            if(err) throw err;
            con.query("UPDATE productamount SET productamountweb = ? WHERE productid = ?",[kolicina,id],(err,result) => {
             if(err) throw err;
-             res.end(JSON.stringify({ result: 'Success' }))
-             resolve();
+            con.query("UPDATE productcategorypr SET categoryprid = ? WHERE productid = ?",[tip,id],(err,result) => {
+              if(err) throw err;
+              res.end(JSON.stringify({ result: 'Success' }))
+              resolve();
+            })
+             
           })
         
        
@@ -83,8 +87,8 @@ export default async (req, res) => {
         }else{
           
           con.query(`UPDATE product SET rabat_1=?,rabat_2=?,rabat_3=?,zemlja_porekla=?,name = ?,manufname=?,kataloski_broj=?,
-           price = ?,vp_cena = ?,type = ?,code = ?,thumb=? WHERE productid = ?`,[rabat_1,rabat_2,rabat_3,zemlja_porekla,ime,proizvodjac,kataloski_broj,
-           mp_cena,vp_cena.toFixed(2),tip,sifra,thumb,id],(err,result) => {
+           price = ?,vp_cena = ?,code = ?,thumb=? WHERE productid = ?`,[rabat_1,rabat_2,rabat_3,zemlja_porekla,ime,proizvodjac,kataloski_broj,
+           mp_cena,vp_cena.toFixed(2),sifra,thumb,id],(err,result) => {
         if(err) throw err;
         con.query("UPDATE productamount SET productamountweb = ? WHERE productid = ?",[kolicina,id],(err,result) => {
             if(err) throw err;
