@@ -6,23 +6,99 @@ export default async (req,res) => {
 	return new Promise(resolve => {
 		res.statusCode = 200
 	res.setHeader('Content-Type','application/json')
+	// if(req.query.tip != undefined){
+	// 	function capitalizeFirstLetter(string) {
+	// 	  return string.charAt(0).toUpperCase() + string.slice(1);
+	// 	}
+	// 	var name = req.query.tip;
+	// 	if(name == "delovi"){
+	// 		name = "delovi za poljoprivredne mašine";
+	// 	}else if(name == ""){
+	// 		name = "poljoprivredna mehanizacija"
+	// 	}
+	// 	con.query("SELECT * FROM categorypr WHERE name LIKE ?",[name],function(err,result,fields){
+	// 		if(err) throw err;
+	// 		if(result.length != 0){
+	// 			var categoryid = result[0].categoryprid;
+	// 		con.query("SELECT * FROM productcategorypr WHERE categoryprid = ?",[categoryid],function(err,result){
+	// 			if(result.length != 0){
+	// 				var productids = []
+	// 				result.map(item => productids.push(item.productid))
+	// 				con.query("SELECT * FROM product WHERE productid IN (?)",[productids],function(err,result){
+	// 					res.send(JSON.stringify(result))
+	// 					res.end()
+	// 					resolve()
+	// 				})
+	// 			}else{
+	// 				res.send(JSON.stringify([]))
+	// 				res.end()
+	// 				resolve()
+	// 			} 
+	// 		})
+	// 		}else{
+	// 			res.send(JSON.stringify([]))
+	// 			res.end()
+	// 			resolve()
+	// 		}
+			
+	// 	})
+	// }
 	if(req.query.tip != undefined){
-		function capitalizeFirstLetter(string) {
-		  return string.charAt(0).toUpperCase() + string.slice(1);
-		}
 		var name = req.query.tip;
-		con.query("SELECT * FROM categorypr WHERE name = ?",[capitalizeFirstLetter(name)],function(err,result,fields){
+		if(name == "delovi"){
+      name = "Delovi Za Poljoprivredne Mašine"
+    }else if(name == "mehanizacija"){
+      name = "Poljoprivredna Mehanizacija"
+    }
+		con.query("SELECT * FROM categorypr WHERE name LIKE ?",[name],function(err,result){
 			if(err) throw err;
+			
 			var categoryid = result[0].categoryprid;
-			con.query("SELECT * FROM productcategorypr WHERE categoryprid = ?",[categoryid],function(err,result){
-				var productids = []
-				result.map(item => productids.push(item.productid))
-				con.query("SELECT * FROM product WHERE productid IN (?)",[productids],function(err,result){
-					res.send(JSON.stringify(result))
-					res.end()
-					resolve()
-				})
+			
+			var ids = [categoryid]
+			con.query("SELECT * FROM categorypr WHERE parentid = ?",[categoryid],function(err,result){
 				
+				if(result.length == 0){
+				var productsid = []
+
+					con.query("SELECT * FROM productcategorypr WHERE categoryprid IN (?)",[ids],function(err,result){
+						if(result.length != 0){
+							result.map(item => {
+							productsid.push(item.productid)
+						})
+						con.query("SELECT * FROM product WHERE productid IN (?)",[productsid],function(err,result){
+							res.send(JSON.stringify(result))
+							res.end()
+							resolve()
+						})
+					}else{
+						res.send(JSON.stringify([]))
+							res.end()
+							resolve()
+					}
+					})
+				}else{
+					if(result.length != 0){
+						result.map(item => {
+						ids.push(item.categoryprid)
+					})
+					var productsid = []
+					con.query("SELECT * FROM productcategorypr WHERE categoryprid IN (?)",[ids],function(err,result){
+						result.map(item => {
+							productsid.push(item.productid)
+						})
+						con.query("SELECT * FROM product WHERE productid IN (?)",[productsid],function(err,result){
+							res.send(JSON.stringify(result))
+							res.end()
+							resolve()
+						})
+					})
+				}else{
+					res.send(JSON.stringify([]))
+							res.end()
+							resolve()
+				}
+				}
 			})
 		})
 	}

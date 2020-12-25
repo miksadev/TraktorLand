@@ -7,7 +7,6 @@ import Cookies from 'cookies';
 class add extends React.Component{
     constructor(props){
         super(props)
-        
         this.state = { 
                 data:{
                         ime:this.props.proizvod.name,
@@ -19,7 +18,9 @@ class add extends React.Component{
                         rabat_1:this.props.proizvod.rabat_1,
                         rabat_2:this.props.proizvod.rabat_2,
                         rabat_3:this.props.proizvod.rabat_3,
-                        tip:this.props.productcategory.categoryprid,
+                        tip:'',
+                        tip2:'',
+                        subtip:[],
                         kolicina:this.props.proizvod.qty
                     },
                 imeEmpty:false,
@@ -32,6 +33,50 @@ class add extends React.Component{
                 tipEmpty:false,
                 kolicinaEmpty:false
         }
+    }
+    componentDidMount(){
+        var target = this.props.target;
+
+        if(target.parent == false){
+
+            var obj = {...this.state}
+            obj.data["tip"] = target.category[0].name.toLowerCase()
+            obj.data["subtip"] = target.subcategory
+            this.setState({obj})
+        }else{
+            var obj = {...this.state}
+            obj.data["tip"] = target.parent[0].name.toLowerCase()
+            obj.data["tip2"] = target.category[0].name
+            obj.data["subtip"] = target.subcategory
+            this.setState({obj})
+        }
+
+    }
+    onChangeTip(e){
+        var HOST = process.env.NEXT_PUBLIC_HOST;
+        var PROTOCOL = process.env.NEXT_PUBLIC_PROTOCOL
+        var tip = e.target.value;
+        fetch(PROTOCOL+"://"+HOST+"/api/getcategory?name="+tip)
+       .then(res => res.json()).then(data => {
+        var obj = {...this.state}
+        obj.data["subtip"] =data.result
+        if(data.result.length != 0){
+           
+            obj.data["tip2"] =data.result[0].name
+        }else{
+             obj.data["tip2"] = ""
+        }
+        this.setState({obj})
+
+       })
+    }
+    onChangeTip2(e){
+        var name = e.target.name
+        var obj = {...this.state}
+        obj.data["tip2"] = e.target.value
+        
+        console.log(e.target.value)
+        this.setState({obj})
     }
     onChange(e){
         var name = e.target.name
@@ -50,6 +95,7 @@ class add extends React.Component{
         var HOST = process.env.NEXT_PUBLIC_HOST;
         var PROTOCOL = process.env.NEXT_PUBLIC_PROTOCOL
         e.preventDefault();
+
         var err = 0;
         var allow_array=["zemlja_porekla","rabat_1","rabat_2","rabat_3"]
         for(const [key,value] of Object.entries(this.state.data)){
@@ -77,6 +123,7 @@ class add extends React.Component{
         formData.append("mp_cena",this.state.data.mp_cena);
         
         formData.append("tip",this.state.data.tip);
+        formData.append("tip2",this.state.data.tip2);
         formData.append("sifra",this.state.data.sifra);
         formData.append("kolicina",this.state.data.kolicina);
         formData.append("rabat_1",this.state.data.rabat_1);
@@ -94,7 +141,7 @@ class add extends React.Component{
             method:"POST",
             body:formData
         }).then(res => res.json()).then(data =>{
-            
+            console.log(data)
             if(data["result"] == "Success"){
                 alert("Sacuvano")
                 
@@ -105,7 +152,6 @@ class add extends React.Component{
         
     }
     render(){
-         var opt = this.props.cat;
         return (
         <div className={styles.proizvodi}>
             <div className={styles.heading}>
@@ -116,9 +162,20 @@ class add extends React.Component{
                 <img className={styles.upload} src="/admin/upload.png" alt=""/>
                 <br />
                 
-                <Input  label="Tip" inputtype="select" name="tip" value={this.state.data.tip} onChange={(e) => this.onChange(e)}>
-                    {opt.map(item =>  <option value={item.categoryprid} >{item.name}</option>)}
-                   
+                <Input  label="Tip" inputtype="select" name="tip" value={this.state.data.tip} onChange={(e) => {this.onChange(e),this.onChangeTip(e)}}>
+                    <option value="traktori" >Traktori</option>
+                    <option value="beraci">Berači</option>
+                    <option value="kombajni">Kombajni</option>
+                    <option value="freze">Freze</option>
+                    <option value="delovi za poljoprivredne mašine">Delovi za poljoprivredne mašine</option>
+                    <option value="poljoprivredna mehanizacija">Poljoprivredna mehanizacija</option>
+                    <option value="ostalo">Ostalo</option>
+                </Input>
+                <Input  label="Tip" inputtype="select" name="subtip" value={this.state.data.tip2} onChange={(e) => this.onChangeTip2(e)}>
+                   <option  value="" >{""}</option>
+                   {this.state.data.subtip.map(item => 
+                    <option  value={item.name} >{item.name}</option>
+                    )}
                     
                 </Input>
                 <Input onFocus={(e) => this.onFocus(e)} style={this.state.imeEmpty ? {borderBottom:'1px solid red'} : {}} onChange={(e) => this.onChange(e)} inputtype="input" value={this.state.data.ime}  name="ime"  label="Ime"  type="text"/>
@@ -178,16 +235,16 @@ export async function getServerSideProps({req,res}){
     
     var data = await fetch(PROTOCOL+'://'+HOST+'/api/get?id='+id).then(res => res.json())
     .then(data => data)
-     var catdata = await fetch(PROTOCOL+'://'+HOST+'/api/getcategory').then(res => res.json())
+    var categoryid = await fetch(PROTOCOL+'://'+HOST+'/api/getcategory?productid='+data[0].productid).then(res => res.json())
+    .then(data => data.data[0].categoryprid)
+    var targetCategory = await fetch(PROTOCOL+'://'+HOST+'/api/getcategory?idfparent='+categoryid).then(res => res.json())
     .then(data => data)
-    var productcategory = await fetch(PROTOCOL+'://'+HOST+'/api/getcategory?productid='+id).then(res => res.json())
-    .then(data => data)
+
     return {
         props:{
-            productcategory:productcategory.data[0],
-            cat:catdata.data,
             proizvod:data[0],
-            id:id
+            id:id,
+            target:targetCategory
         }
     }
 }

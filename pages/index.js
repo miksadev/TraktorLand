@@ -12,14 +12,11 @@ export async function getServerSideProps({req,res}){
   then(res => res.json()).then(data => {
     return data;
   })
-  const cat = await fetch(PROTOCOL+"://"+HOST+"/api/getcategory").
-  then(res => res.json()).then(data => {
-    return data;
-  })
+ 
   return{
     props:{
       akcije:data.data,
-      catdata:cat.data
+     
     }
   }
 }
@@ -45,7 +42,7 @@ export default function Home({akcije,catdata}) {
         <p className={styles.slogan}>Profesionalni i originalni već 25 godina!</p>
         
 
-        <Kategorije cat={catdata}/>
+        <Kategorije/>
 
         <div className={styles.carousell}>
           <h3>PROIZVODI NA AKCIJI</h3>

@@ -75,6 +75,7 @@ export default async (req, res) => {
         var mp_cena = fields["mp_cena"];
         var vp_cena = mp_cena - (mp_cena*20/120);
         var tip = fields["tip"];
+        var tip2 = fields["tip2"];
         var sifra = fields["sifra"];
         var kolicina = fields["kolicina"]
         var zemlja_porekla = fields["zemlja_porekla"]
@@ -98,22 +99,50 @@ export default async (req, res) => {
         rabat_3:rabat_3,
         active:'y'
       } 
-      con.query("INSERT INTO product SET ?", proizvod,(err,result) => {
-        var productid = result.insertId;
-        if(err) throw err;
-        var productam = {
-          productamountweb:kolicina
-        }
-        con.query("INSERT INTO productamount SET ?",productam,(err,result) => {
+      if(tip2 != ""){
+        con.query("SELECT * FROM categorypr WHERE name LIKE ?",[tip2],function(err,result){
           if(err) throw err;
-          con.query("INSERT INTO productcategorypr SET productid = ?,categoryprid = ?",[productid,tip],(err,result) => {
+          var id = result[0].categoryprid
+           con.query("INSERT INTO product SET ?", proizvod,(err,result) => {
+            var productid = result.insertId;
             if(err) throw err;
-            res.end(JSON.stringify({ result: 'Success' }))
-            resolve();
+            var productam = {
+              productamountweb:kolicina
+            }
+            con.query("INSERT INTO productamount SET ?",productam,(err,result) => {
+              if(err) throw err;
+              con.query("INSERT INTO productcategorypr SET productid = ?,categoryprid = ?",[productid,id],(err,result) => {
+                if(err) throw err;
+                res.end(JSON.stringify({ result: 'Success' }))
+                resolve();
+              })
+             
+            })
           })
-         
         })
-      })
+      }else{
+        con.query("SELECT * FROM categorypr WHERE name LIKE ?",[tip],function(err,result){
+          if(err) throw err;
+          var id = result[0].categoryprid
+           con.query("INSERT INTO product SET ?", proizvod,(err,result) => {
+            var productid = result.insertId;
+            if(err) throw err;
+            var productam = {
+              productamountweb:kolicina
+            }
+            con.query("INSERT INTO productamount SET ?",productam,(err,result) => {
+              if(err) throw err;
+              con.query("INSERT INTO productcategorypr SET productid = ?,categoryprid = ?",[productid,id],(err,result) => {
+                if(err) throw err;
+                res.end(JSON.stringify({ result: 'Success' }))
+                resolve();
+              })
+             
+            })
+          })
+        })
+      }
+      
     
   })
  

@@ -7,7 +7,9 @@ import Filter from '../../components/Search/Filter/filter';
 import Cookies from 'cookies'
 function Webshop(props){
 	const [prodata,setProdata] = useState(props.data)
+	const [subCategory,setSubCategory] = useState(props.sub)
 	const [searchKolona,setSearchKolona] = useState("name")
+	const [searchSubCategory,setSearchSubCategory] = useState("")
 	const [searchValue,setSearchValue] = useState("");
 	const router = useRouter()
   	const tip = router.query.tip
@@ -19,6 +21,7 @@ function Webshop(props){
 	var naslov = ""
 	
 	useEffect(() => {
+		
 		var HOST = process.env.NEXT_PUBLIC_HOST;
 		var PROTOCOL = process.env.NEXT_PUBLIC_PROTOCOL;
 		fetch(PROTOCOL +'://'+HOST+`/api/get?tip=`+props.type)
@@ -37,9 +40,14 @@ function Webshop(props){
 	}else{
 		naslov = "Poljoprivredna mehanizacija"
 	}
-	function onChange(e){
-		var searchR="";
-		var searchK="";
+	function onChange(e,sub){
+		
+		
+			if(sub == "" || sub == undefined){
+			sub = searchSubCategory
+
+			var searchR="";
+			var searchK="";
 		if(e.target.name != "selectsearch"){
 			searchR=e.target.value
 			searchK=searchKolona
@@ -49,18 +57,33 @@ function Webshop(props){
 			searchR=searchValue
 
 		}
-		
+		}else if (sub == "off"){
+			sub = ""
+			setSearchSubCategory("")
+			searchK=searchKolona
+			searchR=searchValue
+		}else{
+			
+			searchK=searchKolona
+			searchR=searchValue
+		}
 		var HOST = process.env.NEXT_PUBLIC_HOST;
 		var PROTOCOL = process.env.NEXT_PUBLIC_PROTOCOL;
-		fetch(PROTOCOL+'://'+HOST+'/api/searchtip?search='+searchR+"&tip="+par+"&searchkolona="+searchK)
+		fetch(PROTOCOL+'://'+HOST+'/api/searchtip?search='+searchR+"&tip="+par+"&searchkolona="+searchK+"&sub="+sub)
         .then(res => res.json())
         .then(data => {
            setProdata(data.results)
         })
+		
+		
 	}
 	function onChangeSearch(e){
 		setSearchKolona(e.target.value)
-		onChange(e)
+		onChange(e,"")
+	}
+	function onChangeSearchSub(e){
+		setSearchSubCategory(e.target.value)
+		onChange(e,e.target.value)
 	}
 	return (
 			<div className={styles.container}>
@@ -76,6 +99,10 @@ function Webshop(props){
 						<option value="name">Ime</option>
 						<option value="code">Sifra</option>
 						<option value="kataloski_broj">Kataloski broj</option>
+					</select>
+					<select className={styles.selectt} name="selectsearchsub" value={searchSubCategory} onChange={e => onChangeSearchSub(e)}>
+						<option value="off">{""}</option>
+					{subCategory.map(item => <option value={item.categoryprid}>{item.name}</option>)}
 					</select>
 		            <div className={styles.line}></div>
 		            <Products type={props.type} user={props.user} backroute={props.param} data={prodata} mdata={props.mData}/>
@@ -103,7 +130,8 @@ export async function getServerSideProps(context){
 	}
 	var data = await fetch(PROTOCOL +'://'+HOST+`/api/get?tip=`+param).
 	then(res => res.json()).then(data =>data)
-
+	var sub = await fetch(PROTOCOL +'://'+HOST+`/api/getsubcategory?name=`+param).
+	then(res => res.json()).then(data =>data)
 
 
 
@@ -140,7 +168,8 @@ export async function getServerSideProps(context){
 			mData,
 			param:backroute,
 			user:user,
-			type:param
+			type:param,
+			sub:sub
 		}
 	}
 	

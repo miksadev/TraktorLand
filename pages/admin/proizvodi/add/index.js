@@ -16,7 +16,10 @@ class add extends React.Component{
                         rabat_1:'',
                         rabat_2:'',
                         rabat_3:'',
-                        tip:this.props.cat[0].categoryprid,
+                        tip:'traktori',
+                        tip2:'',
+                        
+                        subtip:[],
                         zemlja_porekla:'',
                         kolicina:''
                     },
@@ -29,6 +32,18 @@ class add extends React.Component{
                 tipEmpty:false,
                 kolicinaEmpty:false
         }
+    }
+    componentDidMount(){
+        var HOST = process.env.NEXT_PUBLIC_HOST;
+        var PROTOCOL = process.env.NEXT_PUBLIC_PROTOCOL
+       fetch(PROTOCOL+"://"+HOST+"/api/getcategory?name=traktori")
+       .then(res => res.json()).then(data => {
+        var obj = {...this.state}
+        obj.data["subtip"] =data.result
+        obj.data["tip2"] =""
+        
+        this.setState({obj})
+       })
     }
     onChange(e){
         var name = e.target.name
@@ -43,12 +58,36 @@ class add extends React.Component{
         obj[key+"Empty"] = false
         this.setState(obj)
     }
+    onChangeTip(e){
+        var HOST = process.env.NEXT_PUBLIC_HOST;
+        var PROTOCOL = process.env.NEXT_PUBLIC_PROTOCOL
+        var tip = e.target.value;
+        fetch(PROTOCOL+"://"+HOST+"/api/getcategory?name="+tip)
+       .then(res => res.json()).then(data => {
+        var obj = {...this.state}
+        obj.data["subtip"] =data.result
+        obj.data["tip2"] = ""
+        
+        this.setState({obj})
+
+       })
+    }
+    onChangeTip2(e){
+        var name = e.target.name
+        var obj = {...this.state}
+        obj.data["tip2"] = e.target.value
+        
+        console.log(e.target.value)
+        this.setState({obj})
+    }
     onSubmit(e){
         e.preventDefault();
+
+
         var HOST = process.env.NEXT_PUBLIC_HOST;
         var PROTOCOL = process.env.NEXT_PUBLIC_PROTOCOL
         var err = 0;
-        var allow_array=["zemlja_porekla","rabat_1","rabat_2","rabat_3"]
+        var allow_array=["zemlja_porekla","rabat_1","rabat_2","rabat_3","tip2"]
         for(const [key,value] of Object.entries(this.state.data)){
             if(value == ""){
                 if(allow_array.includes(key) == false){
@@ -79,6 +118,7 @@ class add extends React.Component{
         formData.append("mp_cena",this.state.data.mp_cena);
         
         formData.append("tip",this.state.data.tip);
+        formData.append("tip2",this.state.data.tip2);
         formData.append("sifra",this.state.data.sifra);
         formData.append("zemlja_porekla",this.state.data.zemlja_porekla);
         formData.append("rabat_1",this.state.data.rabat_1);
@@ -91,7 +131,16 @@ class add extends React.Component{
             body:formData
         }).then(res => res.json()).then(data =>{
             if(data["result"] == "Success"){
-                alert("Success")
+                fetch(PROTOCOL+"://"+HOST+"/api/getcategory?name=traktori")
+               .then(res => res.json()).then(data => {
+                var obj = {...this.state}
+                var tip2;
+                if(data.result.length != 0){
+                    tip2 =data.result[0].name
+                }else{
+                    tip2 =""
+                }
+                
                 this.setState({data:{
                         ime:'',
                         proizvodjac:'',
@@ -103,9 +152,13 @@ class add extends React.Component{
                         rabat_3:'',
                         rabat_2:'',
                         tip:'traktori',
-                        
+                        tip2:tip2,
+                        subtip:data.result,
                         kolicina:''
                     }})
+                alert("Success")
+               })
+                
             }
         })
         
@@ -113,7 +166,6 @@ class add extends React.Component{
         
     }
     render(){
-        var opt = this.props.cat;
         return (
         <div className={styles.proizvodi}>
             <div className={styles.heading}>
@@ -124,9 +176,21 @@ class add extends React.Component{
                 <img className={styles.upload} src="/admin/upload.png" alt=""/>
                 <br />
                 
-                <Input  label="Tip" inputtype="select" name="tip" value={this.state.data.tip} onChange={(e) => this.onChange(e)}>
+                <Input  label="Tip" inputtype="select" name="tip" value={this.state.data.tip} onChange={(e) => {this.onChange(e),this.onChangeTip(e)}}>
+                    <option value="traktori" >Traktori</option>
+                    <option value="beraci">Beraci</option>
+                    <option value="kombajni">Kombajni</option>
+                    <option value="freze">Freze</option>
+                    <option value="delovi za poljoprivredne mašine">Delovi za poljoprivredne mašine</option>
+                    <option value="poljoprivredna mehanizacija">Poljoprivredna mehanizacija</option>
+                    <option value="ostalo">Ostalo</option>
+                </Input>
+                <Input  label="Tip" inputtype="select" name="subtip" value={this.state.data.tip2} onChange={(e) => this.onChangeTip2(e)}>
+                   <option value="" >{""}</option>
+                   {this.state.data.subtip.map(item => 
+                    <option  value={item.name} >{item.name}</option>
+                    )}
                     
-                    {opt.map(item => <option value={item.categoryprid} >{item.name}</option>)}
                 </Input>
                 <Input onFocus={(e) => this.onFocus(e)} style={this.state.imeEmpty ? {borderBottom:'1px solid red'} : {}} onChange={(e) => this.onChange(e)} inputtype="input" value={this.state.data.ime}  name="ime"  label="Ime"  type="text"/>
                 <Input onFocus={(e) => this.onFocus(e)} style={this.state.proizvodjacEmpty ? {borderBottom:'1px solid red'} : {}} onChange={(e) => this.onChange(e)} inputtype="input" value={this.state.data.proizvodjac} name="proizvodjac"  label="Proizvodjac"  type="text"/>
@@ -176,8 +240,6 @@ export async function getServerSideProps({req,res}){
                 res.writeHead(307,{Location:'/login'})
              res.end();
             }
-        var catdata = await fetch(PROTOCOL+"://"+HOST+"/api/getcategory")
-        .then(res => res.json()).then(data => data)
 
     //----------------------------------------------------
 
@@ -185,7 +247,6 @@ export async function getServerSideProps({req,res}){
     
     return {
         props:{
-            cat:catdata.data,
             data:[]
         }
     }
