@@ -29,7 +29,7 @@ const cartitems = (props) => {
             {cartitems}
         </div>
         <div className={styles.donjideo}>
-            <p>UKUPNO: <span>{price}</span><span> RSD</span></p>
+            <p>UKUPNO: <span>{Number(price).toFixed(0)}</span><span> RSD</span></p>
             <LinkButton click={toggleCart} link="/checkout" styles={styles.Button}>Završi kupovinu</LinkButton>
         </div>
     </div>);

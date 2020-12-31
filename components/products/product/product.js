@@ -20,12 +20,12 @@ const product = (props) => {
             <div className={styles.product}>
                 <div onClick={toggleItem} >
                 {props.search == "true" ? <Link href={'/webshop/'+props.tip+'/'+props.id+'?s='+props.backroute}><a><p className={styles.name}>{props.name}</p>
-                    <img className={styles.img} src={props.src} alt=""/></a></Link> : <Link href={'/webshop/'+props.tip+'/'+props.id}><a><p className={styles.name}>{props.name}</p>
-                    <img className={styles.img} src={props.src} alt=""/></a></Link>}
+                    <img className={styles.img} src={props.src ? props.src : "/product.png"} alt=""/></a></Link> : <Link href={'/webshop/'+props.tip+'/'+props.id}><a><p className={styles.name}>{props.name}</p>
+                    <img className={styles.img} src={props.src ? props.src : "/product.png"} alt=""/></a></Link>}
                     
                 </div>
                 
-                <p className={styles.cena}>{props.price}<span> RSD</span></p>
+                <p className={styles.cena}>{Number(props.price).toFixed(0)}<span> RSD</span></p>
                 <input onChange={(event) => onChangeHandler(event)} className={styles.input} type="number" value={quantity} name="kolicina" placeholder="1" min="1" max={props.kolicina}/>
                 <ATCButton item={initialItem} user={props.user}></ATCButton>
             </div>
