@@ -1,12 +1,71 @@
 import { useRouter } from 'next/router'
+import {useEffect,useState,useRef} from 'react'
+
 import Link from 'next/link'
 import styles from "../../styles/webshop.module.css";
 import Products from '../../components/products/products';
 import Cookies from 'cookies'
-
+var offset = 0
+var loading = false;
+var search4code = ""
+var tip4code = ""
+var sub4code = ""
+var kolona4code = ""
+var disScroll = false;
+var lastScroll = 0;
 function Search(props){
 	const router = useRouter()
+	const testRef = useRef();
 	var naslov = ""
+	const [searchValue,setSearchValue] = useState(props.searchValue);
+	const [data,setData] = useState(props.data);
+	useEffect(()=>{
+        window.addEventListener("scroll",scrollFunc)
+        
+    },[])
+     function scrollFunc(event){
+       
+        var {offsetTop,offsetHeight} = testRef.current
+        var scrollTrig = offsetHeight-offsetTop;
+        
+        if (window.scrollY < lastScroll) {
+            return;
+        }
+    
+        if(disScroll){
+            return;
+        }
+     
+        
+        
+        var scrollMaxY = window.scrollMaxY || (document.documentElement.scrollHeight - document.documentElement.clientHeight)
+        var HOST = process.env.NEXT_PUBLIC_HOST;
+        var PROTOCOL = process.env.NEXT_PUBLIC_PROTOCOL;
+        
+        if(window.scrollY > scrollTrig){
+
+            if(!loading){
+                offset +=40
+                loading = true
+               
+                    fetch(PROTOCOL+"://"+HOST+"/api/search?search="+searchValue+"&offset="+offset)
+	.then(res => res.json()).then(data => {
+						if(data.results.length == 0){
+                        	disScroll = true
+                        }
+                        setData(prevData => prevData.concat(data.results))
+						setTimeout(()=>{
+                        	loading = false
+                        },1000)
+		
+	})
+                    
+              
+            }
+        }
+        
+        lastScroll = window.scrollY
+    }
 	return (
 			<div className={styles.container}>
       
@@ -17,7 +76,10 @@ function Search(props){
 
 		            </h3>
 		            <div className={styles.line}></div>
-		            <Products user={props.user} search={props.search} backroute={props.param} data={props.data} mdata={props.mData}/>
+		            <div ref={testRef}>
+		            <Products user={props.user} search={props.search} backroute={props.param} data={data} mdata={props.mData}/>
+
+		            </div>
 		        </div>
 		      
 		    </div>
@@ -26,7 +88,8 @@ function Search(props){
 export async function getServerSideProps(context){
 	var HOST = process.env.HOST;
      var PROTOCOL = process.env.PROTOCOL
-	var data = await fetch(PROTOCOL+"://"+HOST+"/api/search?search="+context.query.search)
+     var offset = 0;
+	var data = await fetch(PROTOCOL+"://"+HOST+"/api/search?search="+context.query.search+"&offset="+offset)
 	.then(res => res.json()).then(data => data.results)
 	var email = ""
 	var online = true;
@@ -56,6 +119,7 @@ export async function getServerSideProps(context){
 			mData:"empty",
 			param:context.query.search,
 			search:"true",
+			searchValue:context.query.search,
 			user:user
 		}
 	}

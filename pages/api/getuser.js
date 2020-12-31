@@ -28,7 +28,8 @@ export default async (req,res) => {
           
         })
     }else{
-      con.query("SELECT * FROM partner ",(err,results) => {
+      var offset = req.query.offset;
+      con.query("SELECT * FROM partner LIMIT 40 OFFSET "+offset,(err,results) => {
           
             res.send(JSON.stringify({result:"Success",users:results}))
             res.end()

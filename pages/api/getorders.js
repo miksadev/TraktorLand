@@ -16,7 +16,8 @@ export default async (req,res) => {
     })
   }else if(req.query.zavrseni != undefined){
       var value = req.query.zavrseni
-      con.query("SELECT * FROM document WHERE zavrsen = ?",value,function(err,result,fields){
+      var offset = req.query.offset
+      con.query("SELECT * FROM document WHERE zavrsen = ? ORDER BY ime_prezime ASC LIMIT 40 OFFSET "+offset,value,function(err,result,fields){
       if(err) throw err;
       res.send(JSON.stringify(result))
       res.end()

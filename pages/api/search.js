@@ -6,7 +6,8 @@ export default async (req,res) => {
 
     if(req.query.search != undefined && req.query.tip == undefined){
       var search = req.query.search
-    con.query("SELECT * FROM product WHERE name LIKE ? ORDER BY name ASC LIMIT 10",search+"%",(err,results) => {
+      var offset = req.query.offset
+    con.query("SELECT * FROM product WHERE name LIKE ? ORDER BY name ASC LIMIT 40 OFFSET "+offset,search+"%",(err,results) => {
             var data = results
             var niz = []
             var res1 = results
