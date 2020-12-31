@@ -9,7 +9,7 @@ import {useRouter} from 'next/router';
 import useCart from '../../util/useCart';
 const WithRouterLogin = (props)=>{
     const router = useRouter();
-    const { toggleLogged } = useCart()
+    const {toggleLogged} = useCart()
     return <Login {...props} toggleLogged={toggleLogged} router={router} />
 }
 class Login extends React.Component {

@@ -9,6 +9,7 @@ export default async (req,res) => {
       var sub = req.query.sub;
       var search = req.query.search
       var tip = req.query.tip
+      var offset = req.query.offset
       var kolona = req.query.searchkolona
       var search_start;
   
@@ -55,7 +56,7 @@ export default async (req,res) => {
             result.map(item => {
               productids.push(item.productid)
             })
-            con.query("SELECT * FROM product WHERE name LIKE ? AND productid IN (?)",[search_start,productids],function(err,results){
+            con.query("SELECT * FROM product WHERE "+kolona+" LIKE ? AND productid IN (?) LIMIT 40 OFFSET "+offset,[search_start,productids],function(err,results){
               if(err) throw err;
              
               res.send(JSON.stringify({results}))

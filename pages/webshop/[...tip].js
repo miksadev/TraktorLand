@@ -1,34 +1,123 @@
-import { useRouter } from 'next/router'
+import { useRouter} from 'next/router'
+import { useRef } from 'react'
 import Link from 'next/link'
 import styles from "../../styles/webshop.module.css";
 import Products from '../../components/products/products';
 import {useState,useEffect} from 'react';
 import Filter from '../../components/Search/Filter/filter';
 import Cookies from 'cookies'
+
+var search4code = ""
+var sub4code = ""
+var kolona4code = ""
+var offset = 0;
+var disScroll = false;
+var lastScroll = 0;
 function Webshop(props){
+	
+	const testRef = useRef();
 	const [prodata,setProdata] = useState(props.data)
 	const [subCategory,setSubCategory] = useState(props.sub)
 	const [searchKolona,setSearchKolona] = useState("name")
 	const [searchSubCategory,setSearchSubCategory] = useState("")
 	const [searchValue,setSearchValue] = useState("");
+	const [position,setPosition] = useState();
+
 	const router = useRouter()
   	const tip = router.query.tip
 	var upLett = ["traktori","beraci","freze","kombajni","ostalo"];
-    
+    var loading = false;
 	var par = props.param
-	
+
 
 	var naslov = ""
+
 	
-	useEffect(() => {
+	
+	
+	useEffect(()=>{
+		search4code = searchValue
+
+	},[searchValue])
+	useEffect(()=>{
+		kolona4code = searchKolona
+
+	},[searchKolona])
+	useEffect(()=>{
+		sub4code = searchSubCategory
+	},[searchSubCategory])
+	function scrollFunc(event){
 		
+		var {offsetTop,offsetHeight} = testRef.current
+		var scrollTrig = offsetHeight-offsetTop;
+		
+		if (window.scrollY < lastScroll) {
+    		return;
+		}
+	
+		if(disScroll){
+			return;
+		}
+	
+		var scrollMaxY = window.scrollMaxY || (document.documentElement.scrollHeight - document.documentElement.clientHeight)
 		var HOST = process.env.NEXT_PUBLIC_HOST;
 		var PROTOCOL = process.env.NEXT_PUBLIC_PROTOCOL;
-		fetch(PROTOCOL +'://'+HOST+`/api/get?tip=`+props.type)
+		
+		if(window.scrollY > scrollTrig){
+			if(!loading){
+				if(search4code != "" || sub4code != ""){
+					offset +=40
+					loading = true
+					fetch(PROTOCOL+'://'+HOST+'/api/searchtip?search='+search4code+"&tip="+par+"&searchkolona="+kolona4code+"&sub="+sub4code+"&offset="+offset)
+			        .then(res => res.json())
+			        .then(data => {
+			        	if(data.length == 0){
+							disScroll = true
+						}
+			           setProdata(prevData => prevData.concat(data.results))
+			           setTimeout(()=>{
+						loading = false
+						},1000)
+			        })
+				}else{
+					offset +=40
+				loading = true
+				fetch(PROTOCOL +'://'+HOST+'/api/get?tip='+props.type+'&offset='+offset).then(res => res.json())
+				.then(data => {
+					if(data.length == 0){
+						disScroll = true
+					}
+					setProdata(prevData => prevData.concat(data))
+					setTimeout(()=>{
+						loading = false
+					},1000)
+					
+				})
+				}
+			
+			}
+		}
+		lastScroll = window.scrollY
+	}
+	
+	useEffect(() => {
+
+		window.addEventListener("scroll",scrollFunc)
+
+
+		var HOST = process.env.NEXT_PUBLIC_HOST;
+		var PROTOCOL = process.env.NEXT_PUBLIC_PROTOCOL;
+		var offset = 0
+		fetch(PROTOCOL +'://'+HOST+'/api/get?tip='+props.type+'&offset='+offset)
         .then(res => res.json())
         .then(data => {
            setProdata(data)
         })
+        return ()=>{
+
+        	window.removeEventListener("scroll",scrollFunc)
+
+        }
 	},[router.query.tip])
 	
 	
@@ -41,8 +130,9 @@ function Webshop(props){
 		naslov = "Poljoprivredna mehanizacija"
 	}
 	function onChange(e,sub){
-		
-		
+		offset =0;
+        	disScroll = false;
+		lastScroll = 0;
 			if(sub == "" || sub == undefined){
 			sub = searchSubCategory
 
@@ -69,9 +159,10 @@ function Webshop(props){
 		}
 		var HOST = process.env.NEXT_PUBLIC_HOST;
 		var PROTOCOL = process.env.NEXT_PUBLIC_PROTOCOL;
-		fetch(PROTOCOL+'://'+HOST+'/api/searchtip?search='+searchR+"&tip="+par+"&searchkolona="+searchK+"&sub="+sub)
+		fetch(PROTOCOL+'://'+HOST+'/api/searchtip?search='+searchR+"&tip="+par+"&searchkolona="+searchK+"&sub="+sub+"&offset="+offset)
         .then(res => res.json())
         .then(data => {
+        	
            setProdata(data.results)
         })
 		
@@ -86,9 +177,9 @@ function Webshop(props){
 		onChange(e,e.target.value)
 	}
 	return (
-			<div className={styles.container}>
+			<div className={styles.container} >
       
-		        <div className={styles.body}>
+		        <div className={styles.body} >
 		            <Link href="/webshop"><h1 className={styles.naslov}>{"<- WEBSHOP"}</h1></Link>
 		            
 		            <h3 className={styles.naslovmanji}>
@@ -105,7 +196,11 @@ function Webshop(props){
 					{subCategory.map(item => <option value={item.categoryprid}>{item.name}</option>)}
 					</select>
 		            <div className={styles.line}></div>
-		            <Products type={props.type} user={props.user} backroute={props.param} data={prodata} mdata={props.mData}/>
+		            {searchValue}
+		           <div ref={testRef}>
+		           <Products  type={props.type} user={props.user} backroute={props.param} data={prodata} mdata={props.mData}/>
+
+		           </div>
 		        </div>
 		       
 
@@ -125,10 +220,12 @@ export async function getServerSideProps(context){
 	var mData = "empty"
 	if(context.query.tip[1] != undefined){
 		var mParam = context.query.tip[1]
+		
 		var mData = await fetch(PROTOCOL +'://'+HOST+`/api/get?id=`+mParam).
 		then(res => res.json()).then(data =>data)
 	}
-	var data = await fetch(PROTOCOL +'://'+HOST+`/api/get?tip=`+param).
+	var offset = 0;
+	var data = await fetch(PROTOCOL +'://'+HOST+'/api/get?tip='+param+'&offset='+offset).
 	then(res => res.json()).then(data =>data)
 	var sub = await fetch(PROTOCOL +'://'+HOST+`/api/getsubcategory?name=`+param).
 	then(res => res.json()).then(data =>data)

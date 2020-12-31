@@ -45,6 +45,7 @@ export default async (req,res) => {
 	// }
 	if(req.query.tip != undefined){
 		var name = req.query.tip;
+		var offset = req.query.offset;
 		if(name == "delovi"){
       name = "Delovi Za Poljoprivredne Mašine"
     }else if(name == "mehanizacija"){
@@ -66,7 +67,7 @@ export default async (req,res) => {
 							result.map(item => {
 							productsid.push(item.productid)
 						})
-						con.query("SELECT * FROM product WHERE productid IN (?)",[productsid],function(err,result){
+						con.query("SELECT * FROM product WHERE productid IN (?) LIMIT 40 OFFSET "+offset,[productsid],function(err,result){
 							res.send(JSON.stringify(result))
 							res.end()
 							resolve()
@@ -87,7 +88,7 @@ export default async (req,res) => {
 						result.map(item => {
 							productsid.push(item.productid)
 						})
-						con.query("SELECT * FROM product WHERE productid IN (?)",[productsid],function(err,result){
+						con.query("SELECT * FROM product WHERE productid IN (?) LIMIT 40 OFFSET "+offset,[productsid],function(err,result){
 							res.send(JSON.stringify(result))
 							res.end()
 							resolve()
@@ -103,6 +104,7 @@ export default async (req,res) => {
 		})
 	}
 	if(req.query.id != undefined){
+
 		con.query("SELECT * FROM product WHERE productid = ?",req.query.id, function(err,result,fields){
 			if(err) throw err;
 				var data = result
@@ -129,8 +131,14 @@ export default async (req,res) => {
 		})
 	}
 	if(req.query.id == undefined && req.query.tip == undefined){
-		con.query("SELECT * FROM product", function(err,result,fields){
+		var offset = req.query.offset;
+		con.query("SELECT * FROM product ORDER BY name ASC LIMIT 40 OFFSET "+offset, function(err,result,fields){
 			if(err) throw err;
+			if(result.length == 0){
+				res.send(JSON.stringify([]))
+				res.end()
+				resolve()
+			}
 				var data = result
 				var count = result.length
 				var result2 = []
