@@ -64,7 +64,11 @@ const proizvodi = ({data} , props) => {
 
      useEffect(()=>{
         window.addEventListener("scroll",scrollFunc)
-        
+        return ()=>{
+
+            window.removeEventListener("scroll",scrollFunc)
+
+        }
     },[])
      useEffect(()=>{
         tip4code = tip

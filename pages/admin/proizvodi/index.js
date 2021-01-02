@@ -71,6 +71,11 @@ const proizvodi = (props) => {
     
     useEffect(()=>{
         window.addEventListener("scroll",scrollFunc)
+        return ()=>{
+
+            window.removeEventListener("scroll",scrollFunc)
+
+        }
     },[])
     function scrollFunc(event){
        

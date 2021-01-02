@@ -64,7 +64,11 @@ const proizvodi = (props) => {
      },[searchValue])
     useEffect(()=>{
         window.addEventListener("scroll",scrollFunc)
-        
+        return ()=>{
+
+            window.removeEventListener("scroll",scrollFunc)
+
+        }
     },[])
     function scrollFunc(event){
        
