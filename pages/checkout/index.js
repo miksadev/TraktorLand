@@ -43,8 +43,9 @@ export async function getServerSideProps({req,res}){
 }
 export default function Checkout({login,user}) {
   
-  const { price, items } = useCart();
-  const [fullPrice,setFullPrice] = useState(0)
+  const { price, items ,isLogged } = useCart();
+  const [fullPrice,setFullPrice] = useState(0);
+  const [pricePopust,setpricePopust] = useState(0)
   const [showPopUp, setShowPopUp] = useState(false);
   const router = useRouter();
 
@@ -59,10 +60,13 @@ export default function Checkout({login,user}) {
   );
 
   useEffect(()=>{
-    var fullprice_ = 0
+    var fullprice_ = 0;
+    var popust = 0;
     items.map(item => {
-      fullprice_ = fullprice_+(Number(item.price) * Number(item.qty))
+      fullprice_ = fullprice_+(Number(item.price) * Number(item.qty));
+      popust = popust + ((Number(item.price) - Number(item.price2)) * Number(item.qty));
     })
+    setpricePopust(popust);
     setFullPrice(fullprice_)
   },[fullPrice,items])
   const popUpHandler = () => {
@@ -80,7 +84,7 @@ export default function Checkout({login,user}) {
   const punakorpa = (
   <>
     <CartItemsNoSSR namena="checkout"/><div className={styles.total}>
-    <TotalNoSSR edit={true} klik={() => popUpHandler()} price={fullPrice} price2={price} rabat={user.rabat == undefined ?'0':user.rabat}/></div>
+    <TotalNoSSR isLogged={isLogged} edit={true} klik={() => popUpHandler()} price={fullPrice} price2={pricePopust} rabat={user.rabat == undefined ?'0':user.rabat}/></div>
     <FinishOrder show={showPopUp} off={() => popUpHandler()}/>
     
   </>);
@@ -89,7 +93,7 @@ export default function Checkout({login,user}) {
             <h1 className={styles.naslov}>Moja Korpa</h1>
             <div className={styles.line}></div>
             
-            {items ? punakorpa : praznakorpa}
+            {items.length != null && items.length > 0 ? punakorpa : praznakorpa}
             
             
         </div>

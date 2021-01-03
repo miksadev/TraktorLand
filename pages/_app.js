@@ -9,13 +9,15 @@ import { loadState , saveState } from '../store/localStorage';
 function MyApp({ Component, pageProps }) {
 
   const persistedState = loadState();
-  const store = useStore(persistedState);
-
+  const store = useStore(pageProps.initialReduxState);
+  // const store = useStore(pageProps.initialReduxState);
   store.subscribe(() => {
-    saveState({
-      items: store.getState().items,
-      price: store.getState().price
-    });
+    // saveState({
+    //   items: store.getState().items,
+    //   price: store.getState().price,
+    //   isLogged : store.getState().isLogged
+    // });
+    saveState(store.getState());
   })
 
   const router = useRouter();

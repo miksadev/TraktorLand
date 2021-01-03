@@ -196,7 +196,7 @@ function Webshop(props){
 					{subCategory.map(item => <option value={item.categoryprid}>{item.name}</option>)}
 					</select>
 		            <div className={styles.line}></div>
-		            {searchValue}
+		            {/* {searchValue} */}
 		           <div ref={testRef}>
 		           <Products  type={props.type} user={props.user} backroute={props.param} data={prodata} mdata={props.mData}/>
 

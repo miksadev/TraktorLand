@@ -28,7 +28,7 @@ const reducer = (state = initialState, { type, payload }) => {
       case "UND_ITEM":
       return{
         ...state,
-        isItemOpened:undefined
+        isItemOpened: undefined
       };
     case "TOGGLE_ITEM":
       return {
