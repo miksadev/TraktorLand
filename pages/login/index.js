@@ -69,7 +69,7 @@ class Login extends React.Component {
                 if(this.props.router.query.back != undefined){
                     this.props.router.push("/checkout/orderdetails")
                 }else{
-                    this.props.toggleLogged()
+                    this.props.toggleLogged(true);
                     this.props.router.push("/")
                     
                 }

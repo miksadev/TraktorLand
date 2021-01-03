@@ -38,13 +38,13 @@ const item = (props) => {
                     <img className={styles.img} src={props.proizvod[0].thumb ? props.proizvod[0].thumb : "/product.png"} alt=""/>
                     <div className={styles.cena}>
                         <p>Maloprodajna cena</p>
-                        <h3 className={styles.ukupnocena}>{props.proizvod[0].price ? Number(props.proizvod[0].price).toFixed(2) : 70800} <span>RSD</span></h3>
+                        <h3 className={styles.ukupnocena}>{props.proizvod[0].price ? Number(props.proizvod[0].price*1.2).toFixed(2) : 70800} <span>RSD</span></h3>
                     </div>
                     <div className={styles.cena}>
                         <p>Veleprodajna cena</p>
-                        <h3 className={styles.ukupnocena}>{props.proizvod[0].vp_cena ? props.proizvod[0].vp_cena : (Number(props.proizvod[0].price) - (Number(props.proizvod[0].price)*20/120)).toFixed(2)} <span>RSD</span></h3>
+                        <h3 className={styles.ukupnocena}>{props.proizvod[0].vp_cena ? props.proizvod[0].vp_cena : Number(props.proizvod[0].price).toFixed(2)} <span>RSD</span></h3>
                     </div>
-                     <AddToCart user={props.user} styles={styles.atcbutton} item={{id:props.proizvod[0].productid, rabat_1: props.proizvod[0].rabat_1, rabat_2: props.proizvod[0].rabat_2, rabat_3: props.proizvod[0].rabat_3, ime: props.proizvod[0].name,slika: props.proizvod[0].thumb,sifra: props.proizvod[0].code, price: Number(props.proizvod[0].price), qty: 1}}/>
+                     <AddToCart user={props.user} styles={styles.atcbutton} item={{id:props.proizvod[0].productid, rabat_1: props.proizvod[0].rabat_1, rabat_2: props.proizvod[0].rabat_2, rabat_3: props.proizvod[0].rabat_3, ime: props.proizvod[0].name,slika: props.proizvod[0].thumb,sifra: props.proizvod[0].code, price: Number(props.proizvod[0].price*1.2).toFixed(2), qty: 1}}/>
                 </div>
                 <div className={styles.line}/>
                     <div className={styles.block}>

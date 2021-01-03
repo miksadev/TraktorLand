@@ -14,10 +14,6 @@ const atcbutton = (props) => {
         	var user = props.user
         	var item = props.item
         	var popust = 0;
-            console.log("user")
-            console.log(user)
-            console.log("item")
-            console.log(item)
         	if(user.partnerid != undefined){
         		if(user.rabat == 1){
         			popust = item.rabat_1
@@ -27,10 +23,12 @@ const atcbutton = (props) => {
         			popust = item.rabat_3
         		}
         	}
-
         	var objToCart = {...props.item}
-        	
-        	objToCart["price2"] = item.price * (1 - popust/100)
+			objToCart["price"] = Number(item.price).toFixed(2);
+			objToCart["price1"] = (item.price * (1 - item.rabat_1/100)).toFixed(2);
+			objToCart["price2"] = (item.price * (1 - item.rabat_2/100)).toFixed(2);
+			objToCart["price3"] = (item.price * (1 - item.rabat_3/100)).toFixed(2);
+			console.log(objToCart);
         	addToCart(objToCart)
         }} className={classes.join(' ')}>+ Dodaj u Korpu</button>
     );

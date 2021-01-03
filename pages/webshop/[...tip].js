@@ -152,7 +152,6 @@ function Webshop(props){
 		naslov = "Poljoprivredna mehanizacija"
 	}
 	function onChange(e,sub){
-		console.log("ONCHANGE")
 		offset =0;
         	disScroll = false;
 		lastScroll = 0;
@@ -215,7 +214,7 @@ function Webshop(props){
 						<option value="kataloski_broj">Kataloski broj</option>
 					</select>
 					<select className={styles.selectt} name="selectsearchsub" value={searchSubCategory} onChange={e => onChangeSearchSub(e)}>
-						<option value="off">{""}</option>
+						<option value="off">{"Sve podkategorije"}</option>
 					{subCategory.map(item => <option value={item.categoryprid}>{item.name}</option>)}
 					</select>
 		            <div className={styles.line}></div>

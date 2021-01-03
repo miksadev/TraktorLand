@@ -7,7 +7,7 @@ export default async (req,res) => {
       var offset = req.query.offset
       var search = req.query.search
       var kolona = req.query.searchkolona
-    con.query("SELECT * FROM product WHERE "+kolona+" LIKE ? ORDER BY name ASC LIMIT 40 OFFSET "+offset,search+"%",(err,results) => {
+    con.query("SELECT * FROM product WHERE "+kolona+" LIKE ? ORDER BY name ASC LIMIT 40 OFFSET "+offset,["%"+search+"%"],(err,results) => {
           
             res.send(JSON.stringify({results}))
             res.end()

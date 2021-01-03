@@ -8,7 +8,10 @@ const initialState = {
   isCartOpened: false,
   items: [],
   price: 0,
-  shipping: {},
+  price1 : 0,
+  price2 : 0,
+  price3 : 0,
+  user: {},
   isLogged: false
 };
 
@@ -25,6 +28,11 @@ const reducer = (state = initialState, { type, payload }) => {
         ...state,
         isCartOpened: !state.isCartOpened,
       };
+    case "SET_USER":
+    return {
+      ...state,
+      user: {...payload},
+    };
       case "UND_ITEM":
       return{
         ...state,
@@ -38,7 +46,7 @@ const reducer = (state = initialState, { type, payload }) => {
     case "TOGGLE_LOGGED":		
     return {		
       ...state,		
-      isLogged: !state.isLogged,		
+      isLogged: payload,
     };
     case "ADD":
 
@@ -51,21 +59,23 @@ const reducer = (state = initialState, { type, payload }) => {
              item.qty += payload.qty;
            }
          });
-         console.log("PAYLOAD1")
-      console.log(payload)
          return {
           ...state,
-          price: state.price + (payload.price2 * payload.qty),
+          price: state.price + (payload.price * payload.qty),
+          price1: state.price1 + (payload.price1 * payload.qty),
+          price2: state.price2 + (payload.price2 * payload.qty),
+          price3: state.price3 + (payload.price3 * payload.qty),
           isCartOpened: true,
           items: newItems,
         };
       }
       else{
-        console.log("PAYLOAD2")
-      console.log(state.price)
         return {
           ...state,
-          price: state.price + payload.price2 * payload.qty,
+          price: state.price + payload.price * payload.qty,
+          price1: state.price1 + (payload.price1 * payload.qty),
+          price2: state.price2 + (payload.price2 * payload.qty),
+          price3: state.price3 + (payload.price3 * payload.qty),
           isCartOpened: true,
           items: [...state.items, payload],
         };
@@ -80,29 +90,44 @@ const reducer = (state = initialState, { type, payload }) => {
       });
       return {
         ...state,
-        price: state.price + payload.price2,
+        price:  Number(state.price) + Number(payload.price),
+        price1: Number(state.price1) + Number(payload.price1),
+        price2: Number(state.price2) + Number(payload.price2),
+        price3: Number(state.price3) + Number(payload.price3),
         items: newItems,
       };
     case "REMOVE_ONE":
     newItems = [...state.items];
     let newPrice = state.price;
+    let nprice1 = state.price1;
+    let nprice2 = state.price2;
+    let nprice3 = state.price3;
     newItems.forEach(item => {
       if(item.id == payload.id){
         if(item.qty > 1){
           item.qty--;
-          newPrice-=payload.price2;
+          newPrice-=payload.price;
+          nprice1-=payload.price1;
+          nprice2-=payload.price2;
+          nprice3-=payload.price3;
         }
       }
     });
     return {
       ...state,
       price: newPrice,
+      price1 : nprice1,
+      price2 : nprice2,
+      price3 : nprice3,
       items: newItems,
     };
     case "REMOVE":
       return {
         ...state,
-        price: state.price - payload.price2*payload.qty,
+        price: state.price - payload.price*payload.qty,
+        price1: state.price1 - payload.price1*payload.qty,
+        price2: state.price2 - payload.price2*payload.qty,
+        price3: state.price3 - payload.price3*payload.qty,
         items: state.items.filter(
           (item) => item.id !== payload.id
         ),

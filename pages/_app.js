@@ -10,7 +10,7 @@ function MyApp({ Component, pageProps }) {
 
   const persistedState = loadState();
   const store = useStore(pageProps.initialReduxState);
-  // const store = useStore(pageProps.initialReduxState);
+  // const store = useStore(persistedState);
   store.subscribe(() => {
     // saveState({
     //   items: store.getState().items,

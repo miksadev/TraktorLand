@@ -43,7 +43,8 @@ export async function getServerSideProps({req,res}){
 }
 export default function Checkout({login,user}) {
   
-  const { price, items ,isLogged } = useCart();
+  const { price,price1,price2,price3, items ,isLogged } = useCart();
+  console.log(price,price1,price2,price3);
   const [fullPrice,setFullPrice] = useState(0);
   const [pricePopust,setpricePopust] = useState(0)
   const [showPopUp, setShowPopUp] = useState(false);
@@ -51,24 +52,25 @@ export default function Checkout({login,user}) {
 
   const CartItemsNoSSR = dynamic(
     () => import('../../components/Cart/CartItems/cartitems'),
-    { ssr: false }
+    { ssr: true }
   );
 
   const TotalNoSSR = dynamic(
     () => import('../../components/UI/Checkout/total'),
-    { ssr: false }
+    { ssr: true }
   );
 
-  useEffect(()=>{
-    var fullprice_ = 0;
-    var popust = 0;
-    items.map(item => {
-      fullprice_ = fullprice_+(Number(item.price) * Number(item.qty));
-      popust = popust + ((Number(item.price) - Number(item.price2)) * Number(item.qty));
-    })
-    setpricePopust(popust);
-    setFullPrice(fullprice_)
-  },[fullPrice,items])
+  // useEffect(()=>{
+  //   var fullprice_ = 0;
+  //   var popust = 0;
+  //   items.map(item => {
+  //     fullprice_ = fullprice_+(Number(item.price) * Number(item.qty));
+  //     popust = popust + ((Number(item.price) - Number(item.price2)) * Number(item.qty));
+  //   })
+  //   setpricePopust(popust);
+  //   setFullPrice(fullprice_)
+  // },[fullPrice,items])
+  
   const popUpHandler = () => {
     if(login){
       router.push('/checkout/orderdetails')
@@ -84,7 +86,7 @@ export default function Checkout({login,user}) {
   const punakorpa = (
   <>
     <CartItemsNoSSR namena="checkout"/><div className={styles.total}>
-    <TotalNoSSR isLogged={isLogged} edit={true} klik={() => popUpHandler()} price={fullPrice} price2={pricePopust} rabat={user.rabat == undefined ?'0':user.rabat}/></div>
+    <TotalNoSSR isLogged={isLogged} edit={true} klik={() => popUpHandler()} price={price} price1={price1} price2={price2} price3={price3} rabat={user.rabat == undefined ? '0' : user.rabat}/></div>
     <FinishOrder show={showPopUp} off={() => popUpHandler()}/>
     
   </>);
