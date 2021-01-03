@@ -13,6 +13,7 @@ var kolona4code = ""
 var offset = 0;
 var disScroll = false;
 var lastScroll = 0;
+
 function Webshop(props){
 	
 	const testRef = useRef();
@@ -25,6 +26,8 @@ function Webshop(props){
 
 	const router = useRouter()
   	const tip = router.query.tip
+  	
+  
 	var upLett = ["traktori","beraci","freze","kombajni","ostalo"];
     var loading = false;
 	var par = props.param
@@ -32,10 +35,18 @@ function Webshop(props){
 
 	var naslov = ""
 
-	
-	
+	useEffect(()=>{
+		if(kolona4code != ""){
+        	setProdata(props.data)
+        	setSearchValue("")
+		}
+	},[par])
+	useEffect(()=>{
+		setSubCategory(props.sub)
+	},[props.sub])
 	
 	useEffect(()=>{
+
 		search4code = searchValue
 
 	},[searchValue])
@@ -71,7 +82,8 @@ function Webshop(props){
 					fetch(PROTOCOL+'://'+HOST+'/api/searchtip?search='+search4code+"&tip="+par+"&searchkolona="+kolona4code+"&sub="+sub4code+"&offset="+offset)
 			        .then(res => res.json())
 			        .then(data => {
-			        	if(data.length == 0){
+			        	
+			        	if(data.results.length == 0){
 							disScroll = true
 						}
 			           setProdata(prevData => prevData.concat(data.results))
@@ -103,16 +115,26 @@ function Webshop(props){
 	useEffect(() => {
 
 		window.addEventListener("scroll",scrollFunc)
-
-
-		var HOST = process.env.NEXT_PUBLIC_HOST;
-		var PROTOCOL = process.env.NEXT_PUBLIC_PROTOCOL;
-		var offset = 0
-		fetch(PROTOCOL +'://'+HOST+'/api/get?tip='+props.type+'&offset='+offset)
-        .then(res => res.json())
-        .then(data => {
-           setProdata(data)
-        })
+		// console.log("TIIP")
+		// console.log(par)
+		// var HOST = process.env.NEXT_PUBLIC_HOST;
+		// var PROTOCOL = process.env.NEXT_PUBLIC_PROTOCOL;
+		// var offset = 0
+		
+		// 	offset = 0;
+		// 	var HOST = process.env.NEXT_PUBLIC_HOST;
+		// var PROTOCOL = process.env.NEXT_PUBLIC_PROTOCOL;
+		// fetch(PROTOCOL+'://'+HOST+'/api/searchtip?search='+search4code+"&tip="+par+"&searchkolona="+kolona4code+"&sub="+sub4code+"&offset="+offset)
+  //       .then(res => res.json())
+  //       .then(data => {
+  //       	setProdata(data.results)
+  //          console.log("PREVVVV")
+  //          setProdata(prevData => {
+  //          	console.log(prevData)
+  //          	return data.results
+  //          })
+  //       })
+		
         return ()=>{
 
         	window.removeEventListener("scroll",scrollFunc)
@@ -130,6 +152,7 @@ function Webshop(props){
 		naslov = "Poljoprivredna mehanizacija"
 	}
 	function onChange(e,sub){
+		console.log("ONCHANGE")
 		offset =0;
         	disScroll = false;
 		lastScroll = 0;
@@ -185,18 +208,18 @@ function Webshop(props){
 		            <h3 className={styles.naslovmanji}>
 		            	{naslov}
 		            </h3>
-					<Filter styles={styles.filter} change={e => onChange(e)} placeholder="Pretrazi proizvode..."></Filter>
+					<Filter val={searchValue} styles={styles.filter} change={e => onChange(e)} placeholder="Pretrazi proizvode..."></Filter>
 					<select className={styles.selectt} name="selectsearch" value={searchKolona} onChange={e => onChangeSearch(e)}>
 						<option value="name">Ime</option>
 						<option value="code">Sifra</option>
 						<option value="kataloski_broj">Kataloski broj</option>
 					</select>
 					<select className={styles.selectt} name="selectsearchsub" value={searchSubCategory} onChange={e => onChangeSearchSub(e)}>
-						<option value="off">{"Sve podkategorije"}</option>
+						<option value="off">{""}</option>
 					{subCategory.map(item => <option value={item.categoryprid}>{item.name}</option>)}
 					</select>
 		            <div className={styles.line}></div>
-		            {/* {searchValue} */}
+		            
 		           <div ref={testRef}>
 		           <Products  type={props.type} user={props.user} backroute={props.param} data={prodata} mdata={props.mData}/>
 
