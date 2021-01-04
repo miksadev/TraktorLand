@@ -107,9 +107,15 @@ const reducer = (state = initialState, { type, payload }) => {
       let moze = 0;
       newItems.forEach(item => {
         if(item.id == payload.id){
+          console.log(item.qty, item.kolicina);
           if(item.qty + 1 <= item.kolicina){
+            console.log("sta sad")
             item.qty++;
             moze = 1;
+          }
+          else{
+            item.qty = item.kolicina;
+            moze = 2;
           }
         }
       });
@@ -123,6 +129,9 @@ const reducer = (state = initialState, { type, payload }) => {
           items: newItems,
         };
       }
+      else{
+        return state;
+      }
       
     case "REMOVE_ONE":
     newItems = [...state.items];
@@ -133,6 +142,7 @@ const reducer = (state = initialState, { type, payload }) => {
     newItems.forEach(item => {
       if(item.id == payload.id){
         if(item.qty > 1){
+          console.log("smanji sad")
           item.qty--;
           newPrice-=payload.price;
           nprice1-=payload.price1;

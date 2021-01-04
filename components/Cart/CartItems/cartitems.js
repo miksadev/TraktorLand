@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState, useEffect} from 'react';
 import styles from './cartitems.module.css';
 import CartItem from './CartItem/cartitem';
 import useCart from '../../../util/useCart';
@@ -6,8 +6,32 @@ import LinkButton from '../../UI/Button/LinkButton/linkButton';
 
 const cartitems = (props) => {
 
-    const {price, toggleCart, items, removeFromCart, addOne, removeOne, isLogged} = useCart();
+    const {price,price1,price2,price3, toggleCart, items, removeFromCart, addOne, removeOne, isLogged,user} = useCart();
     
+    const [priceCart, setPriceCart] = useState(price);
+    useEffect(() => {
+      if(isLogged){
+        switch(user.rabat){
+          case 0 :
+            setPriceCart(price);
+            break;
+          case 1: 
+            setPriceCart(price1);
+            break;
+          case 2: 
+            setPriceCart(price2);
+            break;
+          case 3: 
+            setPriceCart(price3);
+            break;
+          default:
+            setPriceCart(0);
+        }
+      }
+      else{
+        setPriceCart(price);
+      }
+    },[price, isLogged]);
     let cartitems = items.map(cartitem => {
 
         const item = {
@@ -21,14 +45,7 @@ const cartitems = (props) => {
           qty: cartitem.qty, 
           sifra: cartitem.sifra
         };
-        return <CartItem isLogged={isLogged} edit={true} sifra={cartitem.sifra} namena={props.namena} key={cartitem.id} src={cartitem.slika} name={cartitem.ime} price2={cartitem.price2} price={cartitem.price} qty={cartitem.qty} up={() => {
-          if(cartitem.qty >= cartitem.kolicina){
-            return;
-          }else{
-            addOne(item);
-          }
-
-        }} down={() => removeOne(item)} brisi={() => removeFromCart(item)}></CartItem>
+        return <CartItem isLogged={isLogged} edit={true} sifra={cartitem.sifra} namena={props.namena} key={cartitem.id} src={cartitem.slika} name={cartitem.ime} price={cartitem.price} price1={cartitem.price1} price2={cartitem.price2} price3={cartitem.price3} rabat = {user.rabat} qty={cartitem.qty} up={() => addOne(item)} down={() => removeOne(item)} brisi={() => removeFromCart(item)}></CartItem>
     });
 
     let korpa = (
@@ -39,7 +56,7 @@ const cartitems = (props) => {
             {cartitems}
         </div>
         <div className={styles.donjideo}>
-            <p>UKUPNO: <span>{Number(price).toFixed(0)}</span><span> RSD</span></p>
+            <p>UKUPNO: <span>{Number(priceCart).toFixed(0)}</span><span> RSD</span></p>
             <LinkButton click={toggleCart} link="/checkout" styles={styles.Button}>Završi kupovinu</LinkButton>
         </div>
     </div>);
