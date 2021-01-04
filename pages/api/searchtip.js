@@ -56,12 +56,30 @@ export default async (req,res) => {
             result.map(item => {
               productids.push(item.productid)
             })
-            con.query("SELECT * FROM product WHERE "+kolona+" LIKE ? AND productid IN (?) LIMIT 40 OFFSET "+offset,[search_start,productids],function(err,results){
-              if(err) throw err;
-             
-              res.send(JSON.stringify({results}))
-              res.end()
-              resolve();
+            con.query("SELECT * FROM product WHERE "+kolona+" LIKE ? AND productid IN (?) LIMIT 40 OFFSET "+offset,[search_start,productids],function(err,result){
+              if(result.length == 0){
+                res.send(JSON.stringify({results:[]}))
+                res.end()
+                resolve()
+              }
+              var data = result
+              var count = result.length
+              var result2 = []
+              var num = 1
+              result.map((item) => {
+                con.query("SELECT * FROM productamount WHERE productid = ?",item.productid,(err,result) => {
+                  data[num-1]["qty"] = result[0].productamountb2b
+                  result2.push(data[num-1])
+                  
+                  if(num == count){
+                    
+                    res.send(JSON.stringify({results:result2}))
+                    res.end()
+                    resolve()
+                  }
+                  num++
+                })
+              })
             })
             }
             

@@ -184,7 +184,8 @@ function Webshop(props){
 		fetch(PROTOCOL+'://'+HOST+'/api/searchtip?search='+searchR+"&tip="+par+"&searchkolona="+searchK+"&sub="+sub+"&offset="+offset)
         .then(res => res.json())
         .then(data => {
-        	
+        	console.log("DADADADA")
+        	console.log(data.results.length)
            setProdata(data.results)
         })
 		

@@ -13,10 +13,10 @@ var GOOGLE_CLOUD_DB_HOST = process.env.GOOGLE_CLOUD_DB_HOST;
 // })
 import mysql from 'mysql';
 
-const con = mysql.createConnection({
-	host:'127.0.0.1',
+const con = mysql.createPool({
+	host:'localhost',
 	user:'root',
-	password:'123456',
-	database:'gazzele_web'
+	password:'',
+	database:'traktorland2'
 });
 export default con;
