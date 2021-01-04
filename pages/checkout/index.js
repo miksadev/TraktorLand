@@ -8,6 +8,9 @@ import FinishOrder from '../../components/UI/FinishOrder/PopUp/popUp';
 import {useRouter} from 'next/router';
 import Cookies from 'cookies'
 import dynamic from 'next/dynamic';
+import TotalNoSSR from '../../components/UI/Checkout/total';
+import CartItemsNoSSR from '../../components/Cart/CartItems/cartitems';
+
 
 export async function getServerSideProps({req,res}){
         var HOST = process.env.HOST;
@@ -50,15 +53,15 @@ export default function Checkout({login,user}) {
   const [showPopUp, setShowPopUp] = useState(false);
   const router = useRouter();
 
-  const CartItemsNoSSR = dynamic(
-    () => import('../../components/Cart/CartItems/cartitems'),
-    { ssr: true }
-  );
+  // const CartItemsNoSSR = dynamic(
+  //   () => import('../../components/Cart/CartItems/cartitems'),
+  //   { ssr: true }
+  // );
 
-  const TotalNoSSR = dynamic(
-    () => import('../../components/UI/Checkout/total'),
-    { ssr: true }
-  );
+  // const TotalNoSSR = dynamic(
+  //   () => import('../../components/UI/Checkout/total'),
+  //   { ssr: true }
+  // );
 
   // useEffect(()=>{
   //   var fullprice_ = 0;

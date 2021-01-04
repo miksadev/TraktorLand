@@ -8,8 +8,6 @@ const total = (props) => {
     const { price,price1,price2,price3, items ,isLogged } = useCart();
     const classes = [styles.total];
 
-    
-
     useEffect(() => {
         // {props.isLogged ? setPopust(props.price2) : setPopust(0)}
         if(props.isLogged){
@@ -30,7 +28,7 @@ const total = (props) => {
                     setPopust(0)
             }
         }
-    }, [props.isLogged]);
+    }, [props.isLogged, price, props.rabat]);
     
     return (
         <div className={classes.join(' ')} style={!props.edit ? {height: "230px"} : null}>

@@ -16,3 +16,7 @@
     right: 0;
     cursor: pointer;
 }
+.disable{
+    background: grey;
+    cursor: not-allowed;
+}

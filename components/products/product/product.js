@@ -32,8 +32,8 @@ const product = (props) => {
                 </div>
                 
                 <p className={styles.cena}>{Number(props.price*1.2).toFixed(0)}<span> RSD</span></p>
-                <input onChange={(event) => onChangeHandler(event)} className={styles.input} type="number" value={quantity} name="kolicina" placeholder="1" min={props.kolicina == 0 ? 0 : 1} max={props.kolicina}/>
-                <ATCButton item={initialItem} user={props.user}></ATCButton>
+                <input onChange={(event) => onChangeHandler(event)} className={styles.input} type="number" value={quantity} name="kolicina" placeholder={props.kolicina == 0 ? 0 : 1} min={props.kolicina == 0 ? 0 : 1} max={props.kolicina}/>
+                <ATCButton disable={props.kolicina == 0 ? true : false} item={initialItem} user={props.user}></ATCButton>
             </div>
         </>
     );

@@ -8,9 +8,12 @@ const atcbutton = (props) => {
   
     if(props.styles){
         classes.push(props.styles);
-    }
+	}
+	if(props.disable){
+		classes.push(styles.disable);
+	}
     return (
-        <button onClick={() => {
+        <button onClick={!props.disable ? () => {
         	var user = props.user
         	var item = props.item
         	var popust = 0;
@@ -30,7 +33,7 @@ const atcbutton = (props) => {
 			objToCart["price3"] = (item.price * (1 - item.rabat_3/100)).toFixed(2);
 			console.log(objToCart);
         	addToCart(objToCart)
-        }} className={classes.join(' ')}>+ Dodaj u Korpu</button>
+        }: null} className={classes.join(' ')}>+ Dodaj u Korpu</button>
     );
 }
 export default atcbutton;

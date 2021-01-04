@@ -2,14 +2,15 @@ import React from 'react';
 import useCart from '../../../util/useCart';
 import styles from './carticon.module.css';
 import dynamic from 'next/dynamic';
+import CountNoSSR from './CartCount/count';
 
 const carticon = (props) => {
     const {toggleCart,items} = useCart();
 
-    const CountNoSSR = dynamic(
-        () => import('./CartCount/count'),
-        { ssr: false }
-      );
+    // const CountNoSSR = dynamic(
+    //     () => import('./CartCount/count'),
+    //     { ssr: false }
+    //   );
 
     return(
         <div className={styles.carticon}>
