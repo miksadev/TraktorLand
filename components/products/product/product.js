@@ -10,8 +10,14 @@ const product = (props) => {
     const {isItemOpened, toggleItem} = useCart();
 
     const onChangeHandler = (e) => {
-        setInitialItem({...initialItem, qty:Number(e.target.value)});
-        setQty(e.target.value);
+        if(e.target.value > props.kolicina){
+            setQty(props.kolicina);
+            setInitialItem({...initialItem, qty:Number(props.kolicina)});
+        }
+        else{
+            setQty(e.target.value);
+            setInitialItem({...initialItem, qty:Number(e.target.value)});
+        }
     }
     const HOST = process.env.NEXT_PUBLIC_HOST;
     const PROTOCOL = process.env.NEXT_PUBLIC_PROTOCOL;

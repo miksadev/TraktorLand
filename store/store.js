@@ -52,22 +52,44 @@ const reducer = (state = initialState, { type, payload }) => {
 
       let plusitem = state.items.filter((item) => item.id == payload.id);
       let newItems = [...state.items];
-
+      moze = 0;
+      let mnozi = 1;
       if(plusitem.length > 0){
           newItems.forEach(item => {
-           if(item.id == payload.id){
-             item.qty += payload.qty;
-           }
+            if(item.id == payload.id){
+              if(item.qty + payload.qty <= item.kolicina){
+                item.qty += payload.qty;
+                moze = 1;
+              }
+              else{
+                moze = 2;
+                mnozi = item.kolicina - item.qty;
+                item.qty = item.kolicina;
+              }
+            }
          });
-         return {
-          ...state,
-          price: state.price + (payload.price * payload.qty),
-          price1: state.price1 + (payload.price1 * payload.qty),
-          price2: state.price2 + (payload.price2 * payload.qty),
-          price3: state.price3 + (payload.price3 * payload.qty),
-          isCartOpened: true,
-          items: newItems,
-        };
+         if(moze == 1){
+          return {
+            ...state,
+            price: state.price + (payload.price * payload.qty),
+            price1: state.price1 + (payload.price1 * payload.qty),
+            price2: state.price2 + (payload.price2 * payload.qty),
+            price3: state.price3 + (payload.price3 * payload.qty),
+            isCartOpened: true,
+            items: newItems,
+          };
+         }
+         else if(moze == 2){
+          return {
+            ...state,
+            price: state.price + (payload.price * mnozi),
+            price1: state.price1 + (payload.price1 * mnozi),
+            price2: state.price2 + (payload.price2 * mnozi),
+            price3: state.price3 + (payload.price3 * mnozi),
+            isCartOpened: true,
+            items: newItems,
+          };
+         }
       }
       else{
         return {
@@ -82,20 +104,26 @@ const reducer = (state = initialState, { type, payload }) => {
       }
     case "ADD_ONE":
       newItems = [...state.items];
-
+      let moze = 0;
       newItems.forEach(item => {
         if(item.id == payload.id){
-          item.qty++;
+          if(item.qty + 1 <= item.kolicina){
+            item.qty++;
+            moze = 1;
+          }
         }
       });
-      return {
-        ...state,
-        price:  Number(state.price) + Number(payload.price),
-        price1: Number(state.price1) + Number(payload.price1),
-        price2: Number(state.price2) + Number(payload.price2),
-        price3: Number(state.price3) + Number(payload.price3),
-        items: newItems,
-      };
+      if(moze == 1){
+        return {
+          ...state,
+          price:  Number(state.price) + Number(payload.price),
+          price1: Number(state.price1) + Number(payload.price1),
+          price2: Number(state.price2) + Number(payload.price2),
+          price3: Number(state.price3) + Number(payload.price3),
+          items: newItems,
+        };
+      }
+      
     case "REMOVE_ONE":
     newItems = [...state.items];
     let newPrice = state.price;

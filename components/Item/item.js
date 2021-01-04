@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useState,useEffect} from 'react';
 import styles from './item.module.css';
 import Wrapper from '../UI/ItemWrapper/itemWrapper';
 import AddToCart from '../UI/Button/AddToCart/atcbutton';
@@ -9,10 +9,19 @@ import useCart from '../../util/useCart';
 
 const item = (props) => {
     const router = useRouter();
+    const [quantity, setQty] = useState(props.proizvod[0].qty == 0 ? 0 : 1);
     const {isItemOpened, toggleItem, undItem} = useCart();
     var back = router.query.tip[0];
 
-    
+    const onChangeHandler = (e) => {
+        if(e.target.value > props.proizvod[0].qty){
+            setQty(props.proizvod[0].qty);
+        }
+        else{
+            setQty(e.target.value);
+        }
+    }
+
     useEffect(() => {
         if(isItemOpened != null){
             if(!isItemOpened){
@@ -46,7 +55,8 @@ const item = (props) => {
                         <p>Veleprodajna cena</p>
                         <h3 className={styles.ukupnocena}>{props.proizvod[0].vp_cena ? props.proizvod[0].vp_cena : Number(props.proizvod[0].price).toFixed(2)} <span>RSD</span></h3>
                     </div>
-                     <AddToCart user={props.user} styles={styles.atcbutton} item={{id:props.proizvod[0].productid, rabat_1: props.proizvod[0].rabat_1, rabat_2: props.proizvod[0].rabat_2, rabat_3: props.proizvod[0].rabat_3, ime: props.proizvod[0].name,slika: props.proizvod[0].thumb,sifra: props.proizvod[0].code, price: Number(props.proizvod[0].price*1.2).toFixed(2), qty: 1}}/>
+                    <input onChange={(event) => onChangeHandler(event)} className={styles.input} type="number" value={quantity} name="kolicina" placeholder="1" min={props.proizvod.kolicina == 0 ? 0 : 1} max={props.proizvod[0].qty}/>
+                     <AddToCart user={props.user} styles={styles.atcbutton} item={{id:props.proizvod[0].productid, rabat_1: props.proizvod[0].rabat_1, rabat_2: props.proizvod[0].rabat_2, rabat_3: props.proizvod[0].rabat_3, ime: props.proizvod[0].name,slika: props.proizvod[0].thumb,sifra: props.proizvod[0].code, price: Number(props.proizvod[0].price*1.2).toFixed(2), qty: quantity}}/>
                 </div>
                 <div className={styles.line}/>
                     <div className={styles.block}>
