@@ -12,41 +12,44 @@ import TotalNoSSR from '../../components/UI/Checkout/total';
 import CartItemsNoSSR from '../../components/Cart/CartItems/cartitems';
 
 
-export async function getServerSideProps({req,res}){
-        var HOST = process.env.HOST;
-        var PROTOCOL = process.env.PROTOCOL
-        var login = false;
-        var user = ""
-        var email = ""
-        var cookies = new Cookies(req,res)
-        var authToken = cookies.get('auth-token')
-        if(authToken != undefined){
-             login = true;
-             await fetch(PROTOCOL+'://'+HOST+'/api/checkauth',
-            {headers:{'auth-token':authToken}}).then(res => res.json())
-        .then(data => {
-           email = data.email
-        })
+// export async function getServerSideProps({req,res}){
+//         var HOST = process.env.HOST;
+//         var PROTOCOL = process.env.PROTOCOL
+//         var login = false;
+//         var user = ""
+//         var email = ""
+//         var cookies = new Cookies(req,res)
+//         var authToken = cookies.get('auth-token')
+//         if(authToken != undefined){
+//              login = true;
+//              await fetch(PROTOCOL+'://'+HOST+'/api/checkauth',
+//             {headers:{'auth-token':authToken}}).then(res => res.json())
+//         .then(data => {
+//            email = data.email
+//         })
 
-        await fetch(PROTOCOL+'://'+HOST+'/api/getuser',{
-                method:'POST',
-                body:JSON.stringify({email:email})
-            }).then(res => res.json()).then(data => {
-                user = data.user
-            })
-        }
+//         await fetch(PROTOCOL+'://'+HOST+'/api/getuser',{
+//                 method:'POST',
+//                 body:JSON.stringify({email:email})
+//             }).then(res => res.json()).then(data => {
+//                 user = data.user
+//             })
+//         }
         
         
-        return{
-           props:{
-            user:user,
-            login:login
-           }
-        }
-}
-export default function Checkout({login,user}) {
+//         return{
+//            props:{
+//             user:user,
+//             login:login
+//            }
+//         }
+// }
+
+
+// export default function Checkout({login,user}) {
+  export default function Checkout() {
   
-  const { price,price1,price2,price3, items ,isLogged } = useCart();
+  const { price,price1,price2,price3, items ,isLogged, user } = useCart();
   console.log(price,price1,price2,price3);
   const [fullPrice,setFullPrice] = useState(0);
   const [pricePopust,setpricePopust] = useState(0)
@@ -75,7 +78,7 @@ export default function Checkout({login,user}) {
   // },[fullPrice,items])
   
   const popUpHandler = () => {
-    if(login){
+    if(isLogged){
       router.push('/checkout/orderdetails')
       return;
     }

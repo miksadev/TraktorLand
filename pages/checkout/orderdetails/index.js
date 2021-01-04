@@ -4,58 +4,60 @@ import Input from '../../../components/UI/Input/input';
 import Submit from '../../../components/UI/Button/Submit/submit';
 import Cookies from 'cookies'
 import useCart from '../../../util/useCart';
-import {useState,useEffect,useRef } from 'react'
-export async function getServerSideProps({req,res}){
-    var HOST = process.env.HOST;
-    var PROTOCOL = process.env.PROTOCOL
-    var user = ""
-    var email = ""
-    var cookies = new Cookies(req,res)
-    var authToken = cookies.get('auth-token')
-    if(authToken != undefined){
-        await fetch(PROTOCOL+'://'+HOST+'/api/checkauth',{headers:{'auth-token':authToken}})
-        .then(res => res.json()).then(data => {
-            email = data.email
-        })
+import {useState,useEffect,useRef } from 'react';
 
-        await fetch(PROTOCOL+'://'+HOST+'/api/getuser',{
-            method:'POST',
-            body:JSON.stringify({email:email})
-        }).then(res => res.json()).then(data => {
-            user = data.user
-        })
-    }else{
-        user = {
-        ime:"",
+
+// export async function getServerSideProps({req,res}){
+//     var HOST = process.env.HOST;
+//     var PROTOCOL = process.env.PROTOCOL
+//     var user = ""
+//     var email = ""
+//     var cookies = new Cookies(req,res)
+//     var authToken = cookies.get('auth-token')
+//     if(authToken != undefined){
+//         await fetch(PROTOCOL+'://'+HOST+'/api/checkauth',{headers:{'auth-token':authToken}})
+//         .then(res => res.json()).then(data => {
+//             email = data.email
+//         })
+
+//         await fetch(PROTOCOL+'://'+HOST+'/api/getuser',{
+//             method:'POST',
+//             body:JSON.stringify({email:email})
+//         }).then(res => res.json()).then(data => {
+//             user = data.user
+//         })
+//     }else{
+//         user = {
+//         ime:"",
         
-        telefon:"",
-        email:"",
-        adresa:"",
-        grad:"",
-        postanski_broj:""
-    }
-    }
+//         telefon:"",
+//         email:"",
+//         adresa:"",
+//         grad:"",
+//         postanski_broj:""
+//     }
+//     }
     
-    return{
-        props:{
-            user:user
-        }
-    }
-}
-export default function Kontakt({user}) {
-    const [user_,setUser] = useState(user);
+//     return{
+//         props:{
+//             user:user
+//         }
+//     }
+// }
+
+export default function Kontakt() {
     const [orderdata,setOrderdata] = useState({})
     const [inputEmpty,setInputEmpty] = useState({
 
         ime:false,
-        
         telefon:false,
         email:false,
         adresa:false,
         grad:false,
         postanski_broj:false
     })
-    const { price, items } = useCart();
+    const { price, items, isLogged, user } = useCart();
+    const [user_,setUser] = useState(user);
     const submitRef = useRef(null)
     useEffect(() => {
         
@@ -103,14 +105,14 @@ export default function Kontakt({user}) {
         <div className={styles.body}>
         <form method="POST" action="/checkout/order">
             <Form formname="Detalji Narudžbine">
-                <Input onFocus={e => onFocus(e)} style={inputEmpty.ime ? {borderBottom:'1px solid red'} : {}} onChange={e => onChange(e)}   inputtype="input"  label="Ime" placeholder="npr. Petar" value={user_.name} name="ime" type="text"></Input>
+                <Input onFocus={e => onFocus(e)} style={inputEmpty.ime ? {borderBottom:'1px solid red'} : {}} onChange={e => onChange(e)}   inputtype="input"  label="Ime" placeholder="npr. Petar" value={user_.name} name="name" type="text"></Input>
                 
-                <Input onFocus={e => onFocus(e)} style={inputEmpty.telefon ? {borderBottom:'1px solid red'} : {}} onChange={e => onChange(e)}  inputtype="input"  label="Telefon" placeholder="npr. 060/123/45-67" name="telefon" value={user_.phone} type="text"></Input>
+                <Input onFocus={e => onFocus(e)} style={inputEmpty.telefon ? {borderBottom:'1px solid red'} : {}} onChange={e => onChange(e)}  inputtype="input"  label="Telefon" placeholder="npr. 060/123/45-67" name="phone" value={user_.phone} type="text"></Input>
                 <Input onFocus={e => onFocus(e)} style={inputEmpty.email ? {borderBottom:'1px solid red'} : {}} onChange={e => onChange(e)}   inputtype="input"  label="E-mail" placeholder="npr. vasaadresa@gmail.com" name="email" value={user_.email} type="email"></Input>
                 <div className={styles.line}></div>
-                <Input onFocus={e => onFocus(e)} style={inputEmpty.adresa ? {borderBottom:'1px solid red'} : {}} onChange={e => onChange(e)}   inputtype="input"  label="Adresa" placeholder="npr. Cara Dušana 26" value={user_.address} name="adresa" type="text"></Input>
-                <Input onFocus={e => onFocus(e)} style={inputEmpty.grad ? {borderBottom:'1px solid red'} : {}} onChange={e => onChange(e)}  inputtype="input"  label="Grad" placeholder="npr. Beograd" name="grad" value={user_.city} type="text"></Input>
-                <Input onFocus={e => onFocus(e)} style={inputEmpty.postanski_broj ? {borderBottom:'1px solid red'} : {}} onChange={e => onChange(e)}  inputtype="input"  label="Poštanski br." placeholder="npr. 11000" name="postanski_broj" value={user_.zip} type="text"></Input>
+                <Input onFocus={e => onFocus(e)} style={inputEmpty.adresa ? {borderBottom:'1px solid red'} : {}} onChange={e => onChange(e)}   inputtype="input"  label="Adresa" placeholder="npr. Cara Dušana 26" value={user_.address} name="address" type="text"></Input>
+                <Input onFocus={e => onFocus(e)} style={inputEmpty.grad ? {borderBottom:'1px solid red'} : {}} onChange={e => onChange(e)}  inputtype="input"  label="Grad" placeholder="npr. Beograd" name="city" value={user_.city} type="text"></Input>
+                <Input onFocus={e => onFocus(e)} style={inputEmpty.postanski_broj ? {borderBottom:'1px solid red'} : {}} onChange={e => onChange(e)}  inputtype="input"  label="Poštanski br." placeholder="npr. 11000" name="zip" value={user_.zip} type="text"></Input>
                <input type="hidden" value={JSON.stringify(orderdata)} name="orderdata" />
                <input type="hidden" name="rabat" value={user_.rabat} />
                <input type="hidden" name="partnerid" value={user_.partnerid} />
