@@ -10,6 +10,7 @@ const useCart = () => {
   const price2 = useSelector((state) => state.price2);
   const price3 = useSelector((state) => state.price3);
   const user = useSelector((state) => state.user);
+  const shipping = useSelector((state) => state.shipping);
   const dispatch = useDispatch();
   let isLogged = useSelector((state) => state.isLogged);
 
@@ -83,7 +84,9 @@ const useCart = () => {
     isCartOpened,
     isItemOpened,
     isLogged,
+    shipping,
     setUser,
+    setShipping,
     toggleCart,
     toggleItem,
     toggleLogged,

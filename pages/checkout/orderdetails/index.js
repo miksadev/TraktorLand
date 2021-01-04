@@ -48,27 +48,28 @@ import {useState,useEffect,useRef } from 'react';
 export default function Kontakt() {
     const [orderdata,setOrderdata] = useState({})
     const [inputEmpty,setInputEmpty] = useState({
-
-        ime:false,
-        telefon:false,
+        name:false,
+        phone:false,
         email:false,
-        adresa:false,
-        grad:false,
-        postanski_broj:false
+        address:false,
+        city:false,
+        zip:false
     })
-    const { price, items, isLogged, user } = useCart();
+    const { price, items, isLogged, user, setShipping } = useCart();
     const [user_,setUser] = useState(user);
     const submitRef = useRef(null)
+
     useEffect(() => {
-        
         var newOrderdata = {...orderdata}
         newOrderdata.items = items
         setOrderdata(newOrderdata)
     },[items])
+
      function onChange(e){
         var newUser = {...user_}
         newUser[e.target.name] = e.target.value
         setUser(newUser)
+        setShipping(newUser)
         var newOrderdata = {...orderdata}
         newOrderdata.user = newUser
         setOrderdata(newOrderdata)
@@ -105,14 +106,14 @@ export default function Kontakt() {
         <div className={styles.body}>
         <form method="POST" action="/checkout/order">
             <Form formname="Detalji Narudžbine">
-                <Input onFocus={e => onFocus(e)} style={inputEmpty.ime ? {borderBottom:'1px solid red'} : {}} onChange={e => onChange(e)}   inputtype="input"  label="Ime" placeholder="npr. Petar" value={user_.name} name="name" type="text"></Input>
+                <Input onFocus={e => onFocus(e)} style={inputEmpty.name ? {borderBottom:'1px solid red'} : {}} onChange={e => onChange(e)}   inputtype="input"  label="Ime" placeholder="npr. Petar" value={user_.name} name="name" type="text"></Input>
                 
-                <Input onFocus={e => onFocus(e)} style={inputEmpty.telefon ? {borderBottom:'1px solid red'} : {}} onChange={e => onChange(e)}  inputtype="input"  label="Telefon" placeholder="npr. 060/123/45-67" name="phone" value={user_.phone} type="text"></Input>
+                <Input onFocus={e => onFocus(e)} style={inputEmpty.phone ? {borderBottom:'1px solid red'} : {}} onChange={e => onChange(e)}  inputtype="input"  label="Telefon" placeholder="npr. 060/123/45-67" name="phone" value={user_.phone} type="text"></Input>
                 <Input onFocus={e => onFocus(e)} style={inputEmpty.email ? {borderBottom:'1px solid red'} : {}} onChange={e => onChange(e)}   inputtype="input"  label="E-mail" placeholder="npr. vasaadresa@gmail.com" name="email" value={user_.email} type="email"></Input>
                 <div className={styles.line}></div>
-                <Input onFocus={e => onFocus(e)} style={inputEmpty.adresa ? {borderBottom:'1px solid red'} : {}} onChange={e => onChange(e)}   inputtype="input"  label="Adresa" placeholder="npr. Cara Dušana 26" value={user_.address} name="address" type="text"></Input>
-                <Input onFocus={e => onFocus(e)} style={inputEmpty.grad ? {borderBottom:'1px solid red'} : {}} onChange={e => onChange(e)}  inputtype="input"  label="Grad" placeholder="npr. Beograd" name="city" value={user_.city} type="text"></Input>
-                <Input onFocus={e => onFocus(e)} style={inputEmpty.postanski_broj ? {borderBottom:'1px solid red'} : {}} onChange={e => onChange(e)}  inputtype="input"  label="Poštanski br." placeholder="npr. 11000" name="zip" value={user_.zip} type="text"></Input>
+                <Input onFocus={e => onFocus(e)} style={inputEmpty.address ? {borderBottom:'1px solid red'} : {}} onChange={e => onChange(e)}   inputtype="input"  label="Adresa" placeholder="npr. Cara Dušana 26" value={user_.address} name="address" type="text"></Input>
+                <Input onFocus={e => onFocus(e)} style={inputEmpty.city ? {borderBottom:'1px solid red'} : {}} onChange={e => onChange(e)}  inputtype="input"  label="Grad" placeholder="npr. Beograd" name="city" value={user_.city} type="text"></Input>
+                <Input onFocus={e => onFocus(e)} style={inputEmpty.zip ? {borderBottom:'1px solid red'} : {}} onChange={e => onChange(e)}  inputtype="input"  label="Poštanski br." placeholder="npr. 11000" name="zip" value={user_.zip} type="text"></Input>
                <input type="hidden" value={JSON.stringify(orderdata)} name="orderdata" />
                <input type="hidden" name="rabat" value={user_.rabat} />
                <input type="hidden" name="partnerid" value={user_.partnerid} />

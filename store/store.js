@@ -12,6 +12,7 @@ const initialState = {
   price2 : 0,
   price3 : 0,
   user: {},
+  shipping: {},
   isLogged: false
 };
 
