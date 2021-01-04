@@ -9,8 +9,8 @@ import {useRouter} from 'next/router';
 import useCart from '../../util/useCart';
 const WithRouterLogin = (props)=>{
     const router = useRouter();
-    const {toggleLogged} = useCart()
-    return <Login {...props} toggleLogged={toggleLogged} router={router} />
+    const {toggleLogged,setUser} = useCart()
+    return <Login {...props} setUser={setUser} toggleLogged={toggleLogged} router={router} />
 }
 class Login extends React.Component {
     constructor(props){
@@ -62,14 +62,17 @@ class Login extends React.Component {
             method:"POST",
             body:formData
         }).then(res => res.json()).then(data => {
+
             if(data.result == "Failed"){
                 alert("Pokusajte ponovo!")
             }else{
-                
+                var user = data.user;
+                this.props.setUser(user)
+                this.props.toggleLogged(true);
                 if(this.props.router.query.back != undefined){
                     this.props.router.push("/checkout/orderdetails")
                 }else{
-                    this.props.toggleLogged(true);
+                   
                     this.props.router.push("/")
                     
                 }

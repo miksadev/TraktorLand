@@ -14,9 +14,9 @@ export default async (req,res) => {
       var search_start;
   
       if(kolona == "ime"){
-        search_start=search+"%"
+        search_start="%"+search+"%"
       }else{
-        search_start=search+"%"
+        search_start="%"+search+"%"
       }
       var sql;
       var que;

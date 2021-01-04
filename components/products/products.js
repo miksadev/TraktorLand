@@ -3,7 +3,7 @@ import Product from './product/product';
 import styles from './products.module.css';
 import Item from '../Item/item';
 const products = ({data,mdata,backroute,search,user,type}) => {
-    
+
     
     return(
         <div className={styles.products}>

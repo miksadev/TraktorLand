@@ -11,7 +11,7 @@ export default async (req,res) => {
       if(req.query.limit != undefined){
         limit = req.query.limit
       }
-    con.query("SELECT * FROM product WHERE name LIKE ? ORDER BY name ASC LIMIT "+limit+" OFFSET "+offset,search+"%",(err,results) => {
+    con.query("SELECT * FROM product WHERE name LIKE ? ORDER BY name ASC LIMIT "+limit+" OFFSET "+offset,"%"+search+"%",(err,results) => {
             var data = results
             var niz = []
             var res1 = results

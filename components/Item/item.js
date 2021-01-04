@@ -16,14 +16,16 @@ const item = (props) => {
     useEffect(() => {
         if(isItemOpened != null){
             if(!isItemOpened){
-               router.push(props.backroute)
-               undItem();
+              window.history.back();
+               
         }
         }
     },[isItemOpened])
     useEffect(() => {
         {isItemOpened ? null : toggleItem()}
-        
+        return ()=>{
+            undItem();
+        }
     }, []);
 
     return(

@@ -68,7 +68,7 @@ export default async (req,res) => {
         })
         proxyRes.on('end',()=>{
 
-            var {result,authToken} = JSON.parse(responseBody)
+            var {result,authToken,user} = JSON.parse(responseBody)
             if(result == "Success"){
                 var {authToken} = JSON.parse(responseBody)
                 var cookies = new Cookies(req,res)
@@ -76,7 +76,7 @@ export default async (req,res) => {
                     httpOnly:true,
                     sameSite:'lax'
                 })
-                res.end(JSON.stringify({result:'Success'}))
+                res.end(JSON.stringify({result:'Success',user:user}))
                 resolve()
             }else{
                 res.end(JSON.stringify({result:'Failed'}))

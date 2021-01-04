@@ -12,7 +12,9 @@ const search = (props) => {
         var PROTOCOL = process.env.NEXT_PUBLIC_PROTOCOL
         if(e.target.value != ""){
             setSearch(e.target.value)
-            fetch(PROTOCOL+"://"+HOST+"/api/search?search="+e.target.value).then(res => res.json()).then(data =>{
+            var offset = 0;
+            var limit = 10;
+            fetch(PROTOCOL+"://"+HOST+"/api/search?search="+e.target.value+"&offset="+offset+"&limit="+limit).then(res => res.json()).then(data =>{
                 var newArray = data.results
                 setData(newArray)
 

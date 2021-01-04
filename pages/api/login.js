@@ -38,7 +38,7 @@ export default async (req, res) => {
                var secret = "traktorlandsecret";
           var username = email;
           var token = jwt.sign({username:username},secret)
-          res.end(JSON.stringify({result:'Success',authToken:token}))
+          res.end(JSON.stringify({result:'Success',authToken:token,user:result[0]}))
           resolve();
           }else{
             res.end(JSON.stringify({result:'Failed'}));

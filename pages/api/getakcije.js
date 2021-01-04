@@ -6,8 +6,13 @@ export default async (req,res) => {
     if(req.query.id != undefined){
       var id = req.query.id
     con.query("SELECT * FROM akcije WHERE id = ?",id,(err,results) => {
-          
-            res.send(JSON.stringify({data:results[0]}))
+            var res;
+            if(results.length != 0){
+              res = results[0]
+            }else{
+              res = []
+            }
+            res.send(JSON.stringify({data:res}))
             res.end()
             resolve();
           
