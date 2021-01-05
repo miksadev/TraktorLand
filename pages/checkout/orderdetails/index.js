@@ -4,6 +4,7 @@ import Input from '../../../components/UI/Input/input';
 import Submit from '../../../components/UI/Button/Submit/submit';
 import Cookies from 'cookies'
 import useCart from '../../../util/useCart';
+import {useRouter} from 'next/router';
 import {useState,useEffect,useRef } from 'react';
 
 
@@ -44,8 +45,15 @@ import {useState,useEffect,useRef } from 'react';
 //         }
 //     }
 // }
+function isEmpty(obj) {
+    for(var prop in obj) {
+        if(obj.hasOwnProperty(prop))
+            return false;
+    }
 
-export default function Kontakt() {
+    return true;
+}
+export default function Kontakt(props) {
     const [orderdata,setOrderdata] = useState({})
     const [inputEmpty,setInputEmpty] = useState({
         name:false,
@@ -55,8 +63,22 @@ export default function Kontakt() {
         city:false,
         zip:false
     })
-    const { price, items, isLogged, user, setShipping } = useCart();
-    const [user_,setUser] = useState(user);
+
+    const router = useRouter();
+    const { price, items, isLogged, user, setShipping,shipping } = useCart();
+     if(isEmpty(user)){
+        var [user_,setUser] = useState({
+            name:"",
+            phone:"",
+            email:"",
+            address:"",
+            city:"",
+            zip:""
+        });
+     }else{
+        var [user_,setUser] = useState(user);
+     }
+    
     const submitRef = useRef(null)
 
     useEffect(() => {
@@ -69,7 +91,7 @@ export default function Kontakt() {
         var newUser = {...user_}
         newUser[e.target.name] = e.target.value
         setUser(newUser)
-        setShipping(newUser)
+       
         var newOrderdata = {...orderdata}
         newOrderdata.user = newUser
         setOrderdata(newOrderdata)
@@ -88,13 +110,14 @@ export default function Kontakt() {
                 err++
             }
         }
-        console.log("ERRRO")
-        console.log(newInput)
-        setInputEmpty(newInput)
 
-        if(err != 0){
-            e.preventDefault()
+        setInputEmpty(newInput)
+        if(err == 0){
+            setShipping(user_)
+            router.push("/checkout/order")
         }
+
+        
     }
     function onFocus(e){
         var newInput = {...inputEmpty}
@@ -104,7 +127,7 @@ export default function Kontakt() {
   return (
     <div className={styles.container}>
         <div className={styles.body}>
-        <form method="POST" action="/checkout/order">
+       
             <Form formname="Detalji Narudžbine">
                 <Input onFocus={e => onFocus(e)} style={inputEmpty.name ? {borderBottom:'1px solid red'} : {}} onChange={e => onChange(e)}   inputtype="input"  label="Ime" placeholder="npr. Petar" value={user_.name} name="name" type="text"></Input>
                 
@@ -120,7 +143,7 @@ export default function Kontakt() {
                 {/* <div className={styles.line}></div> */}
                 <div className={styles.block}  onClick={e => submitMask(e)}><Submit styles={styles.loginbutton} >Završi narudžbinu</Submit></div>
             </Form>
-        </form>
+        
         </div>
     </div>
   );

@@ -6,24 +6,30 @@ import Input from '../UI/Input/input';
 import Submit from '../UI/Button/Submit/submit';
 import {useRouter} from 'next/router';
 import {useState,useEffect} from 'react';
+import useCart from '../../util/useCart';
+
 const order = (props) => {
 
-    if(props.data.orderdata != undefined){
-    var [order,setOrder] = useState(JSON.parse(props.data.orderdata).items)
-
+     const {items, user} = useCart();
+    if(props.adminpanel != undefined){
+        var [order,setOrder] = useState(props.orders)
+        var [userinfo,setUserinfo] = useState(props.data);
     }else{
-    var [order,setOrder] = useState(props.orders)
+        
+        var [order,setOrder] = useState(props.data)
+        var [userinfo,setUserinfo] = useState(user);
     }
+    
+
     const [orderaddress,setOrderaddress] = useState(props.orderaddress)
     const [fullPrice,setFullPrice] = useState(0)
     const [url,setUrl] = useState("")
     const [price,setPrice] = useState(0)
-    const [userinfo,setUserinfo] = useState(props.data);
+    
     const [zavrsen,setZavrsen] = useState("Zavrsi")
     const router = useRouter();
     useEffect(()=>{
-        console.log("PROPS")
-        console.log(props)
+       
         setUrl(router.asPath)
         if(userinfo.zavrsen == 1){
             setZavrsen("Zavrsen")
@@ -43,7 +49,7 @@ const order = (props) => {
                         }else{
                             popust = 0
                         }
-                        price2 = item.price * (1 - popust/100)
+                        price2 = (item.price) * (1 - popust/100)
             var newPrice = Number(price2) * Number(item.qty)
            cena = cena+newPrice
            fullcena = fullcena + (Number(item.price) * Number(item.qty))
@@ -85,7 +91,8 @@ const order = (props) => {
          var HOST = process.env.NEXT_PUBLIC_HOST;
         var PROTOCOL = process.env.NEXT_PUBLIC_PROTOCOL
         var formData_ = new FormData();
-        formData_.append("postData",JSON.stringify(props.data));
+        formData_.append("items",JSON.stringify(props.data));
+        formData_.append("postData",JSON.stringify(orderaddress));
          fetch(PROTOCOL+'://'+HOST+'/api/addorder',{
             method:'POST',
             body:formData_
@@ -106,8 +113,7 @@ const order = (props) => {
                 <div className={styles.CartItems}>
 
                     {order.map(item => {
-                        console.log("IIII")
-                        console.log(item)
+
                         var popust;
                         var price2;
                         if(props.data.rabat == 1){
@@ -134,7 +140,7 @@ const order = (props) => {
                     <div className={styles.infoblock}>
                         <h3>Detalji narucioca</h3>
                         <ul>
-                            {userinfo.ime_prezime == undefined ? <li>{userinfo.ime} {userinfo.prezime}</li>:
+                            {userinfo.ime_prezime == undefined ? <li>{orderaddress.name}</li>:
                         <li>{userinfo.ime_prezime}</li>}
                             <li>{orderaddress.address}</li>
                             <li>{orderaddress.zip} {orderaddress.city}</li>

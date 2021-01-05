@@ -81,7 +81,7 @@ const ViewOrder = ({data,orders,orderaddress}) => {
                 <button className={styles.printbutton} onClick={() => window.print()}>Print</button>
 
                 <div className={styles.line}></div>
-                <Order namena="checkout" orderaddress={orderaddress} orders={orders} data={data} edit={false}/>
+                <Order namena="checkout" adminpanel orderaddress={orderaddress} orders={orders} data={data} edit={false}/>
                 
                 
             </div>

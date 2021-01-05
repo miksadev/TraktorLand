@@ -16,12 +16,13 @@ export default async (req, res) => {
       const form = new formidable.IncomingForm()
       
       form.parse(req,(err,fields,files) => {
-        var ime = fields["ime"];
-        console.log(fields)
-        var price = 0;
+       
+        
         var order = JSON.parse(fields['postData']);
+        var price = 0;
         var rabat = order["rabat"]
-        var allorders = JSON.parse(order['orderdata']).items
+        var allorders = JSON.parse(fields['items']);
+        
         allorders.map((item) => {
           var cena = Number(item.qty) * Number(item.price)
           price = price + cena
@@ -31,15 +32,14 @@ export default async (req, res) => {
         var created = d.getDate()+"/"+(d.getMonth()+1)+"/"+d.getFullYear()
         var time = d.getHours()+":"+d.getMinutes()+":"+d.getSeconds();
 
-        console.log("ID")
-        console.log(order)
+        
         var partneraddress4db = {
-          address:order['adresa'],
-          city:order['grad'],
-          zip:order['postanski_broj'],
+          address:order['address'],
+          city:order['city'],
+          zip:order['zip'],
           partnerid:order['partnerid'],
           email:order['email'],
-          phone:order['telefon']
+          phone:order['phone']
         }
         // res.end(JSON.stringify({ result: 'Success' }))
         // resolve();
@@ -55,7 +55,7 @@ export default async (req, res) => {
           processed:'n',
           retrieved:'n',   
           price:price,
-          ime_prezime:order["ime"]
+          ime_prezime:order["name"]
           
         }
         con.query("INSERT INTO document SET ?",document4db,(err,result) => {
