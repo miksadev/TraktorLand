@@ -68,6 +68,16 @@
   font-family: "Open Sans";
   font-size: 18px;
 }
+.izmeniPorudzbinu{
+  margin-left: 100px;
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 24px;
+  margin-bottom: 0px;
+  cursor: pointer;
+}
+
 @media only screen and (max-width: 1300px) {
 
 

@@ -19,11 +19,12 @@ export async function getServerSideProps({req,res}){
 }
 export default function Logout({log}){
 	const router = useRouter();
-	const {isLogged,toggleLogged,setUser} = useCart()
+	const {isLogged,toggleLogged,setUser,setShipping} = useCart()
 	useEffect(()=>{
 		if(isLogged || log){
 			toggleLogged(false)
 			setUser({})
+			setShipping({})
 			router.push("/login")
 		}else{
 			router.push("/")

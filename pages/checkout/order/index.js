@@ -3,6 +3,7 @@ import Order from '../../../components/Order/order';
 import styles from '../../../styles/checkout.module.css';
 import qs from 'querystring';
 import useCart from '../../../util/useCart';
+import Link from 'next/link';
 const order = () => {
 	 const {items,user,shipping } = useCart();
     return (
@@ -11,6 +12,7 @@ const order = () => {
         <div className={styles.body}>
             <h1 className={styles.naslov}>Pregled porudzbine</h1>
             <div className={styles.line}></div>
+            <Link href="/checkout"><h1 className={styles.izmeniPorudzbinu}>{"< Izmeni porudžbinu"}</h1></Link>
             <Order namena="checkout" orderaddress={shipping} data={items} edit={false}/>
             
             
@@ -21,38 +23,4 @@ const order = () => {
        
     );
 }
-// export async function getServerSideProps({req,res}){
-	
-// 	var data = {};
-// 	const streamPromise = new Promise((resolve,reject) => {
-// 		let postBody = '';
-// 		req.on('data',(data) => {
-// 			postBody+=data.toString()
-// 		})
-// 		req.on('end', () => {
-// 			const postData = qs.parse(postBody)
-// 			resolve(postData)
-// 		})
-// 	})
-// 	try{
-// 		data = await streamPromise
-// 		if(Object.keys(data).length == 0){
-// 		 	res.writeHead(302,{
-// 		 		'Location':'/'
-// 		 	})
-// 		 	res.end();
-// 		}
-
-// 	}catch(err){
-// 		console.log("StreamPromiseError")
-// 		console.log(err)
-// 	}
-
-// 	return {
-// 		props:{
-// 			data:data
-
-// 		}
-// 	}
-// }
 export default order;

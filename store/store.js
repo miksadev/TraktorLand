@@ -1,10 +1,13 @@
 import { useMemo } from "react";
 import { createStore, applyMiddleware } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
-
+import {loadState} from './localStorage';
 let store;
 
-const initialState = {
+
+const persistedState = loadState();
+
+const initialState = persistedState || {
   isCartOpened: false,
   items: [],
   price: 0,
@@ -174,7 +177,7 @@ const reducer = (state = initialState, { type, payload }) => {
     case "SET_SHIPPING":
       return {
         ...state,
-        shipping: payload,
+        shipping: {...payload},
       };
     default:
       return state;

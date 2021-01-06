@@ -7,58 +7,56 @@ import Submit from '../UI/Button/Submit/submit';
 import {useRouter} from 'next/router';
 import {useState,useEffect} from 'react';
 import useCart from '../../util/useCart';
-
+import Link from 'next/link';
 const order = (props) => {
 
-     const {items, user} = useCart();
+    const {items, user,price,price1,price2, price3,isLogged} = useCart();
     if(props.adminpanel != undefined){
         var [order,setOrder] = useState(props.orders)
         var [userinfo,setUserinfo] = useState(props.data);
-    }else{
-        
+    }
+    else{
         var [order,setOrder] = useState(props.data)
         var [userinfo,setUserinfo] = useState(user);
     }
     
-
     const [orderaddress,setOrderaddress] = useState(props.orderaddress)
     const [fullPrice,setFullPrice] = useState(0)
     const [url,setUrl] = useState("")
-    const [price,setPrice] = useState(0)
     
     const [zavrsen,setZavrsen] = useState("Zavrsi")
     const router = useRouter();
-    useEffect(()=>{
+    // useEffect(()=>{
        
-        setUrl(router.asPath)
-        if(userinfo.zavrsen == 1){
-            setZavrsen("Zavrsen")
-        }
-        var cena = 0;
-        var fullcena = 0;
-        order.map(item => {
+    //     setUrl(router.asPath)
+    //     if(userinfo.zavrsen == 1){
+    //         setZavrsen("Zavrsen")
+    //     }
+    //     var cena = 0;
+    //     var fullcena = 0;
+    //     order.map(item => {
             
-            var popust;
-                        var price2;
-                        if(props.data.rabat == 1){
-                            popust = item.rabat_1
-                        }else if(props.data.rabat == 2){
-                            popust = item.rabat_2
-                        }else if(props.data.rabat == 3){
-                            popust = item.rabat_3
-                        }else{
-                            popust = 0
-                        }
-                        price2 = (item.price) * (1 - popust/100)
-            var newPrice = Number(price2) * Number(item.qty)
-           cena = cena+newPrice
-           fullcena = fullcena + (Number(item.price) * Number(item.qty))
+    //         var popust;
+    //                     var price2;
+    //                     if(props.data.rabat == 1){
+    //                         popust = item.rabat_1
+    //                     }else if(props.data.rabat == 2){
+    //                         popust = item.rabat_2
+    //                     }else if(props.data.rabat == 3){
+    //                         popust = item.rabat_3
+    //                     }else{
+    //                         popust = 0
+    //                     }
+    //                     price2 = (item.price) * (1 - popust/100)
+    //         var newPrice = Number(price2) * Number(item.qty)
+    //        cena = cena+newPrice
+    //        fullcena = fullcena + (Number(item.price) * Number(item.qty))
            
-        })
-        setFullPrice(fullcena)
-         setPrice(cena)
+    //     })
+    //     setFullPrice(fullcena)
+    //      setPrice(cena)
          
-    },[])
+    // },[])
     function zavrsiOrder(){
          var HOST = process.env.NEXT_PUBLIC_HOST;
         var PROTOCOL = process.env.NEXT_PUBLIC_PROTOCOL
@@ -113,30 +111,17 @@ const order = (props) => {
                 <div className={styles.CartItems}>
 
                     {order.map(item => {
-
-                        var popust;
-                        var price2;
-                        if(props.data.rabat == 1){
-                            popust = item.rabat_1
-                        }else if(props.data.rabat == 2){
-                            popust = item.rabat_2
-                        }else if(props.data.rabat == 3){
-                            popust = item.rabat_3
-                        }else{
-                            popust = 0
-                        }
-                        price2 = item.price * (1 - popust/100)
-                        return <CartItem key={item.id} edit={props.edit} sifra={item.code != undefined ? item.code : item.sifra}
-                     namena={props.namena} src={item.slika}
-                      name={item.name != undefined ? item.name : item.ime} price2={price2}
-                       price={item.price} qty={item.qty} up={() => addOne(item)}
+                        return <CartItem isLogged={isLogged}key={item.id} edit={props.edit} sifra={item.code != undefined ? item.code : item.sifra} namena={props.namena} src={item.slika}
+                      name={item.name != undefined ? item.name : item.ime} price={item.price} price1={item.price1} price2={item.price2} price3={item.price3} rabat = {user.rabat} qty={item.qty} up={() => addOne(item)}
                         down={() => removeOne(item)} brisi={() => removeFromCart(item)}></CartItem>
+                        
                     })}
                 </div>
                 <div className={styles.total}>
-                    <Total edit={props.edit} price={fullPrice} price2={price} rabat={userinfo.rabat == undefined || userinfo.rabat == "" ? '0' : userinfo.rabat}/>
+                    <Total isLogged={isLogged} edit={props.edit} price={price} price1={price1} price2={price2} price3={price3} rabat={user.rabat == undefined ? '0' : user.rabat}/>
                     <div className={styles.orderinfo}>
                     {/* <Input inputtype="input" label="Napomena"/> */}
+                    <Link href="/checkout/orderdetails"><h1 className={styles.izmeniPorudzbinu}>{"< Izmeni podatke za dostavu"}</h1></Link>
                     <div className={styles.infoblock}>
                         <h3>Detalji narucioca</h3>
                         <ul>

@@ -12,11 +12,6 @@ function MyApp({ Component, pageProps }) {
   const store = useStore(pageProps.initialReduxState);
   // const store = useStore(persistedState);
   store.subscribe(() => {
-    // saveState({
-    //   items: store.getState().items,
-    //   price: store.getState().price,
-    //   isLogged : store.getState().isLogged
-    // });
     saveState(store.getState());
   })
 
