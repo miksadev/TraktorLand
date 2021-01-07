@@ -9,7 +9,7 @@ export const config = {
   }
 };
 export default async (req, res) => {
-	return new Promise(resolve => {
+  return new Promise(resolve => {
     if(req.method == "POST"){
     res.sendStatus = 200
      res.setHeader('Content-Type', 'application/json')
@@ -20,14 +20,36 @@ export default async (req, res) => {
         
         var order = JSON.parse(fields['postData']);
         var price = 0;
-        var rabat = order["rabat"]
+        var price2 = 0;
+        var partnerid;
+        var userrabat = fields["userrabat"]
         var allorders = JSON.parse(fields['items']);
+        
+        if(order["partnerid"] == undefined){
+          partnerid = 9999;
+        }else{
+          partnerid = order["partnerid"]
+        }
         
         allorders.map((item) => {
           var cena = Number(item.qty) * Number(item.price)
           price = price + cena;
-
+          if(userrabat == 1){
+            var cena2 = Number(item.qty) * Number(item.price1)
+            price2 = price2 + cena2;
+          }else if(userrabat == 2){
+            var cena2 = Number(item.qty) * Number(item.price2)
+            price2 = price2 + cena2;  
+          }else if(userrabat == 3){
+            var cena2 = Number(item.qty) * Number(item.price3)
+            price2 = price2 + cena2;  
+          }else{
+            var cena2 = Number(item.qty) * Number(item.price)
+            price2 = price2 + cena2;  
+          }
         })
+          
+         
         var d = new Date()
         var created = d.getDate()+"/"+(d.getMonth()+1)+"/"+d.getFullYear()
         var time = d.getHours()+":"+d.getMinutes()+":"+d.getSeconds();
@@ -37,7 +59,7 @@ export default async (req, res) => {
           address:order['address'],
           city:order['city'],
           zip:order['zip'],
-          partnerid:order['partnerid'],
+          partnerid:partnerid,
           email:order['email'],
           phone:order['phone']
         }
@@ -48,13 +70,14 @@ export default async (req, res) => {
         if(err) throw err;
         var document4db = {
           documentdate:created,
-          partnerid:order['partnerid'],
+          partnerid:partnerid,
           status:'n',
           foreign_partneraddressid:result.insertId,
           processtype:'WEB',
           processed:'n',
           retrieved:'n',   
           price:price,
+          price2:price2,
           ime_prezime:order["name"]
           
         }
@@ -67,10 +90,19 @@ export default async (req, res) => {
             fullorder.push(item.id)
             fullorder.push(item.qty)
             fullorder.push(item.price)
+            if(userrabat == 1){
+                fullorder.push(item.price1)
+            }else if(userrabat == 2){
+                fullorder.push(item.price2)
+            }else if(userrabat == 3){
+                fullorder.push(item.price3)
+            }else{
+                fullorder.push(item.price)
+            }
             insertRow.push(fullorder)
           })
           
-          con.query("INSERT INTO documentitem (documentid,productid,quantity,price) VALUES ?",[insertRow],(err,result) => {
+          con.query("INSERT INTO documentitem (documentid,productid,quantity,price,price2) VALUES ?",[insertRow],(err,result) => {
             if(err) throw err;
             res.end(JSON.stringify({ result: 'Success' }))
             resolve();

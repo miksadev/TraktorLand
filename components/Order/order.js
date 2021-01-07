@@ -26,6 +26,9 @@ const order = (props) => {
     
     const [zavrsen,setZavrsen] = useState("Zavrsi")
     const router = useRouter();
+    useEffect(()=>{
+        setUrl(router.asPath)
+    },[])
     // useEffect(()=>{
        
     //     setUrl(router.asPath)
@@ -57,7 +60,7 @@ const order = (props) => {
     //      setPrice(cena)
          
     // },[])
-    function zavrsiOrder(){
+       function zavrsiOrder(){
          var HOST = process.env.NEXT_PUBLIC_HOST;
         var PROTOCOL = process.env.NEXT_PUBLIC_PROTOCOL
         if(zavrsen == "Zavrsi"){
@@ -86,11 +89,19 @@ const order = (props) => {
         }
     }
     function onSubmit(){
+
          var HOST = process.env.NEXT_PUBLIC_HOST;
         var PROTOCOL = process.env.NEXT_PUBLIC_PROTOCOL
         var formData_ = new FormData();
+       
+        var userrabat = 0;
+        if(user.rabat != undefined){
+            userrabat = user.rabat
+        }
+       
         formData_.append("items",JSON.stringify(props.data));
         formData_.append("postData",JSON.stringify(orderaddress));
+        formData_.append("userrabat",userrabat);
          fetch(PROTOCOL+'://'+HOST+'/api/addorder',{
             method:'POST',
             body:formData_
