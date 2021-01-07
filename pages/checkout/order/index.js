@@ -1,11 +1,18 @@
 import React,{useState,useEffect,useLayoutEffect} from 'react';
+import {useRouter} from 'next/router';
 import Order from '../../../components/Order/order';
 import styles from '../../../styles/checkout.module.css';
 import qs from 'querystring';
 import useCart from '../../../util/useCart';
 import Link from 'next/link';
 const order = () => {
-	 const {items,user,shipping } = useCart();
+     const {items,user,shipping } = useCart();
+     const router = useRouter();
+     useEffect(() => {
+        if(items.length < 1){
+              router.push('/webshop');
+          }
+     },[items])
     return (
         <div className={styles.container}>
 

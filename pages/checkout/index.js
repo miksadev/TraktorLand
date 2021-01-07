@@ -27,7 +27,7 @@ export default function Checkout() {
   const popUpHandler = () => {
     if(isLogged){
       console.log(shipping)
-      if(JSON.stringify(shipping) === '{}'){ // SREDITI OVAJ DEO
+      if(JSON.stringify(shipping) != '{}'){ // SREDITI OVAJ DEO
         router.push('/checkout/order')
       }
       else{

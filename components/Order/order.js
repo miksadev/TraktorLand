@@ -121,8 +121,8 @@ const order = (props) => {
                     <Total isLogged={isLogged} edit={props.edit} price={price} price1={price1} price2={price2} price3={price3} rabat={user.rabat == undefined ? '0' : user.rabat}/>
                     <div className={styles.orderinfo}>
                     {/* <Input inputtype="input" label="Napomena"/> */}
-                    <Link href="/checkout/orderdetails"><h1 className={styles.izmeniPorudzbinu}>{"< Izmeni podatke za dostavu"}</h1></Link>
                     <div className={styles.infoblock}>
+                        <Link href="/checkout/orderdetails"><img className={styles.editShipping} src="/admin/edit.png" alt=""/></Link>
                         <h3>Detalji narucioca</h3>
                         <ul>
                             {userinfo.ime_prezime == undefined ? <li>{orderaddress.name}</li>:
@@ -134,7 +134,7 @@ const order = (props) => {
                             <li>{orderaddress.phone}</li>
                         </ul>
                         {url.includes("admin") ? <span onClick={zavrsiOrder} ><Submit styles={styles.dugme} >{zavrsen}</Submit></span> : 
-                    <span onClick={onSubmit}><Submit styles={styles.dugme} >Zavrsi</Submit></span>}
+                        <span onClick={onSubmit}><Submit styles={styles.dugme}>Pošalji porudžbinu</Submit></span>}
                     </div>
                 </div>
                 </div>

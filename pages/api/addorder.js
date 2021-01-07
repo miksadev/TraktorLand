@@ -25,7 +25,7 @@ export default async (req, res) => {
         
         allorders.map((item) => {
           var cena = Number(item.qty) * Number(item.price)
-          price = price + cena
+          price = price + cena;
 
         })
         var d = new Date()

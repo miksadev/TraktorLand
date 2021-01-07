@@ -111,9 +111,7 @@ const reducer = (state = initialState, { type, payload }) => {
       let moze = 0;
       newItems.forEach(item => {
         if(item.id == payload.id){
-          console.log(item.qty, item.kolicina);
           if(item.qty + 1 <= item.kolicina){
-            console.log("sta sad")
             item.qty++;
             moze = 1;
           }
@@ -146,7 +144,6 @@ const reducer = (state = initialState, { type, payload }) => {
     newItems.forEach(item => {
       if(item.id == payload.id){
         if(item.qty > 1){
-          console.log("smanji sad")
           item.qty--;
           newPrice-=payload.price;
           nprice1-=payload.price1;
@@ -193,16 +190,8 @@ function initStore(preloadedState = initialState) {
 }
 
 export const initializeStore = (preloadedState) => {
-  if(typeof window == "undefined"){
-    console.log("SERVER")
-    console.log(store)
-  }else{
-    console.log("CLIENT")
-    console.log(store)
-  }
+
   let _store = store ?? initStore(preloadedState);
-  
-  
   // After navigating to a page with an initial Redux state, merge that state
   // with the current state in the store, and create a new store
   if (preloadedState && store) {

@@ -16,9 +16,8 @@ class Edit extends React.Component{
         user:this.props.user,
         data:{
             ime:this.props.user.name,
-            
             naziv_firme:this.props.user.naziv_firme,
-            pib:this.props.user.pib,
+            pib:this.props.user.code,
             telefon:this.props.user.phone,
             email:this.props.user.email,
             adresa:this.props.user.address,
@@ -27,7 +26,6 @@ class Edit extends React.Component{
         },
         empty:{
             imeEmpty:false,
-            
             naziv_firmeEmpty:false,
             pibEmpty:false,
             telefonEmpty:false,
@@ -98,7 +96,6 @@ class Edit extends React.Component{
                 method:'POST',
                 body:formData
             }).then(res => res.json()).then(data => {
-                console.log("1")
                 if(data.result == "Success"){
                     alert("Email vec postoji u bazi");
                     return;
