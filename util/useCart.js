@@ -52,6 +52,10 @@ const useCart = () => {
       type: "REMOVE",
       payload: item,
     });
+  const resetItems = () =>
+  dispatch({
+    type: "RESET_ITEMS"
+  });
   const addOne = (item) =>
   dispatch({
     type: "ADD_ONE",
@@ -86,6 +90,7 @@ const useCart = () => {
     isLogged,
     shipping,
     setUser,
+    resetItems,
     setShipping,
     toggleCart,
     toggleItem,

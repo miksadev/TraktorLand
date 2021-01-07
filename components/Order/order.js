@@ -10,7 +10,7 @@ import useCart from '../../util/useCart';
 import Link from 'next/link';
 const order = (props) => {
 
-    const {items, user,price,price1,price2, price3,isLogged} = useCart();
+    const {items, user,price,price1,price2, price3,isLogged,resetItems} = useCart();
     if(props.adminpanel != undefined){
         var [order,setOrder] = useState(props.orders)
         var [userinfo,setUserinfo] = useState(props.data);
@@ -97,6 +97,7 @@ const order = (props) => {
          }).then(res => res.json()).then(data => {
             if(data.result == "Success"){
                 alert("Uspesno")
+                resetItems();
                 router.push("/")
             }
          })

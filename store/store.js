@@ -171,6 +171,15 @@ const reducer = (state = initialState, { type, payload }) => {
           (item) => item.id !== payload.id
         ),
       };
+      case "RESET_ITEMS":
+      return {
+        ...state,
+        price: 0,
+        price1: 0,
+        price2: 0,
+        price3: 0,
+        items: []
+      };
     case "SET_SHIPPING":
       return {
         ...state,
