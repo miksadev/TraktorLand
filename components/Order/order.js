@@ -128,11 +128,15 @@ const order = (props) => {
                         <ul>
                             {userinfo.ime_prezime == undefined ? <li>{orderaddress.name}</li>:
                         <li>{userinfo.ime_prezime}</li>}
-                            <li>{orderaddress.address}</li>
-                            <li>{orderaddress.zip} {orderaddress.city}</li>
-                            <li>Serbia</li>
-                            <li>{orderaddress.email}</li>
                             <li>{orderaddress.phone}</li>
+                            <li>{orderaddress.email}</li>
+                            {orderaddress.pravno_lice == 1 ? <>
+                                <li>{orderaddress.naziv_firme}</li>
+                                <li>{orderaddress.code}</li>
+                            </>: null}
+                            <li>{orderaddress.address}</li>
+                            <li>{orderaddress.city} {orderaddress.zip} </li>
+                            
                         </ul>
                         {url.includes("admin") ? <span onClick={zavrsiOrder} ><Submit styles={styles.dugme} >{zavrsen}</Submit></span> : 
                         <span onClick={onSubmit}><Submit styles={styles.dugme}>Pošalji porudžbinu</Submit></span>}

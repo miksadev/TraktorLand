@@ -76,7 +76,7 @@ export default function Kontakt(props) {
             zip:""
         });
      }else{
-        var [user_,setUser] = useState(user);
+        var [user_,setUser] = useState(JSON.stringify(shipping) != '{}' ? shipping : user);
      }
     
     const submitRef = useRef(null)
@@ -87,11 +87,11 @@ export default function Kontakt(props) {
         setOrderdata(newOrderdata)
     },[items])
 
-     function onChange(e){
+    function onChange(e){
         var newUser = {...user_}
         newUser[e.target.name] = e.target.value
         setUser(newUser)
-       
+        
         var newOrderdata = {...orderdata}
         newOrderdata.user = newUser
         setOrderdata(newOrderdata)
@@ -100,7 +100,7 @@ export default function Kontakt(props) {
         
         var newInput = {...inputEmpty}
         var err = 0;
-        delete user_["pravno_lice"]
+        // delete user_["pravno_lice"]
         
         for(var key in user_){
             if(user_[key] === ""){
@@ -130,7 +130,10 @@ export default function Kontakt(props) {
        
             <Form formname="Detalji Narudžbine">
                 <Input onFocus={e => onFocus(e)} style={inputEmpty.name ? {borderBottom:'1px solid red'} : {}} onChange={e => onChange(e)}   inputtype="input"  label="Ime" placeholder="npr. Petar" value={user_.name} name="name" type="text"></Input>
-                
+                {user_.pravno_lice == 1 ? <>
+                    <Input onFocus={e => onFocus(e)} style={inputEmpty.naziv_firme ? {borderBottom:'1px solid red'} : {}} onChange={e => onChange(e)}   inputtype="input"  label="Naziv firme" placeholder="npr. Petar D.O.O" value={user_.naziv_firme} name="naziv_firme" type="text"></Input>
+                    <Input onFocus={e => onFocus(e)} style={inputEmpty.naziv_firme ? {borderBottom:'1px solid red'} : {}} onChange={e => onChange(e)}   inputtype="input"  label="PIB" placeholder="npr. 123456" value={user_.code} name="code" type="text"></Input>
+                </> : null}
                 <Input onFocus={e => onFocus(e)} style={inputEmpty.phone ? {borderBottom:'1px solid red'} : {}} onChange={e => onChange(e)}  inputtype="input"  label="Telefon" placeholder="npr. 060/123/45-67" name="phone" value={user_.phone} type="text"></Input>
                 <Input onFocus={e => onFocus(e)} style={inputEmpty.email ? {borderBottom:'1px solid red'} : {}} onChange={e => onChange(e)}   inputtype="input"  label="E-mail" placeholder="npr. vasaadresa@gmail.com" name="email" value={user_.email} type="email"></Input>
                 <div className={styles.line}></div>
