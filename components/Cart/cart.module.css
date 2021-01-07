@@ -16,8 +16,8 @@
 }
 .X{
     position: absolute;
-    top: 30px;
-    right: 30px;
+    top: 25px;
+    right: 25px;
     cursor: pointer;
 }
 .praznakorpa{
@@ -27,7 +27,8 @@
     font-size: 25px;
     line-height: 20px;
     color: #212121;
-    width: 100%;
+    width: calc(100% - 114px);
+    margin-left: 57px;
     text-align: center;
 }
 .LinkButton{

@@ -131,3 +131,21 @@
 
 
   }
+  @media screen and (max-width: 450px) {
+    .cprice{
+        margin-bottom: 30px;
+    }
+  .cprice span{
+      position: absolute;
+      left: 0;
+      top: 25px;
+  }
+    .price{
+        margin-bottom: 30px;
+    }
+  .price span{
+      position: absolute;
+      left: 0;
+      top: 25px;
+  }
+}

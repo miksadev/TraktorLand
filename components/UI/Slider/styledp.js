@@ -8,4 +8,7 @@ export default styled.p`
     line-height: 28px;
     position: absolute;
     top:168px;
+    @media (max-width: 380px) {
+        top:148px;
+      }
 `;

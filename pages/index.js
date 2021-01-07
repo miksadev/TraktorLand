@@ -36,7 +36,7 @@ export default function Home({akcije,catdata}) {
         <Coninfo/>
         
         <div className={styles.logowide}>
-          <Logowide />
+          <Logowide styles={styles.logowidee}/>
         </div>
 
         <p className={styles.slogan}>Profesionalni i originalni već 25 godina!</p>

@@ -1,9 +1,9 @@
 .body{
   width: 100%;
-  min-height: calc(100% + 50px);
+  min-height: 850px;
   height: auto;
   padding-top: 108px;
-  position: absolute;
+  position: relative;
   top: 0;
   left: 0;
   background-color: #F7F7F7;
@@ -97,7 +97,20 @@
       margin-bottom: 0;
   }
 }
-
+@media screen and (max-width: 850px) {
+  .izmeniPorudzbinu{
+    margin-left: 47px;
+  }
+}
+@media screen and (max-width: 780px) {
+  .naslov,.izmeniPorudzbinu{
+    margin-left: 30px;
+  }
+  .line{
+    width: calc(100% - 60px);
+    margin-left: 30px;
+}
+}
 @media screen and (max-width: 550px) {
   .total{
       margin-left: 0;

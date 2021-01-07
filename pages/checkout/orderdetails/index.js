@@ -66,18 +66,22 @@ export default function Kontakt(props) {
 
     const router = useRouter();
     const { price, items, isLogged, user, setShipping,shipping } = useCart();
-     if(isEmpty(user)){
-        var [user_,setUser] = useState({
-            name:"",
-            phone:"",
-            email:"",
-            address:"",
-            city:"",
-            zip:""
-        });
-     }else{
-        var [user_,setUser] = useState(JSON.stringify(shipping) != '{}' ? shipping : user);
-     }
+    var [user_,setUser] = useState({
+        name:"",
+        phone:"",
+        email:"",
+        address:"",
+        city:"",
+        zip:""
+    });
+    useEffect(() => {
+        if(isEmpty(user) && JSON.stringify(shipping) == '{}'){
+            
+         }else{
+            setUser(JSON.stringify(shipping) != '{}' ? shipping : user);
+         }
+    },[shipping]);
+     
     
     const submitRef = useRef(null)
 

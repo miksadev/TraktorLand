@@ -111,8 +111,8 @@ const order = (props) => {
                 
                 <div className={styles.CartItems}>
 
-                    {order.map(item => {
-                        return <CartItem isLogged={isLogged}key={item.id} edit={props.edit} sifra={item.code != undefined ? item.code : item.sifra} namena={props.namena} src={item.slika}
+                    {order.map(item => { // TREBA DA SE SREDI ORDER KAD JE U ADMIN PANELU
+                        return <CartItem isLogged={props.namena == order ? true : isLogged}key={item.id} edit={props.edit} sifra={item.code != undefined ? item.code : item.sifra} namena={props.namena} src={item.slika}
                       name={item.name != undefined ? item.name : item.ime} price={item.price} price1={item.price1} price2={item.price2} price3={item.price3} rabat = {user.rabat} qty={item.qty} up={() => addOne(item)}
                         down={() => removeOne(item)} brisi={() => removeFromCart(item)}></CartItem>
                         
