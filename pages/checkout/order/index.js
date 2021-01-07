@@ -9,6 +9,7 @@ const order = () => {
      const {items,user,shipping } = useCart();
      const router = useRouter();
      useEffect(() => {
+        
         if(items.length < 1){
               router.push('/webshop');
           }

@@ -48,9 +48,7 @@ export async function getServerSideProps({req,res,query}){
     
 	var orderuser = await fetch(PROTOCOL+'://'+HOST+'/api/getuser?id='+orderaddress[0].partnerid).then(res => res.json())
     .then(data => data)
-    console.log("USERRR")
-    var user = orderuser.user
-    console.log(orderaddress[0].partnerid)
+ 
     if(user.length > 0){
         data[0]["rabat"] = orderuser.user[0].rabat
     }else{

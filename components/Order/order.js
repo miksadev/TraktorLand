@@ -27,6 +27,7 @@ const order = (props) => {
     const [zavrsen,setZavrsen] = useState("Zavrsi")
     const router = useRouter();
     useEffect(()=>{
+        
         setUrl(router.asPath)
     },[])
     // useEffect(()=>{
@@ -141,9 +142,18 @@ const order = (props) => {
                         <li>{userinfo.ime_prezime}</li>}
                             <li>{orderaddress.phone}</li>
                             <li>{orderaddress.email}</li>
-                            {orderaddress.pravno_lice == 1 ? <>
+                            
+                            {orderaddress.naziv_firme != null ? <>
                                 <li>{orderaddress.naziv_firme}</li>
+                                
+                            </>: null}
+                            {orderaddress.pib != null ? <>
+                                <li>{orderaddress.pib}</li>
+                                
+                            </>: null}
+                            {orderaddress.code != null ? <>
                                 <li>{orderaddress.code}</li>
+                                
                             </>: null}
                             <li>{orderaddress.address}</li>
                             <li>{orderaddress.city} {orderaddress.zip} </li>

@@ -75,6 +75,7 @@ export default function Kontakt(props) {
         zip:""
     });
     useEffect(() => {
+        
         if(isEmpty(user) && JSON.stringify(shipping) == '{}'){
             
          }else{

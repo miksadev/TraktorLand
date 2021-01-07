@@ -24,7 +24,8 @@ export default async (req, res) => {
         var partnerid;
         var userrabat = fields["userrabat"]
         var allorders = JSON.parse(fields['items']);
-        
+       
+
         if(order["partnerid"] == undefined){
           partnerid = 9999;
         }else{
@@ -54,8 +55,8 @@ export default async (req, res) => {
         var created = d.getDate()+"/"+(d.getMonth()+1)+"/"+d.getFullYear()
         var time = d.getHours()+":"+d.getMinutes()+":"+d.getSeconds();
 
-        
-        var partneraddress4db = {
+        if(order['pravno_lice'] != 1){
+          var partneraddress4db = {
           address:order['address'],
           city:order['city'],
           zip:order['zip'],
@@ -63,6 +64,20 @@ export default async (req, res) => {
           email:order['email'],
           phone:order['phone']
         }
+      }else{
+        var partneraddress4db = {
+          address:order['address'],
+          city:order['city'],
+          zip:order['zip'],
+          partnerid:partnerid,
+          email:order['email'],
+          phone:order['phone'],
+          pib:order["code"],
+          naziv_firme:order["naziv_firme"]
+        }
+      }
+
+        
         // res.end(JSON.stringify({ result: 'Success' }))
         // resolve();
 
