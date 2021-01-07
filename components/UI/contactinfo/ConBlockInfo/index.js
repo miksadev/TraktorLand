@@ -17,7 +17,7 @@ const conBlockInfo = () => {
                     Email
                 </div>
                 <div className={styles.text}>
-                    info@traktorland.rs
+                    <a href="mailto:traktorland2@gmail.com">traktorland2@gmail.com</a>
                 </div>
             </div>
             <div className={styles.block}>
@@ -25,7 +25,8 @@ const conBlockInfo = () => {
                     Adresa
                 </div>
                 <div className={styles.text}>
-                Knez Mihajlova 67,<br></br>18255 Pukovac
+                <a href="https://www.google.rs/maps/place/T.R.Marjanovic/@43.1681219,21.8505713,17z/data=!3m1!4b1!4m5!3m4!1s0x4755bd592dfc7da3:0xfc5a1b56d0e6e1c6!8m2!3d43.168118!4d21.85276" target="blank">
+                Knez Mihajlova 67,<br></br>18255 Pukovac</a>
                 </div>
             </div>
             <div className={styles.block}>
@@ -33,7 +34,7 @@ const conBlockInfo = () => {
                     Telefon
                 </div>
                 <div className={styles.text}>
-                    +381(18) 812 100
+                <a href="tel:+38118812100">+381(18) 812 100</a>
                 </div>
             </div>
         </div>
