@@ -107,7 +107,7 @@ export default async (req, res) => {
             var productid = result.insertId;
             if(err) throw err;
             var productam = {
-              productamountweb:kolicina
+              productamountb2b:kolicina
             }
             con.query("INSERT INTO productamount SET ?",productam,(err,result) => {
               if(err) throw err;
@@ -128,7 +128,7 @@ export default async (req, res) => {
             var productid = result.insertId;
             if(err) throw err;
             var productam = {
-              productamountweb:kolicina
+              productamountb2b:kolicina
             }
             con.query("INSERT INTO productamount SET ?",productam,(err,result) => {
               if(err) throw err;

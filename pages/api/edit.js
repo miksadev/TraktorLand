@@ -79,7 +79,7 @@ export default async (req, res) => {
            price = ?,vp_cena = ?,code = ? WHERE productid = ?`,[rabat_1,rabat_2,rabat_3,zemlja_porekla,ime,proizvodjac,kataloski_broj,
            mp_cena,vp_cena.toFixed(2),sifra,id],(err,result) => {
            if(err) throw err;
-           con.query("UPDATE productamount SET productamountweb = ? WHERE productid = ?",[kolicina,id],(err,result) => {
+           con.query("UPDATE productamount SET productamountb2b = ? WHERE productid = ?",[kolicina,id],(err,result) => {
             if(err) throw err;
             con.query("UPDATE productcategorypr SET categoryprid = ? WHERE productid = ?",[cat_id,id],(err,result) => {
               if(err) throw err;
@@ -100,7 +100,7 @@ export default async (req, res) => {
            price = ?,vp_cena = ?,code = ? WHERE productid = ?`,[rabat_1,rabat_2,rabat_3,zemlja_porekla,ime,proizvodjac,kataloski_broj,
            mp_cena,vp_cena.toFixed(2),sifra,id],(err,result) => {
            if(err) throw err;
-           con.query("UPDATE productamount SET productamountweb = ? WHERE productid = ?",[kolicina,id],(err,result) => {
+           con.query("UPDATE productamount SET productamountb2b = ? WHERE productid = ?",[kolicina,id],(err,result) => {
             if(err) throw err;
             con.query("UPDATE productcategorypr SET categoryprid = ? WHERE productid = ?",[cat_id,id],(err,result) => {
               if(err) throw err;
@@ -126,7 +126,7 @@ export default async (req, res) => {
            price = ?,vp_cena = ?,code = ?,thumb=? WHERE productid = ?`,[rabat_1,rabat_2,rabat_3,zemlja_porekla,ime,proizvodjac,kataloski_broj,
            mp_cena,vp_cena.toFixed(2),sifra,thumb,id],(err,result) => {
            if(err) throw err;
-           con.query("UPDATE productamount SET productamountweb = ? WHERE productid = ?",[kolicina,id],(err,result) => {
+           con.query("UPDATE productamount SET productamountb2b = ? WHERE productid = ?",[kolicina,id],(err,result) => {
             if(err) throw err;
             con.query("UPDATE productcategorypr SET categoryprid = ? WHERE productid = ?",[cat_id,id],(err,result) => {
               if(err) throw err;
@@ -147,7 +147,7 @@ export default async (req, res) => {
            price = ?,vp_cena = ?,code = ?,thumb=? WHERE productid = ?`,[rabat_1,rabat_2,rabat_3,zemlja_porekla,ime,proizvodjac,kataloski_broj,
            mp_cena,vp_cena.toFixed(2),sifra,thumb,id],(err,result) => {
            if(err) throw err;
-           con.query("UPDATE productamount SET productamountweb = ? WHERE productid = ?",[kolicina,id],(err,result) => {
+           con.query("UPDATE productamount SET productamountb2b = ? WHERE productid = ?",[kolicina,id],(err,result) => {
             if(err) throw err;
             con.query("UPDATE productcategorypr SET categoryprid = ? WHERE productid = ?",[cat_id,id],(err,result) => {
               if(err) throw err;
