@@ -24,14 +24,14 @@ export default async (req, res) => {
         var partnerid;
         var userrabat = fields["userrabat"]
         var allorders = JSON.parse(fields['items']);
-       
+        
 
         if(order["partnerid"] == undefined){
           partnerid = 9999;
         }else{
           partnerid = order["partnerid"]
         }
-        
+       
         allorders.map((item) => {
           var cena = Number(item.qty) * Number(item.price)
           price = price + cena;

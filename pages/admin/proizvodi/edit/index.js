@@ -97,11 +97,13 @@ class add extends React.Component{
         e.preventDefault();
 
         var err = 0;
-        var allow_array=["zemlja_porekla","rabat_1","rabat_2","rabat_3"]
+        var allow_array=["tip2","subtip","zemlja_porekla","rabat_1","rabat_2","rabat_3"]
         for(const [key,value] of Object.entries(this.state.data)){
             if(value == ""){
                 if(allow_array.includes(key) == false){
                     var obj = {};
+                    console.log("ERROR11")
+                    console.log(key)
                     obj[key+"Empty"] = true
                     this.setState(obj)
                      
@@ -110,8 +112,11 @@ class add extends React.Component{
                 
             }
         }
-        
-        
+        console.log("ERROR")
+        console.log(err)
+        if(err != 0){
+            return;
+        }
         
         
 
