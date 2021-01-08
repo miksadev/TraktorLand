@@ -25,6 +25,11 @@ const cartitem = (props) => {
                 setPopust(0);
             }
           }
+          else if(props.admin){
+            if(props.price != props.price2){
+              setPopust(props.price2);
+            }
+          }
           else{
             setPopust(props.price);
           }

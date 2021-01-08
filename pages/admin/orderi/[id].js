@@ -1,5 +1,5 @@
 import {useRouter} from 'next/router'
-import Order from '../../../components/Order/order';
+import OrderAdmin from '../../../components/Order/orderAdmin';
 import styles from '../../../styles/checkout.module.css';
 import qs from 'querystring';
 import Cookies from 'cookies';
@@ -79,7 +79,7 @@ const ViewOrder = ({data,orders,orderaddress}) => {
                 <button className={styles.printbutton} onClick={() => window.print()}>Print</button>
 
                 <div className={styles.line}></div>
-                <Order namena="order" adminpanel orderaddress={orderaddress} orders={orders} data={data} edit={false}/>
+                <OrderAdmin namena="order" adminpanel orderaddress={orderaddress} orders={orders} data={data} edit={false}/>
                 
                 
             </div>

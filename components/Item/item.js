@@ -60,10 +60,6 @@ const item = (props) => {
                 </div>
                 <div className={styles.line}/>
                     <div className={styles.block}>
-                        <p className={styles.levo}>Kataloški broj</p>
-                        <h3 className={styles.desno}>{props.proizvod[0].kataloski_broj}</h3>
-                    </div>
-                    <div className={styles.block}>
                         <p className={styles.levo}>Šifra</p>
                         <h3 className={styles.desno}>{props.proizvod[0].code}</h3>
                     </div>
@@ -75,10 +71,10 @@ const item = (props) => {
                         <p className={styles.levo}>Zemlja porekla</p>
                         <h3 className={styles.desno}>{props.proizvod[0].zemlja_porekla}</h3>
                     </div>}
-                    <div className={styles.block}>
+                    {props.proizvod[0].kataloski_broj != 0 ? <div className={styles.block}>
                         <p className={styles.levo}>Kataloški broj</p>
                         <h3 className={styles.desno}>{props.proizvod[0].kataloski_broj}</h3>
-                    </div>
+                    </div> : null}
                 </div>
                 : null
         }
