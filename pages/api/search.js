@@ -24,7 +24,9 @@ export default async (req,res) => {
                con.query("SELECT * FROM productcategorypr WHERE productid = ?",[item.productid],(err,results) => {
                 if(results.length != 0){
                   con.query("SELECT * FROM categorypr WHERE categoryprid = ?",[results[0].categoryprid],(err,results) => {
-                  res1[index]["tip"] = results[0].name.toLowerCase()
+                  if(results.length != 0){
+                    res1[index]["tip"] = results[0].name.toLowerCase()
+                  }
                   if(index == (res1.length-1)){
                     var results = res1
                     res.send(JSON.stringify({results})) 
