@@ -27,6 +27,9 @@ const order = (props) => {
     useEffect(()=>{
         
         setUrl(router.asPath)
+        if(userinfo.zavrsen == 1){
+            setZavrsen("Zavrsen")
+        }
     },[])
 
        function zavrsiOrder(){

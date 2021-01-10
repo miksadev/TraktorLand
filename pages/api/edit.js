@@ -46,122 +46,47 @@ export default async (req, res) => {
         // })
         
         // }
+
         if(nameImg == ""){
           thumb = "";
         }else{
           
           thumb = `https://storage.googleapis.com/traktorland/${finishPath}`
         }
+
         var ime = fields["ime"];
         var proizvodjac = fields["proizvodjac"];
         var kataloski_broj = fields["kataloski_broj"];
-        var mp_cena = fields["mp_cena"];
-        var vp_cena = mp_cena - (mp_cena*20/120);
-        var tip = fields["tip"];
-        var tip2 = fields["tip2"];
-        var sifra = fields["sifra"];
-        var kolicina = fields["kolicina"]
         var rabat_1 = fields["rabat_1"] == "" ? 0 : fields["rabat_1"]
         var rabat_2 = fields["rabat_2"] == "" ? 0 : fields["rabat_2"]
         var rabat_3 = fields["rabat_3"] == "" ? 0 : fields["rabat_3"]
         var zemlja_porekla = fields["zemlja_porekla"]
         var thumb = thumb;
         var id = fields["id"]
-         
+        var tip2 = "";
+
         if(thumb == ""){
-          if(tip2 != ""){
-            
-        con.query("SELECT * FROM categorypr WHERE name LIKE ?",[tip2],function(err,result){
-          if(err) throw err;
-          var cat_id = result[0].categoryprid
-           
-           con.query(`UPDATE product SET rabat_1=?,rabat_2=?,rabat_3=?,zemlja_porekla=?,name = ?,manufname=?,kataloski_broj=?,
-           price = ?,vp_cena = ?,code = ? WHERE productid = ?`,[rabat_1,rabat_2,rabat_3,zemlja_porekla,ime,proizvodjac,kataloski_broj,
-           mp_cena,vp_cena.toFixed(2),sifra,id],(err,result) => {
-           if(err) throw err;
-           con.query("UPDATE productamount SET productamountb2b = ? WHERE productid = ?",[kolicina,id],(err,result) => {
+          
+         con.query(`UPDATE product SET rabat_1=?,rabat_2=?,rabat_3=?,zemlja_porekla=?,name = ?,manufname=?,kataloski_broj=?
+           WHERE productid = ?`,[rabat_1,rabat_2,rabat_3,zemlja_porekla,ime,proizvodjac,kataloski_broj,
+           id],(err,result) => {
             if(err) throw err;
-            con.query("UPDATE productcategorypr SET categoryprid = ? WHERE productid = ?",[cat_id,id],(err,result) => {
-              if(err) throw err;
               res.end(JSON.stringify({ result: 'Success' }))
               resolve();
-            })
-             
           })
-      })
-
-        })
-      }else{
-        con.query("SELECT * FROM categorypr WHERE name LIKE ?",[tip],function(err,result){
-          if(err) throw err;
-          var cat_id = result[0].categoryprid
-           
-           con.query(`UPDATE product SET rabat_1=?,rabat_2=?,rabat_3=?,zemlja_porekla=?,name = ?,manufname=?,kataloski_broj=?,
-           price = ?,vp_cena = ?,code = ? WHERE productid = ?`,[rabat_1,rabat_2,rabat_3,zemlja_porekla,ime,proizvodjac,kataloski_broj,
-           mp_cena,vp_cena.toFixed(2),sifra,id],(err,result) => {
-           if(err) throw err;
-           con.query("UPDATE productamount SET productamountb2b = ? WHERE productid = ?",[kolicina,id],(err,result) => {
-            if(err) throw err;
-            con.query("UPDATE productcategorypr SET categoryprid = ? WHERE productid = ?",[cat_id,id],(err,result) => {
-              if(err) throw err;
-              res.end(JSON.stringify({ result: 'Success' }))
-              resolve();
-            })
-             
-          })
-      })
-
-        })
-      }
+      
          
         }else{
           
-           if(tip2 != ""){
-            
-        con.query("SELECT * FROM categorypr WHERE name LIKE ?",[tip2],function(err,result){
-          if(err) throw err;
-          var cat_id = result[0].categoryprid
-           
-           con.query(`UPDATE product SET rabat_1=?,rabat_2=?,rabat_3=?,zemlja_porekla=?,name = ?,manufname=?,kataloski_broj=?,
-           price = ?,vp_cena = ?,code = ?,thumb=? WHERE productid = ?`,[rabat_1,rabat_2,rabat_3,zemlja_porekla,ime,proizvodjac,kataloski_broj,
-           mp_cena,vp_cena.toFixed(2),sifra,thumb,id],(err,result) => {
+        con.query(`UPDATE product SET rabat_1=?,rabat_2=?,rabat_3=?,zemlja_porekla=?,name = ?,manufname=?,kataloski_broj=?,
+           thumb=? WHERE productid = ?`,[rabat_1,rabat_2,rabat_3,zemlja_porekla,ime,proizvodjac,kataloski_broj,
+           thumb,id],(err,result) => {
            if(err) throw err;
-           con.query("UPDATE productamount SET productamountb2b = ? WHERE productid = ?",[kolicina,id],(err,result) => {
-            if(err) throw err;
-            con.query("UPDATE productcategorypr SET categoryprid = ? WHERE productid = ?",[cat_id,id],(err,result) => {
-              if(err) throw err;
               res.end(JSON.stringify({ result: 'Success' }))
               resolve();
-            })
-             
-          })
-      })
-
-        })
-      }else{
-        con.query("SELECT * FROM categorypr WHERE name LIKE ?",[tip],function(err,result){
-          if(err) throw err;
-          var cat_id = result[0].categoryprid
            
-           con.query(`UPDATE product SET rabat_1=?,rabat_2=?,rabat_3=?,zemlja_porekla=?,name = ?,manufname=?,kataloski_broj=?,
-           price = ?,vp_cena = ?,code = ?,thumb=? WHERE productid = ?`,[rabat_1,rabat_2,rabat_3,zemlja_porekla,ime,proizvodjac,kataloski_broj,
-           mp_cena,vp_cena.toFixed(2),sifra,thumb,id],(err,result) => {
-           if(err) throw err;
-           con.query("UPDATE productamount SET productamountb2b = ? WHERE productid = ?",[kolicina,id],(err,result) => {
-            if(err) throw err;
-            con.query("UPDATE productcategorypr SET categoryprid = ? WHERE productid = ?",[cat_id,id],(err,result) => {
-              if(err) throw err;
-              res.end(JSON.stringify({ result: 'Success' }))
-              resolve();
             })
-             
-          })
-      })
-
-        })
-      }
-
-          
+      
         }
       
   })

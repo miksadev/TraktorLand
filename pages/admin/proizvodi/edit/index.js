@@ -13,15 +13,10 @@ class add extends React.Component{
                         proizvodjac:this.props.proizvod.manufname,
                         zemlja_porekla :this.props.proizvod.zemlja_porekla,
                         kataloski_broj:this.props.proizvod.kataloski_broj,
-                        sifra:this.props.proizvod.code,
-                        mp_cena:this.props.proizvod.price,
                         rabat_1:this.props.proizvod.rabat_1,
                         rabat_2:this.props.proizvod.rabat_2,
                         rabat_3:this.props.proizvod.rabat_3,
-                        tip:'',
-                        tip2:'',
-                        subtip:[],
-                        kolicina:this.props.proizvod.qty
+
                     },
                 imeEmpty:false,
                 proizvodjacEmpty:false,
@@ -52,32 +47,32 @@ class add extends React.Component{
         }
 
     }
-    onChangeTip(e){
-        var HOST = process.env.NEXT_PUBLIC_HOST;
-        var PROTOCOL = process.env.NEXT_PUBLIC_PROTOCOL
-        var tip = e.target.value;
-        fetch(PROTOCOL+"://"+HOST+"/api/getcategory?name="+tip)
-       .then(res => res.json()).then(data => {
-        var obj = {...this.state}
-        obj.data["subtip"] =data.result
-        if(data.result.length != 0){
+    // onChangeTip(e){
+    //     var HOST = process.env.NEXT_PUBLIC_HOST;
+    //     var PROTOCOL = process.env.NEXT_PUBLIC_PROTOCOL
+    //     var tip = e.target.value;
+    //     fetch(PROTOCOL+"://"+HOST+"/api/getcategory?name="+tip)
+    //    .then(res => res.json()).then(data => {
+    //     var obj = {...this.state}
+    //     obj.data["subtip"] =data.result
+    //     if(data.result.length != 0){
            
-            obj.data["tip2"] =data.result[0].name
-        }else{
-             obj.data["tip2"] = ""
-        }
-        this.setState({obj})
+    //         obj.data["tip2"] =data.result[0].name
+    //     }else{
+    //          obj.data["tip2"] = ""
+    //     }
+    //     this.setState({obj})
 
-       })
-    }
-    onChangeTip2(e){
-        var name = e.target.name
-        var obj = {...this.state}
-        obj.data["tip2"] = e.target.value
+    //    })
+    // }
+    // onChangeTip2(e){
+    //     var name = e.target.name
+    //     var obj = {...this.state}
+    //     obj.data["tip2"] = e.target.value
         
-        console.log(e.target.value)
-        this.setState({obj})
-    }
+    //     console.log(e.target.value)
+    //     this.setState({obj})
+    // }
     onChange(e){
         var name = e.target.name
         var obj = {...this.state}
@@ -119,18 +114,12 @@ class add extends React.Component{
         }
         
         
-
+       
         var formData = new FormData();
         formData.append("ime",this.state.data.ime);
         formData.append("proizvodjac",this.state.data.proizvodjac);
         formData.append("zemlja_porekla",this.state.data.zemlja_porekla);
         formData.append("kataloski_broj",this.state.data.kataloski_broj);
-        formData.append("mp_cena",this.state.data.mp_cena);
-        
-        formData.append("tip",this.state.data.tip);
-        formData.append("tip2",this.state.data.tip2);
-        formData.append("sifra",this.state.data.sifra);
-        formData.append("kolicina",this.state.data.kolicina);
         formData.append("rabat_1",this.state.data.rabat_1);
         formData.append("rabat_2",this.state.data.rabat_2);
         formData.append("rabat_3",this.state.data.rabat_3);
@@ -166,31 +155,15 @@ class add extends React.Component{
                 <input  name="thumb" className={styles.inputfile} type="file"/>
                 <img className={styles.upload} src="/admin/upload.png" alt=""/>
                 <br />
-                
-                <Input  label="Tip" inputtype="select" name="tip" value={this.state.data.tip} onChange={(e) => {this.onChange(e),this.onChangeTip(e)}}>
-                    <option value="traktori" >Traktori</option>
-                    <option value="beraci">Berači</option>
-                    <option value="kombajni">Kombajni</option>
-                    <option value="freze">Freze</option>
-                    <option value="delovi za poljoprivredne mašine">Delovi za poljoprivredne mašine</option>
-                    <option value="poljoprivredna mehanizacija">Poljoprivredna mehanizacija</option>
-                    <option value="ostalo">Ostalo</option>
-                </Input>
-                <Input  label="Tip" inputtype="select" name="subtip" value={this.state.data.tip2} onChange={(e) => this.onChangeTip2(e)}>
-                   <option  value="" >{""}</option>
-                   {this.state.data.subtip.map(item => 
-                    <option  value={item.name} >{item.name}</option>
-                    )}
-                    
-                </Input>
+
                 <Input onFocus={(e) => this.onFocus(e)} style={this.state.imeEmpty ? {borderBottom:'1px solid red'} : {}} onChange={(e) => this.onChange(e)} inputtype="input" value={this.state.data.ime}  name="ime"  label="Ime"  type="text"/>
                 <Input onFocus={(e) => this.onFocus(e)} style={this.state.proizvodjacEmpty ? {borderBottom:'1px solid red'} : {}} onChange={(e) => this.onChange(e)} inputtype="input" value={this.state.data.proizvodjac} name="proizvodjac"  label="Proizvodjac"  type="text"/>
                 <Input onFocus={(e) => this.onFocus(e)} style={{}} onChange={(e) => this.onChange(e)} inputtype="input" value={this.state.data.zemlja_porekla} name="zemlja_porekla"  label="Zemlja porekla"  type="text"/>
-                <Input onFocus={(e) => this.onFocus(e)} style={this.state.kataloski_broj ? {borderBottom:'1px solid red'} : {}} onChange={(e) => this.onChange(e)} inputtype="input" value={this.state.data.kataloski_broj} name="kataloski_broj"  label="Kataloski broj"  type="text"/>
-                <Input onFocus={(e) => this.onFocus(e)} style={this.state.sifraEmpty ? {borderBottom:'1px solid red'} : {}} onChange={(e) => this.onChange(e)} inputtype="input" value={this.state.data.sifra} name="sifra"  label="Sifra"  type="text"/>
-                <Input onFocus={(e) => this.onFocus(e)} style={this.state.mp_cenaEmpty ? {borderBottom:'1px solid red'} : {}} onChange={(e) => this.onChange(e)} inputtype="input" value={this.state.data.mp_cena} name="mp_cena"  label="MP cena"  type="text"/>
+                <Input onFocus={(e) => this.onFocus(e)} style={this.state.kataloski_brojEmpty ? {borderBottom:'1px solid red'} : {}} onChange={(e) => this.onChange(e)} inputtype="input" value={this.state.data.kataloski_broj} name="kataloski_broj"  label="Kataloski broj"  type="text"/>
                 
-                <Input onFocus={(e) => this.onFocus(e)} style={this.state.kolicinaEmpty ? {borderBottom:'1px solid red'} : {}} onChange={(e) => this.onChange(e)} inputtype="input" value={this.state.data.kolicina} name="kolicina"  label="Kolicina"  type="text"/>
+               
+                
+                
                 <Input onFocus={(e) => this.onFocus(e)} style={{}} onChange={(e) => this.onChange(e)} inputtype="input" value={this.state.data.rabat_1} name="rabat_1"  label="Rabat 1"  type="text"/>
                 <Input onFocus={(e) => this.onFocus(e)} style={{}} onChange={(e) => this.onChange(e)} inputtype="input" value={this.state.data.rabat_2} name="rabat_2"  label="Rabat 2"  type="text"/>
                 <Input onFocus={(e) => this.onFocus(e)} style={{}} onChange={(e) => this.onChange(e)} inputtype="input" value={this.state.data.rabat_3} name="rabat_3"  label="Rabat 3"  type="text"/>
