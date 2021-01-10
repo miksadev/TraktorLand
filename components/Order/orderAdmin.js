@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './order.module.css';
 import CartItem from '../Cart/CartItems/CartItem/cartitem';
-import Total from '../UI/Checkout/total';
+import TotalAdmin from '../UI/Checkout/totalAdmin';
 import Input from '../UI/Input/input';
 import Submit from '../UI/Button/Submit/submit';
 import {useRouter} from 'next/router';
@@ -99,7 +99,7 @@ const order = (props) => {
                     })}
                 </div>
                 <div className={styles.total}>
-                    <Total isLogged={true} edit={props.edit} price={props.data.price} price2={props.data.price2} />
+                    <TotalAdmin isLogged={true} edit={props.edit} price={props.data.price} price2={props.data.price2} />
                     <div className={styles.orderinfo}>
                     {/* <Input inputtype="input" label="Napomena"/> */}
                     <div className={styles.infoblock}>
