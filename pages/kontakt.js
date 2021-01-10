@@ -37,6 +37,12 @@ export default function Kontakt() {
             -Dostupnost potrebnih delova i dostava istih u najkraćem roku.<br></br>
             <br></br>
             Zahvaljujući svemu navedenom, 2012. godine postali smo generalni zastupnici firme "Termometal" iz Ade, što smo i dan danas, te i ova informacija govori o profesionalnosti i ozbiljnosti naše firme.
+            <br></br><br></br>
+            Vlasnik firme Slaviša Marjanović
+            <br></br>
+            Matični broj 53938248
+            <br></br>
+            PIB 100869645
             </p>
           </div>
 

@@ -17,7 +17,7 @@ const conBlockInfo = () => {
                     Email
                 </div>
                 <div className={styles.text}>
-                    <a href="mailto:traktorland2@gmail.com">traktorland2@gmail.com</a>
+                    <a href="mailto:traktorland1@gmail.com">traktorland1@gmail.com</a>
                 </div>
             </div>
             <div className={styles.block}>

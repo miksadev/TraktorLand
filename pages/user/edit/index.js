@@ -121,6 +121,7 @@ class Edit extends React.Component{
        }).then(res => res.json()).then(data => {
         
            if(data.result == "Success"){
+            
             alert("Sacuvano")
            }
        })

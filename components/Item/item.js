@@ -18,7 +18,7 @@ const item = (props) => {
             setQty(props.proizvod[0].qty);
         }
         else{
-            setQty(e.target.value);
+            setQty(Number(e.target.value));
         }
     }
 
@@ -55,8 +55,8 @@ const item = (props) => {
                         <p>Veleprodajna cena</p>
                         <h3 className={styles.ukupnocena}>{props.proizvod[0].vp_cena ? props.proizvod[0].vp_cena : Number(props.proizvod[0].price).toFixed(2)} <span>RSD</span></h3>
                     </div>
-                    <input onChange={(event) => onChangeHandler(event)} className={styles.input} type="number" value={quantity} name="kolicina" placeholder="1" min={props.proizvod.kolicina == 0 ? 0 : 1} max={props.proizvod[0].qty}/>
-                     <AddToCart disable={props.proizvod[0].qty == 0 ? true : false} user={props.user} styles={styles.atcbutton} item={{id:props.proizvod[0].productid, rabat_1: props.proizvod[0].rabat_1, rabat_2: props.proizvod[0].rabat_2, rabat_3: props.proizvod[0].rabat_3, ime: props.proizvod[0].name,slika: props.proizvod[0].thumb,sifra: props.proizvod[0].code, price: Number(props.proizvod[0].price*1.2).toFixed(2), qty: quantity}}/>
+                    <input onChange={(event) => onChangeHandler(event)} className={styles.input} type="number" value={quantity} name="kolicina" placeholder="1" min={props.proizvod[0].qty == 0 ? 0 : 1} max={props.proizvod[0].qty}/>
+                    <AddToCart disable={props.proizvod[0].qty == 0 ? true : false} user={props.user} styles={styles.atcbutton} item={{id:props.proizvod[0].productid, rabat_1: props.proizvod[0].rabat_1, rabat_2: props.proizvod[0].rabat_2, rabat_3: props.proizvod[0].rabat_3, ime: props.proizvod[0].name,slika: props.proizvod[0].thumb,sifra: props.proizvod[0].code, price: Number(props.proizvod[0].price*1.2).toFixed(2), qty: quantity, kolicina: props.proizvod[0].qty}}/>
                 </div>
                 <div className={styles.line}/>
                     <div className={styles.block}>
