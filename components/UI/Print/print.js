@@ -4,19 +4,24 @@ import Logo from '../Logo/logo';
 const print = (props) => {
     let i=0;
     let cena=0;
-    let poros=0;
-    let pdv=0;
     let cenara=0;
-    
+    var vreme = props.orderaddress.partneraddressts;
+    var t = vreme.split(/[- T : Z]/);
+       
     return(
         <div className={styles.print}>
         <Logo/>
-        <h2>Podaci porucioca: </h2>
+        <h2>Porudžbenica: </h2>
         <h3>{props.data.ime_prezime}</h3>
-        <h3>{props.data.adresa + " " + props.data.grad + " "+ props.data.postanski_broj}</h3>
-        <h3>{"Telefon: " +props.data.telefon}</h3>
-        <h3>{"E-mail: " +props.data.email}</h3>
-        <h3>{"Datum i vreme porudzbine : " + props.data.created +" "+ props.data.time}</h3>
+        {
+            props.orderaddress.naziv_firme != null ? <>
+            <h3>{"Naziv firme: " +props.orderaddress.naziv_firme}</h3>
+            <h3>{"PIB: " +props.orderaddress.pib}</h3></> : null
+        }
+        <h3>{props.orderaddress.address + " " + props.orderaddress.city + " "+ props.orderaddress.zip}</h3>
+        <h3>{"Telefon: " +props.orderaddress.phone}</h3>
+        <h3>{"E-mail: " +props.orderaddress.email}</h3>
+        <h3>{"Datum i vreme porudzbine : " + t[1]+"/"+t[2]+"/"+t[0] +" "+ t[3]+":"+t[4]}</h3>
             <table>
                 <tr>
                     <th>R.B.</th>
@@ -24,34 +29,34 @@ const print = (props) => {
                     <th>Ime</th>
                     <th>Kolicina</th>
                     <th>Cena po komadu</th>
-                    <th>Rabat</th>
                     <th>Stopa PDV</th>
                     <th>Poreska osnovica</th>
                     
                     <th>Iznos PDV</th>
+                    <th>Cena po komadu</th>
                     <th>Cena</th>
+                    <th>Cena po komadu sa Rabatom</th>
                     <th>Cena sa Rabatom</th>
                 </tr>
                 {
                     
                 props.orders.map(order => {
-                    poros+=order.vp_cena*order.qty; 
-                    pdv+=0.2*order.vp_cena*order.qty;
-                    cena+=order.qty*order.mp_cena;
-                    cenara+=order.mp_cena*order.qty * (1 - props.data.rabat/100);
+                    cena+=order.qty*order.price*1.2;
+                    cenara+=order.price2*order.qty;
                     return(
                         <tr>
                             <td>{i++}</td>
-                            <td>{order.sifra}</td>
-                            <td style={{maxWidth: "200px"}}>{order.ime}</td>
+                            <td>{order.code}</td>
+                            <td style={{maxWidth: "200px"}}>{order.name}</td>
                             <td>{order.qty}</td>
-                            <td>{Number(order.vp_cena).toFixed(2)}</td>
-                            <td>{props.data.rabat}</td>
+                            <td>{Number(order.price*1.2).toFixed(2)}</td>
                             <td>20%</td>
-                            <td>{Number(order.vp_cena*order.qty).toFixed(2)}</td>
-                            <td>{Number(0.2*order.vp_cena*order.qty).toFixed(2)}</td>
-                            <td>{Number(order.qty*order.mp_cena).toFixed(2)}</td>
-                            <td>{Number(order.mp_cena*order.qty * (1 - props.data.rabat/100)).toFixed(2)}</td>
+                            <td>{Number(order.price).toFixed(2)}</td>
+                            <td>{Number(0.2*order.price).toFixed(2)}</td>
+                            <td>{Number(order.price*1.2).toFixed(2)}</td>
+                            <td>{Number(order.qty*order.price*1.2).toFixed(2)}</td>
+                            <td>{Number(order.price2).toFixed(2)}</td>
+                            <td>{Number(order.price2*order.qty).toFixed(2)}</td>
                         </tr>
                     );
                 }                    
@@ -63,10 +68,11 @@ const print = (props) => {
                     <td></td>
                     <td></td>
                     <td></td>
+                    <td></td>
+                    <td></td>
                     <td>Ukupno:</td>
-                    <td>{Number(poros).toFixed(2)}</td>
-                    <td>{Number(pdv).toFixed(2)}</td>
                     <td>{Number(cena).toFixed(2)}</td>
+                    <td></td>
                     <td>{Number(cenara).toFixed(2)}</td>
                 </tr>
             </table>

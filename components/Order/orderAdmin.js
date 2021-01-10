@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './order.module.css';
-import CartItem from '../Cart/CartItems/CartItem/cartitem';
+import CartItemAdmin from '../Cart/CartItems/CartItem/cartItemAdmin';
 import TotalAdmin from '../UI/Checkout/totalAdmin';
 import Input from '../UI/Input/input';
 import Submit from '../UI/Button/Submit/submit';
@@ -92,9 +92,8 @@ const order = (props) => {
                 <div className={styles.CartItems}>
 
                     {order.map(item => { // TREBA DA SE SREDI ORDER KAD JE U ADMIN PANELU
-                        return <CartItem key={item.id} edit={props.edit} sifra={item.code != undefined ? item.code : item.sifra} namena={props.namena} src={item.slika}
-                      name={item.name != undefined ? item.name : item.ime} price={item.price} price1={item.price1} price2={item.price2} price3={item.price3} qty={item.qty} up={() => addOne(item)}
-                        down={() => removeOne(item)} brisi={() => removeFromCart(item)}></CartItem>
+                        return <CartItemAdmin key={item.id} edit={props.edit} sifra={item.code != undefined ? item.code : item.sifra} namena={props.namena} src={item.slika}
+                      name={item.name != undefined ? item.name : item.ime} price={Number(item.price*1.2).toFixed(0)} price2={Number(item.price2).toFixed(0)} qty={item.qty}></CartItemAdmin>
                         
                     })}
                 </div>
@@ -103,7 +102,6 @@ const order = (props) => {
                     <div className={styles.orderinfo}>
                     {/* <Input inputtype="input" label="Napomena"/> */}
                     <div className={styles.infoblock}>
-                        <Link href="/checkout/orderdetails"><img className={styles.editShipping} src="/admin/edit.png" alt=""/></Link>
                         <h3>Detalji narucioca</h3>
                         <ul>
                             {userinfo.ime_prezime == undefined ? <li>{orderaddress.name}</li>:

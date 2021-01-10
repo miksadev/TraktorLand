@@ -88,7 +88,7 @@ const ViewOrder = ({data,orders,orderaddress}) => {
 
         </div>
         <div className={styles.print}>
-            <Print orders={orders} data={data}/>
+            <Print orders={orders} data={data} orderaddress={orderaddress}/>
         </div>
         </>
 	)

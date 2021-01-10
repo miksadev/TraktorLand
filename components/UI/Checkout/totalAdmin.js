@@ -21,7 +21,7 @@ const total = (props) => {
             
             <div className={styles.line}></div>
             <h3 className={styles.ukupno}>UKUPNO</h3>
-            {props.price == props.price2 ?  <h3 className={styles.ukupnocena}>{Number(props.price).toFixed(2)} RSD</h3> : <h3 className={styles.ukupnocena}>{Number(props.price2).toFixed(2)} RSD</h3>}
+            {props.price == props.price2 ?  <h3 className={styles.ukupnocena}>{Number(props.price).toFixed(0)} RSD</h3> : <h3 className={styles.ukupnocena}>{Number(props.price2).toFixed(0)} RSD</h3>}
         </div>
     );
 }
