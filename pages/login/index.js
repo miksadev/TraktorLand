@@ -7,10 +7,10 @@ import Link from 'next/link';
 import Cookies from 'cookies'
 import {useRouter} from 'next/router';
 import useCart from '../../util/useCart';
-const WithRouterLogin = (props)=>{
+const WithRouterLogin = (props) =>{
     const router = useRouter();
-    const {toggleLogged,setUser} = useCart()
-    return <Login {...props} setUser={setUser} toggleLogged={toggleLogged} router={router} />
+    const {toggleLogged,setUser, setShipping} = useCart()
+    return <Login {...props} setShipping={setShipping} setUser={setUser} toggleLogged={toggleLogged} router={router} />
 }
 class Login extends React.Component {
     constructor(props){
@@ -67,14 +67,13 @@ class Login extends React.Component {
                 alert("Pokusajte ponovo!")
             }else{
                 var user = data.user;
-                this.props.setUser(user)
+                this.props.setUser(user);
+                this.props.setShipping({});
                 this.props.toggleLogged(true);
                 if(this.props.router.query.back != undefined){
                     this.props.router.push("/checkout/orderdetails")
                 }else{
-                   
                     this.props.router.push("/")
-                    
                 }
                 
             }
