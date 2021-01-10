@@ -32,7 +32,7 @@ export default async (req,res) => {
       var ids_qty = []
       var ids = []
       result.map((item) => {
-        ids_qty.push({pro_id:item.productid,qty:item.quantity})
+        ids_qty.push({pro_id:item.productid,qty:item.quantity,price2:item.price2})
         ids.push(item.productid)
       
       })
@@ -44,10 +44,12 @@ export default async (req,res) => {
               item["qty"] = numb.qty
               item["slika"] = item.thumb 
               item["price"] = item.price
+              item["price2"] = numb.price2
               result_withqty.push(item)
             }
           })
         })
+
         res.send(JSON.stringify(result))
         res.end()
         resolve()
@@ -69,3 +71,5 @@ export default async (req,res) => {
   })
   
 }
+
+

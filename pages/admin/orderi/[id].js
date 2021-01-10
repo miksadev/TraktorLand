@@ -1,4 +1,5 @@
 import {useRouter} from 'next/router'
+
 import OrderAdmin from '../../../components/Order/orderAdmin';
 import styles from '../../../styles/checkout.module.css';
 import qs from 'querystring';
@@ -66,7 +67,7 @@ export async function getServerSideProps({req,res,query}){
 const ViewOrder = ({data,orders,orderaddress}) => {
 	const router = useRouter()
     const {id} = router.query;
-    
+   
 
 	return(
         <>

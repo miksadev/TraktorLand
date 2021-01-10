@@ -1,3 +1,4 @@
+
 import con from '../../store/db.js'
 import formidable from 'formidable-serverless';
 
@@ -15,9 +16,29 @@ export default async (req,res) => {
             var data = results
             var niz = []
             var res1 = results
-               res.send(JSON.stringify({results:res1})) 
+            if(results.length == 0){
+               res.send(JSON.stringify({results:[]})) 
                     res.end()
                     resolve(); 
+            }
+            res1.map((item,index) => {
+               con.query("SELECT * FROM productcategorypr WHERE productid = ?",[item.productid],(err,results) => {
+                if(results.length != 0){
+                  con.query("SELECT * FROM categorypr WHERE categoryprid = ?",[results[0].categoryprid],(err,results) => {
+                  res1[index]["tip"] = results[0].name.toLowerCase()
+                  if(index == (res1.length-1)){
+                    var results = res1
+                    res.send(JSON.stringify({results})) 
+                    res.end()
+                    resolve(); 
+                  }
+                })
+                }
+                
+               })
+            })
+             
+            
             
         })
   }else if(req.query.search != undefined && req.query.tip != undefined){
