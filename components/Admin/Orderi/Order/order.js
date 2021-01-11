@@ -20,7 +20,7 @@ const order = (props) => {
                var vreme = props.created
                var t = vreme.split(/[- T : Z]/);
             var d = new Date(Date.UTC(t[0], t[1]-1, t[2], t[3], t[4], t[5]));
-            setDate(t[1]+"/"+t[2]+"/"+t[0])
+            setDate(t[2]+"/"+t[1]+"/"+t[0])
             setTime(t[3]+":"+t[4])
            
         })

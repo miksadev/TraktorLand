@@ -11,7 +11,6 @@ import CartItemsNoSSR from '../../components/Cart/CartItems/cartitems';
 export default function Checkout() {
   
   const { price,price1,price2,price3, items ,isLogged, user, shipping} = useCart();
-  console.log(price,price1,price2,price3);
   const [showPopUp, setShowPopUp] = useState(false);
   const router = useRouter();
 
@@ -26,7 +25,6 @@ export default function Checkout() {
   
   const popUpHandler = () => {
     if(isLogged){
-      console.log(shipping)
       if(JSON.stringify(shipping) != '{}'){ // SREDITI OVAJ DEO
         router.push('/checkout/order')
       }

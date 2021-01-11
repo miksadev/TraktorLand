@@ -21,30 +21,33 @@ const print = (props) => {
         <h3>{props.orderaddress.address + " " + props.orderaddress.city + " "+ props.orderaddress.zip}</h3>
         <h3>{"Telefon: " +props.orderaddress.phone}</h3>
         <h3>{"E-mail: " +props.orderaddress.email}</h3>
-        <h3>{"Datum i vreme porudzbine : " + t[1]+"/"+t[2]+"/"+t[0] +" "+ t[3]+":"+t[4]}</h3>
+        <h3>{"Datum i vreme porudzbine : " +t[2] +"/"+t[1]+"/"+t[0] +" "+ t[3]+":"+t[4]}</h3>
             <table>
-                <tr>
-                    <th>R.B.</th>
-                    <th>sifra</th>
-                    <th>Ime</th>
-                    <th>Kolicina</th>
-                    <th>Cena po komadu</th>
-                    <th>Stopa PDV</th>
-                    <th>Poreska osnovica</th>
-                    
-                    <th>Iznos PDV</th>
-                    <th>Cena po komadu</th>
-                    <th>Cena</th>
-                    <th>Cena po komadu sa Rabatom</th>
-                    <th>Cena sa Rabatom</th>
-                </tr>
+                <thead>
+                    <tr>
+                        <th>R.B.</th>
+                        <th>sifra</th>
+                        <th>Ime</th>
+                        <th>Kolicina</th>
+                        <th>Cena po komadu</th>
+                        <th>Stopa PDV</th>
+                        <th>Poreska osnovica</th>
+                        
+                        <th>Iznos PDV</th>
+                        <th>Cena po komadu</th>
+                        <th>Cena</th>
+                        <th>Cena po komadu sa Rabatom</th>
+                        <th>Cena sa Rabatom</th>
+                    </tr>
+                </thead>
+                <tbody>
                 {
                     
                 props.orders.map(order => {
                     cena+=order.qty*order.price*1.2;
                     cenara+=order.price2*order.qty;
                     return(
-                        <tr>
+                        <tr key={i}>
                             <td>{i++}</td>
                             <td>{order.code}</td>
                             <td style={{maxWidth: "200px"}}>{order.name}</td>
@@ -75,6 +78,7 @@ const print = (props) => {
                     <td></td>
                     <td>{Number(cenara).toFixed(2)}</td>
                 </tr>
+                </tbody>
             </table>
             </div>
     );

@@ -17,7 +17,6 @@ export default async (req, res) => {
      form.parse(req,(err,fields,files) => {
          var id = fields["id"];
          var rabat = fields["rabat"]
-        console.log(fields)
         con.query(`UPDATE partner SET rabat = ? WHERE partnerid = ?`,[rabat,Number(id)],(err,result) => {
           if(err) throw err;
 

@@ -153,9 +153,6 @@ const proizvodi = ({data} , props) => {
         offset = 0;
         disScroll = false;
         lastScroll = 0;
-        console.log("REFRESH")
-        console.log(tip)
-        console.log(search4code)
         if(search4code == ""){
             if(tip == "novi"){
                     fetch(PROTOCOL+'://'+HOST+'/api/getorders?zavrseni=0&offset='+offset).then(res => res.json())

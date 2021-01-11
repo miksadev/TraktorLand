@@ -22,7 +22,7 @@ const proizvod = (props) => {
     return (
         <div className={styles.proizvod}>
             <p className={styles.sifra}>Sifra: <span>{props.sifra}</span></p>
-            <img className={styles.img} src={props.src} alt=""/>
+            <img className={styles.img} src={props.src ? props.src : "/product.png"} alt=""/>
             <p className={styles.name}>{props.name}</p>
             <p className={styles.price}>{props.price} RSD </p>
             {/* <p className={styles.kolicina}>{props.kolicina}</p> */}

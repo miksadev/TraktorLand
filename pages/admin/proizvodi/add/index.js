@@ -76,8 +76,6 @@ class add extends React.Component{
         var name = e.target.name
         var obj = {...this.state}
         obj.data["tip2"] = e.target.value
-        
-        console.log(e.target.value)
         this.setState({obj})
     }
     onSubmit(e){

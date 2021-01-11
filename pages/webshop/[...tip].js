@@ -115,8 +115,6 @@ function Webshop(props){
 	useEffect(() => {
 
 		window.addEventListener("scroll",scrollFunc)
-		// console.log("TIIP")
-		// console.log(par)
 		// var HOST = process.env.NEXT_PUBLIC_HOST;
 		// var PROTOCOL = process.env.NEXT_PUBLIC_PROTOCOL;
 		// var offset = 0
@@ -214,7 +212,7 @@ function Webshop(props){
 					</select>
 					<select className={styles.selectt} name="selectsearchsub" value={searchSubCategory} onChange={e => onChangeSearchSub(e)}>
 						<option value="off">{"Sve podkategorije"}</option>
-					{subCategory.map(item => <option value={item.categoryprid}>{item.name}</option>)}
+					{subCategory.map(item => <option key={item.categoryprid} value={item.categoryprid}>{item.name}</option>)}
 					</select>
 		            <div className={styles.line}></div>
 		            

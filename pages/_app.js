@@ -4,13 +4,11 @@ import { useStore } from "../store/store";
 import LayoutMain from './layouts/generallayout';
 import LayoutAdmin from './layouts/adminlayout';
 import {useRouter} from 'next/router';
-import { loadState , saveState } from '../store/localStorage';
+import { saveState } from '../store/localStorage';
 
 function MyApp({ Component, pageProps }) {
 
-  const persistedState = loadState();
   const store = useStore(pageProps.initialReduxState);
-  // const store = useStore(persistedState);
   store.subscribe(() => {
     saveState(store.getState());
   })
@@ -20,9 +18,7 @@ function MyApp({ Component, pageProps }) {
   
   return (
     <Provider store={store}>
-    
         {!currentUrl.includes("admin") ? <LayoutMain><Component className="global" {...pageProps} /></LayoutMain> : <LayoutAdmin><Component {...pageProps} /></LayoutAdmin>}
-    
     </Provider>
   );
 }

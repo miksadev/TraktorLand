@@ -2,7 +2,6 @@ import styles from '../styles/home.module.css';
 import Coninfo from '../components/UI/ContactInfo/contactinfo';
 import Logowide from '../components/UI/Logo/logowide';
 import Kategorije from '../components/Kategorije/kategorije';
-import Slider from '../components/Slider/slider';
 import dynamic from 'next/dynamic';
 
 export async function getServerSideProps({req,res}){
@@ -16,7 +15,6 @@ export async function getServerSideProps({req,res}){
   return{
     props:{
       akcije:data.data,
-     
     }
   }
 }
@@ -29,7 +27,6 @@ export default function Home({akcije,catdata}) {
 
   return (
     <>
-      {/* <Header/> */}
       
       <div className={styles.body}>
       <img className={styles.traktor} src="traktor.png" alt=""/>
@@ -50,8 +47,6 @@ export default function Home({akcije,catdata}) {
         </div>
        
       </div>
-
-      {/* <Footer/> */}
       </>
   )
 }

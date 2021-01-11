@@ -97,8 +97,6 @@ class add extends React.Component{
             if(value == ""){
                 if(allow_array.includes(key) == false){
                     var obj = {};
-                    console.log("ERROR11")
-                    console.log(key)
                     obj[key+"Empty"] = true
                     this.setState(obj)
                      
@@ -107,8 +105,6 @@ class add extends React.Component{
                 
             }
         }
-        console.log("ERROR")
-        console.log(err)
         if(err != 0){
             return;
         }
@@ -124,7 +120,6 @@ class add extends React.Component{
         formData.append("rabat_2",this.state.data.rabat_2);
         formData.append("rabat_3",this.state.data.rabat_3);
         formData.append("id",this.props.id)
-        console.log(this.props.id)
         if(e.target["thumb"].files.length != 0){
            formData.append("thumb",e.target["thumb"].files[0]);
         }else{
@@ -135,7 +130,6 @@ class add extends React.Component{
             method:"POST",
             body:formData
         }).then(res => res.json()).then(data =>{
-            console.log(data)
             if(data["result"] == "Success"){
                 alert("Sacuvano")
                 

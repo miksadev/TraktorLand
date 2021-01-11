@@ -31,7 +31,6 @@ const atcbutton = (props) => {
 			objToCart["price1"] = (item.price * (1 - item.rabat_1/100)).toFixed(2);
 			objToCart["price2"] = (item.price * (1 - item.rabat_2/100)).toFixed(2);
 			objToCart["price3"] = (item.price * (1 - item.rabat_3/100)).toFixed(2);
-			console.log(objToCart);
         	addToCart(objToCart)
         }: null} className={classes.join(' ')}>+ Dodaj u Korpu</button>
     );

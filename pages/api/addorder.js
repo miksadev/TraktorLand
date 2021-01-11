@@ -142,7 +142,6 @@ export default async (req, res) => {
         
       //   con.query("INSERT INTO fullorder (order_id,proizvod_id,qty) VALUES ?",[insertRow],(err,result) => {
       //     if(err) throw err;
-      //     console.log(result)
           
       //   })
        

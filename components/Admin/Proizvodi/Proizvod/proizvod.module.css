@@ -6,6 +6,7 @@
     box-shadow: 10px 10px 25px rgba(0, 0, 0, 0.05);
     border-radius: 12px;
     position: relative;
+    /* display: inline-block; */
     height: 110px;
 }
 .aa{

@@ -48,7 +48,7 @@ export default async (req,res) => {
             
         })
     }).once("error",() => {
-        console.log("error")
+
     }).web(req,res,{
         target: API_URL,
         autoRewrite: false,
@@ -85,7 +85,6 @@ export default async (req,res) => {
             
         })
     }).once("error",() => {
-        console.log("error")
     }).web(req,res,{
         target: API_URL,
         autoRewrite: false,

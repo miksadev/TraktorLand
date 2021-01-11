@@ -94,8 +94,6 @@ const proizvodi = (props) => {
         var scrollMaxY = window.scrollMaxY || (document.documentElement.scrollHeight - document.documentElement.clientHeight)
         var HOST = process.env.NEXT_PUBLIC_HOST;
         var PROTOCOL = process.env.NEXT_PUBLIC_PROTOCOL;
-          console.log(window.scrollY)
-        console.log(scrollTrig)
         if(window.scrollY > (scrollMaxY-20)){
 
             if(!loading){
@@ -167,7 +165,7 @@ const proizvodi = (props) => {
             <div className={styles.headingg}>
                 <h3>Proizvodi </h3> 
                 <Filter change={e => onChange(e)} placeholder="Pretrazi proizvode..."></Filter>
-                <select style={{marginLeft:"300px"}} name="selectsearch" value={searchKolona} onChange={e => onChangeSearch(e)}>
+                <select className={styles.selectt} style={{marginLeft:"300px"}} name="selectsearch" value={searchKolona} onChange={e => onChangeSearch(e)}>
                         <option value="name">Ime</option>
                         <option value="code">Sifra</option>
                         <option value="kataloski_broj">Kataloski broj</option>
@@ -176,7 +174,6 @@ const proizvodi = (props) => {
             <div ref={testRef}>
                 <Proizvodi data={pro}/>
             </div>
-            <Link href="/admin/proizvodi/add"><img className={styles.add} src="/admin/add.png" alt=""/></Link>
         </div>
     );
 }

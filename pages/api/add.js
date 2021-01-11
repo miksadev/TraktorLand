@@ -41,7 +41,6 @@ export default async (req, res) => {
       //   image4db = "/upload/"+randomNum1+"-"+randomNum2+randomNum3+"-"+file.name;
       //   // file.path = imageUrl;
         
-      //   console.log(file)
       // })
       form.parse(req,(err,fields,files) => {
         var thumb;
