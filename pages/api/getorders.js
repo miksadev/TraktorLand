@@ -17,7 +17,7 @@ export default async (req,res) => {
   }else if(req.query.zavrseni != undefined){
       var value = req.query.zavrseni
       var offset = req.query.offset
-      con.query("SELECT * FROM document WHERE zavrsen = ? ORDER BY ime_prezime ASC LIMIT 40 OFFSET "+offset,value,function(err,result,fields){
+      con.query("SELECT * FROM document WHERE zavrsen = ? ORDER BY documentts ASC LIMIT 40 OFFSET "+offset,value,function(err,result,fields){
       if(err) throw err;
       res.send(JSON.stringify(result))
       res.end()
@@ -58,7 +58,7 @@ export default async (req,res) => {
     })
   }
   else{
-    con.query("SELECT * FROM document",function(err,result,fields){
+    con.query("SELECT * FROM document ORDER BY documentts ASC",function(err,result,fields){
       if(err) throw err;
       res.send(JSON.stringify(result))
       res.end()
