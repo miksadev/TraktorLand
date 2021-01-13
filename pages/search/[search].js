@@ -18,9 +18,17 @@ function Search(props){
 	const testRef = useRef();
 	var naslov = ""
 	const [searchValue,setSearchValue] = useState(props.searchValue);
-	const [data,setData] = useState(props.data);
+	const [data,setData] = useState([]);
 	useEffect(()=>{
-        window.addEventListener("scroll",scrollFunc)
+        var HOST = process.env.NEXT_PUBLIC_HOST;
+        var PROTOCOL = process.env.NEXT_PUBLIC_PROTOCOL;
+        fetch(PROTOCOL+"://"+HOST+"/api/search?search="+props.param+"&offset="+offset+"&limit=40")
+    .then(res => res.json()).then(data => {
+
+        setData(data.results)
+         window.addEventListener("scroll",scrollFunc)
+    })
+       
         
     },[])
      function scrollFunc(event){
@@ -48,7 +56,7 @@ function Search(props){
                 offset +=40
                 loading = true
                
-                    fetch(PROTOCOL+"://"+HOST+"/api/search?search="+searchValue+"&offset="+offset)
+                    fetch(PROTOCOL+"://"+HOST+"/api/search?search="+searchValue+"&offset="+offset+"&limit=40")
 	.then(res => res.json()).then(data => {
 						if(data.results.length == 0){
                         	disScroll = true
@@ -89,8 +97,7 @@ export async function getServerSideProps(context){
 	var HOST = process.env.HOST;
      var PROTOCOL = process.env.PROTOCOL
      var offset = 0;
-	var data = await fetch(PROTOCOL+"://"+HOST+"/api/search?search="+context.query.search+"&offset="+offset)
-	.then(res => res.json()).then(data => data.results)
+	
 	var email = ""
 	var online = true;
 
@@ -115,7 +122,7 @@ export async function getServerSideProps(context){
         
 	return{
 		props:{
-			data:data,
+			
 			mData:"empty",
 			param:context.query.search,
 			search:"true",
