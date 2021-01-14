@@ -42,6 +42,8 @@ const getCategory = function(item){
 }
 const getData = function(sea){
   return new Promise((resolve,reject)=>{
+    console.log("CALL")
+    console.log(globaldata4off)
       var search = sea
       var offset = globaloffset
       
@@ -143,6 +145,11 @@ export default async (req,res) => {
             resolve();
           
         })
+  }else if(req.query.resetglobal != undefined){
+    globaldata4off = [];
+      res.send(JSON.stringify({msg:"success"}))
+      res.end()
+      resolve();
   }
 })
 }

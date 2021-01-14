@@ -25,7 +25,9 @@ const item = (props) => {
     useEffect(() => {
         if(isItemOpened != null){
             if(!isItemOpened){
+            
               window.history.back();
+
                
         }
         }

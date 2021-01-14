@@ -22,15 +22,18 @@ function Search(props){
 	useEffect(()=>{
         var HOST = process.env.NEXT_PUBLIC_HOST;
         var PROTOCOL = process.env.NEXT_PUBLIC_PROTOCOL;
-        fetch(PROTOCOL+"://"+HOST+"/api/search?search="+props.param+"&offset="+offset+"&limit=40")
+         fetch(PROTOCOL+"://"+HOST+"/api/search?search="+props.param+"&offset="+offset+"&limit=40")
     .then(res => res.json()).then(data => {
 
         setData(data.results)
-         window.addEventListener("scroll",scrollFunc)
+          window.addEventListener("scroll",scrollFunc)
     })
+    return ()=>{
+        fetch(PROTOCOL+"://"+HOST+"/api/search?resetglobal=true")
+        window.removeEventListener("scroll",scrollFunc)
+    }
+},[])
        
-        
-    },[])
      function scrollFunc(event){
        
         var {offsetTop,offsetHeight} = testRef.current
