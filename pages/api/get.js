@@ -82,8 +82,8 @@ export default async (req,res) => {
 							var result2 = []
 							var num = 1
 							result.map((item) => {
-								con.query("SELECT * FROM productamount WHERE productid = ?",item.productid,(err,result) => {
-									data[num-1]["qty"] = result[0].productamountb2b
+								con.query("SELECT * FROM productwarehouse WHERE productid = ?",item.productid,(err,result) => {
+									data[num-1]["qty"] = result[0].amount
 									result2.push(data[num-1])
 									
 									if(num == count){
@@ -126,8 +126,8 @@ export default async (req,res) => {
 							var result2 = []
 							var num = 1
 							result.map((item) => {
-								con.query("SELECT * FROM productamount WHERE productid = ?",item.productid,(err,result) => {
-									data[num-1]["qty"] = result[0].productamountb2b
+								con.query("SELECT * FROM productwarehouse WHERE productid = ?",item.productid,(err,result) => {
+									data[num-1]["qty"] = result[0].amount
 									result2.push(data[num-1])
 									
 									if(num == count){
@@ -161,8 +161,8 @@ export default async (req,res) => {
 				var result2 = []
 				var num = 1
 				result.map((item) => {
-					con.query("SELECT * FROM productamount WHERE productid = ?",item.productid,(err,result) => {
-						data[num-1]["qty"] = result[0].productamountb2b
+					con.query("SELECT * FROM productwarehouse WHERE productid = ?",item.productid,(err,result) => {
+						data[num-1]["qty"] = result[0].amount
 						result2.push(data[num-1])
 						
 						if(num == count){
@@ -193,8 +193,8 @@ export default async (req,res) => {
 				var result2 = []
 				var num = 1
 				result.map((item) => {
-					con.query("SELECT * FROM productamount WHERE productid = ?",item.productid,(err,result) => {
-						data[num-1]["qty"] = result[0].productamountb2b
+					con.query("SELECT * FROM productwarehouse WHERE productid = ?",item.productid,(err,result) => {
+						data[num-1]["qty"] = result[0].amount
 						result2.push(data[num-1])
 						
 						if(num == count){
