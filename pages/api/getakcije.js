@@ -5,7 +5,7 @@ export default async (req,res) => {
 	return new Promise(resolve => {
     if(req.query.id != undefined){
       var id = req.query.id
-    con.query("SELECT * FROM akcije WHERE id = ?",id,(err,results) => {
+    con.query("SELECT * FROM akcija WHERE id = ?",id,(err,results) => {
             var res;
             if(results.length != 0){
               res = results[0]
@@ -18,7 +18,7 @@ export default async (req,res) => {
           
         })
   }else{
-    con.query("SELECT * FROM akcije ",(err,results) => {
+    con.query("SELECT * FROM akcija ",(err,results) => {
           
             res.send(JSON.stringify({data:results}))
             res.end()
