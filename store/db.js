@@ -17,6 +17,6 @@ const con = mysql.createConnection({
 	host:'5.57.72.163',
 	user:'sajt',
 	password:'1',
-	database:'test web'
+	database:'gazzele_web'
 });
 export default con;
