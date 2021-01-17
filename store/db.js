@@ -14,9 +14,9 @@ var GOOGLE_CLOUD_DB_HOST = process.env.GOOGLE_CLOUD_DB_HOST;
 import mysql from 'mysql';
 
 const con = mysql.createConnection({
-	host:'127.0.0.1',
-	user:'root',
-	password:'123456',
+	host:'5.57.72.163',
+	user:'sajt',
+	password:'1',
 	database:'gazzele_web'
 });
 export default con;
