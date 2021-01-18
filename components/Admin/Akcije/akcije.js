@@ -1,4 +1,4 @@
-import React from 'react';
+
 import styles from './akcije.module.css';
 import Akcija from './Akcija/akcija';
 import Link from 'next/link';

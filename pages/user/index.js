@@ -1,5 +1,4 @@
 import styles from '../../styles/user.module.css';
-import React from 'react';
 import LinkButton from '../../components/UI/Button/LinkButton/linkButton';
 import Cookies from 'cookies'
 class User extends React.Component{

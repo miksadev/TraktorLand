@@ -1,4 +1,4 @@
-import React,{useEffect} from 'react';
+import {useEffect} from 'react';
 import styles from './logo.module.css';
 import Link from 'next/link';
 const logo = (props) => {

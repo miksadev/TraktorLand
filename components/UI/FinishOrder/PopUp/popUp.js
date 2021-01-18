@@ -1,4 +1,3 @@
-import React from 'react';
 import styles from './popUp.module.css';
 import LinkButton from '../../Button/LinkButton/linkButton';
 const popup = (props) => {

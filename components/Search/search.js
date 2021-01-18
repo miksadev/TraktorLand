@@ -1,4 +1,3 @@
-import React from 'react';
 import styles from './search.module.css';
 import SearchItems from './SearchItems/searchitems.js';
 import Link from 'next/link';

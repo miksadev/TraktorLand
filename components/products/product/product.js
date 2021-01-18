@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import {useState} from 'react';
 import styles from './product.module.css';
 import ATCButton from '../../UI/Button/AddToCart/atcbutton.js';
 import Link from 'next/link';

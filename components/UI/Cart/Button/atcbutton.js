@@ -1,4 +1,4 @@
-import React ,{useEffect} from 'react';
+import {useEffect} from 'react';
 import styles from './atcbutton.module.css';
 import useCart from '../../../../util/useCart';
 

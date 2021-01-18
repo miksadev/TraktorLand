@@ -1,4 +1,3 @@
-import React from 'react';
 import styles from './orderi.module.css';
 import Order from './Order/order';
 

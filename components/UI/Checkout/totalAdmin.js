@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import {useState, useEffect} from 'react';
 import styles from './total.module.css';
 import Submit from '../Button/Submit/submit';
 import useCart from '../../../util/useCart';

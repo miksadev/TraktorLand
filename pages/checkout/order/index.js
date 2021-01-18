@@ -1,4 +1,4 @@
-import React,{useState,useEffect,useLayoutEffect} from 'react';
+import {useState,useEffect,useLayoutEffect} from 'react';
 import {useRouter} from 'next/router';
 import Order from '../../../components/Order/order';
 import styles from '../../../styles/checkout.module.css';

@@ -1,4 +1,4 @@
-import React from 'react';
+
 import styles from './print.module.css';
 import Logo from '../Logo/logo';
 const print = (props) => {

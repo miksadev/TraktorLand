@@ -1,4 +1,4 @@
-import React from 'react';
+
 import styles from '../../styles/Logo.module.css';
 const logowide = (props) => {
     return (

@@ -1,4 +1,3 @@
-import React from 'react';
 import Input from '../../components/UI/Input/input';
 import styles from '../../styles/login.module.css';
 import Form from '../../components/Form/form';

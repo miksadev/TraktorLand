@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import {useState} from 'react';
 import Logo from '../UI/Logo/logo';
 import styles from '../../styles/header.module.css';
 import Search from '../UI/Search/search';

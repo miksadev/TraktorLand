@@ -1,4 +1,4 @@
-import React, {useState,useEffect} from 'react';
+import {useState,useEffect} from 'react';
 import styles from './item.module.css';
 import Wrapper from '../UI/ItemWrapper/itemWrapper';
 import AddToCart from '../UI/Button/AddToCart/atcbutton';

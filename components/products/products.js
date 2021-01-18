@@ -1,4 +1,3 @@
-import React from 'react';
 import Product from './product/product';
 import styles from './products.module.css';
 import Item from '../Item/item';

@@ -1,4 +1,4 @@
-import React,{useEffect,useState} from 'react';
+import {useEffect,useState} from 'react';
 import styles from './order.module.css';
 import Link from 'next/link';
 const order = (props) => {

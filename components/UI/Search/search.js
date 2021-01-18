@@ -1,4 +1,3 @@
-import React from 'react';
 import styles from './Search.module.css';
 import Aux from '../../../hoc/Auxiliary/Auxiliary';
 import Search from '../../Search/search';

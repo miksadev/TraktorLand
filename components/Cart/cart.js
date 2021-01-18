@@ -1,4 +1,3 @@
-import React from 'react';
 import styles from './cart.module.css';
 import useCart from '../../util/useCart';
 import LinkButton from '../UI/Button/LinkButton/linkButton';

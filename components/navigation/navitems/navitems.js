@@ -1,4 +1,3 @@
-import React from 'react';
 import Navitem from '../navitems/navitem/navitem';
 import Aux from '../../../hoc/Auxiliary/Auxiliary';
 import styles from './Navitems.module.css';

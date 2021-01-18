@@ -1,5 +1,4 @@
 import styles from '../../../../styles/add.module.css';
-import React from 'react';
 import Input from '../../../../components/UI/Input/input';
 import Link from 'next/link';
 import {useState} from 'react';

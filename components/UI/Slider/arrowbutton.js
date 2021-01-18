@@ -1,4 +1,3 @@
-import React from 'react';
 import styles from './arrowbutton.module.css';
 import { consts } from "react-elastic-carousel";
 

@@ -1,4 +1,3 @@
-import React from 'react';
 import Logo from '../UI/logo';
 import styles from '../../styles/Header.module.css';
 import Search from '../navigation/navitems/search/search';

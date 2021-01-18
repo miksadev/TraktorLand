@@ -1,4 +1,4 @@
-import React,{useEffect} from 'react';
+import {useEffect} from 'react';
 import styles from './searchitems.module.css';
 import SearchItem from './SearchItem/searchItem';
 import Link from 'next/link';

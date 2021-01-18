@@ -1,4 +1,3 @@
-import React from 'react';
 import styles from './proizvodi.module.css';
 import Proizvodi from '../../../components/Admin/Proizvodi/proizvodi';
 import Link from 'next/link';

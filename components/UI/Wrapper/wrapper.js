@@ -1,4 +1,3 @@
-import React from 'react';
 import styles from './wrapper.module.css';
 import useCart from '../../../util/useCart';
 

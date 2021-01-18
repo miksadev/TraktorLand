@@ -1,4 +1,3 @@
-import React from 'react';
 import styles from './order.module.css';
 import CartItem from '../Cart/CartItems/CartItem/cartitem';
 import Total from '../UI/Checkout/total';

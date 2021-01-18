@@ -1,4 +1,3 @@
-import React from 'react';
 import Aux from '../../hoc/Auxiliary/Auxiliary';
 import Kategorija from './kategorija/kategorija';
 import styles from './kategorije.module.css';

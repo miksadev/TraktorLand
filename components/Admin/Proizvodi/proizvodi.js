@@ -1,4 +1,3 @@
-import React from 'react';
 import styles from './proizvodi.module.css';
 import Proizvod from './Proizvod/proizvod';
 import {useState,useEffect} from 'react';

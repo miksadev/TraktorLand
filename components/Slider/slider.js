@@ -1,4 +1,3 @@
-import React from 'react';
 import Carousel, { consts } from "react-elastic-carousel";
 import Item from "../UI/Slider/item";
 import StyledImg from "../UI/Slider/styledimg";

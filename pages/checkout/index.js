@@ -1,4 +1,4 @@
-import React, {useState,useEffect} from 'react';
+import {useState,useEffect} from 'react';
 import styles from "../../styles/checkout.module.css";
 // import CartItems from '../../components/Cart/CartItems/cartitems'; 
 // import Total from '../../components/UI/Checkout/total';
