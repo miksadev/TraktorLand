@@ -5,6 +5,7 @@ import styles from "../../styles/webshop.module.css";
 import Products from '../../components/products/products';
 import {useState,useEffect} from 'react';
 import Filter from '../../components/Search/Filter/filter';
+import Loading from '../../components/UI/Loading/loading';
 import Cookies from 'cookies'
 
 var search4code = ""
@@ -204,6 +205,10 @@ function Webshop(props){
 		setSearchSubCategory(e.target.value)
 		onChange(e,e.target.value)
 	}
+	useEffect(()=> {
+		console.log(prodata);
+	},[prodata])
+
 	return (
 			<div className={styles.container} >
       
@@ -225,8 +230,10 @@ function Webshop(props){
 					</select>
 		            <div className={styles.line}></div>
 		            
-		           <div ref={testRef}>
-		           <Products  type={props.type} user={props.user} backroute={props.param} data={prodata} mdata={props.mData}/>
+		           <div ref={testRef} style={{textAlign : "center"}}>
+					
+					{prodata.length != 0  ? <Products  type={props.type} user={props.user} backroute={props.param} data={prodata} mdata={props.mData}/> : <Loading message="Ucitavanje proizvoda"/>}
+		           
 
 		           </div>
 		        </div>
