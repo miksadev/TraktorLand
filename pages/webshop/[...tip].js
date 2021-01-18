@@ -230,7 +230,7 @@ function Webshop(props){
 					</select>
 		            <div className={styles.line}></div>
 		            
-		           <div ref={testRef} style={{textAlign : "center"}}>
+		           <div ref={testRef}>
 					
 					{prodata.length != 0  ? <Products  type={props.type} user={props.user} backroute={props.param} data={prodata} mdata={props.mData}/> : <Loading message="Ucitavanje proizvoda"/>}
 		           
