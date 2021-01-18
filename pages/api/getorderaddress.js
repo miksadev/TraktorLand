@@ -10,8 +10,7 @@ export default async (req,res) => {
       var id = req.query.id
       con.query("SELECT * FROM partneraddress WHERE foreign_partneraddressid = ?",id,function(err,result,fields){
       if(err) throw err;
-      res.send(JSON.stringify(result))
-      res.end()
+      res.json(result)
       resolve()
     })
   }

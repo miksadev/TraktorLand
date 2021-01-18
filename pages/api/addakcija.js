@@ -64,7 +64,7 @@ export default async (req, res) => {
       con.query("INSERT INTO akcije SET ?", akcija,(err,result) => {
         if(err) throw err;
         
-        res.end(JSON.stringify({ result: 'Success' }))
+        res.json({ result: 'Success' })
         resolve();
       })
     

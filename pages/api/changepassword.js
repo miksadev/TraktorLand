@@ -19,14 +19,14 @@ export default async (req, res) => {
       
       con.query("UPDATE partner SET password = ? WHERE email = ?",[fields["password"],fields["email"]],(err,results,fields) => {
           if(err){
-            res.end(JSON.stringify({ result: 'Failed' }))
+            res.json({ result: 'Failed' })
             resolve();
           }
           if(results.changedRows == 0){
-            res.end(JSON.stringify({ result: 'Failed' }))
+            res.json({ result: 'Failed' })
             resolve();
           }else{
-            res.end(JSON.stringify({ result: 'Success' }))
+            res.json({ result: 'Success' })
             resolve();
           }
           

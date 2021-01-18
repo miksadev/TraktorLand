@@ -9,12 +9,10 @@ export default async (req,res) => {
 		var email = JSON.parse(req.body).email
   			con.query("SELECT * FROM partner WHERE email = ?",[email],(err,results) => {
   				if(results.length > 0){
-  					res.send(JSON.stringify({result:"Success",user:results[0]}))
-  					res.end()
+  					res.json({result:"Success",user:results[0]})
   					resolve();
   				}else{
-  					res.send(JSON.stringify({result:'Failed'}))
-  					res.end()
+  					res.json({result:'Failed'})
   					resolve();
   				}
   			})
@@ -22,8 +20,7 @@ export default async (req,res) => {
     if(req.query.id != undefined){
             con.query("SELECT * FROM partner WHERE partnerid = ? ",req.query.id,(err,results) => {
           
-            res.send(JSON.stringify({user:results}))
-            res.end()
+            res.json({user:results})
             resolve();
           
         })
@@ -31,8 +28,7 @@ export default async (req,res) => {
       var offset = req.query.offset;
       con.query("SELECT * FROM partner LIMIT 40 OFFSET "+offset,(err,results) => {
           
-            res.send(JSON.stringify({result:"Success",users:results}))
-            res.end()
+            res.json({result:"Success",users:results})
             resolve();
           
         })

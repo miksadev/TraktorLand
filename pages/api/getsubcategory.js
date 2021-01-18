@@ -17,8 +17,7 @@ export default async (req,res) => {
       if(err) throw err;
       var id = result[0].categoryprid
       con.query("SELECT * FROM categorypr WHERE parentid = ?",[id],function(err,result){
-        res.send(JSON.stringify(result))
-      res.end()
+        res.json(result)
       resolve()
       })
     })

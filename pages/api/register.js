@@ -58,13 +58,13 @@ export default async (req, res) => {
         if(err) throw err;
         
         if(result.length != 0){
-          res.end(JSON.stringify({result:'Error email'}));
+          res.json({result:'Error email'});
           resolve();
         }else{
             con.query("INSERT INTO partner SET ?", user,(err,result) => {
             if(err) throw err;
             
-            res.end(JSON.stringify({ result: 'Success' }))
+            res.json({ result: 'Success' })
             resolve();
             })
         }

@@ -1,6 +1,7 @@
 import con from '../../store/db.js'
 import formidable from 'formidable-serverless';
-
+import con2 from '../../store/db.js'
+var async = require('async');
 export default async (req,res) => {
 	return new Promise(resolve => {
 
@@ -48,37 +49,39 @@ export default async (req,res) => {
           con.query("SELECT * FROM productcategorypr WHERE categoryprid IN (?)",[ids],function(err,result){
             if(err) throw err;
             if(result.length == 0){
-              res.send(JSON.stringify({results:[]}))
-              res.end()
+              res.json({results:[]})
               resolve();
             }else{
               var productids = []
             result.map(item => {
               productids.push(item.productid)
             })
-            con.query("SELECT * FROM product WHERE "+kolona+" LIKE ? AND productid IN (?) LIMIT 40 OFFSET "+offset,[search_start,productids],function(err,result){
+            con.query("SELECT * FROM product WHERE "+kolona+" LIKE ? AND productid IN (?) LIMIT 8 OFFSET "+offset,[search_start,productids],function(err,result){
               if(result.length == 0){
-                res.send(JSON.stringify({results:[]}))
-                res.end()
+                res.json({results:[]})
                 resolve()
               }
               var data = result
               var count = result.length
               var result2 = []
               var num = 1
+              var tasks=[]
               result.map((item) => {
-                con.query("SELECT * FROM productamount WHERE productid = ?",item.productid,(err,result) => {
-                  data[num-1]["qty"] = result[0].productamountb2b
+                var func = function(item,callback){
+
+                  con2.query("SELECT * FROM productwarehouse WHERE productid = ?",item.productid,(err,result) => {
+                  data[num-1]["qty"] = result[0].amount
                   result2.push(data[num-1])
-                  
-                  if(num == count){
-                    
-                    res.send(JSON.stringify({results:result2}))
-                    res.end()
-                    resolve()
-                  }
+                  callback(null,data[num-1])
                   num++
                 })
+                }
+                tasks.push(func.bind(null,item))
+              })
+              async.parallel(tasks,function(err,results){
+                if(err) throw err;
+                res.json({results})
+                resolve()
               })
             })
             }

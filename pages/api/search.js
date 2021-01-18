@@ -42,8 +42,7 @@ const getCategory = function(item){
 }
 const getData = function(sea){
   return new Promise((resolve,reject)=>{
-    console.log("CALL")
-    console.log(globaldata4off)
+  
       var search = sea
       var offset = globaloffset
       
@@ -90,7 +89,7 @@ function loop(promise,res){
  return promise.then((val) =>{
 
     if(val == "end"){
-       res.end(JSON.stringify({results:globaldata}))
+       res.json({results:globaldata})
 
        globaldata = []
        globaloffset = 0;
@@ -105,7 +104,7 @@ function loop(promise,res){
         
     }else{
       if(globaldata.length >= limit_){
-        res.end(JSON.stringify({results:globaldata}))
+        res.json({results:globaldata})
         globaldata = []
         globaloffset = 0;
         globalsearch = "";
@@ -140,15 +139,13 @@ export default async (req,res) => {
     var tip = req.query.tip
     con.query("SELECT * FROM product WHERE name LIKE ? AND type = ? ORDER BY name ASC LIMIT 10",[search+"%",tip],(err,results) => {
           
-            res.send(JSON.stringify({results}))
-            res.end()
+            res.json({results})
             resolve();
           
         })
   }else if(req.query.resetglobal != undefined){
     globaldata4off = [];
-      res.send(JSON.stringify({msg:"success"}))
-      res.end()
+      res.json({msg:"success"})
       resolve();
   }
 })

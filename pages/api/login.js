@@ -26,7 +26,7 @@ export default async (req, res) => {
         if(err) throw err;
         
         if(result.length == 0){
-          res.end(JSON.stringify({result:'Failed'}));
+          res.json({result:'Failed'});
           resolve()
         }else{
           var secret = "traktorlandsecret";
@@ -38,10 +38,10 @@ export default async (req, res) => {
                var secret = "traktorlandsecret";
           var username = email;
           var token = jwt.sign({username:username},secret)
-          res.end(JSON.stringify({result:'Success',authToken:token,user:result[0]}))
+          res.json({result:'Success',authToken:token,user:result[0]})
           resolve();
           }else{
-            res.end(JSON.stringify({result:'Failed'}));
+            res.json({result:'Failed'});
           resolve()
           }
          

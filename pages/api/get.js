@@ -1,5 +1,6 @@
 import con from '../../store/db.js'
-
+import con2 from '../../store/db.js'
+var async = require('async');
 
 export default async (req,res) => {
 	
@@ -45,7 +46,7 @@ export default async (req,res) => {
 	// }
 	if(req.query.tip != undefined){
 		
-						
+		
 		var name = req.query.tip;
 		var offset = req.query.offset;
 		if(name == "delovi"){
@@ -70,11 +71,12 @@ export default async (req,res) => {
 							result.map(item => {
 							productsid.push(item.productid)
 						})
-						con.query("SELECT * FROM product WHERE productid IN (?) LIMIT 40 OFFSET "+offset,[productsid],function(err,result){
+						con.query("SELECT * FROM product WHERE productid IN (?) LIMIT 8 OFFSET "+offset,[productsid],function(err,result){
 
 							if(result.length == 0){
-								res.send(JSON.stringify([]))
-								res.end()
+								res.json([])
+								// res.send(JSON.stringify([]))
+								// res.end()
 								resolve()
 							}
 							var data = result
@@ -82,14 +84,15 @@ export default async (req,res) => {
 							var result2 = []
 							var num = 1
 							result.map((item) => {
-								con.query("SELECT * FROM productwarehouse WHERE productid = ?",item.productid,(err,result) => {
+								con2.query("SELECT * FROM productwarehouse WHERE productid = ?",item.productid,(err,result) => {
 									data[num-1]["qty"] = result[0].amount
 									result2.push(data[num-1])
 									
 									if(num == count){
 										
-										res.send(JSON.stringify(result2))
-										res.end()
+										res.json(result2)
+										// res.send(JSON.stringify(result2))
+										// res.end()
 										resolve()
 									}
 									num++
@@ -97,8 +100,7 @@ export default async (req,res) => {
 							})
 						})
 					}else{
-						res.send(JSON.stringify([]))
-							res.end()
+						res.json([])
 							resolve()
 					}
 					})
@@ -113,33 +115,37 @@ export default async (req,res) => {
 						result.map(item => {
 							productsid.push(item.productid)
 						})
-						con.query("SELECT * FROM product WHERE productid IN (?) LIMIT 40 OFFSET "+offset,[productsid],function(err,result){
+						con.query("SELECT * FROM product WHERE productid IN (?) LIMIT 8 OFFSET "+offset,[productsid],function(err,result){
 							
 							
 							if(result.length == 0){
-								res.send(JSON.stringify([]))
-								res.end()
+								res.json([])
 								resolve()
 							}
 							var data = result
 							var count = result.length
 							var result2 = []
-							var num = 1
+							var num = 1;
+							var tasks = [];
+							
 							result.map((item) => {
-								con.query("SELECT * FROM productwarehouse WHERE productid = ?",item.productid,(err,result) => {
+								var func = function(item,callback){
+
+									con2.query("SELECT * FROM productwarehouse WHERE productid = ?",item.productid,(err,result) => {
 									data[num-1]["qty"] = result[0].amount
 									result2.push(data[num-1])
-									
-									if(num == count){
-										
-										res.send(JSON.stringify(result2))
-										res.end()
-										resolve()
-									}
+									callback(null,data[num-1])
 									num++
 								})
+								}
+								tasks.push(func.bind(null,item))
 							})
-
+							async.parallel(tasks,function(err,results){
+								if(err) throw err;
+								res.json(results)
+								resolve()
+							})
+							
 
 						})
 					})
@@ -167,8 +173,7 @@ export default async (req,res) => {
 						
 						if(num == count){
 							
-							res.send(JSON.stringify(result2))
-							res.end()
+							res.json(result2)
 							resolve()
 						}
 						num++
@@ -181,11 +186,10 @@ export default async (req,res) => {
 	}
 	if(req.query.id == undefined && req.query.tip == undefined){
 		var offset = req.query.offset;
-		con.query("SELECT * FROM product ORDER BY name ASC LIMIT 40 OFFSET "+offset, function(err,result,fields){
+		con.query("SELECT * FROM product ORDER BY name ASC LIMIT 8 OFFSET "+offset, function(err,result,fields){
 			if(err) throw err;
 			if(result.length == 0){
-				res.send(JSON.stringify([]))
-				res.end()
+				res.json([])
 				resolve()
 			}
 				var data = result
@@ -199,8 +203,7 @@ export default async (req,res) => {
 						
 						if(num == count){
 							
-							res.send(JSON.stringify(result2))
-							res.end()
+							res.json(result2)
 							resolve()
 						}
 						num++

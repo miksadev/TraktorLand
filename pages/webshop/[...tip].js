@@ -11,11 +11,12 @@ var search4code = ""
 var sub4code = ""
 var kolona4code = ""
 var offset = 0;
-var disScroll = false;
+var disScroll = true;
 var lastScroll = 0;
 
 function Webshop(props){
-	
+	var HOST = process.env.NEXT_PUBLIC_HOST;
+		var PROTOCOL = process.env.NEXT_PUBLIC_PROTOCOL;
 	const testRef = useRef();
 	const [prodata,setProdata] = useState(props.data)
 	const [subCategory,setSubCategory] = useState(props.sub)
@@ -34,10 +35,18 @@ function Webshop(props){
 
 
 	var naslov = ""
+	useEffect(()=>{
 
+		fetch(PROTOCOL +'://'+HOST+'/api/get?tip='+props.type+'&offset='+'0').then(res => res.json())
+				.then(data => {
+					disScroll = false;
+					setProdata(data)
+				})
+	},[])
 	useEffect(()=>{
 		if(kolona4code != ""){
-        	setProdata(props.data)
+        	fetch(PROTOCOL +'://'+HOST+'/api/get?tip='+props.type+'&offset='+'0').then(res => res.json())
+				.then(data => setProdata(data))
         	setSearchValue("")
 		}
 	},[par])
@@ -69,20 +78,20 @@ function Webshop(props){
 		if(disScroll){
 			return;
 		}
-	
+		
 		var scrollMaxY = window.scrollMaxY || (document.documentElement.scrollHeight - document.documentElement.clientHeight)
-		var HOST = process.env.NEXT_PUBLIC_HOST;
-		var PROTOCOL = process.env.NEXT_PUBLIC_PROTOCOL;
+		
 		
 		if(window.scrollY > scrollTrig){
 			if(!loading){
 				if(search4code != "" || sub4code != ""){
-					offset +=40
+					offset +=8
 					loading = true
 					fetch(PROTOCOL+'://'+HOST+'/api/searchtip?search='+search4code+"&tip="+par+"&searchkolona="+kolona4code+"&sub="+sub4code+"&offset="+offset)
 			        .then(res => res.json())
 			        .then(data => {
-			        	
+			        	console.log("DATAT")
+			        	console.log(data)
 			        	if(data.results.length == 0){
 							disScroll = true
 						}
@@ -92,7 +101,7 @@ function Webshop(props){
 						},1000)
 			        })
 				}else{
-					offset +=40
+					offset +=8
 				loading = true
 				fetch(PROTOCOL +'://'+HOST+'/api/get?tip='+props.type+'&offset='+offset).then(res => res.json())
 				.then(data => {
@@ -134,7 +143,7 @@ function Webshop(props){
   //       })
 		
         return ()=>{
-
+        	lastScroll = 0;
         	window.removeEventListener("scroll",scrollFunc)
 
         }
@@ -244,8 +253,7 @@ export async function getServerSideProps(context){
 		then(res => res.json()).then(data =>data)
 	}
 	var offset = 0;
-	var data = await fetch(PROTOCOL +'://'+HOST+'/api/get?tip='+param+'&offset='+offset).
-	then(res => res.json()).then(data =>data)
+	var data = []
 	var sub = await fetch(PROTOCOL +'://'+HOST+`/api/getsubcategory?name=`+param).
 	then(res => res.json()).then(data =>data)
 

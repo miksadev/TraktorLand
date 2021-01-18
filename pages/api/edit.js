@@ -71,7 +71,7 @@ export default async (req, res) => {
            WHERE productid = ?`,[rabat_1,rabat_2,rabat_3,zemlja_porekla,ime,proizvodjac,kataloski_broj,
            id],(err,result) => {
             if(err) throw err;
-              res.end(JSON.stringify({ result: 'Success' }))
+              res.json({result:'Success'})
               resolve();
           })
       
@@ -82,7 +82,7 @@ export default async (req, res) => {
            thumb=? WHERE productid = ?`,[rabat_1,rabat_2,rabat_3,zemlja_porekla,ime,proizvodjac,kataloski_broj,
            thumb,id],(err,result) => {
            if(err) throw err;
-              res.end(JSON.stringify({ result: 'Success' }))
+              res.json({result:'Success'})
               resolve();
            
             })

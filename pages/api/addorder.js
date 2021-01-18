@@ -119,7 +119,7 @@ export default async (req, res) => {
           
           con.query("INSERT INTO documentitem (documentid,productid,quantity,price,price2) VALUES ?",[insertRow],(err,result) => {
             if(err) throw err;
-            res.end(JSON.stringify({ result: 'Success' }))
+            res.json({ result: 'Success' })
             resolve();
           })
           

@@ -19,4 +19,14 @@ const con = mysql.createConnection({
 	password:'1',
 	database:'gazzele_web'
 });
+
+const con2 = mysql.createPool({
+	host:'5.57.72.163',
+	user:'sajt',
+	password:'1',
+	database:'gazzele_web',
+	connectionLimit: 7,
+    dateStrings: true,
+    multipleStatements: true
+})
 export default con;

@@ -17,9 +17,10 @@ if(req.method == "POST"){
   			if(err) throw err;
   			
   			if(result.length > 0){
-  				res.end(JSON.stringify({ result: 'Success' }))
+  				
+          res.json({result:'Success'})
   			}else{
-  				res.end(JSON.stringify({ result: 'Failed' }))
+  				res.json({result:'Failed'})
   			}
   		})
   	

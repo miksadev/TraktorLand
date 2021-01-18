@@ -12,16 +12,16 @@ export default async (req,res) => {
             }else{
               res = []
             }
-            res.send(JSON.stringify({data:res}))
+            res.json({data:res})
+           
             res.end()
             resolve();
           
         })
   }else{
     con.query("SELECT * FROM akcija ",(err,results) => {
+            res.json({data:results})
           
-            res.send(JSON.stringify({data:results}))
-            res.end()
             resolve();
           
         })

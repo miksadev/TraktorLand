@@ -112,7 +112,7 @@ export default async (req, res) => {
               if(err) throw err;
               con.query("INSERT INTO productcategorypr SET productid = ?,categoryprid = ?",[productid,id],(err,result) => {
                 if(err) throw err;
-                res.end(JSON.stringify({ result: 'Success' }))
+                res.json({ result: 'Success' })
                 resolve();
               })
              
@@ -133,7 +133,7 @@ export default async (req, res) => {
               if(err) throw err;
               con.query("INSERT INTO productcategorypr SET productid = ?,categoryprid = ?",[productid,id],(err,result) => {
                 if(err) throw err;
-                res.end(JSON.stringify({ result: 'Success' }))
+                res.json({ result: 'Success' })
                 resolve();
               })
              

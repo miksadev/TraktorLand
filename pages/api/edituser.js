@@ -42,7 +42,7 @@ export default async (req, res) => {
          WHERE email = ?`,[ime,telefon,naziv_firme,pib,email,adresa,grad,postanskibroj,oldemail],(err,result) => {
           if(err) throw err;
 
-          res.end(JSON.stringify({ result: 'Success' }))
+          res.json({result:'Success'})
           resolve();
         })
      })

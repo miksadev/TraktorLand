@@ -7,8 +7,7 @@ export default async (req,res) => {
       var search = req.query.search
     con.query("SELECT * FROM akcije WHERE ime LIKE ? ORDER BY ime ASC","%"+search+"%",(err,results) => {
           
-            res.send(JSON.stringify({results}))
-            res.end()
+            res.json({results})
             resolve();
           
         })

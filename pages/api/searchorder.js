@@ -14,8 +14,7 @@ export default async (req,res) => {
       }
     con.query("SELECT * FROM document WHERE ime_prezime LIKE ? AND zavrsen = ? ORDER BY ime_prezime ASC LIMIT 40 OFFSET "+offset,["%"+search+"%",tip],(err,results) => {
           
-            res.send(JSON.stringify({results}))
-            res.end()
+            res.json({results})
             resolve();
           
         })

@@ -65,7 +65,7 @@ export default async (req, res) => {
           con.query(`UPDATE akcije SET ime = ?,sifra = ?,link_proizvoda = ?  WHERE id = ?`,[ime,sifra,link_proizvoda,id],(err,result) => {
         if(err) throw err;
         
-        res.end(JSON.stringify({ result: 'Success' }))
+        res.json({result:'Success'})
         resolve();
       })
         }else{
@@ -73,7 +73,7 @@ export default async (req, res) => {
           con.query(`UPDATE akcije SET ime = ?,sifra = ?,link_proizvoda = ?,thumb = ?  WHERE id = ?`,[ime,sifra,link_proizvoda,thumb,id],(err,result) => {
         if(err) throw err;
         
-        res.end(JSON.stringify({ result: 'Success' }))
+        res.json({result:'Success'})
         resolve();
       })
         }

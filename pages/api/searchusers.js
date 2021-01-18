@@ -8,8 +8,7 @@ export default async (req,res) => {
       var offset = req.query.offset
     con.query("SELECT * FROM partner WHERE name LIKE ? ORDER BY name ASC LIMIT 40 OFFSET "+offset,["%"+search+"%"],(err,results) => {
           
-            res.send(JSON.stringify({results}))
-            res.end()
+            res.json({results})
             resolve();
           
         })

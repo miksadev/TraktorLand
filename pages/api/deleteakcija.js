@@ -19,8 +19,8 @@ export default async (req, res) => {
 
         con.query(`DELETE FROM akcije WHERE id = ?`,[Number(id)],(err,result) => {
           if(err) throw err;
-
-          res.end(JSON.stringify({ result: 'Success' }))
+          res.json({result:'Success'})
+        
           resolve();
         })
      })

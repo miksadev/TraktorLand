@@ -20,7 +20,7 @@ export default async (req, res) => {
         con.query(`UPDATE partner SET rabat = ? WHERE partnerid = ?`,[rabat,Number(id)],(err,result) => {
           if(err) throw err;
 
-          res.end(JSON.stringify({ result: 'Success' }))
+          res.json({ result: 'Success' })
           resolve();
         })
      })

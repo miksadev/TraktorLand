@@ -20,7 +20,7 @@ export default async (req, res) => {
         con.query(`DELETE FROM partner WHERE partnerid = ?`,[Number(id)],(err,result) => {
           if(err) throw err;
 
-          res.end(JSON.stringify({ result: 'Success' }))
+          res.json({result:'Success'})
           resolve();
         })
      })

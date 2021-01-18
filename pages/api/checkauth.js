@@ -12,10 +12,12 @@ export default async (req,res) => {
 	}
 	jwt.verify(authToken,'traktorlandsecret',function(err,decoded){
 		if(err){
-			res.end(JSON.stringify({result:'Failed'}))
+			
+			res.json({result:'Failed'})
 			resolve()
 		}else{
-			res.end(JSON.stringify({result:'Success',email:decoded.username}))
+			res.json({result:'Success',email:decoded.username})
+			
 			resolve()
 		}
 	})

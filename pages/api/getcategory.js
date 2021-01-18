@@ -6,9 +6,8 @@ export default async (req,res) => {
     if(req.query.id != undefined){
       var id = req.query.id
     con.query("SELECT * FROM categorypr WHERE id = ?",id,(err,results) => {
-            
-            res.send(JSON.stringify({data:results[0]}))
-            res.end()
+            res.json({data:results[0]})
+           
             resolve();
           
         })
@@ -22,8 +21,8 @@ export default async (req,res) => {
               obj["category"] = targetCategory
               con.query("SELECT * FROM categorypr WHERE parentid = ?",[targetCategory[0].categoryprid],(err,result) => {
                 obj["subcategory"] = result
-                  res.send(JSON.stringify(obj))
-                  res.end()
+                  res.json(obj)
+                
                   resolve();
               })
             }else{
@@ -32,8 +31,8 @@ export default async (req,res) => {
                 obj["category"] = targetCategory
                  con.query("SELECT * FROM categorypr WHERE parentid = ?",[result[0].categoryprid],(err,result) => {
                   obj["subcategory"] = result
-                  res.send(JSON.stringify(obj))
-                  res.end()
+                  res.json(obj)
+               
                   resolve();
                  })
               })
@@ -45,9 +44,8 @@ export default async (req,res) => {
   else if(req.query.productid != undefined){
       var id = req.query.productid
     con.query("SELECT * FROM productcategorypr WHERE productid = ?",id,(err,results) => {
-            
-            res.send(JSON.stringify({data:results}))
-            res.end()
+            res.json({data:results})
+        
             resolve();
           
         })
@@ -61,17 +59,16 @@ export default async (req,res) => {
     con.query("SELECT * FROM categorypr WHERE name LIKE ?",name,(err,results) => {
             
             con.query("SELECT * FROM categorypr WHERE parentid = ?",[results[0].categoryprid],(err,result) => {
-              res.send(JSON.stringify({result}))
-              res.end()
+              res.json({result})
+              
               resolve();
             })
           
         })
   }else{
     con.query("SELECT * FROM categorypr ",(err,results) => {
+            res.json({data:results})
           
-            res.send(JSON.stringify({data:results}))
-            res.end()
             resolve();
           
         })

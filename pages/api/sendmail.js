@@ -34,11 +34,11 @@ export default async (req,res) => {
     }
   transporter.sendMail(mailOptions,(err,info) => {
     if(err){
-      res.end(JSON.stringify({result:'Failed'}))
+      res.json({result:'Failed'})
       resolve();
     };
     
-    res.end(JSON.stringify({result:'Success'}))
+    res.json({result:'Success'})
     resolve();
     })
     

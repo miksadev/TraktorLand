@@ -20,7 +20,7 @@ export default async (req, res) => {
         var id = fields["id"]
         var value = fields["value"]
         con.query("UPDATE document SET zavrsen = ? WHERE documentid = ?",[value,id],(err,fields,result) => {
-          res.end(JSON.stringify({ result: 'Success' }))
+          res.json({result:'Success'})
           resolve();
         })
       })

@@ -10,8 +10,8 @@ export default async (req,res) => {
       var id = req.query.id
       con.query("SELECT * FROM document WHERE documentid = ?",id,function(err,result,fields){
       if(err) throw err;
-      res.send(JSON.stringify(result))
-      res.end()
+      res.json(result)
+      
       resolve()
     })
   }else if(req.query.zavrseni != undefined){
@@ -19,8 +19,8 @@ export default async (req,res) => {
       var offset = req.query.offset
       con.query("SELECT * FROM document WHERE zavrsen = ? ORDER BY documentid ASC LIMIT 40 OFFSET "+offset,value,function(err,result,fields){
       if(err) throw err;
-      res.send(JSON.stringify(result))
-      res.end()
+      res.json(result)
+      
       resolve()
     })
   }
@@ -50,8 +50,7 @@ export default async (req,res) => {
           })
         })
 
-        res.send(JSON.stringify(result))
-        res.end()
+        res.json(result)
         resolve()
       })
       
@@ -60,8 +59,7 @@ export default async (req,res) => {
   else{
     con.query("SELECT * FROM document ORDER BY documentts ASC",function(err,result,fields){
       if(err) throw err;
-      res.send(JSON.stringify(result))
-      res.end()
+      res.json(result)
       resolve()
     })
   }
