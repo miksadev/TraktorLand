@@ -71,7 +71,7 @@ export default async (req,res) => {
 							result.map(item => {
 							productsid.push(item.productid)
 						})
-						con.query("SELECT * FROM product WHERE productid IN (?) LIMIT 8 OFFSET "+offset,[productsid],function(err,result){
+						con.query("SELECT * FROM product WHERE productid IN (?) LIMIT 10 OFFSET "+offset,[productsid],function(err,result){
 
 							if(result.length == 0){
 								res.json([])
@@ -115,7 +115,7 @@ export default async (req,res) => {
 						result.map(item => {
 							productsid.push(item.productid)
 						})
-						con.query("SELECT * FROM product WHERE productid IN (?) LIMIT 8 OFFSET "+offset,[productsid],function(err,result){
+						con.query("SELECT * FROM product WHERE productid IN (?) LIMIT 10 OFFSET "+offset,[productsid],function(err,result){
 							
 							
 							if(result.length == 0){
@@ -186,7 +186,7 @@ export default async (req,res) => {
 	}
 	if(req.query.id == undefined && req.query.tip == undefined){
 		var offset = req.query.offset;
-		con.query("SELECT * FROM product ORDER BY name ASC LIMIT 8 OFFSET "+offset, function(err,result,fields){
+		con.query("SELECT * FROM product ORDER BY name ASC LIMIT 10 OFFSET "+offset, function(err,result,fields){
 			if(err) throw err;
 			if(result.length == 0){
 				res.json([])

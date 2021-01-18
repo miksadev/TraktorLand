@@ -70,7 +70,7 @@ function Webshop(props){
 	function scrollFunc(event){
 		
 		var {offsetTop,offsetHeight} = testRef.current
-		var scrollTrig = offsetHeight-offsetTop;
+		var scrollTrig = offsetHeight-offsetTop-100;
 		
 		if (window.scrollY < lastScroll) {
     		return;
@@ -86,13 +86,12 @@ function Webshop(props){
 		if(window.scrollY > scrollTrig){
 			if(!loading){
 				if(search4code != "" || sub4code != ""){
-					offset +=8
+					offset +=10
 					loading = true
 					fetch(PROTOCOL+'://'+HOST+'/api/searchtip?search='+search4code+"&tip="+par+"&searchkolona="+kolona4code+"&sub="+sub4code+"&offset="+offset)
 			        .then(res => res.json())
 			        .then(data => {
-			        	console.log("DATAT")
-			        	console.log(data)
+			        	
 			        	if(data.results.length == 0){
 							disScroll = true
 						}
@@ -102,7 +101,7 @@ function Webshop(props){
 						},1000)
 			        })
 				}else{
-					offset +=8
+					offset +=10
 				loading = true
 				fetch(PROTOCOL +'://'+HOST+'/api/get?tip='+props.type+'&offset='+offset).then(res => res.json())
 				.then(data => {
