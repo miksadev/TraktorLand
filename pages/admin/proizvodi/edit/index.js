@@ -92,7 +92,7 @@ class add extends React.Component{
         e.preventDefault();
 
         var err = 0;
-        var allow_array=["tip2","subtip","zemlja_porekla","rabat_1","rabat_2","rabat_3"]
+        var allow_array=["proizvodjac","tip2","subtip","zemlja_porekla","rabat_1","rabat_2","rabat_3"]
         for(const [key,value] of Object.entries(this.state.data)){
             if(value == ""){
                 if(allow_array.includes(key) == false){
