@@ -19,21 +19,14 @@ export default async (req, res) => {
      res.setHeader('Content-Type', 'application/json')
 
       const form = new formidable.IncomingForm()
-      // form.on('fileBegin',(name,file) => {
-      //   var randomNum1 = Math.floor((Math.random() * 10000) + 10);
-      //   var randomNum2 = Math.floor((Math.random() * 10000) + 10);
-      //   var randomNum3 = Math.floor((Math.random() * 10000) + 10);
-      //   imageUrl = "./public/upload/"+randomNum1+"-"+randomNum2+randomNum3+"-"+file.name;
-      //   image4db = "/upload/"+randomNum1+"-"+randomNum2+randomNum3+"-"+file.name;
-      //   file.path = imageUrl;
-      // })
+     
       form.parse(req,(err,fields,files) => {
           
         var thumb;
         if(files.thumb != undefined){
           nameImg = files.thumb.name;
           var thumbfile = files.thumb
-       
+
         
         
         var randomNum1 = Math.floor((Math.random() * 10000) + 10);
@@ -62,7 +55,7 @@ export default async (req, res) => {
         var id = fields["id"]
         if(nameImg == ""){
           
-          con.query(`UPDATE akcije SET ime = ?,sifra = ?,link_proizvoda = ?  WHERE id = ?`,[ime,sifra,link_proizvoda,id],(err,result) => {
+          con.query(`UPDATE akcija SET ime = ?,sifra = ?,link_proizvoda = ?  WHERE id = ?`,[ime,sifra,link_proizvoda,id],(err,result) => {
         if(err) throw err;
         
         res.json({result:'Success'})
@@ -70,7 +63,7 @@ export default async (req, res) => {
       })
         }else{
           
-          con.query(`UPDATE akcije SET ime = ?,sifra = ?,link_proizvoda = ?,thumb = ?  WHERE id = ?`,[ime,sifra,link_proizvoda,thumb,id],(err,result) => {
+          con.query(`UPDATE akcija SET ime = ?,sifra = ?,link_proizvoda = ?,thumb = ?  WHERE id = ?`,[ime,sifra,link_proizvoda,thumb,id],(err,result) => {
         if(err) throw err;
         
         res.json({result:'Success'})
