@@ -61,7 +61,7 @@ export default async (req, res) => {
         }
       
         
-      con.query("INSERT INTO akcija SET ?", akcija,(err,result) => {
+      con.query("INSERT INTO akcije SET ?", akcija,(err,result) => {
         if(err) throw err;
         
         res.json({ result: 'Success' })

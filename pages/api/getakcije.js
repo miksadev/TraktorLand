@@ -6,13 +6,13 @@ export default async (req,res) => {
     if(req.query.id != undefined){
       var id = req.query.id
     con.query("SELECT * FROM akcija WHERE id = ?",id,(err,results) => {
-            var result;
+            var res;
             if(results.length != 0){
-              result = results[0]
+              res = results[0]
             }else{
-              result = []
+              res = []
             }
-            res.json({data:result})
+            res.json({data:res})
            
             res.end()
             resolve();
