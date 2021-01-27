@@ -3,6 +3,7 @@ import con from '../../store/db.js'
 import formidable from 'formidable-serverless';
 import uploadImage from '../../store/uploadgc';
 import fs from 'fs';
+const gc = require("../../store/uploadgc/config/");
 var imageUrl = "";
 var image4db = "";
 var nameImg = "";
@@ -23,6 +24,13 @@ export default async (req, res) => {
       form.parse(req,(err,fields,files) => {
         var thumb;
         if(files.thumb != undefined){
+          if(fields["oldthumb"] != "/upload/default.png" && fields["oldthumb"] != ""){
+            var imageurl = fields['oldthumb'];
+            var imageurl2 = imageurl.split("/");
+            imageurl2 = imageurl2.slice(4, imageurl2.length + 1).join("/");
+            gc.bucket("traktorland").file(imageurl2).delete();
+        }
+
           nameImg = files.thumb.name;
           var thumbfile = files.thumb
        
@@ -58,6 +66,7 @@ export default async (req, res) => {
         var id = fields["id"]
         var tip2 = "";
 
+        
         if(thumb == ""){
           
          con.query(`UPDATE product SET rabat_1=?,rabat_2=?,rabat_3=?,zemlja_porekla=?,name = ?,manufname=?,kataloski_broj=?

@@ -8,6 +8,8 @@ class add extends React.Component{
     constructor(props){
         super(props)
         this.state = { 
+                deletebtn:true,
+                oldthumb:this.props.proizvod.thumb,
                 data:{
                         ime:this.props.proizvod.name,
                         proizvodjac:this.props.proizvod.manufname,
@@ -31,7 +33,11 @@ class add extends React.Component{
     }
     componentDidMount(){
         var target = this.props.target;
-
+        if(this.props.proizvod.thumb != "" && this.props.proizvod.thumb != "/upload/default.png"){
+            this.setState({deletebtn:true})
+        }else{
+            this.setState({deletebtn:false})
+        }
         if(target.parent == false){
 
             var obj = {...this.state}
@@ -73,6 +79,23 @@ class add extends React.Component{
     //     console.log(e.target.value)
     //     this.setState({obj})
     // }
+    deleteImage(e){
+            var HOST = process.env.NEXT_PUBLIC_HOST;
+            var PROTOCOL = process.env.NEXT_PUBLIC_PROTOCOL
+            var formData = new FormData();
+            formData.append("id",this.props.proizvod.productid);
+            formData.append("oldthumb",this.state.oldthumb);
+            fetch(PROTOCOL+"://"+HOST+"/api/deleteimage",{
+            method:"POST",
+            body:formData
+            }).then(res => res.json()).then(data =>{
+                if(data["result"] == "Success"){
+                    this.setState({oldthumb:"",deletebtn:false})
+                    alert("Slika je izbrisana");
+                }
+            })
+            
+    }
     onChange(e){
         var name = e.target.name
         var obj = {...this.state}
@@ -120,6 +143,7 @@ class add extends React.Component{
         formData.append("rabat_2",this.state.data.rabat_2);
         formData.append("rabat_3",this.state.data.rabat_3);
         formData.append("id",this.props.id)
+        formData.append("oldthumb",this.state.oldthumb)
         if(e.target["thumb"].files.length != 0){
            formData.append("thumb",e.target["thumb"].files[0]);
         }else{
@@ -149,7 +173,7 @@ class add extends React.Component{
                 <input  name="thumb" className={styles.inputfile} type="file"/>
                 <img className={styles.upload} src="/admin/upload.png" alt=""/>
                 <br />
-
+                {this.state.deletebtn &&  <span onClick={(e)=>this.deleteImage(e)} style={{cursor:"pointer",color:"red"}}>Izbrisi sliku</span>}
                 <Input onFocus={(e) => this.onFocus(e)} style={this.state.imeEmpty ? {borderBottom:'1px solid red'} : {}} onChange={(e) => this.onChange(e)} inputtype="input" value={this.state.data.ime}  name="ime"  label="Ime"  type="text"/>
                 <Input onFocus={(e) => this.onFocus(e)} style={this.state.proizvodjacEmpty ? {borderBottom:'1px solid red'} : {}} onChange={(e) => this.onChange(e)} inputtype="input" value={this.state.data.proizvodjac} name="proizvodjac"  label="Proizvodjac"  type="text"/>
                 <Input onFocus={(e) => this.onFocus(e)} style={{}} onChange={(e) => this.onChange(e)} inputtype="input" value={this.state.data.zemlja_porekla} name="zemlja_porekla"  label="Zemlja porekla"  type="text"/>
