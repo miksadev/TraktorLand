@@ -29,6 +29,7 @@
     left: 0;
     max-width: 303px;
     height: auto;
+    max-height: 171px !important;
     border-bottom: 1px solid#F54343;
 }
 
