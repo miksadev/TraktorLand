@@ -86,7 +86,7 @@ function Webshop(props){
 		if(window.scrollY > scrollTrig){
 			if(!loading){
 				if(search4code != "" || sub4code != ""){
-					offset +=10
+					offset +=20
 					loading = true
 					fetch(PROTOCOL+'://'+HOST+'/api/searchtip?search='+search4code+"&tip="+par+"&searchkolona="+kolona4code+"&sub="+sub4code+"&offset="+offset)
 			        .then(res => res.json())
@@ -101,7 +101,7 @@ function Webshop(props){
 						},1000)
 			        })
 				}else{
-					offset +=10
+					offset +=20
 				loading = true
 				fetch(PROTOCOL +'://'+HOST+'/api/get?tip='+props.type+'&offset='+offset).then(res => res.json())
 				.then(data => {

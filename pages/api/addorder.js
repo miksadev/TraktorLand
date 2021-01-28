@@ -95,7 +95,6 @@ export default async (req, res) => {
           status:'n',
           foreign_partneraddressid:result.insertId,
           processtype:'WEB',
-          processed:'n',
           retrieved:'y',
           price:price,
           price2:price2,
