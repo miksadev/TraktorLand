@@ -9,12 +9,12 @@ export default function Kontakt() {
     <>
 
         <div className={styles.body}>
-          <h1 className={styles.naslov}>KONTAKTTT</h1>
+          <h1 className={styles.naslov}>KONTAKT</h1>
           <div className={styles.ConInfo}>
             <ConInfo/>
           </div>
           <p className={styles.opis}>
-          Dobrodošli na našu kontaktTTTT stranicu. Možete nas kontaktirati na navedeni telefon ili mail, a možete nas pronaći i na adresi Knez Mihajlova 67 u Pukovcu.
+          Dobrodošli na našu kontakt stranicu. Možete nas kontaktirati na navedeni telefon ili mail, a možete nas pronaći i na adresi Knez Mihajlova 67 u Pukovcu.
           </p>
           
           <div className={styles.maps}>
