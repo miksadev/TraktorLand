@@ -34,7 +34,7 @@ const search = (props) => {
                     <img src="/search.png" alt=""/>
                 </div>
                 <input onChange={e => onChange(e)} className={inputstyle.join(' ')} type="text" placeholder="Pretrazite..."/>
-                <Search styles={props.input} search={search}  data={data}/>
+                {search != "" ? <Search styles={props.input} search={search}  data={data}/> : null}
             </div>
             
         </Aux> 
