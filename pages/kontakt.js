@@ -9,7 +9,7 @@ export default function Kontakt() {
     <>
 
         <div className={styles.body}>
-          <h1 className={styles.naslov}>KONTAKT</h1>
+          <h1 className={styles.naslov}>KONTAKTTT</h1>
           <div className={styles.ConInfo}>
             <ConInfo/>
           </div>
