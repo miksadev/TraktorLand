@@ -16,7 +16,7 @@ export default async (req,res) => {
     var obj = {}
     con.query("SELECT * FROM categorypr WHERE categoryprid = ?",id,(err,result) => {
       var targetCategory = result
-            if(result[0].parentid == null){
+            if(result[0].parentid == 0){
               obj["parent"] = false
               obj["category"] = targetCategory
               con.query("SELECT * FROM categorypr WHERE parentid = ?",[targetCategory[0].categoryprid],(err,result) => {
