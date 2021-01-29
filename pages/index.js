@@ -36,7 +36,7 @@ export default function Home({akcije,catdata}) {
           <Logowide styles={styles.logowidee}/>
         </div>
 
-        <p className={styles.slogan}>Profesionalni i originalni već 25 godina!</p>
+        <p className={styles.slogan}>Profesionalni KKK i originalni već 25 godina!</p>
         
 
         <Kategorije/>

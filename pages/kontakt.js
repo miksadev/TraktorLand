@@ -14,7 +14,7 @@ export default function Kontakt() {
             <ConInfo/>
           </div>
           <p className={styles.opis}>
-          Dobrodošli na našu kontakt stranicu. Možete nas kontaktirati na navedeni telefon ili mail, a možete nas pronaći i na adresi Knez Mihajlova 67 u Pukovcu.
+          Dobrodošli na našu kontaktTTTT stranicu. Možete nas kontaktirati na navedeni telefon ili mail, a možete nas pronaći i na adresi Knez Mihajlova 67 u Pukovcu.
           </p>
           
           <div className={styles.maps}>
