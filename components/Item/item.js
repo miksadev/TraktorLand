@@ -65,10 +65,10 @@ const item = (props) => {
                         <p className={styles.levo}>Šifra</p>
                         <h3 className={styles.desno}>{props.proizvod[0].code}</h3>
                     </div>
-                    <div className={styles.block}>
-                        <p className={styles.levo}>Proizvođac</p>
+                    {props.proizvod[0].manufname == null  || props.proizvod[0].manufname ==  "" ? "" : <div className={styles.block}>
+                        <p className={styles.levo}>Zemlja porekla</p>
                         <h3 className={styles.desno}>{props.proizvod[0].manufname}</h3>
-                    </div>
+                    </div>}
                     {props.proizvod[0].zemlja_porekla == null  || props.proizvod[0].zemlja_porekla ==  "" ? "" : <div className={styles.block}>
                         <p className={styles.levo}>Zemlja porekla</p>
                         <h3 className={styles.desno}>{props.proizvod[0].zemlja_porekla}</h3>
