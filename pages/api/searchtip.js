@@ -56,7 +56,7 @@ export default async (req,res) => {
             result.map(item => {
               productids.push(item.productid)
             })
-            con.query("SELECT * FROM product WHERE "+kolona+" LIKE ? AND productid IN (?) LIMIT 8 OFFSET "+offset,[search_start,productids],function(err,result){
+            con.query("SELECT * FROM product WHERE "+kolona+" LIKE ? AND productid IN (?) LIMIT 20 OFFSET "+offset,[search_start,productids],function(err,result){
               if(result.length == 0){
                 res.json({results:[]})
                 resolve()
