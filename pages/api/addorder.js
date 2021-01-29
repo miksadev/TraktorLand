@@ -55,6 +55,9 @@ export default async (req, res) => {
         var created = d.getDate()+"/"+(d.getMonth()+1)+"/"+d.getFullYear()
         var time = d.getHours()+":"+d.getMinutes()+":"+d.getSeconds();
 
+        var d2 = new Date()
+        var created2 = d2.getFullYear()+"-"+(d2.getMonth()+1)+"-"+d2.getDate()
+
         if(order['pravno_lice'] != 1){
           var partneraddress4db = {
           address:order['address'],
@@ -84,13 +87,15 @@ export default async (req, res) => {
       con.query("INSERT INTO partneraddress SET ?",partneraddress4db,(err,result) => {
         if(err) throw err;
         var document4db = {
-          documentdate:created,
+          documentdate:created2,
+          valutedate:created2,
+          documentissuedate:created2,
           partnerid:partnerid,
+
           status:'n',
           foreign_partneraddressid:result.insertId,
           processtype:'WEB',
-          processed:'n',
-          retrieved:'n',   
+          retrieved:'y',
           price:price,
           price2:price2,
           ime_prezime:order["name"]
@@ -103,8 +108,11 @@ export default async (req, res) => {
             var fullorder = []
             fullorder.push(result.insertId)
             fullorder.push(item.id)
+            fullorder.push(20)
+            fullorder.push(item.qty*item.price)
             fullorder.push(item.qty)
-            fullorder.push(item.price)
+            fullorder.push(Number(item.price*100/120))
+            fullorder.push(Number(item.price))
             if(userrabat == 1){
                 fullorder.push(item.price1)
             }else if(userrabat == 2){
@@ -117,7 +125,7 @@ export default async (req, res) => {
             insertRow.push(fullorder)
           })
           
-          con.query("INSERT INTO documentitem (documentid,productid,quantity,price,price2) VALUES ?",[insertRow],(err,result) => {
+          con.query("INSERT INTO documentitem (documentid,productid,taxvalue,itemvalue,quantity,price,price1,price2) VALUES ?",[insertRow],(err,result) => {
             if(err) throw err;
             res.json({ result: 'Success' })
             resolve();
