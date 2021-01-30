@@ -22,6 +22,7 @@
     color: #2B2B2B;
     margin-left: 47px;
     cursor: pointer;
+    display: inline-block;
   }
   .line{
       width: 90%;
