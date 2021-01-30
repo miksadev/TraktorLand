@@ -66,7 +66,7 @@ const item = (props) => {
                         <h3 className={styles.desno}>{props.proizvod[0].code}</h3>
                     </div>
                     {props.proizvod[0].manufname == null  || props.proizvod[0].manufname ==  "" ? "" : <div className={styles.block}>
-                        <p className={styles.levo}>Zemlja porekla</p>
+                        <p className={styles.levo}>Proizvođač</p>
                         <h3 className={styles.desno}>{props.proizvod[0].manufname}</h3>
                     </div>}
                     {props.proizvod[0].zemlja_porekla == null  || props.proizvod[0].zemlja_porekla ==  "" ? "" : <div className={styles.block}>
