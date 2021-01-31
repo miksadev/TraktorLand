@@ -128,11 +128,18 @@ export default async (req,res) => {
     if(req.query.search != undefined && req.query.tip == undefined){
       globalsearch = req.query.search
       limit_  = req.query.limit
-     
-      if(req.query.offset == 0){
-        globaldata4off = []
+      var offset;
+      if(req.query.offset != null){
+        offset = req.query.offset
+      }else{
+        offset = 0;
       }
-      loop(getData(globalsearch),res)
+      con.query("SELECT t1.*, t2.*,t3.name AS categoryname,t4.name AS categoryparentname FROM product t1 INNER JOIN productcategorypr t2 ON t1.productid = t2.productid INNER JOIN categorypr t3 ON t3.categoryprid = t2.categoryprid INNER JOIN categorypr t4 ON t4.categoryprid = t3.parentid WHERE t1.name LIKE ? LIMIT 10 OFFSET "+offset,"%"+globalsearch+"%",async (err,results) => {
+        if(err) throw err;
+        console.log(results.length)
+        res.json({results})
+        resolve();
+      })
      
   }else if(req.query.search != undefined && req.query.tip != undefined){
     var search = req.query.search

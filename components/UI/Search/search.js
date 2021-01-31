@@ -1,26 +1,30 @@
 import styles from './Search.module.css';
 import Aux from '../../../hoc/Auxiliary/Auxiliary';
 import Search from '../../Search/search';
-import {useState} from 'react';
+import {useState,useEffect} from 'react';
+
 const search = (props) => {
     const [data,setData] = useState([])
     const [search,setSearch] = useState("")
+    const [maskData,setMaskData] = useState([])
     
+     
     function onChange(e){
          var HOST = process.env.NEXT_PUBLIC_HOST;
         var PROTOCOL = process.env.NEXT_PUBLIC_PROTOCOL
-        if(e.target.value != ""){
             setSearch(e.target.value)
+
             var offset = 0;
             var limit = 10;
             fetch(PROTOCOL+"://"+HOST+"/api/search?search="+e.target.value+"&offset="+offset+"&limit="+limit).then(res => res.json()).then(data =>{
-                var newArray = data.results
-                setData(newArray)
+              setData([])
+              setData((current)=>{
+                return data.results
+              })
+
 
         })
-        }else{
-            setData([])
-        }
+
     }
     let style = [styles.Search];
     
@@ -33,7 +37,7 @@ const search = (props) => {
                 <div className={styles.lupica}>
                     <img src="/search.png" alt=""/>
                 </div>
-                <input onChange={e => onChange(e)} className={inputstyle.join(' ')} type="text" placeholder="Pretrazite..."/>
+                <input onChange={e => onChange(e)} value={search} className={inputstyle.join(' ')} type="text" placeholder="Pretrazite..."/>
                 {search != "" ? <Search styles={props.input} search={search}  data={data}/> : null}
             </div>
             

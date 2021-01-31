@@ -54,109 +54,11 @@ export default async (req,res) => {
     }else if(name == "mehanizacija"){
       name = "Poljoprivredna Mehanizacija"
     }
-		con.query("SELECT * FROM categorypr WHERE name LIKE ?",[name],function(err,result){
-			if(err) throw err;
-			
-			var categoryid = result[0].categoryprid;
-			
-			var ids = [categoryid]
-			con.query("SELECT * FROM categorypr WHERE parentid = ?",[categoryid],function(err,result){
-				
-				if(result.length == 0){
-				var productsid = []
-
-					con.query("SELECT * FROM productcategorypr WHERE categoryprid IN (?)",[ids],function(err,result){
-						
-						if(result.length != 0){
-							result.map(item => {
-							productsid.push(item.productid)
-						})
-						con.query("SELECT * FROM product WHERE productid IN (?) LIMIT 20 OFFSET "+offset,[productsid],function(err,result){
-
-							if(result.length == 0){
-								res.json([])
-								// res.send(JSON.stringify([]))
-								// res.end()
-								resolve()
-							}
-							var data = result
-							var count = result.length
-							var result2 = []
-							var num = 1
-							result.map((item) => {
-								con2.query("SELECT * FROM productwarehouse WHERE productid = ?",item.productid,(err,result) => {
-									data[num-1]["qty"] = result[0].amount
-									result2.push(data[num-1])
-									
-									if(num == count){
-										
-										res.json(result2)
-										// res.send(JSON.stringify(result2))
-										// res.end()
-										resolve()
-									}
-									num++
-								})
-							})
-						})
-					}else{
-						res.json([])
-							resolve()
-					}
-					})
-				}else{
-					if(result.length != 0){
-						result.map(item => {
-						ids.push(item.categoryprid)
-					})
-					var productsid = []
-					con.query("SELECT * FROM productcategorypr WHERE categoryprid IN (?)",[ids],function(err,result){
-						
-						result.map(item => {
-							productsid.push(item.productid)
-						})
-						con.query("SELECT * FROM product WHERE productid IN (?) LIMIT 20 OFFSET "+offset,[productsid],function(err,result){
-							
-							
-							if(result.length == 0){
-								res.json([])
-								resolve()
-							}
-							var data = result
-							var count = result.length
-							var result2 = []
-							var num = 1;
-							var tasks = [];
-							
-							result.map((item) => {
-								var func = function(item,callback){
-
-									con2.query("SELECT * FROM productwarehouse WHERE productid = ?",item.productid,(err,result) => {
-									data[num-1]["qty"] = result[0].amount
-									result2.push(data[num-1])
-									callback(null,data[num-1])
-									num++
-								})
-								}
-								tasks.push(func.bind(null,item))
-							})
-							async.parallel(tasks,function(err,results){
-								if(err) throw err;
-								res.json(results)
-								resolve()
-							})
-							
-
-						})
-					})
-				}else{
-					res.send(JSON.stringify([]))
-							res.end()
-							resolve()
-				}
-				}
-			})
-		})
+		con.query("SELECT t4.*,t1.name AS kategorija,t2.name AS podkategorija,t5.amount AS qty FROM categorypr t1 INNER JOIN categorypr t2 ON t1.categoryprid = t2.parentid OR t1.categoryprid = t2.categoryprid INNER JOIN productcategorypr t3 ON t3.categoryprid = t2.categoryprid OR t3.categoryprid = t1.categoryprid INNER JOIN product t4 ON t4.productid = t3.productid INNER JOIN productwarehouse t5 ON t4.productid = t5.productid WHERE t1.name LIKE ? LIMIT 20 OFFSET "+offset,[name],(err,results) => {
+    if(err) throw err;
+    res.json(results)
+    resolve();
+  })
 	}
 	if(req.query.id != undefined){
 
