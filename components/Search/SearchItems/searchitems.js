@@ -7,7 +7,7 @@ const searchItems = ({data}) => {
     return(
         <div className={styles.search}>
             {data.map(item => 
-               <Link  key={item.productid} href={`/webshop/${item.kategorija.toLowerCase()}/${item.productid}`}><a> <SearchItem  img={item.thumb} ime={item.name} cena={item.price}/> </a></Link>
+               <Link  key={item.productid} href={`/webshop/${item.categoryparentname == null ? item.categoryname.toLowerCase() : item.categoryparentname.toLowerCase()}/${item.productid}`}><a> <SearchItem  img={item.thumb} ime={item.name} cena={item.price}/> </a></Link>
                 )}
          
         </div>
