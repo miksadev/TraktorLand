@@ -35,7 +35,7 @@ const conBlockInfo = () => {
                 <div className={styles.text}>
                 <a href="tel:+38118812100">+381(18) 812 100</a>
                 <br></br>
-                <a href="tel:+38118812100">Drugi broj da se doda</a>
+                <a href="tel:+38163412447">063 412 447</a>
                 </div>
             </div>
         </div>
