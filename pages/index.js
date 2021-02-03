@@ -2,6 +2,7 @@ import styles from '../styles/home.module.css';
 import Coninfo from '../components/UI/ContactInfo/contactinfo';
 import Logowide from '../components/UI/Logo/logowide';
 import Kategorije from '../components/Kategorije/kategorije';
+import Kartice from '../components/Kartice/kartice';
 import dynamic from 'next/dynamic';
 
 export async function getServerSideProps({req,res}){
@@ -29,7 +30,7 @@ export default function Home({akcije,catdata}) {
     <>
       
       <div className={styles.body}>
-      <img className={styles.traktor} src="traktor.png" alt=""/>
+      <img className={styles.traktor} src="traktor.svg" alt=""/>
         <Coninfo/>
         
         <div className={styles.logowide}>
@@ -40,6 +41,7 @@ export default function Home({akcije,catdata}) {
         
 
         <Kategorije/>
+        <Kartice/>
 
         <div className={styles.carousell}>
           <h3>PROIZVODI NA AKCIJI</h3>

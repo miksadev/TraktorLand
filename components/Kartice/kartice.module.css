@@ -1,13 +1,20 @@
-.kategorije{
+.kartice{
     display: flex;
     justify-content: center;
-    margin-top:100px;
+    margin-top:20px;
     z-index: 5000;
     flex-wrap: wrap;
     justify-content: center;
     align-content: space-between;
+    /* padding-top: 50px; */
+    margin-top: 35px;
 }
-
+.line{
+    width: 60%;
+    margin-left: 20%;
+    height: 1px;
+    background-color: #212121;
+}
 .naslov{
     font-family: 'Open Sans', sans-serif;
     font-style: normal;

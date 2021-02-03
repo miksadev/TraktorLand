@@ -14,8 +14,9 @@
 .traktor{
   position: absolute;
   right: 0px;
-  top: 103px;
+  top: 83px;
   z-index: 2;
+  width: 800px;
 }
 
 .logowide{
