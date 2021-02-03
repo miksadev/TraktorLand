@@ -18,10 +18,13 @@
     border: 0.5px solid #BCBCBC;
     box-sizing: border-box;
     border-radius: 9px;
-    outline-color: #BCBCBC;
+    outline: 0;
     padding-left: 63px;
     font-size: 20px;
     z-index: 2;
+}
+.input:focus {
+  box-shadow: 0 0 3pt 2pt #BCBCBC;
 }
 
 .search::placeholder{
