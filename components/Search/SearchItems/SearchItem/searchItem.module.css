@@ -18,6 +18,8 @@
     position: absolute;
     left: 115px;
     top: -13px;
+    max-height: 35px;
+    overflow: hidden;
 }
 .searchitem h3{
     font-family: "Open Sans";
@@ -41,6 +43,7 @@
     .searchitem h2{
         line-height: 16px;
         top: -5px;
+        max-height: 33px;
     }
     .searchitem h3{
         top: 30px;

@@ -2,12 +2,13 @@ import styles from './Search.module.css';
 import Aux from '../../../hoc/Auxiliary/Auxiliary';
 import Search from '../../Search/search';
 import {useState,useEffect} from 'react';
+import useCart from '../../../util/useCart';
 
 const search = (props) => {
     const [data,setData] = useState([])
     const [search,setSearch] = useState("")
     const [maskData,setMaskData] = useState([])
-    
+    const {toggleSearch, isSearchOpened} = useCart();
      
     function onChange(e){
          var HOST = process.env.NEXT_PUBLIC_HOST;
@@ -28,6 +29,14 @@ const search = (props) => {
     }
     let style = [styles.Search];
     
+    const upaliSearch = () => {
+        console.log(search, data.length ,isSearchOpened)
+        if(search!="" && data.length > 0 && !isSearchOpened){
+            toggleSearch(true);
+        }
+    }
+
+
     let inputstyle = [styles.input];
     {props.input ?  inputstyle.push(props.input) : null}
     {props.styles ?  style.push(props.styles) : null}
@@ -37,7 +46,7 @@ const search = (props) => {
                 <div className={styles.lupica}>
                     <img src="/search.png" alt=""/>
                 </div>
-                <input onChange={e => onChange(e)} value={search} className={inputstyle.join(' ')} type="text" placeholder="Pretrazite..."/>
+                <input onClick={upaliSearch} onChange={e => onChange(e)} value={search} className={inputstyle.join(' ')} type="text" placeholder="Pretrazite..."/>
                 {search != "" ? <Search styles={props.input} search={search}  data={data}/> : null}
             </div>
             

@@ -1,6 +1,6 @@
 import {useState,useEffect} from 'react';
 import styles from './item.module.css';
-import Wrapper from '../UI/ItemWrapper/itemWrapper';
+import Wrapper from '../UI/Wrapper/wrapper';
 import AddToCart from '../UI/Button/AddToCart/atcbutton';
 import { useRouter } from 'next/router'
 import Link from 'next/link';
@@ -26,10 +26,7 @@ const item = (props) => {
     useEffect(() => {
         if(isItemOpened != null){
             if(!isItemOpened){
-            
               window.history.back();
-
-               
         }
         }
     },[isItemOpened])
@@ -42,7 +39,7 @@ const item = (props) => {
 
     return(
     <>
-        <Wrapper/>
+        <Wrapper click={toggleItem} isOpened={isItemOpened}/>
         { isItemOpened ?
             <div className={styles.item}>
                 <img onClick={toggleItem} className={styles.x} src="/header/x.png" alt=""/>

@@ -32,6 +32,12 @@ const reducer = (state = initialState, { type, payload }) => {
         ...state,
         isCartOpened: !state.isCartOpened,
       };
+
+    case "TOGGLE_SEARCH":
+      return {
+        ...state,
+        isSearchOpened: payload,
+      };
     case "SET_USER":
     return {
       ...state,

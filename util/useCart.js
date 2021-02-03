@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 const useCart = () => {
   const isItemOpened = useSelector((state) => state.isItemOpened);
   const isCartOpened = useSelector((state) => state.isCartOpened);
+  const isSearchOpened = useSelector((state) => state.isSearchOpened);
   const items = useSelector((state) => state.items);
   const rabat = useSelector((state) => state.items);
   const price = useSelector((state) => state.price);
@@ -22,6 +23,12 @@ const useCart = () => {
   const toggleItem = () => {
     dispatch({
       type: "TOGGLE_ITEM",
+    });
+  };
+  const toggleSearch = (set) => {
+    dispatch({
+      type: "TOGGLE_SEARCH",
+      payload: set
     });
   };
   const setUser = (user) => {
@@ -87,6 +94,7 @@ const useCart = () => {
     user,
     isCartOpened,
     isItemOpened,
+    isSearchOpened,
     isLogged,
     shipping,
     setUser,
@@ -94,6 +102,7 @@ const useCart = () => {
     setShipping,
     toggleCart,
     toggleItem,
+    toggleSearch,
     toggleLogged,
     undItem,
     addToCart,

@@ -1,5 +1,5 @@
 .wrapper{
-    position: absolute;
+    position: fixed;
     backdrop-filter: blur(10px);
     top: 0;
     left: 0;
@@ -7,6 +7,7 @@
     width: 100%;
     background: rgba(47,46,65,.1);
     z-index: 90;
+    cursor: pointer;
 }
 .nema{
     display: none;
