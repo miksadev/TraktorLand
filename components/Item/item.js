@@ -5,7 +5,8 @@ import AddToCart from '../UI/Button/AddToCart/atcbutton';
 import { useRouter } from 'next/router'
 import Link from 'next/link';
 import useCart from '../../util/useCart';
-
+// import './magnifier.css';
+import Magnifier from 'react-magnifier';
 
 const item = (props) => {
     const router = useRouter();
@@ -48,7 +49,8 @@ const item = (props) => {
             {/* <Link href={'/webshop/'+back} style={{float:"right"}}><a>close</a></Link> */}
                 <h3 className={styles.name}>{props.proizvod[0].name}</h3>
                 <div>
-                    <img className={styles.img} src={props.proizvod[0].thumb ? props.proizvod[0].thumb : "/product.png"} alt=""/>
+                    <Magnifier mgShape="square" className={styles.img} src={props.proizvod[0].thumb ? props.proizvod[0].thumb : "/product.png"}/>
+                    {/* <img className={styles.img} src={props.proizvod[0].thumb ? props.proizvod[0].thumb : "/product.png"} alt=""/> */}
                     <div className={styles.cena}>
                         <p>Maloprodajna cena</p>
                         <h3 className={styles.ukupnocena}>{props.proizvod[0].price ? Number(props.proizvod[0].price*1.2).toFixed(2) : 70800} <span>RSD</span></h3>

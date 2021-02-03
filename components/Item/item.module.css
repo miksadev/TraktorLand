@@ -24,7 +24,7 @@
     width: 100%;
 }
 .img{
-    width: 408px;
+    width: 408px !important;
     height: auto;
     display: inline-block;
     float: left;
@@ -152,7 +152,7 @@
 
 @media screen and (max-width: 520px) {
     .img{
-        width: calc(100%);
+        width: calc(100%) !important;
         margin-left: 0;
     }
 
