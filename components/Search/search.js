@@ -7,9 +7,6 @@ import { useEffect } from 'react';
 const search = ({data,search}) => {
     const { toggleSearch , isSearchOpened } = useCart();
     useEffect(() => {
-        if(data.length == 0 && isSearchOpened){
-            toggleSearch(false)
-        }
         if(data.length != 0 && !isSearchOpened){
             toggleSearch(true)
         }
