@@ -86,8 +86,8 @@ class Login extends React.Component {
             <div className={styles.login}>
             <form onSubmit={(e)=>this.onSubmit(e)}>
                 <Form formname="Prijavi se">
-                    <Input onFocus={(e) => this.onFocus(e)} onChange={(e) => this.onChange(e)} value={this.state.email} style={this.state.empty.email ? {borderBottom:'1px solid red'} : {}} inputtype="input" label="E-mail" img="/login/email.png" placeholder="mojaadresa@gmail.com" name="email" type="email"></Input>
-                    <Input onFocus={(e) => this.onFocus(e)} onChange={(e) => this.onChange(e)} value={this.state.password} style={this.state.empty.password ? {borderBottom:'1px solid red'} : {}} inputtype="input" label="Lozinka" img="/login/password.png" placeholder="•••••••••••••" name="password" type="password"></Input>
+                    <Input onFocus={(e) => this.onFocus(e)} onChange={(e) => this.onChange(e)} value={this.state.email} style={this.state.empty.email ? {borderBottom:'1px solid red'} : {}} inputtype="input" label="E-mail" img="/login/email.svg" placeholder="mojaadresa@gmail.com" name="email" type="email"></Input>
+                    <Input onFocus={(e) => this.onFocus(e)} onChange={(e) => this.onChange(e)} value={this.state.password} style={this.state.empty.password ? {borderBottom:'1px solid red'} : {}} inputtype="input" label="Lozinka" img="/login/password.svg" placeholder="•••••••••••••" name="password" type="password"></Input>
                     <div className={styles.block}><Submit styles={styles.loginbutton} >Prijava</Submit></div>
                     <div className={styles.block}>
                         <Link href="/login/forgotpassword"><p className={styles.forgotpw}>Zaboravili ste lozinku?</p></Link>

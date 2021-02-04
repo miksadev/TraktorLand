@@ -62,6 +62,8 @@
 .choosebutton{
     margin:15px;
     cursor: pointer;
+    width: 211px;
+    height: 54px;
 }
 .desno{
     position: absolute;

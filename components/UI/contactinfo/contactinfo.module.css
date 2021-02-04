@@ -47,13 +47,15 @@ background: #D2D2D2;
     height: 19px;
     left: 18px;
     top: 11px;
-
+    width: 19px;
+    height: 19px;
 }
 .mailimg{
     position: absolute;
     left: 16.3px;
     top: 53.46px;
-    
+    width: 23.81px;
+    height: 16.07px;
 }
 
 

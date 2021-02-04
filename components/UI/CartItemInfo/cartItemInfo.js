@@ -14,10 +14,10 @@ const cartItemInfo = (props) => {
             {
                 edit ? 
                 <>
-                    <img className={styles.brisi} onClick={props.brisi} src="/header/x.png" alt=""/>
+                    <img className={styles.brisi} onClick={props.brisi} src="/header/x.svg" alt=""/>
                     <p className={styles.kolicina}>x{props.qty}</p>
-                    <img className={styles.up} onClick={props.up} src="/cart/up.png" alt=""/>
-                    <img className={styles.down} onClick={props.down} src="/cart/down.png" alt=""/>
+                    <img className={styles.up} onClick={props.up} src="/cart/up.svg" alt=""/>
+                    <img className={styles.down} onClick={props.down} src="/cart/down.svg" alt=""/>
                     {props.namena == "korpa" ? null : <p className={styles.sifra}>Sifra: #{props.sifra}</p>}
                 </>
                 :

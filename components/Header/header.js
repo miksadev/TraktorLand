@@ -39,7 +39,7 @@ const header = () => {
                 {search ? null : <Logo styles={styles.logos}/>}
                 {search ? null : <Menu open={open} onclickhandler={isCartOpened ? null : onClickHandler}/> }
                 { search ? <Search styles={styles.responsivesearch} input={styles.responsiveinput}/> : null}
-                {open ? null : <img onClick={open || isCartOpened ? null : searchHeandler} className={search ? styles.searchX : styles.searchicon} src={search ? "/header/x.png" : "/header/search.png"} alt=""/> }
+                {open ? null : <img onClick={open || isCartOpened ? null : searchHeandler} className={search ? styles.searchX : styles.searchicon} src={search ? "/header/x.svg" : "/header/search.svg"} alt=""/> }
                 {search || open ? null : <CartIcon open={open}/> }
                 { open ? <DropHeader setopen={onClickHandler}/> : null }
                 { open ? <UserIcon click={onClickHandler} styles={styles.usericonn}/> : null}

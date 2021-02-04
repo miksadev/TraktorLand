@@ -24,8 +24,8 @@ const akcija = (props) => {
             <img className={styles.slika} src={props.img} alt=""/>
             <h2>{props.ime}</h2>
             <h3>Sifra: #{props.sifra}</h3>
-            <Link href={`/admin/akcija/edit/`+props.id}><img className={styles.edit} src="/admin/edit.png" alt=""/></Link>
-            <img onClick={e => deleteAkcija(e)} data-id={props.id} className={styles.delete} src="/admin/delete.png" alt=""/>
+            <Link href={`/admin/akcija/edit/`+props.id}><img className={styles.edit} src="/admin/edit.svg" alt=""/></Link>
+            <img onClick={e => deleteAkcija(e)} data-id={props.id} className={styles.delete} src="/admin/delete.svg" alt=""/>
         </div>
     );
 }

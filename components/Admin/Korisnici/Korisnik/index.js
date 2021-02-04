@@ -76,7 +76,7 @@ const korisnik = (props) => {
                 </h3>
             </div>
             { /* <Link href="/admin/korisnici/edit"><img className={styles.edit} src="/admin/edit.png" alt=""/></Link> */}
-            <img onClick={e => deleteUser(e)} name={props.id} className={styles.delete} src="/admin/delete.png" alt=""/>
+            <img onClick={e => deleteUser(e)} name={props.id} className={styles.delete} src="/admin/delete.svg" alt=""/>
         </div>
     );
 }

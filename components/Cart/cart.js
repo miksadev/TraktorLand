@@ -8,7 +8,7 @@ const cart = () => {
     
     const prazno = 
     <>
-        <img onClick={toggleCart} className={styles.X}src="/header/x.png" alt=""/>
+        <img onClick={toggleCart} className={styles.X}src="/header/x.svg" alt=""/>
         <p className={styles.praznakorpa}>Vaša korpa je prazna</p>
         <LinkButton click={toggleCart} styles={styles.LinkButton} link="/webshop" >Nazad na kupovinu</LinkButton>
     </>;

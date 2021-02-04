@@ -15,7 +15,7 @@ const carticon = (props) => {
         <div className={styles.carticon}>
             <CountNoSSR items={items} styles_prikazi={styles.prikazi} styles_nema={styles.nema}></CountNoSSR>
             {/* <p className={items.length != null && items.length > 0 ? styles.prikazi : styles.nema}>{items.length}</p> */}
-            <img onClick={props.open ? null : toggleCart} src="/header/cart.png" alt=""/>
+            <img onClick={props.open ? null : toggleCart} src="/header/cart.svg" alt=""/>
         </div>
         
     );

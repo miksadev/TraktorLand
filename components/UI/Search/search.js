@@ -44,7 +44,7 @@ const search = (props) => {
         <Aux>
             <div className={style.join(' ')}>
                 <div className={styles.lupica}>
-                    <img src="/search.png" alt=""/>
+                    <img src="/header/search.svg" alt=""/>
                 </div>
                 <input onClick={upaliSearch} onChange={e => onChange(e)} value={search} className={inputstyle.join(' ')} type="text" placeholder="Pretrazite..."/>
                 {search != "" ? <Search styles={props.input} search={search}  data={data}/> : null}

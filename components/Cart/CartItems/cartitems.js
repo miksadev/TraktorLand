@@ -51,7 +51,7 @@ const cartitems = (props) => {
     let korpa = (
         <div className={styles.cartitems}>
         <h3 className={styles.ime}>KORPA</h3>
-        <img onClick={toggleCart} className={styles.X}src="/header/x.png" alt=""/>
+        <img onClick={toggleCart} className={styles.X}src="/header/x.svg" alt=""/>
         <div className={styles.gornjideo}>
             {cartitems}
         </div>

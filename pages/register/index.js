@@ -207,8 +207,8 @@ class Register extends React.Component {
             <form onSubmit={(e) => this.onSubmit(e)}>
                 <Form formname="Registruj se" >
                     
-                    <img onClick={() => this.formTypeHandler("fizicko")} className={styles.choosebutton} src={this.state.showForm && !this.state.pravnaLica ? "/register/fl1.png" : "/register/fl.png"} alt=""/>
-                    <img onClick={() => this.formTypeHandler("pravno")} className={styles.choosebutton} src={this.state.showForm && this.state.pravnaLica ? "/register/pl1.png" : "/register/pl.png" } alt=""/>
+                    <img onClick={() => this.formTypeHandler("fizicko")} className={styles.choosebutton} src={this.state.showForm && !this.state.pravnaLica ? "/register/fl1.svg" : "/register/fl.svg"} alt=""/>
+                    <img onClick={() => this.formTypeHandler("pravno")} className={styles.choosebutton} src={this.state.showForm && this.state.pravnaLica ? "/register/pl1.svg" : "/register/pl.svg" } alt=""/>
                 {this.state.showForm ? 
                     <>
                         <Input onFocus={(e)=>this.onFocus(e)} onChange={(e) => this.onChange(e)} value={this.state.data.ime} style={this.state.empty.imeEmpty ? {borderBottom:'1px solid red'} : {}} inputtype="input" requiered label="Ime" placeholder="npr. Petar" name="ime" type="text"></Input>

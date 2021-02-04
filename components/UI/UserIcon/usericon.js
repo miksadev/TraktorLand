@@ -23,7 +23,7 @@ const UserIcon = (props)=>{
 		})
 	},[isLogged])
 	return(
- <Link href={url}><img onClick={props.click} className={style.join(' ')} src="/header/user.png" alt=""/></Link>
+ <Link href={url}><img onClick={props.click} className={style.join(' ')} src="/header/user.svg" alt=""/></Link>
 		)
 }
 
