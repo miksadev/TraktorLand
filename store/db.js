@@ -18,7 +18,10 @@ const con = mysql.createPool({
 	user:'sajt',
 	password:'1',
 	database:'gazzele_web',
-	connectionLimit: 10
+	connectionLimit : 10,
+    connectTimeout  : 60 * 60 * 1000,
+    acquireTimeout  : 60 * 60 * 1000,
+    timeout         : 60 * 60 * 1000
 });
 con.getConnection((err, connection) => {
     if (err) {
@@ -31,7 +34,7 @@ con.getConnection((err, connection) => {
         if (err.code === 'ECONNREFUSED') {
             console.error('Database connection was refused.')
         }
-        
+
     }
     if (connection) connection.release()
     return
