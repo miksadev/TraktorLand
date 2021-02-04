@@ -13,20 +13,38 @@ var GOOGLE_CLOUD_DB_HOST = process.env.GOOGLE_CLOUD_DB_HOST;
 // })
 import mysql from 'mysql';
 
-const con = mysql.createConnection({
+const con = mysql.createPool({
 	host:'5.57.72.163',
 	user:'sajt',
 	password:'1',
-	database:'gazzele_web'
+	database:'gazzele_web',
+	connectionLimit: 10
 });
-
+con.getConnection((err, connection) => {
+    if (err) {
+        if (err.code === 'PROTOCOL_CONNECTION_LOST') {
+            console.error('Database connection was closed.')
+        }
+        if (err.code === 'ER_CON_COUNT_ERROR') {
+            console.error('Database has too many connections.')
+        }
+        if (err.code === 'ECONNREFUSED') {
+            console.error('Database connection was refused.')
+        }
+        
+    }
+    if (connection) connection.release()
+    return
+})
 const con2 = mysql.createPool({
 	host:'5.57.72.163',
 	user:'sajt',
 	password:'1',
 	database:'gazzele_web',
-	connectionLimit: 7,
-    dateStrings: true,
-    multipleStatements: true
+	connectionLimit : 10,
+    connectTimeout  : 60 * 60 * 1000,
+    acquireTimeout  : 60 * 60 * 1000,
+    timeout         : 60 * 60 * 1000,
 })
+
 export default con;
