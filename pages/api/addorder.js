@@ -21,16 +21,16 @@ export default async (req, res) => {
         var order = JSON.parse(fields['postData']);
         var price = 0;
         var price2 = 0;
-        var partnerid;
+        var partnerid = 9999;
         var userrabat = fields["userrabat"]
         var allorders = JSON.parse(fields['items']);
         
 
-        if(order["partnerid"] == undefined){
-          partnerid = 9999;
-        }else{
-          partnerid = order["partnerid"]
-        }
+        // if(order["partnerid"] == undefined){
+        //   partnerid = 9999;
+        // }else{
+        //   partnerid = order["partnerid"]
+        // }
        
         allorders.map((item) => {
           var cena = Number(item.qty) * Number(item.price)
@@ -57,7 +57,7 @@ export default async (req, res) => {
 
         var d2 = new Date()
         var created2 = d2.getFullYear()+"-"+(d2.getMonth()+1)+"-"+d2.getDate()
-
+        var firma = "";
         if(order['pravno_lice'] != 1){
           var partneraddress4db = {
           address:order['address'],
@@ -78,8 +78,10 @@ export default async (req, res) => {
           pib:order["code"],
           naziv_firme:order["naziv_firme"]
         }
+        firma = naziv_firme;
       }
-
+      var comm = "Ime i prezime: "+order["name"]+", Grad: "+order["city"]+", Adresa: "+order["address"]+
+      ", Zip: "+order["zip"]+", Email: "+order["email"]+", PIB: "+order["code"]+", Naziv firme: "+firma;
         
         // res.end(JSON.stringify({ result: 'Success' }))
         // resolve();
@@ -91,11 +93,11 @@ export default async (req, res) => {
           valutedate:created2,
           documentissuedate:created2,
           partnerid:partnerid,
-
+          comment:comm,
           status:'n',
-          foreign_partneraddressid:result.insertId,
+          foreign_partneraddressid_web:result.insertId,
           processtype:'WEB',
-          retrieved:'y',
+          processed:'y',
           price:price,
           price2:price2,
           ime_prezime:order["name"]

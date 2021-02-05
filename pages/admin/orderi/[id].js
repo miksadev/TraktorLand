@@ -44,7 +44,7 @@ export async function getServerSideProps({req,res,query}){
 	.then(data => data);
 	var orders = await fetch(PROTOCOL+'://'+HOST+'/api/getorders?order_id='+id).then(res => res.json())
 	.then(data => data)
-    var orderaddress = await fetch(PROTOCOL+'://'+HOST+'/api/getorderaddress?id='+data[0].foreign_partneraddressid).then(res => res.json())
+    var orderaddress = await fetch(PROTOCOL+'://'+HOST+'/api/getorderaddress?id='+data[0].foreign_partneraddressid_web).then(res => res.json())
     .then(data => data)
     
 	var orderuser = await fetch(PROTOCOL+'://'+HOST+'/api/getuser?id='+orderaddress[0].partnerid).then(res => res.json())
