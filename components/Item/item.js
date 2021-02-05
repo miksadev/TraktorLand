@@ -42,7 +42,7 @@ const item = (props) => {
         <Wrapper click={toggleItem} isOpened={isItemOpened}/>
         { isItemOpened ?
             <div className={styles.item}>
-                <img onClick={toggleItem} className={styles.x} src="/header/x.png" alt=""/>
+                <img onClick={toggleItem} className={styles.x} src="/header/x.svg" alt=""/>
             {/* <Link href={'/webshop/'+back} style={{float:"right"}}><a>close</a></Link> */}
                 <h3 className={styles.name}>{props.proizvod[0].name}</h3>
                 <div>
