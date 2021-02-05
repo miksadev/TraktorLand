@@ -28,7 +28,7 @@
 .searchX{
     position: absolute;
     right: 30px;
-    top: 42px;
+    top: 40px;
     transform: scale(1.15);
 }
 .responsivesearch{
@@ -57,4 +57,17 @@
 
 
 
+}
+
+@media screen and (max-width: 500px) {
+    .responsivesearch{
+        left: 10px;
+        width: calc(100% - 10px) !important;
+    }
+    .responsiveinput{
+        width: calc(100% - 50px) !important;
+    }
+    .searchX{
+        right: 10px;
+    }
 }
