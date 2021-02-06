@@ -1,8 +1,17 @@
-import con from '../../store/db.js'
+import mysql from 'mysql'
 import formidable from 'formidable-serverless';
 
 export default async (req,res) => {
 	return new Promise(resolve => {
+     const con = mysql.createConnection({
+  host:'5.57.72.163',
+  user:'sajt',
+  password:'1',
+  database:'gazzele_web',
+    connectTimeout  : 60 * 60 * 1000,
+    acquireTimeout  : 60 * 60 * 1000,
+    timeout         : 60 * 60 * 1000
+});
     if(req.query.id != undefined){
       var id = req.query.id
     con.query("SELECT * FROM categorypr WHERE id = ?",id,(err,results) => {
@@ -11,6 +20,7 @@ export default async (req,res) => {
             resolve();
           
         })
+    con.end();
   }else if(req.query.idfparent != undefined){
     var id = req.query.idfparent
     var obj = {}
@@ -25,6 +35,7 @@ export default async (req,res) => {
                 
                   resolve();
               })
+              con.end();
             }else{
               con.query("SELECT * FROM categorypr WHERE categoryprid = ?",[result[0].parentid],(err,result) => {
                 obj["parent"] = result
@@ -35,6 +46,7 @@ export default async (req,res) => {
                
                   resolve();
                  })
+                 con.end();
               })
             }
            
@@ -49,6 +61,7 @@ export default async (req,res) => {
             resolve();
           
         })
+    con.end();
   }else if(req.query.name != undefined){
     var name = req.query.name
     if(name == "delovi"){
@@ -63,8 +76,9 @@ export default async (req,res) => {
               
               resolve();
             })
-          
+            con.end();
         })
+    
   }else{
     con.query("SELECT * FROM categorypr ",(err,results) => {
             res.json({data:results})
@@ -72,6 +86,7 @@ export default async (req,res) => {
             resolve();
           
         })
+    con.end();
   }
 })
 }

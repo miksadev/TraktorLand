@@ -1,9 +1,18 @@
-import con from '../../store/db.js'
+import mysql from 'mysql'
 
 
 export default async (req,res) => {
   
   return new Promise(resolve => {
+    const con = mysql.createConnection({
+  host:'5.57.72.163',
+  user:'sajt',
+  password:'1',
+  database:'gazzele_web',
+    connectTimeout  : 60 * 60 * 1000,
+    acquireTimeout  : 60 * 60 * 1000,
+    timeout         : 60 * 60 * 1000
+});
     res.statusCode = 200
   res.setHeader('Content-Type','application/json')
   if(req.query.id != undefined){
@@ -14,6 +23,7 @@ export default async (req,res) => {
       
       resolve()
     })
+      con.end();
   }else if(req.query.zavrseni != undefined){
       var value = req.query.zavrseni
       var offset = req.query.offset
@@ -23,6 +33,7 @@ export default async (req,res) => {
       
       resolve()
     })
+      con.end();
   }
   else if(req.query.order_id != undefined){
       var id = req.query.order_id
@@ -53,6 +64,7 @@ export default async (req,res) => {
         res.json(result)
         resolve()
       })
+      con.end();
       
     })
   }
@@ -62,6 +74,7 @@ export default async (req,res) => {
       res.json(result)
       resolve()
     })
+    con.end();
   }
     
   

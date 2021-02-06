@@ -1,8 +1,17 @@
-import con from '../../store/db.js'
+import mysql from 'mysql'
 import formidable from 'formidable-serverless';
 
 export default async (req,res) => {
 	return new Promise(resolve => {
+    const con = mysql.createConnection({
+  host:'5.57.72.163',
+  user:'sajt',
+  password:'1',
+  database:'gazzele_web',
+    connectTimeout  : 60 * 60 * 1000,
+    acquireTimeout  : 60 * 60 * 1000,
+    timeout         : 60 * 60 * 1000
+});
     if(req.method == "POST"){
 		res.sendStatus = 200
 		res.setHeader('Content-Type', 'application/json')
@@ -16,6 +25,7 @@ export default async (req,res) => {
   					resolve();
   				}
   			})
+        con.end();
 	}else if(req.method == "GET"){
     if(req.query.id != undefined){
             con.query("SELECT * FROM partner WHERE partnerid = ? ",req.query.id,(err,results) => {
@@ -24,6 +34,7 @@ export default async (req,res) => {
             resolve();
           
         })
+            con.end();
     }else{
       var offset = req.query.offset;
       con.query("SELECT * FROM partner LIMIT 40 OFFSET "+offset,(err,results) => {
@@ -32,6 +43,7 @@ export default async (req,res) => {
             resolve();
           
         })
+      con.end();
     }
   }else{
 		 res.redirect('/')

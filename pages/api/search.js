@@ -1,5 +1,4 @@
-
-import con from '../../store/db.js'
+import mysql from 'mysql'
 import formidable from 'formidable-serverless';
 var globallimit = 10;
 var globaloffset = 0;
@@ -9,6 +8,7 @@ var globalsearch = "";
 var limit_  = 0;
 const getCategoryFinish = function(item){
   return new Promise((resolve,reject) => {
+
     con.query("SELECT * FROM categorypr WHERE categoryprid = ?",[item.kategorijaid],(err,results) => {
              if(results.length == 0){
                 resolve("false")
@@ -124,7 +124,15 @@ function loop(promise,res){
 
 export default async (req,res) => {
   return new Promise(resolve => {
-
+ const con = mysql.createConnection({
+  host:'5.57.72.163',
+  user:'sajt',
+  password:'1',
+  database:'gazzele_web',
+    connectTimeout  : 60 * 60 * 1000,
+    acquireTimeout  : 60 * 60 * 1000,
+    timeout         : 60 * 60 * 1000
+});
     if(req.query.search != undefined && req.query.tip == undefined){
       globalsearch = req.query.search
       limit_  = req.query.limit
@@ -140,6 +148,7 @@ export default async (req,res) => {
         res.json({results})
         resolve();
       })
+      con.end();
      
   }else if(req.query.search != undefined && req.query.tip != undefined){
     var search = req.query.search
@@ -150,6 +159,7 @@ export default async (req,res) => {
             resolve();
           
         })
+    con.end();
   }else if(req.query.resetglobal != undefined){
     globaldata4off = [];
       res.json({msg:"success"})

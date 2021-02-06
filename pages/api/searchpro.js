@@ -1,8 +1,17 @@
-import con from '../../store/db.js'
+import mysql from 'mysql'
 import formidable from 'formidable-serverless';
 
 export default async (req,res) => {
 	return new Promise(resolve => {
+     const con = mysql.createConnection({
+  host:'5.57.72.163',
+  user:'sajt',
+  password:'1',
+  database:'gazzele_web',
+    connectTimeout  : 60 * 60 * 1000,
+    acquireTimeout  : 60 * 60 * 1000,
+    timeout         : 60 * 60 * 1000
+});
     if(req.query.search != undefined){
       var offset = req.query.offset
       var search = req.query.search
@@ -13,6 +22,7 @@ export default async (req,res) => {
             resolve();
           
         })
+    con.end();
   }
 })
 }
