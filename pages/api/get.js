@@ -78,8 +78,11 @@ export default async (req,res) => {
 				var count = result.length
 				var result2 = []
 				var num = 1
+
 				result.map((item) => {
-					con.query("SELECT * FROM productwarehouse WHERE productid = ?",item.productid,(err,result) => {
+				
+					con.query("SELECT * FROM productwarehouse WHERE productid = ?",[item.productid],(err,result) => {
+						
 						data[num-1]["qty"] = result[0].amount
 						result2.push(data[num-1])
 						
@@ -91,11 +94,12 @@ export default async (req,res) => {
 						num++
 					})
 				})
+				con.end();
 			
 			
 			
 		})
-		con.end();
+		
 	}
 	if(req.query.id == undefined && req.query.tip == undefined){
 		var offset = req.query.offset;
