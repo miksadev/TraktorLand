@@ -10,6 +10,7 @@ const order = (props) => {
     const [date,setDate] = useState()
     const [time,setTime] = useState()
     useEffect(()=>{
+  
          var HOST = process.env.NEXT_PUBLIC_HOST;
     var PROTOCOL = process.env.NEXT_PUBLIC_PROTOCOL
        fetch(PROTOCOL+'://'+HOST+'/api/getorderaddress?id='+props.addressid).then(res =>res.json())

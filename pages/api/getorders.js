@@ -37,8 +37,10 @@ export default async (req,res) => {
   }
   else if(req.query.order_id != undefined){
       var id = req.query.order_id
+
       con.query("SELECT * FROM documentitem WHERE documentid = ?",id,function(err,result,fields){
       if(err) throw err;
+       
       var result_stringify = JSON.stringify(result)
       var ids_qty = []
       var ids = []
@@ -47,8 +49,11 @@ export default async (req,res) => {
         ids.push(item.productid)
       
       })
+     
       con.query("SELECT * FROM product WHERE productid IN (?)",[ids],function(err,result,fields){
         var result_withqty = []
+         console.log("IDDD")
+      console.log(ids)
         result.map((item) => {
           ids_qty.map((numb) => {
             if(numb.pro_id == item.productid){

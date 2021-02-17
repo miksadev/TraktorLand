@@ -37,7 +37,8 @@ export async function getServerSideProps({req,res}){
 
 
 	const data = await  fetch(PROTOCOL+'://'+HOST+'/api/get?offset='+offset).then(res => res.json()).then(data => data)
-	return{
+
+    return{
 		props:{
 			data:data
 		}

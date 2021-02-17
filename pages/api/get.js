@@ -119,7 +119,7 @@ export default async (req,res) => {
 						result2.push(data[num-1])
 						
 						if(num == count){
-							
+							con.end();
 							res.json(result2)
 							resolve()
 						}
@@ -130,7 +130,7 @@ export default async (req,res) => {
 			
 			
 		})
-		con.end();
+		
 	}
 	})
 	

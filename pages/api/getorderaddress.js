@@ -5,7 +5,7 @@ export default async (req,res) => {
   
   return new Promise(resolve => {
     const con = mysql.createConnection({
-  host:'5.57.72.163',
+ host:'5.57.72.163',
   user:'sajt',
   password:'1',
   database:'gazzele_web',
@@ -17,8 +17,10 @@ export default async (req,res) => {
   res.setHeader('Content-Type','application/json')
 
   if(req.query.id != undefined){
+    console.log("ID")
+    console.log(req.query.id)
       var id = req.query.id
-      con.query("SELECT * FROM partneraddress WHERE foreign_partneraddressid_web = ?",id,function(err,result,fields){
+      con.query("SELECT * FROM partneraddress WHERE foreign_partneraddressid = ?",id,function(err,result,fields){
       if(err) throw err;
       res.json(result)
       resolve()

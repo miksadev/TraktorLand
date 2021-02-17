@@ -10,6 +10,7 @@ import useCart from '../../util/useCart';
 import Link from 'next/link';
 const order = (props) => {
     if(props.adminpanel != undefined){
+
         var [order,setOrder] = useState(props.orders)
         var [userinfo,setUserinfo] = useState(props.data);
     }
@@ -25,7 +26,7 @@ const order = (props) => {
     const [zavrsen,setZavrsen] = useState("Zavrsi")
     const router = useRouter();
     useEffect(()=>{
-        
+
         setUrl(router.asPath)
         if(userinfo.zavrsen == 1){
             setZavrsen("Zavrsen")
