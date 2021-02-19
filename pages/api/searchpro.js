@@ -4,10 +4,10 @@ import formidable from 'formidable-serverless';
 export default async (req,res) => {
 	return new Promise(resolve => {
      const con = mysql.createConnection({
- host:'5.57.72.163',
+ host:'188.93.122.197',
   user:'sajt',
   password:'1',
-  database:'gazzele_web',
+  database:'gazzele_webmarjanovic',
     connectTimeout  : 60 * 60 * 1000,
     acquireTimeout  : 60 * 60 * 1000,
     timeout         : 60 * 60 * 1000
