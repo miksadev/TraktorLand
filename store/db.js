@@ -14,10 +14,10 @@ var GOOGLE_CLOUD_DB_HOST = process.env.GOOGLE_CLOUD_DB_HOST;
 import mysql from 'mysql';
 
 const con = mysql.createConnection({
-	host:'5.57.72.163',
+	host:'188.93.122.197',
 	user:'sajt',
 	password:'1',
-	database:'gazzele_web',
+	database:'gazzele_webmarjanovic',
 
     connectTimeout  : 60 * 60 * 1000,
     acquireTimeout  : 60 * 60 * 1000,
