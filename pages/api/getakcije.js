@@ -29,7 +29,7 @@ host:'188.93.122.197',
         })
     con.end();
   }else{
-    con.query("SELECT * FROM akcija ",(err,results) => {
+    con.query("SELECT * FROM akcija2 ",(err,results) => {
             res.json({data:results})
           
             resolve();
