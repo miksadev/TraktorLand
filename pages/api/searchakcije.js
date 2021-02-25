@@ -14,7 +14,7 @@ host:'188.93.122.197',
 });
     if(req.query.search != undefined){
       var search = req.query.search
-    con.query("SELECT * FROM akcije WHERE ime LIKE ? ORDER BY ime ASC","%"+search+"%",(err,results) => {
+    con.query("SELECT * FROM akcija2 WHERE ime LIKE ? ORDER BY ime ASC","%"+search+"%",(err,results) => {
           
             res.json({results})
             resolve();
