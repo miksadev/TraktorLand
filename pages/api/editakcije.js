@@ -62,7 +62,7 @@ export default async (req, res) => {
         var id = fields["id"]
         if(nameImg == ""){
           
-          con.query(`UPDATE akcije SET ime = ?,sifra = ?,link_proizvoda = ?  WHERE id = ?`,[ime,sifra,link_proizvoda,id],(err,result) => {
+          con.query(`UPDATE akcija2 SET ime = ?,sifra = ?,link_proizvoda = ?  WHERE id = ?`,[ime,sifra,link_proizvoda,id],(err,result) => {
         if(err) throw err;
         
         res.json({result:'Success'})
@@ -70,7 +70,7 @@ export default async (req, res) => {
       })
         }else{
           
-          con.query(`UPDATE akcije SET ime = ?,sifra = ?,link_proizvoda = ?,thumb = ?  WHERE id = ?`,[ime,sifra,link_proizvoda,thumb,id],(err,result) => {
+          con.query(`UPDATE akcija2 SET ime = ?,sifra = ?,link_proizvoda = ?,thumb = ?  WHERE id = ?`,[ime,sifra,link_proizvoda,thumb,id],(err,result) => {
         if(err) throw err;
         
         res.json({result:'Success'})
