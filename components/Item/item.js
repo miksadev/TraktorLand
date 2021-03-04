@@ -34,7 +34,7 @@ const item = (props) => {
     useEffect(() => {
         if(props.proizvod[0].thumb != ""){
             console.log(props.proizvod[0].thumb)
-            mergeImages([props.proizvod[0].thumb,'/overlay.png'],{crossOrigin:'*'})
+            mergeImages(["https://cors-anywhere.herokuapp.com/"+props.proizvod[0].thumb,'/overlay.png'],{crossOrigin:'*'})
             .then(b64 => setImg(b64))
         }
         {isItemOpened ? null : toggleItem()}
