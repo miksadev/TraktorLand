@@ -32,11 +32,7 @@ const item = (props) => {
         }
     },[isItemOpened])
     useEffect(() => {
-        if(props.proizvod[0].thumb != ""){
-            console.log(props.proizvod[0].thumb)
-            mergeImages(["https://cors-anywhere.herokuapp.com/"+props.proizvod[0].thumb,'/overlay.png'],{crossOrigin:'*'})
-            .then(b64 => setImg(b64))
-        }
+        
         {isItemOpened ? null : toggleItem()}
         return ()=>{
             undItem();
@@ -53,7 +49,7 @@ const item = (props) => {
             {/* <Link href={'/webshop/'+back} style={{float:"right"}}><a>close</a></Link> */}
                 <h3 className={styles.name}>{props.proizvod[0].name}</h3>
                 <div>
-                    <Magnifier mgWidth={250} mgShape='square' className={styles.img} src={props.proizvod[0].thumb ? img : "/product.png"}/>
+                    <Magnifier mgWidth={250} mgShape='square' className={styles.img} src={props.proizvod[0].thumb ? props.proizvod[0].thumb : "/product.png"}/>
                     {/* <img className={styles.img} src={props.proizvod[0].thumb ? props.proizvod[0].thumb : "/product.png"} alt=""/> */}
                     <div className={styles.cena}>
                         <p>Maloprodajna cena</p>
