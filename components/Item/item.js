@@ -50,6 +50,7 @@ const item = (props) => {
             <div className={styles.item}>
                 <img onClick={toggleItem} className={styles.x} src="/header/x.svg" alt=""/>
             {/* <Link href={'/webshop/'+back} style={{float:"right"}}><a>close</a></Link> */}
+            {/* <Link href={'/webshop/'+back} style={{float:"right"}}><a>close</a></Link> */}
                 <h3 className={styles.name}>{props.proizvod[0].name}</h3>
                 <div>
                     <Magnifier mgWidth={250} mgShape='square' className={styles.img} src={props.proizvod[0].thumb ? img : "/product.png"}/>
