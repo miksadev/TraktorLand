@@ -26,8 +26,8 @@ const product = (props) => {
             <div className={styles.product}>
                 <div onClick={toggleItem} >
                 {props.search == "true" ? <Link href={'/webshop/'+props.tip+'/'+props.id+'?s='+props.backroute}><a><p className={styles.name}>{props.name}</p>
-                    <img className={styles.img} src={props.src ? props.src : "/product.png"} alt=""/></a></Link> : <Link href={'/webshop/'+props.tip+'/'+props.id}><a><p className={styles.name}>{props.name}</p>
-                    <img className={styles.img} src={props.src ? props.src : "/product.png"} alt=""/></a></Link>}
+                    <img className={styles.img} src={props.src ? props.src : "/product.png"} alt=""/>{props.src ? <img className={styles.imgOverlay} src="/overlay.png" /> : null }</a></Link> : <Link href={'/webshop/'+props.tip+'/'+props.id}><a><p className={styles.name}>{props.name}</p>
+                    <img className={styles.img} src={props.src ? props.src : "/product.png"} alt=""/>{props.src ? <img className={styles.imgOverlay} src="/overlay.png" /> : null }</a></Link>}
                     
                 </div>
                 

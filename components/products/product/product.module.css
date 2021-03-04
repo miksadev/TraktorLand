@@ -32,6 +32,13 @@
     max-height: 171px !important;
     border-bottom: 1px solid#F54343;
 }
+.imgOverlay {
+    max-width: 303px;
+    height: auto;
+    position: absolute;
+    top: 58px;
+    left: 0;
+}
 
 .cena{
     position: absolute;
