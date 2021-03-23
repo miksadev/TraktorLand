@@ -7,11 +7,12 @@ import Link from 'next/link';
 import useCart from '../../util/useCart';
 // import './magnifier.css';
 import Magnifier from 'react-magnifier';
-
+import mergeImages from 'merge-images';
 const item = (props) => {
     const router = useRouter();
     const [quantity, setQty] = useState(props.proizvod[0].qty == 0 ? 0 : 1);
     const {isItemOpened, toggleItem, undItem} = useCart();
+    const [img,setImg] = useState()
     var back = router.query.tip[0];
 
     const onChangeHandler = (e) => {
@@ -31,6 +32,7 @@ const item = (props) => {
         }
     },[isItemOpened])
     useEffect(() => {
+        
         {isItemOpened ? null : toggleItem()}
         return ()=>{
             undItem();
@@ -43,6 +45,7 @@ const item = (props) => {
         { isItemOpened ?
             <div className={styles.item}>
                 <img onClick={toggleItem} className={styles.x} src="/header/x.svg" alt=""/>
+            {/* <Link href={'/webshop/'+back} style={{float:"right"}}><a>close</a></Link> */}
             {/* <Link href={'/webshop/'+back} style={{float:"right"}}><a>close</a></Link> */}
                 <h3 className={styles.name}>{props.proizvod[0].name}</h3>
                 <div>
