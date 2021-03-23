@@ -1,6 +1,5 @@
 import styles from '../styles/kontakt.module.css'
 import ConInfo from '../components/UI/ContactInfo/contactinfo';
-import GoogleMaps from '../components/UI/GoogleMap/googleMap';
 import ConBlockInfo from '../components/UI/contactinfo/ConBlockInfo';
 
 
@@ -18,9 +17,7 @@ export default function Kontakt() {
           </p>
           
           <div className={styles.maps}>
-            {/* <GoogleMaps/> */}
             <a href="https://www.google.rs/maps/place/T.R.Marjanovic/@43.1681219,21.8505713,17z/data=!3m1!4b1!4m5!3m4!1s0x4755bd592dfc7da3:0xfc5a1b56d0e6e1c6!8m2!3d43.168118!4d21.85276" target="blank"><img className={styles.mapaimg} src="maps.png" alt=""/></a>
-            
           </div>
           <ConBlockInfo/>
 

@@ -47,6 +47,7 @@ const item = (props) => {
                 <h3 className={styles.name}>{props.proizvod[0].name}</h3>
                 <div>
                     <Magnifier mgWidth={250} mgShape='square' className={styles.img} src={props.proizvod[0].thumb ? props.proizvod[0].thumb : "/product.png"}/>
+                    {/* {props.proizvod[0].thumb ? <img className={styles.imgOverlay} src="/overlay.png" /> : null } */}
                     {/* <img className={styles.img} src={props.proizvod[0].thumb ? props.proizvod[0].thumb : "/product.png"} alt=""/> */}
                     <div className={styles.cena}>
                         <p>Maloprodajna cena</p>

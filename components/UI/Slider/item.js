@@ -6,7 +6,8 @@ export default styled.div`
     align-items: center;
     position:relative;
     width: 298px;
-    height: 237px;
+    height: auto;
+    min-height: 260px;
     color: black;
     margin: 0 15px;
     font-size: 4em;
