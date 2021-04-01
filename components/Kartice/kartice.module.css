@@ -2,6 +2,7 @@
     display: flex;
     justify-content: center;
     margin-top:20px;
+    padding: 0 20px;
     z-index: 5000;
     flex-wrap: wrap;
     justify-content: center;
@@ -26,4 +27,9 @@
     margin-top: 100px;
     color: #212121;
 
+}
+@media screen and (max-width: 400px) {
+    .kartice{
+        padding: 0 10px;
+    }
 }

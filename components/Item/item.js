@@ -11,6 +11,7 @@ import mergeImages from 'merge-images';
 const item = (props) => {
     const router = useRouter();
     const [quantity, setQty] = useState(props.proizvod[0].qty == 0 ? 0 : 1);
+    const [popust, setPopust] = useState(props.proizvod[0].price);
     const {isItemOpened, toggleItem, undItem} = useCart();
     const [img,setImg] = useState()
     var back = router.query.tip[0];
@@ -23,6 +24,26 @@ const item = (props) => {
             setQty(Number(e.target.value));
         }
     }
+    
+    useEffect(() => {
+        if(props.user !== ""){
+            switch(props.user.rabat){
+              case 0 :
+                setPopust(props.proizvod[0].price*1.2);
+                break;
+              case 1: 
+                setPopust(props.proizvod[0].price*1.2*(1 - (1/100*props.proizvod[0].rabat_1)));
+                break;
+              case 2: 
+                setPopust(props.proizvod[0].price*1.2*(1 - (1/100*props.proizvod[0].rabat_2)));
+                break;
+              case 3: 
+                setPopust(props.proizvod[0].price*1.2*(1 - (1/100*props.proizvod[0].rabat_3)));
+                break;
+            }
+          }
+    }, [props.proizvod[0].price, props.user,props.proizvod[0].rabat_1,props.proizvod[0].rabat_2,props.proizvod[0].rabat_3]);
+
 
     useEffect(() => {
         if(isItemOpened != null){
@@ -54,7 +75,10 @@ const item = (props) => {
                     {/* <img className={styles.img} src={props.proizvod[0].thumb ? props.proizvod[0].thumb : "/product.png"} alt=""/> */}
                     <div className={styles.cena}>
                         <p>Maloprodajna cena</p>
+                        { popust.toFixed(0) !==  Number(props.proizvod[0].price*1.2).toFixed(0) && props.user !== ""?
+                        <h3 className={styles.ukupnocena}><span style={{textDecoration: "line-through",color:"#F54343"}}>{(props.proizvod[0].price*1.2).toFixed(2)}</span>{" "+popust.toFixed(2)} <span>RSD</span> </h3> : 
                         <h3 className={styles.ukupnocena}>{props.proizvod[0].price ? Number(props.proizvod[0].price*1.2).toFixed(2) : 70800} <span>RSD</span></h3>
+                        }
                     </div>
                     <div className={styles.cena}>
                         <p>Veleprodajna cena</p>

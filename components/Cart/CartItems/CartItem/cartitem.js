@@ -39,7 +39,7 @@ const cartitem = (props) => {
         <div className={props.namena == "korpa" ? styles.cartitem : styles.checkoutitem}>
             <img className={props.namena == "korpa" ? styles.img : styles.cimg} src={props.src ? props.src : "/product.png"} alt=""/>
             <p className={props.namena == "korpa" ? styles.name : styles.cname}>{props.name}</p>
-            {props.price != popust && props.isLogged ? <p className={props.namena == "korpa" ? styles.price: styles.cprice}>{popust} RSD <span style={{textDecoration: "line-through",color:"red"}}>{props.price}</span></p> : 
+            {props.price != popust && props.isLogged ? <p className={props.namena == "korpa" ? styles.price: styles.cprice}>{popust} RSD <span style={{textDecoration: "line-through",color:"#F54343"}}>{props.price}</span></p> : 
             <p className={props.namena == "korpa" ? styles.price: styles.cprice}>{props.price} RSD</p>}
             <CartItemInfo namena={props.namena} edit={props.edit} sifra={props.sifra} brisi={props.brisi} qty={props.qty} up={props.up} down={props.down}/>
         </div>

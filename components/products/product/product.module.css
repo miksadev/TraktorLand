@@ -39,7 +39,27 @@
     top: 58px;
     left: 0;
 }
-
+.cenaPopust{
+    position: absolute;
+    bottom:-13px;
+    left: 12px;
+    font-family: "Open Sans";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    color: #2B2B2B;
+}
+.cenaPrecrtana{
+    position: absolute;
+    bottom:6px;
+    left: 12px;
+    font-family: "Open Sans";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    text-decoration: line-through;
+    color: #F54343;
+}
 .cena{
     position: absolute;
     bottom:-6px;

@@ -206,7 +206,7 @@ function Webshop(props){
 		onChange(e,e.target.value)
 	}
 	useEffect(()=> {
-		console.log(prodata);
+		// console.log(prodata);
 	},[prodata])
 
 	return (
