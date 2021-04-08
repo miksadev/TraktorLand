@@ -142,7 +142,7 @@ export default async (req,res) => {
       }else{
         offset = 0;
       }
-      con.query("SELECT t1.*, t2.*,t3.name AS categoryname,t4.name AS categoryparentname FROM product t1 INNER JOIN productcategorypr t2 ON t1.productid = t2.productid INNER JOIN categorypr t3 ON t3.categoryprid = t2.categoryprid INNER JOIN categorypr t4 ON t4.categoryprid = t3.parentid WHERE t1.name LIKE ? LIMIT 10 OFFSET "+offset,"%"+globalsearch+"%",async (err,results) => {
+      con.query("SELECT t1.*, t2.*,t3.name AS categoryname,t4.name AS categoryparentname FROM product t1 INNER JOIN productcategorypr t2 ON t1.productid = t2.productid INNER JOIN categorypr t3 ON t3.categoryprid = t2.categoryprid INNER JOIN categorypr t4 ON t4.categoryprid = t3.parentid WHERE t1.name LIKE ? AND t1.active = 'y' LIMIT 10 OFFSET "+offset,"%"+globalsearch+"%",async (err,results) => {
         if(err) throw err;
         console.log(results.length)
         res.json({results})
@@ -153,7 +153,7 @@ export default async (req,res) => {
   }else if(req.query.search != undefined && req.query.tip != undefined){
     var search = req.query.search
     var tip = req.query.tip
-    con.query("SELECT * FROM product WHERE name LIKE ? AND type = ? ORDER BY name ASC LIMIT 10",[search+"%",tip],(err,results) => {
+    con.query("SELECT * FROM product WHERE name LIKE ? AND type = ? AND active = 'y' ORDER BY name ASC LIMIT 10",[search+"%",tip],(err,results) => {
           
             res.json({results})
             resolve();

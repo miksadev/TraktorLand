@@ -63,7 +63,7 @@ export default async (req,res) => {
     }else if(name == "mehanizacija"){
       name = "Poljoprivredna Mehanizacija"
     }
-		con.query("SELECT t4.*,t1.name AS kategorija,t2.name AS podkategorija,t5.amount AS qty FROM categorypr t1 INNER JOIN categorypr t2 ON t1.categoryprid = t2.parentid OR t1.categoryprid = t2.categoryprid INNER JOIN productcategorypr t3 ON t3.categoryprid = t2.categoryprid OR t3.categoryprid = t1.categoryprid INNER JOIN product t4 ON t4.productid = t3.productid INNER JOIN productwarehouse t5 ON t4.productid = t5.productid WHERE t1.name LIKE ? LIMIT 20 OFFSET "+offset,[name],(err,results) => {
+		con.query("SELECT t4.*,t1.name AS kategorija,t2.name AS podkategorija,t5.amount AS qty FROM categorypr t1 INNER JOIN categorypr t2 ON t1.categoryprid = t2.parentid OR t1.categoryprid = t2.categoryprid INNER JOIN productcategorypr t3 ON t3.categoryprid = t2.categoryprid OR t3.categoryprid = t1.categoryprid INNER JOIN product t4 ON t4.productid = t3.productid AND t4.active = 'y' INNER JOIN productwarehouse t5 ON t4.productid = t5.productid WHERE t1.name LIKE ? LIMIT 20 OFFSET "+offset,[name],(err,results) => {
     if(err) throw err;
     res.json(results)
     resolve();
@@ -72,7 +72,7 @@ export default async (req,res) => {
 	}
 	if(req.query.id != undefined){
 
-		con.query("SELECT * FROM product WHERE productid = ?",req.query.id, function(err,result,fields){
+		con.query("SELECT * FROM product WHERE productid = ? AND active = 'y' ",req.query.id, function(err,result,fields){
 			if(err) throw err;
 				var data = result
 				var count = result.length
@@ -103,7 +103,7 @@ export default async (req,res) => {
 	}
 	if(req.query.id == undefined && req.query.tip == undefined){
 		var offset = req.query.offset;
-		con.query("SELECT * FROM product ORDER BY name ASC LIMIT 20 OFFSET "+offset, function(err,result,fields){
+		con.query("SELECT * FROM product WHERE active = 'y' ORDER BY name ASC LIMIT 20 OFFSET "+offset, function(err,result,fields){
 			if(err) throw err;
 			if(result.length == 0){
 				res.json([])
