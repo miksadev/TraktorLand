@@ -16,7 +16,15 @@ export default async (req,res) => {
       var offset = req.query.offset
       var search = req.query.search
       var kolona = req.query.searchkolona
-    con.query("SELECT * FROM product WHERE "+kolona+" LIKE ? AND active = 'y' ORDER BY name ASC LIMIT 8 OFFSET "+offset,["%"+search+"%"],(err,results) => {
+      if(kolona == "code"){
+        var search_ = search;
+      var searchMet = "=";
+      }else{
+        var search_ = "%"+search+"%";
+      var searchMet = "LIKE";
+      }
+
+    con.query("SELECT * FROM product WHERE "+kolona+" "+searchMet+" ? AND active = 'y' ORDER BY name ASC LIMIT 8 OFFSET "+offset,[search_],(err,results) => {
           
             res.json({results})
             resolve();

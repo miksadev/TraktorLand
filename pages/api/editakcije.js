@@ -58,11 +58,13 @@ export default async (req, res) => {
         var ime = fields["ime"];
         var sifra = fields["sifra"];
         var link_proizvoda = fields["link_proizvoda"];
+        var cena = fields["cena"];
+        var popust = fields["popust"]
         var thumb = thumb;
         var id = fields["id"]
         if(nameImg == ""){
           
-          con.query(`UPDATE akcija2 SET ime = ?,sifra = ?,link_proizvoda = ?  WHERE id = ?`,[ime,sifra,link_proizvoda,id],(err,result) => {
+          con.query(`UPDATE akcija2 SET ime = ?,sifra = ?,link_proizvoda = ?,cena = ?,popust = ?  WHERE id = ?`,[ime,sifra,link_proizvoda,cena,popust,id],(err,result) => {
         if(err) throw err;
         
         res.json({result:'Success'})

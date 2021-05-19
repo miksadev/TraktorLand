@@ -56,6 +56,8 @@ export default async (req, res) => {
         var akcija = {
           ime:fields["ime"],
           link_proizvoda:fields["link_proizvoda"],
+          cena:fields["cena"],
+          popust:fields["popust"],
           thumb:thumb,
           sifra:fields["sifra"]
         }

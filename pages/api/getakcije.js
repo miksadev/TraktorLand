@@ -14,14 +14,14 @@ host:'188.93.122.197',
 });
     if(req.query.id != undefined){
       var id = req.query.id
-    con.query("SELECT * FROM akcija WHERE id = ?",id,(err,results) => {
-            var res;
+    con.query("SELECT * FROM akcija2 WHERE id = ?",id,(err,results) => {
+            var res2;
             if(results.length != 0){
-              res = results[0]
+              res2 = results[0]
             }else{
-              res = []
+              res2 = []
             }
-            res.json({data:res})
+            res.json({data:res2})
            
             res.end()
             resolve();

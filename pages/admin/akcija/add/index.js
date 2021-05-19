@@ -42,12 +42,16 @@ const AddAkcija = () => {
 	const initialA = {
 		ime:"",
 		sifra:"",
-		link_proizvoda:""
+		link_proizvoda:"",
+		cena:"",
+		popust:""
 	}
 	const initialAempty = {
 		ime:false,
 		sifra:false,
-		link_proizvoda:false
+		link_proizvoda:false,
+		cena:false,
+		popust:false
 	}
 	const [data,setData] = useState(initialA)
 	const [dataempty,setDataempty] = useState(initialAempty)
@@ -88,7 +92,8 @@ const AddAkcija = () => {
 		var formData = new FormData()
 		formData.append("ime",data["ime"]);
 		formData.append("sifra",data["sifra"]);
-		formData.append("link_proizvoda",data["link_proizvoda"]);
+		formData.append("cena",data["cena"]);
+		formData.append("popust",data["popust"]);
 		formData.append("thumb",e.target["thumb"].files[0]);
 		fetch(PROTOCOL+'://'+HOST+'/api/addakcija',{
 			method:"POST",
@@ -114,7 +119,8 @@ const AddAkcija = () => {
                 <Input onFocus={(e) => onFocus(e)} style={dataempty.ime ? {borderBottom:'1px solid red'} : {}} onChange={(e) => onChange(e)} inputtype="input" value={data.ime}  name="ime"  label="Ime"  type="text"/>
                 <Input onFocus={(e) => onFocus(e)} style={dataempty.sifra ? {borderBottom:'1px solid red'} : {}} onChange={(e) => onChange(e)} inputtype="input" value={data.sifra} name="sifra"  label="Šifra"  type="text"/>
                 <Input onFocus={(e) => onFocus(e)} style={dataempty.link_proizvoda ? {borderBottom:'1px solid red'} : {}} onChange={(e) => onChange(e)} inputtype="input" value={data.link_proizvoda} name="link_proizvoda"  label="Link proizvoda"  type="text"/>
-                
+                <Input onFocus={(e) => onFocus(e)} style={dataempty.cena ? {borderBottom:'1px solid red'} : {}} onChange={(e) => onChange(e)} inputtype="input" value={data.cena} name="cena"  label="Cena"  type="text"/>
+                <Input onFocus={(e) => onFocus(e)} style={dataempty.popust ? {borderBottom:'1px solid red'} : {}} onChange={(e) => onChange(e)} inputtype="input" value={data.popust} name="popust"  label="Cena sa popustom"  type="text"/>
 
                 <button type="submit" className={styles.submit}>ADD</button>
             </form>
