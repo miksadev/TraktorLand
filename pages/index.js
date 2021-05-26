@@ -3,7 +3,7 @@ import Coninfo from '../components/UI/ContactInfo/contactinfo';
 import Logowide from '../components/UI/Logo/logowide';
 import Kategorije from '../components/Kategorije/kategorije';
 import Kartice from '../components/Kartice/kartice';
-import dynamic from 'next/dynamic';
+import Swiper from '../components/Slider/swiper';
 
 export async function getServerSideProps({req,res}){
   var HOST = process.env.HOST;
@@ -20,11 +20,6 @@ export async function getServerSideProps({req,res}){
   }
 }
 export default function Home({akcije,catdata}) {
-
-  const DynamicComponentWithNoSSR = dynamic(
-    () => import('../components/Slider/slider'),
-    { ssr: false }
-  );
 
   return (
     <>
@@ -45,7 +40,7 @@ export default function Home({akcije,catdata}) {
 
         <div className={styles.carousell}>
           <h3>PROIZVODI NA AKCIJI</h3>
-          <DynamicComponentWithNoSSR akcije={akcije}/>
+          <Swiper akcije={akcije}/>
         </div>
        
       </div>

@@ -43,14 +43,6 @@
   background-color: #f7f7f7c9;
   border-radius: 10px;
 }
-/* .rec-carousel-wrapper{
-  width: 70% !important;
-  margin-left: 15%;
-} */
-/* .llldhF{
-  width: 70% !important;
-  margin-left: 15%;
-} */
 .carousell{
   width: 80%;
   margin-left: 10%;
@@ -76,7 +68,7 @@
   line-height: 28px;
   color: #212121;
 }
-@media screen and (max-width: 1100px) {
+@media screen and (max-width: 1350px) {
   .carousell{
     width: calc(100% - 50px);
     margin-left: 25px;
@@ -114,8 +106,8 @@
     font-size: 50px;
   }
   .carousell{
-    width: 100%;
-    margin-left: 0;
+    width: 96%;
+    margin-left: 2%;
   }
 }
 @media screen and (max-width: 350px) {
