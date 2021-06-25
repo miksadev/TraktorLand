@@ -14,7 +14,7 @@ var kolona4code = ""
 var offset = 0;
 var disScroll = true;
 var lastScroll = 0;
-
+var moveTo = 0;
 function Webshop(props){
 	var HOST = process.env.NEXT_PUBLIC_HOST;
 		var PROTOCOL = process.env.NEXT_PUBLIC_PROTOCOL;
@@ -53,6 +53,9 @@ function Webshop(props){
 	},[par])
 	useEffect(()=>{
 		setSubCategory(props.sub)
+		if(router.query.tip[1] == undefined){
+			window.scrollTo(0,moveTo)
+		}
 	},[props.sub])
 	
 	useEffect(()=>{
@@ -143,6 +146,9 @@ function Webshop(props){
   //       })
 		
         return ()=>{
+		if(lastScroll != 0){
+        		moveTo = lastScroll
+        	}
         	lastScroll = 0;
         	window.removeEventListener("scroll",scrollFunc)
 
