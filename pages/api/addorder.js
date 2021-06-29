@@ -135,7 +135,7 @@ export default async (req, res) => {
       })
       var mailOptions = {
         from:'traktorland80@gmail.com',
-        to:'traktorland1@gmail.com',
+        to:'marjanovicpuk@gmail.com',
         subject:'Porudžbenica Traktorland',
         text:'Porudžbenica',
         html:`
