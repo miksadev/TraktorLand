@@ -93,6 +93,7 @@ const AddAkcija = () => {
 		formData.append("ime",data["ime"]);
 		formData.append("sifra",data["sifra"]);
 		formData.append("cena",data["cena"]);
+		formData.append("link_proizvoda",data["link_proizvoda"]);
 		formData.append("popust",data["popust"]);
 		formData.append("thumb",e.target["thumb"].files[0]);
 		fetch(PROTOCOL+'://'+HOST+'/api/addakcija',{
